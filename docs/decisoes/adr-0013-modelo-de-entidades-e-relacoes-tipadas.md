@@ -4,6 +4,7 @@
 
 Um item canônico único aproxima identidade, especificação, aplicabilidade e equivalência mais do que a evidência permite.
 O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) mostrou que identidade, referência cruzada, intercâmbio condicionado, compatibilidade e similaridade exigem semânticas e provas distintas.
+O [aprofundamento sobre identidade e equivalência](../pesquisa/aprofundamento-identidade-equivalencia.md) detalha a evidência normativa e de fabricantes para preservar identificadores, condições e proveniência sem converter similaridade em identidade.
 
 ## Decisão
 

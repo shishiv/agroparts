@@ -4,6 +4,7 @@
 
 Um gabarito único de pares não mede com honestidade identidade, referência cruzada e intercâmbio.
 O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) definiu provas e riscos diferentes para cada relação e mostrou que uma métrica agregada pode esconder famílias e casos difíceis.
+O [aprofundamento sobre jornada e integração](../pesquisa/aprofundamento-jornada-integracao.md) reúne a evidência sobre ground truth, limiares, precisão, recall e avaliação separada por relação.
 
 ## Decisão
 

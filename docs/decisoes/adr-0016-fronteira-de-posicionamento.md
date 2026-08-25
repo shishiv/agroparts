@@ -4,6 +4,7 @@
 
 O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) encontrou fornecedores maduros para propostas genéricas de gestão e deduplicação de materiais.
 A evidência disponível sustenta uma fronteira conservadora de resolução técnica, não uma plataforma transacional nem promessas financeiras.
+O [aprofundamento de mercado e operação](../pesquisa/aprofundamento-mercado-operacao.md) separa fatos externos, hipóteses do produto e limites que exigem linha de base e piloto.
 
 ## Decisão
 
