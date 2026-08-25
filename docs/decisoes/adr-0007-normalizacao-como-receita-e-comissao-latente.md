@@ -23,4 +23,4 @@ Ativar comissão exigirá decisão posterior sobre atribuição, conciliação, 
 
 ## Status
 
-Aceita.
+Superado pelo [ADR 0019](adr-0019-comissao-fora-do-caminho-critico.md). O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) retirou a comissão do pitch e do caminho crítico até haver canal transacional, atribuição e demanda comprovadas.

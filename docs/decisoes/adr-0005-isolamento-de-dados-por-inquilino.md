@@ -25,4 +25,4 @@ Logs e auditoria precisam evitar copiar campos comerciais proibidos.
 
 ## Status
 
-Aceita.
+Superado pelo [ADR 0018](adr-0018-isolamento-estrito-no-piloto.md). O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) mostrou que anonimizar um mapeamento privado não elimina o risco de revelar práticas operacionais, por isso o piloto adota zero aprendizagem entre clientes.
