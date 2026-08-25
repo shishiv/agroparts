@@ -23,4 +23,4 @@ A interface da demonstração permanece uma decisão aberta, mas não pode ocult
 
 ## Status
 
-Aceita.
+Superado pelo [ADR 0020](adr-0020-prova-antes-do-pitch.md). O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) tornou a prova sobre cadastro real o marco organizador e colocou o pitch depois da amostra, dos benchmarks e da medição.

@@ -24,4 +24,4 @@ Equivalência comercial e técnica ainda depende de catálogo e validação de f
 
 ## Status
 
-Aceita.
+Superado pelo [ADR 0017](adr-0017-catmat-como-corpus.md). O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) mostrou que o CATMAT é útil como corpus e vocabulário, mas não sustenta sozinho a função de ontologia principal.

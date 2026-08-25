@@ -2,29 +2,31 @@
 title: Prototipar a interface mínima do pitch
 type: prototype
 status: open
+priority: P3
 blocked_by:
-  - medir-cobertura-por-familia
+  - fatia-vertical-minima
 ---
 
 ## Pergunta
 
-Qual interface mínima prova ao vivo uma resolução individual, sua trilha de evidência, a calibração medida e a tradução em lote sem simular integrações ainda inexistentes?
+Qual interface mínima apresenta a fatia vertical já medida e prova as cinco capacidades do ADR 0020 sem simular integração ou compra?
 
 ## Evidência que torna a pergunta difícil
 
-O pitch precisa ser compreensível e verificável, mas uma interface ampla pode consumir o tempo reservado ao motor.
-Uma tela que mostra apenas o resultado pode esconder contradições, recusas e cobertura.
+A interface precisa tornar evidência, condições, recusas e denominadores legíveis sem consumir o esforço reservado à prova.
+Construí-la antes da fatia vertical inverteria a ordem definida pelo [recon profundo](../../../pesquisa/recon-profundo-2026-08-25.md).
 
 ## Opções e o que pesa contra cada uma
 
 Uma interface web local é legível, mas adiciona superfície de implementação.
-Uma interface de linha de comando é barata e auditável, mas pode dificultar a narrativa para o comitê.
-Um notebook mostra cálculo e gráficos, mas pode parecer análise preparada em vez de produto ao vivo.
+Uma interface de linha de comando é pequena e auditável, mas pode dificultar a narrativa.
+Um notebook mostra cálculo e gráficos, mas pode parecer análise preparada em vez de fluxo reproduzível.
 
 ## Teste de falha
 
-O protótipo falha se depender de vídeo, rede externa instável, dado falso, edição manual durante a prova ou uma métrica sem denominador visível.
+O protótipo falha se não mostrar uma duplicidade exata, uma falsa semelhança recusada, uma referência cruzada com condições e fonte, tradução em lote com cobertura e precisão estratificadas e revisão humana que preserve o original e registre a decisão.
+Também falha se depender de vídeo, dado falso, métrica sem denominador visível ou compra automática.
 
-## Fechamento
+## Artefato de fechamento
 
-O ticket fecha com protótipo descartável testado por roteiro, tempo total medido, entradas congeladas e verdadeiras, estados resolve, revisa e recusa visíveis e plano de recuperação que não falsifique o resultado.
+O ticket fecha com protótipo descartável testado por roteiro sobre a fatia vertical, tempo total medido, entradas congeladas e verdadeiras, as cinco provas visíveis e plano de recuperação que não falsifique o resultado.

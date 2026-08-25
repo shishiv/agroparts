@@ -1,7 +1,8 @@
 ---
 title: Definir a medição de cobertura por família
 type: research
-status: open
+status: closed
+priority: P1
 blocked_by: []
 ---
 
@@ -11,19 +12,20 @@ Qual denominador e qual estratificação tornam a cobertura automática por fam�
 
 ## Evidência que torna a pergunta difícil
 
-A precisão da faixa automática pode parecer alta quando o sistema recusa os casos difíceis.
-O CATMAT mistura famílias, padrões e níveis de completude diferentes, e o contrato prioriza erro inferior a 1% sobre cobertura.
+A precisão da faixa automática pode parecer alta quando casos difíceis são recusados.
+O [recon profundo](../../../pesquisa/recon-profundo-2026-08-25.md) mostrou que cobertura isolada não resolve a medição de identidade, referência cruzada e intercâmbio.
 
 ## Opções e o que pesa contra cada uma
 
-Cobertura sobre todos os registros é simples, mas mistura entradas impossíveis com entradas resolvíveis.
-Cobertura sobre registros elegíveis mede capacidade onde há evidência, mas pode inflar resultado se elegibilidade for definida depois do teste.
-Cobertura estratificada por família e completude é mais honesta, mas exige tamanhos mínimos e relatório mais detalhado.
+Cobertura sobre todos os registros é simples, mas mistura entradas impossíveis com entradas elegíveis.
+Cobertura sobre elegíveis mede capacidade onde há evidência, mas pode inflar o resultado se a regra surgir depois do teste.
+Cobertura estratificada é mais honesta, mas precisa fazer parte de benchmarks separados e pré-registrados.
 
 ## Teste de falha
 
-A métrica falha se mudar depois de observar resultados, se permitir excluir casos sem regra prévia ou se não mostrar quantidade absoluta junto da porcentagem.
+A medição falha se mudar depois de observar resultados, excluir casos sem regra prévia, omitir números absolutos ou agregar tipos de relação em uma única acurácia.
 
-## Fechamento
+## Artefato de fechamento
 
-O ticket fecha com denominador pré-registrado, regra de elegibilidade, estratos, quantidade mínima, fórmula, exemplo calculado e formato único de relatório de precisão e cobertura.
+Encerrado como superado porque a pergunta foi absorvida por [`pre-registrar-benchmarks`](pre-registrar-benchmarks.md), que reúne os três conjuntos e o relatório de cobertura exigidos pelo [ADR 0014](../../../decisoes/adr-0014-benchmarks-separados-e-pre-registrados.md).
+Nenhum denominador foi decidido neste ticket encerrado.

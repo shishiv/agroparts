@@ -22,4 +22,4 @@ Mudanças no esquema do item exigirão política de versionamento ainda aberta n
 
 ## Status
 
-Aceita.
+Superado pelo [ADR 0013](adr-0013-modelo-de-entidades-e-relacoes-tipadas.md). O [recon profundo](../pesquisa/recon-profundo-2026-08-25.md) separou identidade, especificação, aplicabilidade e evidência; substantivo, modificador, atributos tipados e unidade permanecem válidos em `TechnicalSpecification`.

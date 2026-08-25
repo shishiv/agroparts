@@ -1,53 +1,61 @@
 # Produto
 
+`PartsGraph` é o codinome interno do produto até a escolha de outro nome conforme o [ADR 0015](decisoes/adr-0015-partsgraph-como-codinome-interno.md).
+
 ## Problema
 
 Cadastros de materiais acumulam descrições livres, códigos locais, sinônimos, abreviações e duplicidades históricas entre plantas e sistemas.
-A ausência de uma identidade comum da peça reduz a visibilidade de estoque, dificulta equivalências e permite requisições indevidas.
+A ausência de relações técnicas verificáveis reduz a visibilidade de estoque e torna a análise manual lenta.
 Apagar ou fundir registros não resolve o problema porque códigos antigos permanecem ligados a pedidos, contratos, notas, garantias e ordens de manutenção.
 
 ## Cliente-alvo
 
-O cliente-alvo inicial é a operação industrial ou agroindustrial com estoque de manutenção, múltiplos códigos de materiais e ERP ou CMMS já estabelecido.
-O primeiro piloto precisa fornecer uma exportação real do cadastro de materiais, não comprar um projeto de substituição de sistema.
+O cliente-alvo inicial é uma operação industrial ou agroindustrial com estoque de manutenção, múltiplos códigos de materiais e ERP ou CMMS estabelecido.
+O primeiro piloto precisa fornecer uma exportação real, autorizada e acompanhada de dicionário de campos e regras de retenção e eliminação.
 
-## Dores
+## Fronteira do produto
 
-A mesma peça pode estar registrada sob nomes diferentes e ser recomprada apesar de existir em estoque.
-Peças distintas podem parecer iguais no texto ou na imagem e exigir atributos dimensionais para evitar uma equivalência falsa.
-A fragmentação entre plantas e ERPs impede consultar equivalentes e comparar o histórico sem destruir rastreabilidade.
-A revisão manual consome tempo, mas uma automação sem recusa cria erros mais caros do que a demora que pretende remover.
+O produto resolve códigos e descrições de materiais agroindustriais em português contra evidência técnica de fabricante, sem apagar o ERP e sem automatizar equivalência incerta.
+Um único serviço devolve entidades, atributos, evidências, decisão ternária e o tipo de relação resolvida.
+Identidade, referência cruzada, intercâmbio condicionado, compatibilidade com ativo e similaridade permanecem distintos.
 
-## Os quatro pilares do AGR08
+O benefício inicial declarável é visibilidade e redução de tempo de análise.
+Economia, compra evitada e redução de parada só podem ser afirmadas com dados de piloto.
+Essa fronteira decorre do [recon profundo](pesquisa/recon-profundo-2026-08-25.md) e está fixada no [ADR 0016](decisoes/adr-0016-fronteira-de-posicionamento.md).
+
+## Capacidades do AGR08
 
 ### Identificação automática
 
-PartsGraph lê texto sujo, código gravado ou contexto do ativo e devolve candidatos, item canônico e confiança.
-A câmera é usada para leitura do código e do contexto, não para prometer classificação visual de peças dimensionalmente diferentes.
+Texto, código lido e contexto do ativo geram candidatos.
+Regras tipadas decidem entre resolve, revisa e recusa, e a resposta declara a relação encontrada.
+A câmera serve para OCR e contexto, não como prova visual de equivalência.
 
 ### Integração com catálogo dos fabricantes
 
-O item canônico preserva referências de fabricante e equivalências validadas, começando por rolamentos e por catálogos cuja licença e forma de uso sejam verificadas.
-O CATMAT fornece a espinha taxonômica pública, mas não substitui o catálogo do fabricante.
+Referências, especificações, condições e evidências vêm de catálogo com licença verificada.
+O CATMAT serve como corpus e vocabulário brasileiro, enquanto a ontologia principal permanece aberta à comparação por família com ECLASS e o esquema do fabricante.
 
-### Geração automática de requisições
+### Requisições
 
-A resolução produz a informação que o ERP ou o CMMS pode usar para alertar, aprovar e requisitar.
-O guardrail de requisição é o próximo passo após o piloto porque depende do vínculo entre peça e ativo.
+A resolução fornece informação que ERP ou CMMS poderão usar em fluxos próprios.
+Guardrail de requisição só será considerado depois de existir vínculo real entre peça e ativo.
 
-### Correlação e classificação para evitar solicitações indevidas
+### Correlação e classificação
 
-A decisão compara atributos tipados, reprova contradições e só automatiza a faixa cuja precisão medida atende ao contrato.
-O mapa não destrutivo liga todos os códigos legados ao item canônico e expõe equivalentes antes de uma nova solicitação.
+A decisão compara atributos tipados, reprova contradições e automatiza somente a faixa que atende ao contrato de precisão da família e do tipo de relação.
+O mapa preserva códigos e descrições originais junto de evidência e decisão rastreável.
 
-## Unidade de valor
+## Rejeições explícitas
 
-A unidade de valor do primeiro corte é a resolução de item: entra texto sujo ou código e sai item canônico com atributos, equivalentes e grau de confiança.
-Busca, guardrail e tradução em lote são vistas da mesma resolução.
-A receita de entrada é a normalização, enquanto eventual comissão sobre venda permanece latente e sem cobrança.
+O produto não é loja, e-commerce nem marketplace.
+Não será usado número de máquinas como mercado endereçável de software.
+Não será prometido catálogo universal.
+Similaridade não será chamada de equivalência.
+Preço público não será tratado como preço justo.
+Guardrail de requisição não será implementado antes do vínculo real entre peça e ativo.
+Implementação ampla não começará antes da amostra e dos benchmarks.
 
-## O que o produto não é
-
-PartsGraph não é ERP, CMMS, marketplace transacional, catálogo web isolado, operação de compra, empresa de campo ou fabricante de sensores.
-PartsGraph não reescreve o cadastro do cliente, não define preço justo com preço público e não promete automação total.
-PartsGraph não compartilha preço, fornecedor, condição comercial, volume ou consumo entre clientes.
+O produto também não é ERP, CMMS, catálogo web isolado, operação de compra, empresa de campo ou fabricante de sensores.
+Preço, disponibilidade, garantia e compra permanecem nos sistemas transacionais.
+Comissão sobre venda fica fora do pitch e do caminho crítico até existirem canal transacional, atribuição e demanda comprovadas.

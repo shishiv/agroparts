@@ -2,28 +2,29 @@
 title: Obter uma exportação real de cadastro de materiais
 type: task
 status: open
+priority: P0
 blocked_by: []
 ---
 
 ## Pergunta
 
-Qual empresa fornecerá um arquivo de cadastro de materiais com autorização clara para uso na tradução em lote do piloto?
+Qual empresa fornecerá a menor amostra útil de cadastro de materiais, com dicionário de campos, autorização clara de uso e regras acordadas de retenção e eliminação?
 
 ## Evidência que torna a pergunta difícil
 
-O arquivo contém nomes, códigos e possivelmente campos comerciais sensíveis, enquanto a equipe precisa apenas da menor amostra útil para provar normalização.
-A ausência do arquivo não impede as fases públicas iniciais, mas impede validar o formato e a diversidade de um cadastro real.
+O arquivo pode conter códigos, descrições e informação operacional sensível, enquanto a prova precisa somente dos campos necessários para resolver e revisar relações.
+Sem uma amostra autorizada, o projeto pode provar trabalho sobre corpus público, mas não valor sobre cadastro real, conforme o [recon profundo](../../../pesquisa/recon-profundo-2026-08-25.md).
 
 ## Opções e o que pesa contra cada uma
 
 Pedir uma exportação completa aumenta representatividade, mas também exposição e resistência do responsável.
-Pedir uma amostra minimizada reduz risco, mas pode não conter duplicidades e famílias suficientes.
-Pedir dados anonimizados protege a empresa, mas uma anonimização mal definida pode remover referências necessárias ou preservar informação comercial.
+Pedir uma amostra minimizada reduz risco, mas pode não conter relações e famílias suficientes.
+Pedir dados transformados protege a empresa, mas pode remover referências necessárias ou conservar sinais operacionais sem uma regra clara.
 
 ## Teste de falha
 
-A opção falha se não houver autorização registrada, se campos proibidos forem necessários para a prova ou se o arquivo não trouxer códigos e descrições suficientes para construir o mapa.
+A opção falha se não houver autorização registrada, dicionário de campos, finalidade definida, regras de retenção e eliminação ou códigos e descrições suficientes para a prova.
 
-## Fechamento
+## Artefato de fechamento
 
-O ticket fecha com empresa e responsável autorizadores registrados de forma privada, finalidade acordada, esquema mínimo do arquivo, campos excluídos, prazo de retenção e arquivo recebido no canal aprovado.
+O ticket fecha com empresa e responsável autorizadores registrados de forma privada, finalidade acordada, dicionário e esquema mínimo, campos excluídos, retenção e eliminação acordadas e arquivo recebido no canal aprovado.

@@ -7,7 +7,7 @@ Apagar, fundir ou reescrever esses registros quebraria rastreabilidade e poderia
 
 ## Decisão
 
-PartsGraph manterá um item canônico e um mapa em que todos os códigos legados apontam para ele.
+PartsGraph manterá um mapa externo em que os códigos legados participam das relações tipadas definidas no [ADR 0013](adr-0013-modelo-de-entidades-e-relacoes-tipadas.md).
 Nenhum registro do cliente será apagado, fundido ou reescrito.
 
 ## Alternativas descartadas
@@ -17,7 +17,7 @@ A eleição de um código legado como mestre foi descartada porque transfere a i
 
 ## Consequências
 
-O produto precisa preservar origem, evidência e histórico de cada vínculo.
+O produto precisa preservar origem, evidência e histórico de cada relação.
 A integração fica reversível e compatível com múltiplos sistemas.
 
 ## Status
