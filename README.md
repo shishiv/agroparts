@@ -19,3 +19,4 @@ A próxima entrega é uma fatia vertical sobre cadastro real autorizado, medida 
 [Recon profundo](docs/pesquisa/recon-profundo-2026-08-25.md) fundamenta a reconciliação atual.
 [Pesquisa](docs/pesquisa/) preserva fontes e medições reconferidas.
 [Wayfinder](docs/wayfinder/partsgraph/map.md) mantém decisões, névoa e tickets locais.
+[Visão geral](docs/visao-geral.html) explica o problema, as relações tipadas e o que ainda não está provado.
