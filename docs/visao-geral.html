@@ -106,7 +106,7 @@
 
 <h2>Como isso é tratado hoje, e por que falha</h2>
 <p>Na prática, o trabalho é manual: alguém compara descrições em planilha, usa a busca do ERP e decide com quem conhece a peça. Ferramentas genéricas de deduplicação agrupam textos parecidos.</p>
-<p>Elas recuperam candidatos. Não provam que dois códigos são a mesma peça, e a diferença é grande:</p>
+<p>Elas recuperam candidatos. Não provam que dois códigos são a mesma peça:</p>
 <ul>
   <li>Agrupar descrições parecidas é análise de texto. Afirmar que duas entradas são o mesmo material é uma afirmação sobre a peça, que exige referência, dimensão, material, condição e fonte.</li>
   <li>O limiar de semelhança é uma escolha entre precisão e cobertura, não uma propriedade do texto. Baixar o limiar junta mais registros e erra mais.</li>
@@ -115,14 +115,14 @@
 <p>O resultado é um dos dois: revisão manual sem registro do motivo, ou automação de uma equivalência incerta que falha depois.</p>
 
 <h2>O que o produto faz</h2>
-<p><strong>A resolução é o único serviço de valor.</strong> Ela recebe texto sujo ou um código, extrai entidades e atributos, recupera candidatos e devolve evidências, o tipo de relação e uma decisão. Busca interativa e tradução de um cadastro inteiro são formas de ver o mesmo serviço.</p>
+<p><strong>A resolução é o único serviço de valor.</strong> Ela recebe texto sujo ou um código, extrai entidades e atributos, recupera candidatos e devolve evidências, o tipo de relação e uma decisão. Busca interativa e tradução em lote são formas de ver o mesmo serviço.</p>
 <h3>Decisão ternária</h3>
-<p>A saída nunca é um número solto. São três respostas: <strong>resolve</strong>, quando a relação é aceita dentro do contrato de erro da família e do tipo de relação; <strong>revisa</strong>, quando a evidência é insuficiente e o caso vai para fila humana; <strong>recusa</strong>, quando há incompatibilidade ou falta evidência mínima.</p>
+<p>A saída nunca é um número solto. São três respostas: <strong>resolve</strong>, quando a relação é aceita dentro do contrato de erro da família e do tipo de relação; <strong>revisa</strong>, quando a evidência é insuficiente ou limítrofe e o caso vai para fila humana; <strong>recusa</strong>, quando há incompatibilidade ou falta evidência mínima.</p>
 <p>A assimetria é intencional: uma resolução falsa custa mais que uma revisão. Contradição entre atributos reprova um candidato; concordância apenas soma evidência.</p>
 <h3>Trilha de evidência</h3>
 <p>Cada relação carrega a fonte que a sustenta, com documento, trecho, versão, data e licença quando aplicável. Regras e evidências são explícitas, versionadas e auditáveis. A revisão humana vê o original, o candidato, as diferenças, a fonte e o motivo da regra.</p>
 <h3>Mapa não destrutivo</h3>
-<p>O mapa preserva cada código legado no sistema de origem e o liga a relações tipadas sem perder o original. Nenhum fluxo apaga, funde ou reescreve registros do ERP. O ERP e o CMMS continuam responsáveis por alerta, aprovação, requisição, pedido e compra.</p>
+<p>O mapa preserva cada código legado no sistema de origem e o liga a relações tipadas sem perder o original. Nenhum fluxo apaga, funde ou reescreve registros do ERP. ERP e CMMS continuam responsáveis por alerta, aprovação, requisição, pedido e compra.</p>
 
 <h2>As cinco relações tipadas</h2>
 <p>A resposta não diz apenas que dois códigos são “o mesmo”. Ela diz que tipo de relação foi encontrada, porque cada tipo exige uma prova e autoriza uma ação diferentes. Chamar todas de equivalência é o atalho que produz erro caro.</p>
@@ -176,7 +176,7 @@
 
 <div class="gate">
   <h3>P2 — fatia vertical e utilidade</h3>
-  <p>Poucos itens reais atravessam importação, extração, candidatos, regras, decisão ternária, revisão e exportação, produzindo um mapa auditável. Mede-se cobertura e precisão por família e por tipo de relação, com o absoluto ao lado da porcentagem.</p>
+  <p>De dez a cinquenta itens reais atravessam importação, extração, candidatos, regras, decisão ternária, revisão e exportação, produzindo um mapa auditável. Mede-se cobertura e precisão por família e por tipo de relação, com o absoluto ao lado da porcentagem.</p>
 </div>
 
 <div class="gate">
