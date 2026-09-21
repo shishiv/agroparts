@@ -94,35 +94,35 @@
 </header>
 
 <h2>O problema</h2>
-<p>Cadastros de materiais de manutenção se acumulam por décadas e por várias mãos. Um mesmo rolamento pode ter uma descrição livre em português, um código local da planta, um código do fornecedor, uma abreviação e um sinônimo usado só por um turno. Nada disso é erro de digitação: é o resultado normal de muitas pessoas cadastrando ao longo do tempo.</p>
+<p>Cadastros de materiais de manutenção se acumulam por décadas e por várias mãos. Um mesmo rolamento pode ter descrição livre em português, código local da planta, código do fornecedor, abreviação e sinônimo usado só por um turno. Nada disso é erro de digitação: é o acúmulo normal de muitos cadastros ao longo do tempo.</p>
 <p>Quatro sintomas aparecem juntos:</p>
 <ul>
   <li><strong>Códigos locais.</strong> Cada planta, almoxarifado, fornecedor ou sistema mantém identificadores próprios para o mesmo material.</li>
   <li><strong>Descrições livres.</strong> Texto sem padrão, com sinônimos, abreviações e grafias diferentes para a mesma peça.</li>
   <li><strong>Duplicidade histórica.</strong> Dois códigos criados em épocas diferentes apontam para o mesmo item, porque quem cadastrou não encontrou o registro anterior.</li>
-  <li><strong>Sem visibilidade.</strong> A ausência de relações técnicas verificáveis reduz a visibilidade de estoque e torna a análise manual lenta.</li>
+  <li><strong>Sem visibilidade.</strong> A ausência de relações técnicas verificáveis reduz a visibilidade de estoque e torna a análise lenta.</li>
 </ul>
 <p>Apagar ou fundir registros não resolve. O código antigo permanece ligado a pedidos, contratos, notas, garantias e ordens de manutenção. Fundir dois códigos apaga a origem de cada um e a razão pela qual existiram. Nenhuma das duas operações é reversível, e nenhuma usa evidência técnica. O que falta não é limpeza: é uma relação verificável entre códigos.</p>
 
 <h2>Como isso é tratado hoje, e por que falha</h2>
-<p>Na prática, o trabalho é manual: alguém compara descrições em planilha, usa a busca do próprio ERP e decide com o conhecimento de quem conhece a peça. Ferramentas genéricas de deduplicação agrupam textos parecidos.</p>
+<p>Na prática, o trabalho é manual: alguém compara descrições em planilha, usa a busca do ERP e decide com quem conhece a peça. Ferramentas genéricas de deduplicação agrupam textos parecidos.</p>
 <p>Elas recuperam candidatos. Não provam que dois códigos são a mesma peça, e a diferença é grande:</p>
 <ul>
   <li>Agrupar descrições parecidas é análise de texto. Afirmar que duas entradas são o mesmo material é uma afirmação sobre a peça, que exige referência, dimensão, material, condição e fonte.</li>
   <li>O limiar de semelhança é uma escolha entre precisão e cobertura, não uma propriedade do texto. Baixar o limiar junta mais registros e erra mais.</li>
   <li>Semelhança de texto não decide identidade, referência cruzada, intercâmbio nem aplicabilidade a um ativo.</li>
 </ul>
-<p>O resultado é um dos dois: a equipe revisa fila por fila sem registrar por que decidiu, ou o sistema automatiza uma equivalência incerta e o erro aparece depois.</p>
+<p>O resultado é um dos dois: revisão manual sem registro do motivo, ou automação de uma equivalência incerta que falha depois.</p>
 
 <h2>O que o produto faz</h2>
-<p><strong>A resolução é o único serviço de valor.</strong> Ela recebe texto sujo ou um código, extrai entidades e atributos, recupera candidatos e devolve evidências, o tipo de relação encontrada e uma decisão. Busca interativa e tradução de um cadastro inteiro são formas de ver o mesmo serviço.</p>
+<p><strong>A resolução é o único serviço de valor.</strong> Ela recebe texto sujo ou um código, extrai entidades e atributos, recupera candidatos e devolve evidências, o tipo de relação e uma decisão. Busca interativa e tradução de um cadastro inteiro são formas de ver o mesmo serviço.</p>
 <h3>Decisão ternária</h3>
-<p>A saída nunca é um número solto. São três respostas possíveis: <strong>resolve</strong>, quando a relação é aceita dentro do contrato de erro da família e do tipo de relação; <strong>revisa</strong>, quando a evidência é insuficiente ou limítrofe e o caso vai para fila humana; e <strong>recusa</strong>, quando há incompatibilidade ou falta evidência mínima.</p>
+<p>A saída nunca é um número solto. São três respostas: <strong>resolve</strong>, quando a relação é aceita dentro do contrato de erro da família e do tipo de relação; <strong>revisa</strong>, quando a evidência é insuficiente e o caso vai para fila humana; <strong>recusa</strong>, quando há incompatibilidade ou falta evidência mínima.</p>
 <p>A assimetria é intencional: uma resolução falsa custa mais que uma revisão. Contradição entre atributos reprova um candidato; concordância apenas soma evidência.</p>
 <h3>Trilha de evidência</h3>
-<p>Cada relação carrega a fonte que a sustenta, com documento ou endereço, trecho, versão, data e licença quando aplicável. Regras e evidências são explícitas, versionadas e auditáveis. A revisão humana vê o original, o candidato, as diferenças, a fonte e o motivo da regra.</p>
+<p>Cada relação carrega a fonte que a sustenta, com documento, trecho, versão, data e licença quando aplicável. Regras e evidências são explícitas, versionadas e auditáveis. A revisão humana vê o original, o candidato, as diferenças, a fonte e o motivo da regra.</p>
 <h3>Mapa não destrutivo</h3>
-<p>O mapa preserva cada código legado no sistema de origem e o liga a relações tipadas sem perder o valor original. Nenhum fluxo apaga, funde ou reescreve registros do ERP. O ERP e o CMMS continuam responsáveis por alerta, aprovação, requisição, pedido e compra.</p>
+<p>O mapa preserva cada código legado no sistema de origem e o liga a relações tipadas sem perder o original. Nenhum fluxo apaga, funde ou reescreve registros do ERP. O ERP e o CMMS continuam responsáveis por alerta, aprovação, requisição, pedido e compra.</p>
 
 <h2>As cinco relações tipadas</h2>
 <p>A resposta não diz apenas que dois códigos são “o mesmo”. Ela diz que tipo de relação foi encontrada, porque cada tipo exige uma prova e autoriza uma ação diferentes. Chamar todas de equivalência é o atalho que produz erro caro.</p>
@@ -152,16 +152,16 @@
   <p>Serve apenas para trazer candidatos à mesa. Não tem autoridade para decidir identidade, e <strong>nunca promove automaticamente para <code>SAME_AS</code></strong>. Uma falsa semelhança corretamente recusada é um resultado do produto, não uma falha dele.</p>
 </div>
 
-<p>Identidade, aplicabilidade, procedência e condição permanecem separadas. Preço, disponibilidade, garantia e compra ficam fora do núcleo, nos sistemas transacionais.</p>
+<p>Identidade, aplicabilidade, procedência e condição permanecem separadas. Preço, disponibilidade, garantia e compra ficam nos sistemas transacionais.</p>
 
 <h2>Por que é diferente</h2>
-<p>Encontrar peças duplicadas sem trocar o ERP já existe em fornecedores maduros de dados mestres e de harmonização de materiais. Uma frase genérica desse tipo não diferencia nada.</p>
+<p>Encontrar peças duplicadas sem trocar o ERP já existe em fornecedores maduros de dados mestres. Uma frase genérica não diferencia nada.</p>
 <p>A fronteira escolhida é mais estreita: resolver códigos e descrições de materiais agroindustriais em português contra evidência técnica de fabricante, sem apagar o ERP e sem automatizar equivalência incerta.</p>
 <p>Três coisas sustentam essa fronteira. A decisão é conservadora: contradição reprova, concordância só soma. A saída é explícita: resolve, revisa ou recusa, com o tipo de relação declarado. E o erro preferido é a recusa, porque uma revisão é recuperável e uma equivalência falsa não é. Semelhança de texto nunca decide sozinha.</p>
 
 <h2>O que ainda não está provado</h2>
-<p>O repositório é documental: não há motor, dataset versionado, API, interface nem testes executáveis. O que existe são decisões e a ordem em que elas serão provadas.</p>
-<p>Ainda não existe amostra autorizada de cadastro real, benchmark pré-registrado, fatia vertical medida, cliente nem número. O benefício declarável hoje é visibilidade e redução do tempo de análise. Economia, compra evitada e redução de parada só podem ser afirmadas com dado de piloto.</p>
+<p>O repositório é documental: não há motor, dataset, API, interface nem testes executáveis. O que existe são decisões e a ordem em que serão provadas.</p>
+<p>Ainda não existe amostra autorizada de cadastro real, benchmark pré-registrado, fatia vertical medida, cliente nem número. O benefício declarável hoje é visibilidade e redução do tempo de análise; economia, compra evitada e redução de parada exigem dado de piloto.</p>
 <p><strong>A prova precede o pitch.</strong> Cada portão só avança quando o artefato do anterior estiver registrado.</p>
 
 <div class="gate">
@@ -184,21 +184,21 @@
   <p>Interface, narrativa e material saem somente da fatia medida: uma duplicidade exata entre códigos locais, uma falsa semelhança corretamente recusada, uma referência cruzada com condições e fonte, tradução em lote com cobertura e precisão estratificadas, e uma revisão humana que preserve o original e registre a decisão.</p>
 </div>
 
-<p>Sem amostra autorizada, a fatia vertical não começa; sem catálogo licenciado, a família não avança; sem benchmark pré-registrado, nenhum resultado serve como prova; se a precisão não fechar, a cobertura diminui e o limiar não é afrouxado.</p>
+<p>Sem amostra autorizada, a fatia não começa; sem catálogo licenciado, a família não avança; sem benchmark pré-registrado, nenhum resultado é prova; se a precisão não fechar, a cobertura diminui e o limiar não afrouxa.</p>
 
 <h2>O que está fora de escopo</h2>
-<p>Estas recusas são decisões, não pendências:</p>
+<p>Recusas são decisões, não pendências:</p>
 <ul>
   <li>O produto não é loja, e-commerce nem marketplace, e não substitui ERP ou CMMS.</li>
-  <li>Etiqueta eletrônica ou inteligente, sensor, telemetria, hardware operado pela plataforma e máquina que abre pedido sozinha ficam fora. Já a etiqueta física do ativo e do endereço de almoxarifado está dentro: a plataforma gera o material e o cliente aplica. A câmera lê código gravado, etiqueta e contexto do ativo, e nunca dá prova visual de equivalência.</li>
-  <li>O piloto tem zero aprendizagem entre clientes. Não existe “aprende com o tempo” entre cadastros de clientes diferentes.</li>
+  <li>Etiqueta eletrônica ou inteligente, sensor, telemetria, hardware operado pela plataforma e máquina que abre pedido sozinha ficam fora. Já a etiqueta física do ativo e do endereço de almoxarifado está dentro: a plataforma gera o material e o cliente aplica. A câmera lê código gravado, etiqueta e contexto, e nunca dá prova visual de equivalência.</li>
+  <li>O piloto tem zero aprendizagem entre clientes: não existe “aprende com o tempo” entre cadastros de clientes diferentes.</li>
   <li>Preço, disponibilidade, garantia e compra permanecem nos sistemas transacionais, e comissão sobre venda fica fora do caminho crítico.</li>
   <li>Catálogo universal não será prometido, e similaridade não será chamada de equivalência.</li>
-  <li>Pedido automático, guardrail de requisição e integração nativa com ERP dependem do vínculo real entre peça e ativo e do piloto, que ainda não existem.</li>
+  <li>Pedido automático e guardrail de requisição dependem do vínculo real entre peça e ativo, que ainda não existe; a integração nativa depende do primeiro piloto real definir o ERP.</li>
 </ul>
 
 <footer>
-  <p>Toda afirmação factual desta página é rastreável aos documentos do repositório: <code>docs/produto.md</code>, <code>docs/arquitetura.md</code>, <code>docs/roadmap.md</code>, <code>docs/glossario.md</code>, os ADRs 0008, 0009, 0013, 0014, 0016, 0018 e 0020 em <code>docs/decisoes/</code>, e <code>docs/pesquisa/recon-profundo-2026-08-25.md</code>. <strong>PartsGraph</strong> é codinome interno; o nome público segue aberto. Material do Desafio AGR08 · Rota Inova.</p>
+  <p>Toda afirmação factual desta página é rastreável ao próprio repositório: <code>docs/produto.md</code>, <code>docs/arquitetura.md</code>, <code>docs/roadmap.md</code>, <code>docs/glossario.md</code>, os ADRs 0008, 0009, 0012, 0013, 0014, 0016, 0018 e 0020 em <code>docs/decisoes/</code>, e <code>docs/pesquisa/recon-profundo-2026-08-25.md</code>. <strong>PartsGraph</strong> é codinome interno; o nome público segue aberto. Material do Desafio AGR08 · Rota Inova.</p>
 </footer>
 
 </main>
