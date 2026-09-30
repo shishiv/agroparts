@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agroparts — visão geral</title>
+<style>
+  :root {
+    --ink: #14181d;
+    --ink-soft: #3d454e;
+    --line: #c9ced6;
+    --accent: #7a2f1b;
+    --bg: #fbfaf8;
+    --panel: #f2f0ec;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 1.5rem 1.125rem 3rem;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+  main { max-width: 40rem; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 1.25rem; margin-bottom: 2rem; }
+  .eyebrow {
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 0.5rem;
+  }
+  h1 { font-size: 1.875rem; line-height: 1.15; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+  .lede { font-size: 1.0625rem; margin: 0 0 1rem; color: var(--ink); }
+  .codename { font-size: 0.9375rem; color: var(--ink-soft); margin: 0; }
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 2.5rem 0 0.875rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--line);
+  }
+  h3 { font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+  p { margin: 0 0 0.875rem; }
+  ul { margin: 0 0 0.875rem; padding-left: 1.125rem; }
+  li { margin-bottom: 0.5rem; }
+  strong { font-weight: 650; }
+  .rel {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    padding: 0.875rem 1rem;
+    margin: 0 0 0.875rem;
+  }
+  .rel h3 { margin: 0 0 0.375rem; }
+  .rel p:last-child { margin-bottom: 0; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9375rem;
+  }
+  .gate { margin: 0 0 1.125rem; }
+  .gate h3 { margin: 0 0 0.25rem; }
+  .gate p { margin: 0; }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+  footer p { margin: 0 0 0.5rem; }
+  @media print {
+    :root { --ink: #000; --ink-soft: #222; --bg: #fff; --panel: #f4f4f4; --accent: #000; --line: #777; }
+    body { padding: 0; font-size: 10.5pt; line-height: 1.45; }
+    main { max-width: none; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+    .rel, .gate, li, p { break-inside: avoid; page-break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <p class="eyebrow">Desafio AGR08 · Rota Inova</p>
+  <h1>agroparts</h1>
+  <p class="lede">Uma camada de resolução de materiais para operações industriais e agroindustriais. Ela compara códigos e descrições de cadastro com evidência técnica de fabricante e devolve uma decisão rastreável, sem apagar o que já existe no ERP.</p>
+  <p class="codename"><strong>PartsGraph é o codinome interno do produto.</strong> A escolha do nome público segue aberta.</p>
+</header>
+
+<h2>O problema</h2>
+<p>Cadastros de materiais de manutenção se acumulam por décadas e por várias mãos. Um mesmo rolamento pode ter descrição livre em português, código local da planta, código do fornecedor, abreviação e sinônimo usado só por um turno. Nada disso é erro de digitação: é o acúmulo normal de muitos cadastros ao longo do tempo.</p>
+<p>Quatro sintomas aparecem juntos:</p>
+<ul>
+  <li><strong>Códigos locais.</strong> Cada planta, almoxarifado, fornecedor ou sistema mantém identificadores próprios para o mesmo material.</li>
+  <li><strong>Descrições livres.</strong> Texto sem padrão, com sinônimos, abreviações e grafias diferentes para a mesma peça.</li>
+  <li><strong>Duplicidade histórica.</strong> Dois códigos criados em épocas diferentes apontam para o mesmo item, porque quem cadastrou não encontrou o registro anterior.</li>
+  <li><strong>Sem visibilidade.</strong> A ausência de relações técnicas verificáveis reduz a visibilidade de estoque e torna a análise lenta.</li>
+</ul>
+<p>Apagar ou fundir registros não resolve. O código antigo permanece ligado a pedidos, contratos, notas, garantias e ordens de manutenção. Fundir dois códigos apaga a origem de cada um e a razão pela qual existiram. Nenhuma das duas operações é reversível, e nenhuma usa evidência técnica. O que falta não é limpeza: é uma relação verificável entre códigos.</p>
+
+<h2>Como isso é tratado hoje, e por que falha</h2>
+<p>Na prática, o trabalho é manual: alguém compara descrições em planilha, usa a busca do ERP e decide com quem conhece a peça. Ferramentas genéricas de deduplicação agrupam textos parecidos.</p>
+<p>Elas recuperam candidatos. Não provam que dois códigos são a mesma peça:</p>
+<ul>
+  <li>Agrupar descrições parecidas é análise de texto. Afirmar que duas entradas são o mesmo material é uma afirmação sobre a peça, que exige referência, dimensão, material, condição e fonte.</li>
+  <li>O limiar de semelhança é uma escolha entre precisão e cobertura, não uma propriedade do texto. Baixar o limiar junta mais registros e erra mais.</li>
+  <li>Semelhança de texto não decide identidade, referência cruzada, intercâmbio nem aplicabilidade a um ativo.</li>
+</ul>
+<p>O resultado é um dos dois: revisão manual sem registro do motivo, ou automação de uma equivalência incerta que falha depois.</p>
+
+<h2>O que o produto faz</h2>
+<p><strong>A resolução é o único serviço de valor.</strong> Ela recebe texto sujo ou um código, extrai entidades e atributos, recupera candidatos e devolve evidências, o tipo de relação e uma decisão. Busca interativa e tradução em lote são formas de ver o mesmo serviço.</p>
+<h3>Decisão ternária</h3>
+<p>A saída nunca é um número solto. São três respostas: <strong>resolve</strong>, quando a relação é aceita dentro do contrato de erro da família e do tipo de relação; <strong>revisa</strong>, quando a evidência é insuficiente ou limítrofe e o caso vai para fila humana; <strong>recusa</strong>, quando há incompatibilidade ou falta evidência mínima.</p>
+<p>A assimetria é intencional: uma resolução falsa custa mais que uma revisão. Contradição entre atributos reprova um candidato; concordância apenas soma evidência.</p>
+<h3>Trilha de evidência</h3>
+<p>Cada relação carrega a fonte que a sustenta, com documento, trecho, versão, data e licença quando aplicável. Regras e evidências são explícitas, versionadas e auditáveis. A revisão humana vê o original, o candidato, as diferenças, a fonte e o motivo da regra.</p>
+<h3>Mapa não destrutivo</h3>
+<p>O mapa preserva cada código legado no sistema de origem e o liga a relações tipadas sem perder o original. Nenhum fluxo apaga, funde ou reescreve registros do ERP. ERP e CMMS continuam responsáveis por alerta, aprovação, requisição, pedido e compra.</p>
+
+<h2>As cinco relações tipadas</h2>
+<p>A resposta não diz apenas que dois códigos são “o mesmo”. Ela diz que tipo de relação foi encontrada, porque cada tipo exige uma prova e autoriza uma ação diferentes. Chamar todas de equivalência é o atalho que produz erro caro.</p>
+
+<div class="rel">
+  <h3><code>SAME_AS</code> — mesma identidade</h3>
+  <p>Os dois registros apontam para o mesmo material, sustentados por evidência. É a única relação que autoriza tratar dois códigos como o mesmo item.</p>
+</div>
+
+<div class="rel">
+  <h3><code>CROSS_REFERENCE</code> — referência cruzada publicada</h3>
+  <p>Existe uma referência publicada entre peças, normalmente por fabricantes diferentes. Ela informa que os itens se referenciam, e nada além disso: <strong><code>CROSS_REFERENCE</code> não implica <code>INTERCHANGEABLE_FOR</code> sem condições técnicas e fonte</strong>. Referência cruzada não é prova de que uma peça substitui a outra.</p>
+</div>
+
+<div class="rel">
+  <h3><code>INTERCHANGEABLE_FOR</code> — substituição condicionada</h3>
+  <p>Uma peça pode substituir outra em uma aplicação específica, com escopo, condições, fonte e versão registrados. O intercâmbio vale para aquela aplicação, não para todas: dimensão, carga, folga, vedação ou montagem podem reprovar a substituição. Substituição condicionada não é identidade.</p>
+</div>
+
+<div class="rel">
+  <h3><code>COMPATIBLE_WITH</code> — aplicabilidade a um ativo</h3>
+  <p>A peça é aplicável a um ativo ou a uma configuração conhecida. A aplicabilidade não é inferida de código nem de descrição, porque modelo, série, PIN e alterações feitas depois da fabricação mudam a conclusão. Uma equivalência válida em uma planta não pode ser reutilizada como se fosse universal.</p>
+</div>
+
+<div class="rel">
+  <h3><code>SIMILAR_TO</code> — semelhança para recuperação</h3>
+  <p>Serve apenas para trazer candidatos à mesa. Não tem autoridade para decidir identidade, e <strong>nunca promove automaticamente para <code>SAME_AS</code></strong>. Uma falsa semelhança corretamente recusada é um resultado do produto, não uma falha dele.</p>
+</div>
+
+<p>Identidade, aplicabilidade, procedência e condição permanecem separadas. Preço, disponibilidade, garantia e compra ficam nos sistemas transacionais.</p>
+
+<h2>Por que é diferente</h2>
+<p>Encontrar peças duplicadas sem trocar o ERP já existe em fornecedores maduros de dados mestres. Uma frase genérica não diferencia nada.</p>
+<p>A fronteira escolhida é mais estreita: resolver códigos e descrições de materiais agroindustriais em português contra evidência técnica de fabricante, sem apagar o ERP e sem automatizar equivalência incerta.</p>
+<p>Três coisas sustentam essa fronteira. A decisão é conservadora: contradição reprova, concordância só soma. A saída é explícita: resolve, revisa ou recusa, com o tipo de relação declarado. E o erro preferido é a recusa, porque uma revisão é recuperável e uma equivalência falsa não é. Semelhança de texto nunca decide sozinha.</p>
+
+<h2>O que ainda não está provado</h2>
+<p>O repositório é documental: não há motor, dataset, API, interface nem testes executáveis. O que existe são decisões e a ordem em que serão provadas.</p>
+<p>Ainda não existe amostra autorizada de cadastro real, benchmark pré-registrado, fatia vertical medida, cliente nem número. O benefício declarável hoje é visibilidade e redução do tempo de análise; economia, compra evitada e redução de parada exigem dado de piloto.</p>
+<p><strong>A prova precede o pitch.</strong> Cada portão só avança quando o artefato do anterior estiver registrado.</p>
+
+<div class="gate">
+  <h3>P0 — autorização e identidade</h3>
+  <p>Obter a menor exportação útil de cadastro real, com autorização de uso, dicionário de campos e regras de retenção e eliminação. Em paralelo, escolher um nome distinto e executar busca oficial de marca.</p>
+</div>
+
+<div class="gate">
+  <h3>P1 — modelo e medição pré-registrada</h3>
+  <p>Fixar o modelo das cinco relações, congelar os conjuntos de avaliação de identidade, referência cruzada e intercâmbio antes de observar resultado, e escolher uma família estreita com catálogo licenciado de um único fabricante. Positivos, negativos e limiares são decididos antes, nunca depois de ver o número.</p>
+</div>
+
+<div class="gate">
+  <h3>P2 — fatia vertical e utilidade</h3>
+  <p>De dez a cinquenta itens reais atravessam importação, extração, candidatos, regras, decisão ternária, revisão e exportação, produzindo um mapa auditável. Mede-se cobertura e precisão por família e por tipo de relação, com o absoluto ao lado da porcentagem.</p>
+</div>
+
+<div class="gate">
+  <h3>P3 — pitch depois da prova</h3>
+  <p>Interface, narrativa e material saem somente da fatia medida: uma duplicidade exata entre códigos locais, uma falsa semelhança corretamente recusada, uma referência cruzada com condições e fonte, tradução em lote com cobertura e precisão estratificadas, e uma revisão humana que preserve o original e registre a decisão.</p>
+</div>
+
+<p>Sem amostra autorizada, a fatia não começa; sem catálogo licenciado, a família não avança; sem benchmark pré-registrado, nenhum resultado é prova; se a precisão não fechar, a cobertura diminui e o limiar não afrouxa.</p>
+
+<h2>O que está fora de escopo</h2>
+<p>Recusas são decisões, não pendências:</p>
+<ul>
+  <li>O produto não é loja, e-commerce nem marketplace, e não substitui ERP ou CMMS.</li>
+  <li>Etiqueta eletrônica ou inteligente, sensor, telemetria, hardware operado pela plataforma e máquina que abre pedido sozinha ficam fora. Já a etiqueta física do ativo e do endereço de almoxarifado está dentro: a plataforma gera o material e o cliente aplica. A câmera lê código gravado, etiqueta e contexto, e nunca dá prova visual de equivalência.</li>
+  <li>O piloto tem zero aprendizagem entre clientes: não existe “aprende com o tempo” entre cadastros de clientes diferentes.</li>
+  <li>Preço, disponibilidade, garantia e compra permanecem nos sistemas transacionais, e comissão sobre venda fica fora do caminho crítico.</li>
+  <li>Catálogo universal não será prometido, e similaridade não será chamada de equivalência.</li>
+  <li>Pedido automático e guardrail de requisição dependem do vínculo real entre peça e ativo, que ainda não existe; a integração nativa depende do primeiro piloto real definir o ERP.</li>
+</ul>
+
+<footer>
+  <p>Toda afirmação factual desta página é rastreável ao próprio repositório: <code>docs/produto.md</code>, <code>docs/arquitetura.md</code>, <code>docs/roadmap.md</code>, <code>docs/glossario.md</code>, os ADRs 0008, 0009, 0012, 0013, 0014, 0016, 0018 e 0020 em <code>docs/decisoes/</code>, e <code>docs/pesquisa/recon-profundo-2026-08-25.md</code>. <strong>PartsGraph</strong> é codinome interno; o nome público segue aberto. Material do Desafio AGR08 · Rota Inova.</p>
+</footer>
+
+</main>
+</body>
+</html>
