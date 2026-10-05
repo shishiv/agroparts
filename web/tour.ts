@@ -291,6 +291,11 @@ export function abrirTour(nome: string, acoes: Acoes) {
     disableActiveInteraction: true,
     popoverClass: "tour",
     onPopoverRender: (pop, { driver: dd }) => {
+      // O driver.js usa <header> e <footer>; dentro do balão eles não são marcos da página.
+      pop.title.setAttribute("role", "heading");
+      pop.title.setAttribute("aria-level", "2");
+      pop.footer.setAttribute("role", "group");
+      pop.footer.setAttribute("aria-label", "Navegação da explicação");
       if (!dd.isLastStep()) {
         const pular = Object.assign(document.createElement("button"), {
           type: "button",
