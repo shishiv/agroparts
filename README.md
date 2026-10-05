@@ -29,7 +29,7 @@ A pilha está no [ADR 0021](docs/decisoes/adr-0021-pilha-do-prototipo-publico.md
 Você precisa do [Bun](https://bun.sh) 1.4 ou mais novo.
 
 1. Instale as dependências: `bun install`.
-2. Rode os testes do motor e da API: `bun run test`.
+2. Rode os testes do motor, da API e do passo a passo: `bun run test`. O teste do passo a passo gera o site e abre cada explicação num Chromium instalado na máquina. Se o Chromium não estiver em `/usr/bin/chromium`, defina `CHROME=/caminho/do/navegador`.
 3. Suba a demo local com a API: `bun run demo`. Abra http://localhost:8788.
 
 Outros comandos:

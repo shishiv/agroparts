@@ -43,6 +43,7 @@ A decisão está no [ADR 0010](../decisoes/adr-0010-licencas-de-terceiros.md).
 | Arquivo | Fonte | Licença |
 |---|---|---|
 | tesseract.js 7.0.0 e tesseract.js-core | npm | Apache 2.0 |
+| driver.js 1.9.0, passo a passo "Como funciona" | npm | MIT |
 | `public/ocr/eng.traineddata.gz` | [tessdata_fast](https://github.com/tesseract-ocr/tessdata_fast), modelo `eng`, comprimido com gzip | Apache 2.0 |
 | `public/exemplos/foto-rolamento-6203-c3-rkw.jpg` | [R. Henrik Nilsson, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Second_half_of_20th_century_ball_bearing_6203_C3_M7_by_RKW.jpg), reduzida para 800 px | CC BY 4.0 |
 | `public/exemplos/etiqueta-impressa-catmat-311960.png` | Gerada pela equipe com ImageMagick a partir do texto do item CATMAT 311960 | Própria; não é foto de campo |

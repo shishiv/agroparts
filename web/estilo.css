@@ -100,6 +100,75 @@ nav a {
 }
 nav a:hover { color: #fff; border-bottom-color: var(--nav-hover); }
 nav a[aria-current="page"] { color: #fff; border-bottom-color: #fff; }
+nav { margin-left: auto; }
+
+/* ---------- Como funciona: sempre visível, abre a explicação passo a passo ---------- */
+.como-funciona {
+  align-self: center; display: inline-flex; align-items: center; gap: 0.45rem; min-height: 44px; padding: 0.3rem 0.9rem;
+  font-weight: 700; font-size: var(--t-ui); color: #fff; background: transparent; cursor: pointer;
+  border: var(--borda) solid var(--nav-texto); border-radius: var(--raio); white-space: nowrap;
+}
+.como-funciona svg { width: 20px; height: 20px; }
+.como-funciona:hover { background: var(--nav-hover); }
+.menu-tours {
+  position: fixed; inset: 4.25rem clamp(1rem, 4vw, 3rem) auto auto; margin: 0;
+  width: min(21rem, calc(100vw - 2rem)); padding: 0.75rem; color: var(--tinta);
+  background: var(--papel); border: var(--borda) solid var(--tinta); border-radius: var(--raio);
+}
+.menu-tours::backdrop { background: transparent; }
+.menu-tours-titulo { font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); margin: 0 0 0.5rem 0.25rem; }
+.menu-tours ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+.menu-tours button {
+  width: 100%; display: flex; align-items: center; gap: 0.6rem; min-height: 44px; padding: 0.3rem 0.4rem; text-align: left;
+  font: inherit; font-weight: 600; font-size: var(--t-ui); color: var(--tinta); background: none; border: 0; border-radius: var(--raio); cursor: pointer;
+}
+.menu-tours button:hover { background: var(--azul-claro); }
+.menu-tours .num {
+  display: grid; place-items: center; width: 1.75rem; height: 1.75rem; flex: none; background: var(--tinta); color: #fff; border-radius: 2px;
+  font-family: var(--placa); font-weight: 700;
+}
+.menu-tours .num svg { width: 1.1rem; height: 1.1rem; }
+
+/* ---------- Popover do passo a passo (driver.js), no sistema de placas ---------- */
+.driver-popover.tour {
+  font-family: var(--sans); color: var(--tinta); background: var(--papel);
+  border: var(--borda) solid var(--tinta); border-radius: var(--raio); box-shadow: none;
+  padding: 1rem 1.1rem 0.9rem; min-width: min(17rem, calc(100vw - 1.5rem)); max-width: min(25rem, calc(100vw - 1.5rem));
+}
+.tour .driver-popover-title { font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.12; padding-right: 0; }
+.tour .driver-popover-description { font-size: var(--t-body); line-height: 1.45; color: var(--tinta-2); text-wrap: pretty; }
+.tour .driver-popover-title[style*="block"] + .driver-popover-description { margin-top: 0.4rem; }
+.tour .driver-popover-footer { flex-wrap: wrap; gap: 0.5rem 0.75rem; margin-top: 1rem; }
+.tour .driver-popover-progress-text { order: -2; font-size: var(--t-meta); font-weight: 600; color: var(--suave); }
+.tour .driver-popover-navigation-btns { display: flex; margin-left: auto; gap: 0.5rem; }
+/* O driver.js põe display: block direto no botão; o padding centraliza o texto em 44px ou mais. */
+.driver-popover.tour .driver-popover-footer-btn {
+  padding: 0.7rem 0.9rem; text-align: center; text-shadow: none;
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-ui); line-height: 1.2; color: var(--azul);
+  background: var(--papel); border: var(--borda) solid var(--azul); border-radius: var(--raio);
+}
+.driver-popover.tour .driver-popover-footer-btn:hover { background: var(--azul-claro); }
+.driver-popover.tour .driver-popover-footer-btn:focus { background: var(--papel); }
+.driver-popover.tour .driver-popover-next-btn { font-family: var(--placa); font-weight: 700; font-size: 1.05rem; color: #fff; background: var(--azul); }
+.driver-popover.tour .driver-popover-next-btn:hover, .driver-popover.tour .driver-popover-next-btn:focus { background: var(--azul); }
+.driver-popover.tour .driver-popover-next-btn:hover { background: var(--azul-escuro); border-color: var(--azul-escuro); }
+.driver-popover.tour .driver-popover-next-btn:disabled { background: var(--desligado); border-color: var(--desligado); cursor: progress; }
+.driver-popover.tour .driver-popover-footer .driver-popover-btn-disabled { opacity: 1; color: var(--desligado); border-color: var(--linha); background: var(--papel); }
+.driver-popover.tour .driver-popover-footer-btn:focus-visible, .tour-pular:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.tour-pular {
+  order: -1; min-height: 44px; padding: 0 0.1rem; font: inherit; font-size: var(--t-small); font-weight: 600; color: var(--suave);
+  background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 0.18em;
+}
+.tour-pular:hover { color: var(--tinta); }
+.tour .driver-popover-arrow { border-width: 8px; border-color: var(--tinta); }
+.tour .driver-popover-arrow-side-left { border-top-color: transparent; border-bottom-color: transparent; border-right-color: transparent; }
+.tour .driver-popover-arrow-side-right { border-top-color: transparent; border-bottom-color: transparent; border-left-color: transparent; }
+.tour .driver-popover-arrow-side-top { border-bottom-color: transparent; border-left-color: transparent; border-right-color: transparent; }
+.tour .driver-popover-arrow-side-bottom { border-top-color: transparent; border-left-color: transparent; border-right-color: transparent; }
+.tour-selos { display: grid; gap: 0.35rem; margin-top: 0.6rem; justify-items: start; }
+@media (prefers-reduced-motion: reduce) {
+  .driver-popover, .driver-overlay, .driver-active .driver-overlay { animation: none !important; transition: none !important; }
+}
 
 main { flex: 1; width: 100%; max-width: 1360px; margin: 0 auto; padding: clamp(1.5rem, 3vw, 2.75rem) clamp(1rem, 4vw, 3rem) 4rem; }
 .aba > h1 + .lead { margin-bottom: 1.75rem; }
@@ -133,6 +202,15 @@ main { flex: 1; width: 100%; max-width: 1360px; margin: 0 auto; padding: clamp(1
 .roteiro button:active { transform: translateY(1px); }
 .roteiro button[aria-pressed="true"] { background: var(--tinta); color: #fff; }
 .roteiro button[aria-pressed="true"] .num { background: #fff; color: var(--tinta); }
+.roteiro li { display: flex; flex-direction: column; }
+.roteiro li > button:first-child { flex: 1; }
+.explicar {
+  align-self: flex-start; display: inline-flex; align-items: center; min-height: 40px; padding: 0 0.15rem;
+  font: inherit; font-weight: 600; font-size: var(--t-ui); color: var(--azul); background: none; border: 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px;
+}
+.explicar:hover { text-decoration-thickness: 2px; }
+.roteiro .explicar { margin-top: 0.15rem; }
 
 /* ---------- Controles ---------- */
 button, .botao { font: inherit; }
@@ -404,6 +482,11 @@ tfoot th, tfoot td { font-weight: 600; border-top: var(--borda) solid var(--tint
 @media (max-width: 1100px) {
   .roteiro ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+@media (max-width: 1180px) {
+  .sub { display: none; }
+  .topo { gap: 0 1rem; }
+  nav a { padding: 0 0.6rem; }
+}
 @media (max-width: 860px) {
   .abertura { grid-template-columns: 1fr; }
   .sub { display: none; }
@@ -411,6 +494,11 @@ tfoot th, tfoot td { font-weight: 600; border-top: var(--borda) solid var(--tint
   #resultado, .grupo, .revisao { scroll-margin-top: 12px; }
   nav { width: calc(100% + 2 * clamp(1rem, 4vw, 3rem)); margin: 0 calc(-1 * clamp(1rem, 4vw, 3rem)); padding: 0 clamp(0.25rem, 2vw, 1rem); overflow-x: auto; scrollbar-width: none; border-top: 1px solid var(--nav-linha); }
   nav a { white-space: nowrap; min-height: 46px; padding: 0 0.7rem; }
+  /* A faixa da marca rola junto com a página; o botão fica preso no canto da tela. */
+  .como-funciona { position: fixed; right: 1rem; bottom: 1rem; z-index: 6; min-height: 48px; background: var(--azul); border-color: var(--papel); }
+  .como-funciona:hover { background: var(--azul-escuro); }
+  .menu-tours { inset: auto 1rem 4.75rem auto; }
+  .rodape { padding-bottom: 5rem; }
   .par { grid-template-columns: 1fr; }
   .item { grid-template-columns: 1fr; }
   .escolhas { grid-template-columns: 1fr; }

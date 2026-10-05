@@ -35,6 +35,22 @@
         <a href="#revisoes" data-aba="revisoes">Decisões</a>
         <a href="#fontes" data-aba="fontes">Fontes</a>
       </nav>
+      <button type="button" id="como-funciona" class="como-funciona" popovertarget="menu-tours">
+        <svg aria-hidden="true"><use href="#p-info" /></svg><span>Como funciona</span>
+      </button>
+      <div id="menu-tours" class="menu-tours" popover aria-labelledby="t-menu-tours">
+        <p id="t-menu-tours" class="menu-tours-titulo">Explicação passo a passo</p>
+        <ul>
+          <li><button type="button" data-tour="inicio"><span class="num"><svg aria-hidden="true"><use href="#p-info" /></svg></span><span>Visão geral do site</span></button></li>
+          <li><button type="button" data-tour="duplicado"><span class="num">1</span><span>Cadastro duplicado</span></button></li>
+          <li><button type="button" data-tour="parece"><span class="num">2</span><span>Parece, mas não é</span></button></li>
+          <li><button type="button" data-tour="marca"><span class="num">3</span><span>Outra marca</span></button></li>
+          <li><button type="button" data-tour="lote"><span class="num">4</span><span>Cadastro inteiro</span></button></li>
+          <li><button type="button" data-tour="pessoa"><span class="num">5</span><span>Decisão de uma pessoa</span></button></li>
+          <li><button type="button" data-tour="fornecedor"><span class="num">+</span><span>Texto de fornecedor</span></button></li>
+          <li><button type="button" data-tour="foto"><span class="num">+</span><span>Foto da etiqueta</span></button></li>
+        </ul>
+      </div>
     </header>
 
     <main id="conteudo">
@@ -53,12 +69,12 @@
         <div class="roteiro" role="group" aria-labelledby="t-roteiro">
           <p id="t-roteiro" class="roteiro-titulo">Roteiro da apresentação</p>
           <ol>
-            <li><button type="button" data-exemplo="codigo|311960"><span class="num">1</span><span>Cadastro duplicado</span></button></li>
-            <li><button type="button" data-exemplo="codigo|317388"><span class="num">2</span><span>Parece, mas não é</span></button></li>
-            <li><button type="button" data-exemplo="codigo|624270"><span class="num">3</span><span>Outra marca</span></button></li>
-            <li><button type="button" data-ir="lote"><span class="num">4</span><span>Cadastro inteiro</span></button></li>
-            <li><button type="button" data-exemplo="codigo|472447"><span class="num">5</span><span>Decisão de uma pessoa</span></button></li>
-            <li><button type="button" data-exemplo="descricao|BLK Modelo 6205-2rs"><span class="num">+</span><span>Texto de fornecedor</span></button></li>
+            <li><button type="button" data-exemplo="codigo|311960"><span class="num">1</span><span>Cadastro duplicado</span></button><button type="button" class="explicar" data-tour="duplicado" aria-label="Explicar a prova 1, Cadastro duplicado, passo a passo">Explicar</button></li>
+            <li><button type="button" data-exemplo="codigo|317388"><span class="num">2</span><span>Parece, mas não é</span></button><button type="button" class="explicar" data-tour="parece" aria-label="Explicar a prova 2, Parece, mas não é, passo a passo">Explicar</button></li>
+            <li><button type="button" data-exemplo="codigo|624270"><span class="num">3</span><span>Outra marca</span></button><button type="button" class="explicar" data-tour="marca" aria-label="Explicar a prova 3, Outra marca, passo a passo">Explicar</button></li>
+            <li><button type="button" data-ir="lote"><span class="num">4</span><span>Cadastro inteiro</span></button><button type="button" class="explicar" data-tour="lote" aria-label="Explicar a prova 4, Cadastro inteiro, passo a passo">Explicar</button></li>
+            <li><button type="button" data-exemplo="codigo|472447"><span class="num">5</span><span>Decisão de uma pessoa</span></button><button type="button" class="explicar" data-tour="pessoa" aria-label="Explicar a prova 5, Decisão de uma pessoa, passo a passo">Explicar</button></li>
+            <li><button type="button" data-exemplo="descricao|BLK Modelo 6205-2rs"><span class="num">+</span><span>Texto de fornecedor</span></button><button type="button" class="explicar" data-tour="fornecedor" aria-label="Explicar o exemplo Texto de fornecedor, passo a passo">Explicar</button></li>
           </ol>
         </div>
 
@@ -84,6 +100,7 @@
               <span class="ou">ou use um exemplo:</span>
               <button type="button" class="botao" data-foto="/exemplos/etiqueta-impressa-catmat-311960.png">Etiqueta impressa</button>
               <button type="button" class="botao" data-foto="/exemplos/foto-rolamento-6203-c3-rkw.jpg">Anel gravado no metal</button>
+              <button type="button" class="explicar" data-tour="foto" aria-label="Explicar a foto da etiqueta, passo a passo">Explicar</button>
             </div>
             <figure id="previa" hidden><figcaption></figcaption></figure>
             <p id="ocr-estado" class="ocr-estado" role="status" aria-live="polite"></p>

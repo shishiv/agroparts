@@ -36,6 +36,13 @@ Uma etapa local para o pitch pode baixar um snapshot da SKF para uso individual,
 Essa etapa fica para depois do site público e só acontece se houver prazo antes de 09/10/2026.
 Evidência, URLs e corpora abertos usados no lugar estão em [fontes do protótipo](../pesquisa/fontes-do-prototipo.md).
 
+## Bibliotecas da interface verificadas em 05/10/2026
+
+O passo a passo do site ("Como funciona") usa driver.js 1.9.0, de Kamran Ahmed, sob licença MIT.
+A licença MIT permite usar, copiar e redistribuir o código, inclusive em uso comercial, desde que o aviso de copyright acompanhe o código.
+O pacote vai junto com o JavaScript do site, e o aviso está no arquivo `LICENSE` do pacote npm `driver.js`.
+O teste do passo a passo usa playwright-core 1.63.0, sob Apache 2.0, só no desenvolvimento. Ele não vai para o site publicado.
+
 ## Status
 
 Aceita.

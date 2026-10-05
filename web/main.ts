@@ -24,6 +24,7 @@ import {
   veredito,
   type Grupo,
 } from "./linguagem";
+import { iniciarTours } from "./tour";
 
 const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
 const esc = (v: unknown) =>
@@ -220,7 +221,7 @@ function marcarRoteiro(valor: string | null) {
   document.querySelectorAll<HTMLButtonElement>("[data-exemplo]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.exemplo === valor)));
 }
 
-async function resolver(tipo: Tipo, texto: string) {
+async function resolver(tipo: Tipo, texto: string, rolar = true) {
   const botao = $<HTMLButtonElement>("#form-resolver .primario");
   botao.disabled = true;
   $("#resultado").innerHTML = `<p class="estado" style="margin-top:2rem">Procurando a peça no cadastro…</p>`;
@@ -228,7 +229,7 @@ async function resolver(tipo: Tipo, texto: string) {
     const resposta = await api<Resposta>("/api/resolver", { tipo, texto });
     ultima = { tipo, texto, resposta };
     desenharResposta(resposta);
-    $("#resultado").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    if (rolar) $("#resultado").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   } catch (e) {
     $("#resultado").innerHTML = `<p class="erro" role="alert">Não foi possível identificar a peça: ${esc((e as Error).message)}. Tente de novo em alguns segundos.</p>`;
   } finally {
@@ -236,28 +237,34 @@ async function resolver(tipo: Tipo, texto: string) {
   }
 }
 
-$("#form-resolver").addEventListener("submit", (ev) => {
-  ev.preventDefault();
+function identificar(rolar = true): Promise<void> {
   const tipo = tipoAtual();
   const texto = (tipo === "ocr" ? $<HTMLTextAreaElement>("#texto-ocr") : $<HTMLTextAreaElement>("#texto")).value.trim();
   if (!texto) {
     $("#resultado").innerHTML = `<p class="erro" role="alert">${tipo === "ocr" ? "Leia uma foto ou digite o texto da etiqueta." : "Digite um código ou uma descrição."}</p>`;
-    return;
+    return Promise.resolve();
   }
   marcarRoteiro(null);
-  resolver(tipo, texto);
+  return resolver(tipo, texto, rolar);
+}
+$("#form-resolver").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  identificar();
 });
 
-document.querySelectorAll<HTMLButtonElement>("[data-exemplo]").forEach((b) =>
-  b.addEventListener("click", () => {
-    const [tipo, texto] = b.dataset.exemplo!.split("|") as [Tipo, string];
-    document.querySelector<HTMLInputElement>(`input[name="tipo"][value="${tipo}"]`)!.checked = true;
-    ajustarModo();
-    $<HTMLTextAreaElement>("#texto").value = texto;
-    marcarRoteiro(b.dataset.exemplo!);
-    resolver(tipo, texto);
-  }),
-);
+function escolherModo(tipo: Tipo) {
+  document.querySelector<HTMLInputElement>(`input[name="tipo"][value="${tipo}"]`)!.checked = true;
+  ajustarModo();
+}
+function rodarExemplo(valor: string, rolar = true): Promise<void> {
+  const [tipo, texto] = valor.split("|") as [Tipo, string];
+  if (location.hash && location.hash !== "#resolver") location.hash = "resolver";
+  escolherModo(tipo);
+  $<HTMLTextAreaElement>("#texto").value = texto;
+  marcarRoteiro(valor);
+  return resolver(tipo, texto, rolar);
+}
+document.querySelectorAll<HTMLButtonElement>("[data-exemplo]").forEach((b) => b.addEventListener("click", () => rodarExemplo(b.dataset.exemplo!)));
 document.querySelectorAll<HTMLButtonElement>("[data-ir]").forEach((b) => b.addEventListener("click", () => (location.hash = b.dataset.ir!)));
 
 // ---------- Leitura da foto no navegador ----------
@@ -299,15 +306,14 @@ $<HTMLInputElement>("#foto").addEventListener("change", (ev) => {
   const arquivo = (ev.target as HTMLInputElement).files?.[0];
   if (arquivo) lerImagem(arquivo, `Foto enviada: ${arquivo.name}`);
 });
-document.querySelectorAll<HTMLButtonElement>("[data-foto]").forEach((b) =>
-  b.addEventListener("click", async () => {
-    const r = await fetch(b.dataset.foto!);
-    const legenda = b.dataset.foto!.includes("rkw")
-      ? "Foto de rolamento 6203 C3 com marcação gravada. R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0."
-      : "Etiqueta impressa de exemplo, montada pela equipe com o texto do cadastro 311960. Não é foto de campo.";
-    lerImagem(await r.blob(), legenda);
-  }),
-);
+async function lerFotoExemplo(url: string) {
+  const r = await fetch(url);
+  const legenda = url.includes("rkw")
+    ? "Foto de rolamento 6203 C3 com marcação gravada. R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0."
+    : "Etiqueta impressa de exemplo, montada pela equipe com o texto do cadastro 311960. Não é foto de campo.";
+  await lerImagem(await r.blob(), legenda);
+}
+document.querySelectorAll<HTMLButtonElement>("[data-foto]").forEach((b) => b.addEventListener("click", () => lerFotoExemplo(b.dataset.foto!)));
 
 // ---------- Decisões das pessoas (registro local) ----------
 const CHAVE = "agroparts.revisoes.v1";
@@ -461,7 +467,7 @@ $("#lote-resultado").addEventListener("click", (ev) => {
   marcarRoteiro(null);
   resolver("codigo", b.dataset.codigo!);
 });
-$("#rodar-lote").addEventListener("click", async () => {
+async function lerLote() {
   const botao = $<HTMLButtonElement>("#rodar-lote");
   botao.disabled = true;
   $("#lote-resultado").innerHTML = `<p class="estado" style="margin-top:1.5rem">Lendo o cadastro inteiro…</p>`;
@@ -476,7 +482,8 @@ $("#rodar-lote").addEventListener("click", async () => {
   } finally {
     botao.disabled = false;
   }
-});
+}
+$("#rodar-lote").addEventListener("click", lerLote);
 
 // ---------- Quanto acerta ----------
 function tabelaTraducao(id: string, titulo: string, explicacao: string, linhas: MedicaoTraducao[]): string {
@@ -547,10 +554,11 @@ async function carregarFontes() {
         .map((c) => `<li>${link(c.url, c.nome)}. Consulta em ${esc(new Date(c.consultado_em).toLocaleDateString("pt-BR"))}. Licença: ${esc(c.licenca)}.</li>`)
         .join("")}</ul></section>
       <section class="bloco" aria-labelledby="t-regras"><h2 id="t-regras">Regras de leitura dos códigos</h2><ul class="lista">${f.regras.map((r) => `<li>${link(r.url, r.fonte)}. ${esc(r.licenca)}.</li>`).join("")}</ul></section>
-      <section class="bloco" aria-labelledby="t-imagens"><h2 id="t-imagens">Imagens e leitura de foto</h2><ul class="lista">
+      <section class="bloco" aria-labelledby="t-imagens"><h2 id="t-imagens">Imagens e programas usados pelo site</h2><ul class="lista">
         <li>Foto do rolamento 6203 C3: R. Henrik Nilsson, ${link("https://commons.wikimedia.org/wiki/File:Second_half_of_20th_century_ball_bearing_6203_C3_M7_by_RKW.jpg", "Wikimedia Commons")}, CC BY 4.0, reduzida para 800 px.</li>
         <li>Leitura de texto na foto: tesseract.js 7 (Apache 2.0) com o modelo eng de tessdata_fast (Apache 2.0), servidos por este site.</li>
         <li>Letra Barlow, de Jeremy Tribby (SIL Open Font License 1.1), servida por este site.</li>
+        <li>Explicação passo a passo do botão "Como funciona": driver.js 1.9, de Kamran Ahmed (MIT), servido por este site.</li>
       </ul></section>`;
   } catch (e) {
     $("#fontes-lista").innerHTML = `<p class="erro" role="alert">Não foi possível carregar as fontes: ${esc((e as Error).message)}.</p>`;
@@ -559,3 +567,14 @@ async function carregarFontes() {
 
 ajustarModo();
 mostrarAba(location.hash.slice(1));
+iniciarTours({
+  exemplo: (valor) => rodarExemplo(valor, false),
+  aba: (nome) => {
+    location.hash = nome;
+    mostrarAba(nome);
+  },
+  lote: lerLote,
+  modo: escolherModo,
+  foto: lerFotoExemplo,
+  identificar: () => identificar(false),
+});
