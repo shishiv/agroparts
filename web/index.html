@@ -3,128 +3,144 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AgroParts · protótipo de resolução de peças</title>
-    <meta name="description" content="Protótipo AgroParts (Rota Inova AGR08): identifica rolamentos por código, descrição ou etiqueta, com relação tipada, evidência e revisão humana, sobre dados públicos do CATMAT." />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%231f5f3f' stroke-width='5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%231f5f3f'/%3E%3C/svg%3E" />
+    <meta name="theme-color" content="#15191a" />
+    <title>AgroParts · Qual é esta peça?</title>
+    <meta name="description" content="Protótipo AgroParts para o Rota Inova UEMG 2026. Diz se dois cadastros são a mesma peça, se uma peça só parece outra e quando a decisão precisa de uma pessoa, com dados públicos do CATMAT." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2315191a'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='4' fill='none' stroke='%23fff' stroke-width='2.5'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="./estilo.css" />
   </head>
   <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="p-resolve" viewBox="0 0 48 48"><path d="M10 25.5 19.5 35 38 14" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" /></symbol>
+        <symbol id="p-revisa" viewBox="0 0 48 48"><circle cx="24" cy="11.5" r="5.5" fill="currentColor" /><path d="M15 21h18l-2.5 13H28l-1 10h-6l-1-10h-2.5z" fill="currentColor" /></symbol>
+        <symbol id="p-recusa" viewBox="0 0 48 48"><circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="5.5" /><path d="M12.7 12.7 35.3 35.3" stroke="currentColor" stroke-width="5.5" /></symbol>
+        <symbol id="p-info" viewBox="0 0 48 48"><circle cx="24" cy="12" r="4" fill="currentColor" /><path d="M19 20h8v18h4v4H17v-4h4V24h-2z" fill="currentColor" /></symbol>
+        <symbol id="p-peca" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="4" /><circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="4" /><g fill="currentColor"><circle cx="24" cy="11.5" r="3" /><circle cx="24" cy="36.5" r="3" /><circle cx="11.5" cy="24" r="3" /><circle cx="36.5" cy="24" r="3" /><circle cx="15.2" cy="15.2" r="3" /><circle cx="32.8" cy="32.8" r="3" /><circle cx="32.8" cy="15.2" r="3" /><circle cx="15.2" cy="32.8" r="3" /></g></symbol>
+        <symbol id="p-seta" viewBox="0 0 24 24"><path d="M5 12h12M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" /></symbol>
+      </defs>
+    </svg>
+
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
     <header class="topo">
-      <div class="marca">
-        <span class="logo" aria-hidden="true"></span>
-        <div>
-          <p class="nome">AgroParts</p>
-          <p class="sub">Protótipo · Rota Inova AGR08</p>
-        </div>
-      </div>
+      <a class="marca" href="#resolver">
+        <svg class="logo" aria-hidden="true"><use href="#p-peca" /></svg>
+        <span class="nome">AgroParts</span>
+        <span class="sub">Protótipo · Rota Inova UEMG 2026</span>
+      </a>
       <nav aria-label="Seções">
-        <a href="#resolver" data-aba="resolver">Resolver</a>
-        <a href="#lote" data-aba="lote">Lote</a>
-        <a href="#medicao" data-aba="medicao">Medição</a>
-        <a href="#revisoes" data-aba="revisoes">Revisões</a>
+        <a href="#resolver" data-aba="resolver">Identificar</a>
+        <a href="#lote" data-aba="lote">Cadastro inteiro</a>
+        <a href="#medicao" data-aba="medicao">Quanto acerta</a>
+        <a href="#revisoes" data-aba="revisoes">Decisões</a>
         <a href="#fontes" data-aba="fontes">Fontes</a>
       </nav>
     </header>
 
     <main id="conteudo">
-      <p class="aviso">
-        Recorte: rolamento rígido de esferas, séries 60, 62 e 63. Dados públicos do CATMAT e de compras do Compras.gov.br,
-        não de um cliente. O protótipo não faz compra nem requisição.
-      </p>
-
       <section id="aba-resolver" class="aba" aria-labelledby="t-resolver">
-        <h1 id="t-resolver">Qual é esta peça?</h1>
-        <p class="lead">Digite um código, cole uma descrição ou fotografe uma etiqueta. A resposta diz a relação encontrada, a evidência e o que ainda precisa de uma pessoa.</p>
-
-        <div class="roteiro" role="group" aria-label="Casos do roteiro do pitch">
-          <span class="roteiro-titulo">Roteiro:</span>
-          <button type="button" data-exemplo="codigo|311960">1 · Duplicidade exata</button>
-          <button type="button" data-exemplo="codigo|317388">2 · Falsa semelhança</button>
-          <button type="button" data-exemplo="codigo|624270">3 · Referência cruzada</button>
-          <button type="button" data-ir="lote">4 · Tradução em lote</button>
-          <button type="button" data-exemplo="codigo|472447">5 · Revisão humana</button>
-          <button type="button" data-exemplo="descricao|BLK Modelo 6205-2rs">Texto de fornecedor</button>
+        <div class="abertura">
+          <div>
+            <h1 id="t-resolver">Qual é esta peça?</h1>
+            <p class="lead">Digite o código, cole a descrição do cadastro ou fotografe a etiqueta. A resposta diz se é a mesma peça, se só parece, ou se precisa de uma pessoa.</p>
+          </div>
+          <p class="recorte">
+            <svg class="picto-mini" aria-hidden="true"><use href="#p-info" /></svg>
+            <span>Só rolamento rígido de esferas das séries 60, 62 e 63. Dados públicos do governo federal, não de um cliente. O protótipo não compra nem faz pedido.</span>
+          </p>
         </div>
 
-        <form id="form-resolver" class="cartao entrada" novalidate>
+        <div class="roteiro" role="group" aria-labelledby="t-roteiro">
+          <p id="t-roteiro" class="roteiro-titulo">Roteiro da apresentação</p>
+          <ol>
+            <li><button type="button" data-exemplo="codigo|311960"><span class="num">1</span><span>Cadastro duplicado</span></button></li>
+            <li><button type="button" data-exemplo="codigo|317388"><span class="num">2</span><span>Parece, mas não é</span></button></li>
+            <li><button type="button" data-exemplo="codigo|624270"><span class="num">3</span><span>Outra marca</span></button></li>
+            <li><button type="button" data-ir="lote"><span class="num">4</span><span>Cadastro inteiro</span></button></li>
+            <li><button type="button" data-exemplo="codigo|472447"><span class="num">5</span><span>Decisão de uma pessoa</span></button></li>
+            <li><button type="button" data-exemplo="descricao|BLK Modelo 6205-2rs"><span class="num">+</span><span>Texto de fornecedor</span></button></li>
+          </ol>
+        </div>
+
+        <form id="form-resolver" class="entrada" novalidate>
           <fieldset class="modos">
-            <legend>Entrada</legend>
-            <label><input type="radio" name="tipo" value="codigo" checked /> Código</label>
-            <label><input type="radio" name="tipo" value="descricao" /> Descrição livre</label>
-            <label><input type="radio" name="tipo" value="ocr" /> Foto de etiqueta</label>
+            <legend class="sr">Como você quer informar a peça</legend>
+            <label><input type="radio" name="tipo" value="codigo" checked /> <span>Código</span></label>
+            <label><input type="radio" name="tipo" value="descricao" /> <span>Descrição</span></label>
+            <label><input type="radio" name="tipo" value="ocr" /> <span>Foto da etiqueta</span></label>
           </fieldset>
 
-          <div id="campo-texto">
-            <label for="texto" id="rotulo-texto">Código CATMAT ou designação</label>
+          <div id="campo-texto" class="campo">
+            <label for="texto" id="rotulo-texto">Código do cadastro ou da peça</label>
             <textarea id="texto" name="texto" rows="2" maxlength="2000" spellcheck="false" placeholder="311960 ou 6205-2RS C3"></textarea>
           </div>
 
-          <div id="campo-foto" hidden>
-            <label class="botao-arquivo">
-              <input id="foto" type="file" accept="image/*" capture="environment" />
-              Tirar ou escolher foto
-            </label>
-            <div class="exemplos-foto">
-              <button type="button" data-foto="/exemplos/etiqueta-impressa-catmat-311960.png">Etiqueta impressa de exemplo</button>
-              <button type="button" data-foto="/exemplos/foto-rolamento-6203-c3-rkw.jpg">Foto de anel gravado</button>
+          <div id="campo-foto" class="campo" hidden>
+            <div class="foto-acoes">
+              <label class="botao botao-arquivo">
+                <input id="foto" type="file" accept="image/*" capture="environment" />
+                Tirar ou escolher foto
+              </label>
+              <span class="ou">ou use um exemplo:</span>
+              <button type="button" class="botao" data-foto="/exemplos/etiqueta-impressa-catmat-311960.png">Etiqueta impressa</button>
+              <button type="button" class="botao" data-foto="/exemplos/foto-rolamento-6203-c3-rkw.jpg">Anel gravado no metal</button>
             </div>
-            <figure id="previa" hidden><img alt="Imagem enviada para leitura" /><figcaption></figcaption></figure>
-            <p id="ocr-estado" class="estado" role="status" aria-live="polite"></p>
-            <label for="texto-ocr">Texto lido pela câmera. Confira e corrija antes de resolver.</label>
+            <figure id="previa" hidden><figcaption></figcaption></figure>
+            <p id="ocr-estado" class="ocr-estado" role="status" aria-live="polite"></p>
+            <label for="texto-ocr">Texto lido na foto. Confira e corrija antes de identificar.</label>
             <textarea id="texto-ocr" rows="3" maxlength="2000" spellcheck="false" placeholder="O texto lido aparece aqui."></textarea>
           </div>
 
-          <button class="primario" type="submit">Resolver</button>
+          <button class="primario" type="submit">Identificar <svg aria-hidden="true"><use href="#p-seta" /></svg></button>
         </form>
 
         <div id="resultado" aria-live="polite"></div>
       </section>
 
       <section id="aba-lote" class="aba" aria-labelledby="t-lote" hidden>
-        <h1 id="t-lote">Tradução em lote do cadastro</h1>
-        <p class="lead">Aplica a mesma resolução aos itens ativos do padrão descritivo CATMAT 11797 (rolamento de esfera). O texto original fica intacto ao lado da tradução.</p>
+        <h1 id="t-lote">O cadastro inteiro de uma vez</h1>
+        <p class="lead">O protótipo lê todos os rolamentos de esferas ativos do catálogo público de materiais do governo federal. A descrição original fica intacta ao lado da descrição padronizada.</p>
         <div class="acoes">
-          <button class="primario" id="rodar-lote" type="button">Traduzir o cadastro inteiro</button>
-          <a class="botao" id="baixar-csv" href="/api/lote?formato=csv" download>Baixar mapa de códigos (CSV)</a>
+          <button class="primario" id="rodar-lote" type="button">Ler o cadastro inteiro <svg aria-hidden="true"><use href="#p-seta" /></svg></button>
+          <a class="botao" id="baixar-csv" href="/api/lote?formato=csv" download>Baixar planilha de-para (CSV)</a>
         </div>
         <div id="lote-resultado" aria-live="polite"></div>
       </section>
 
       <section id="aba-medicao" class="aba" aria-labelledby="t-medicao" hidden>
-        <h1 id="t-medicao">Medição contra o gabarito v1</h1>
-        <p class="lead">Gabarito pequeno, rotulado e pré-registrado antes do motor. Cada porcentagem vem com o número absoluto. Não existe acurácia geral única.</p>
-        <div id="medicao-resultado" aria-live="polite"><p class="estado">Carregando…</p></div>
+        <h1 id="t-medicao">Quanto o protótipo acerta</h1>
+        <p class="lead">A equipe separou e marcou um conjunto pequeno de cadastros antes de escrever o sistema. Aqui o sistema é comparado com essas respostas. Cada porcentagem vem com a conta que a gerou.</p>
+        <div id="medicao-resultado" aria-live="polite"><p class="estado">Carregando a medição…</p></div>
       </section>
 
       <section id="aba-revisoes" class="aba" aria-labelledby="t-revisoes" hidden>
-        <h1 id="t-revisoes">Registro de revisões</h1>
-        <p class="lead">Cada decisão humana fica ao lado do original, com o hash do original, a decisão do motor e a justificativa. O registro fica neste navegador.</p>
+        <h1 id="t-revisoes">Decisões das pessoas</h1>
+        <p class="lead">Cada decisão fica ao lado do cadastro original, junto com o que o sistema tinha dito e o motivo da pessoa. Este registro fica só neste navegador.</p>
         <div class="acoes">
-          <button class="botao" id="exportar-revisoes" type="button">Exportar JSON</button>
+          <button class="botao" id="exportar-revisoes" type="button">Baixar registro (JSON)</button>
           <button class="botao perigo" id="limpar-revisoes" type="button">Apagar registro deste navegador</button>
         </div>
         <div id="revisoes-lista"></div>
       </section>
 
       <section id="aba-fontes" class="aba" aria-labelledby="t-fontes" hidden>
-        <h1 id="t-fontes">Fontes e licenças</h1>
+        <h1 id="t-fontes">De onde vêm os dados</h1>
         <div id="fontes-lista"></div>
-        <div class="cartao texto">
-          <h2>O que este protótipo não faz</h2>
-          <ul>
-            <li>Não usa catálogo de fabricante. Os termos da SKF proíbem repassar seus dados a terceiros, e os da Timken proíbem uso sem autorização escrita. A SKF entra só como link para a regra de designação.</li>
-            <li>Não infere aplicabilidade a máquina (<code>COMPATIBLE_WITH</code>) nem promove referência cruzada a intercâmbio.</li>
-            <li>Não lê peça pela aparência. A câmera só lê texto de etiqueta, e a pessoa confere o texto lido.</li>
-            <li>Não integra ERP, não gera requisição e não compra.</li>
+        <section class="bloco" aria-labelledby="t-nao-faz">
+          <h2 id="t-nao-faz">O que este protótipo não faz</h2>
+          <ul class="lista">
+            <li>Não usa catálogo de fabricante. Os termos da SKF proíbem repassar seus dados, e os da Timken proíbem uso sem autorização escrita. A SKF aparece só como link para a regra que explica os códigos.</li>
+            <li>Não diz em que máquina a peça serve. Não trata duas marcas citadas juntas como troca garantida.</li>
+            <li>Não reconhece a peça pela aparência. A câmera só lê o texto da etiqueta, e a pessoa confere o texto lido.</li>
+            <li>Não se liga ao sistema de gestão da empresa, não faz pedido e não compra.</li>
           </ul>
-          <p>API documentada em <a href="/api/openapi.json">/api/openapi.json</a>.</p>
-        </div>
+          <p class="pequeno">Para quem integra sistemas: a interface de programação está descrita em <a href="/api/openapi.json">/api/openapi.json</a>.</p>
+        </section>
       </section>
     </main>
 
     <footer class="rodape">
-      <p>Equipe AgroParts · SI UEMG Frutal · Rota Inova UEMG 2026.</p>
+      <p>Equipe AgroParts · Sistemas de Informação, UEMG Frutal · Rota Inova UEMG 2026</p>
     </footer>
     <script type="module" src="./main.ts"></script>
   </body>

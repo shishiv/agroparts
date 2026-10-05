@@ -48,54 +48,54 @@
 <h2 class="quebra">3. Telas e o que cada tela prova</h2>
 
 <figure class="figura">
-  <img src="img/desktop-00-inicio.jpg" alt="Tela inicial do protótipo AgroParts com o campo de entrada e os botões do roteiro das cinco provas">
-  <figcaption><strong>Tela inicial.</strong> A pessoa escolhe a entrada: código, descrição livre ou foto de etiqueta. Os botões do roteiro abrem as cinco provas. O aviso do topo declara o recorte e que os dados são públicos.</figcaption>
+  <img src="img/desktop-00-inicio.jpg" alt="Tela inicial do protótipo AgroParts com a pergunta Qual é esta peça, o roteiro das cinco provas e o campo de entrada">
+  <figcaption><strong>Tela inicial.</strong> A pessoa escolhe a entrada: código, descrição ou foto da etiqueta. Os botões do roteiro abrem as cinco provas. O aviso ao lado do título declara o recorte e que os dados são públicos.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-01-duplicidade-exata.jpg" alt="Resultado RESOLVE para o item CATMAT 311960 com relação SAME_AS para o item 311963">
-  <figcaption><strong>Prova 1: duplicidade exata.</strong> O item 311960 resolve com a designação 6318ZZ C3 lida por inteiro. O item 311963 aparece como <code>SAME_AS</code> (mesma peça), com o motivo “mesmas palavras e mesma especificação”. A tela também declara o limite: a tabela dimensional aberta não cobre a série 6318, então diâmetro externo e largura não foram conferidos.</figcaption>
+  <img src="img/desktop-01-duplicidade-exata.jpg" alt="Placa verde Peça identificada para o item CATMAT 311960, com o item 311963 no grupo É a mesma peça">
+  <figcaption><strong>Prova 1: duplicidade exata.</strong> O item 311960 aparece como peça identificada: o código 6318ZZ C3 foi lido inteiro. O item 311963 aparece no grupo “É a mesma peça”, com a etiqueta “Cadastro duplicado”: mesmas palavras e mesma especificação (relação <code>SAME_AS</code> no motor). A tela também declara o limite: a tabela aberta da norma não traz o tamanho 6318, então diâmetro externo e largura não foram conferidos.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-02-falsa-semelhanca.jpg" alt="Resultado do item 317388 com itens parecidos recusados">
-  <figcaption><strong>Prova 2: falsa semelhança recusada.</strong> O item 317388 (6211ZZ, folga CN) tem o item 472510 como mesma peça. Outros 7 itens têm texto parecido e terminam em <span class="tag recusa">recusa</span>. Para o item 290385, o motivo é “folga radial CN x C3” e “blindagem nos dois lados x em um lado”, mesmo com semelhança de texto de 0,8.</figcaption>
+  <img src="img/desktop-02-falsa-semelhanca.jpg" alt="Item 317388 identificado, com sete itens parecidos no grupo vermelho Parece, mas não é">
+  <figcaption><strong>Prova 2: falsa semelhança recusada.</strong> O item 317388 (6211ZZ, folga normal) tem o item 472510 como a mesma peça. Outros 7 itens têm texto parecido e caem no grupo vermelho “Parece, mas não é”. Para o item 290385, a tela diz “Textos quase iguais” e explica: a proteção é diferente (dos dois lados contra um lado só) e a folga é diferente (normal contra C3).</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-03-referencia-cruzada.jpg" alt="Resultado do item 624270 com referência cruzada SKF para NSK e intercâmbio em revisão">
-  <figcaption><strong>Prova 3: referência cruzada com condições e fonte.</strong> O item 624270 publica SKF 6206 2RS1 e NSK 6206 DDU. A referência cruzada resolve, com a condição “mesma designação básica, mesmas dimensões de contorno pela série ISO”. A substituição (<code>INTERCHANGEABLE_FOR</code>) fica em <span class="tag revisa">revisa</span>: o sufixo DDU não está nas fontes de regra, e o texto pede aço inoxidável que a designação não confirma.</figcaption>
+  <img src="img/desktop-03-referencia-cruzada.jpg" alt="Item 624270 em placa amarela Precisa de uma pessoa, com SKF e NSK no grupo Equivale na medida, com condições, e a troca de marca no grupo amarelo">
+  <figcaption><strong>Prova 3: referência cruzada com condições e fonte.</strong> O item 624270 cita SKF 6206 2RS1 e NSK 6206 DDU. A tela mostra “Equivale na medida, com condições”: as duas têm o mesmo tamanho básico e, pela norma ISO, as mesmas medidas externas (<code>CROSS_REFERENCE</code> no motor). A troca de uma marca pela outra fica em “Precisa de uma pessoa” (<code>INTERCHANGEABLE_FOR</code> em revisão): ninguém conferiu o que significa o final DDU, e a descrição pede aço inoxidável que o código não confirma.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-04-traducao-em-lote.jpg" alt="Tela de tradução em lote com 396 itens traduzidos e 28 grupos de duplicidade">
-  <figcaption><strong>Prova 4: tradução em lote.</strong> Um clique traduz os 396 itens ativos do padrão 11797 e encontra 28 grupos de duplicidade. A tabela mostra resolve, revisa e recusa por série, com denominadores. O mapa de códigos sai em CSV, com o texto original ao lado da tradução.</figcaption>
+  <img src="img/desktop-04-traducao-em-lote.jpg" alt="Tela Cadastro inteiro com 396 cadastros lidos e 28 grupos de cadastros duplicados">
+  <figcaption><strong>Prova 4: tradução em lote.</strong> Um clique lê os 396 itens ativos do padrão 11797 e encontra 28 grupos de cadastros duplicados. A tabela mostra, por série, quantos itens foram confirmados, quantos precisam de uma pessoa e quantos foram recusados, sempre com o total. A planilha de-para sai em CSV, com o texto original ao lado da tradução.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-05a-recusa-472447.jpg" alt="Resultado RECUSA do item 472447 com contradição de diâmetro interno">
-  <img src="img/desktop-05c-formulario-revisao.jpg" alt="Formulário de revisão humana com decisão registrada" style="margin-top:2mm;">
-  <figcaption><strong>Prova 5: revisão humana.</strong> O item 472447 declara furo de 60 mm e o código 6013, que tem furo de 65 mm. O motor recusa e mostra a contradição. Uma pessoa registra a própria decisão e a justificativa no formulário. O original não muda.</figcaption>
+  <img src="img/desktop-05a-recusa-472447.jpg" alt="Placa vermelha O cadastro se contradiz para o item 472447: furo de 60 mm contra o código 6013, que tem furo de 65 mm">
+  <img src="img/desktop-05c-formulario-revisao.jpg" alt="Formulário Decisão de uma pessoa com a decisão registrada" style="margin-top:2mm;">
+  <figcaption><strong>Prova 5: revisão humana.</strong> O item 472447 declara furo de 60 mm e o código 6013, que tem furo de 65 mm. A placa vermelha diz “O cadastro se contradiz” e mostra a contradição em uma frase. Uma pessoa registra a própria decisão e o motivo no formulário “Decisão de uma pessoa”. O original não muda.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-05b-registro-de-revisoes.jpg" alt="Registro de revisões com original, decisão do motor, decisão da pessoa e hash do original">
-  <figcaption><strong>Registro de revisões.</strong> Cada registro guarda o texto original, a decisão do motor, a decisão da pessoa, a justificativa, o hash SHA-256 do original e a versão das regras.</figcaption>
+  <img src="img/desktop-05b-registro-de-revisoes.jpg" alt="Tela Decisões das pessoas com o que o sistema disse, o que a pessoa decidiu, o motivo e o texto original">
+  <figcaption><strong>Registro de revisões.</strong> Cada registro guarda o texto original, a decisão do sistema, a decisão da pessoa e o motivo. Quando a pessoa discorda, o selo do sistema aparece riscado, não apagado. Em “Ver detalhes” ficam o hash SHA-256 do original e a versão das regras.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-06-medicao.jpg" alt="Tela de medição contra o gabarito v1 com tabelas por série">
-  <figcaption><strong>Medição.</strong> A aba Medição mostra os números contra o gabarito v1, por série, sempre com o número absoluto. A seção 4 deste documento repete esses números.</figcaption>
+  <img src="img/desktop-06-medicao.jpg" alt="Tela Quanto o protótipo acerta, com tabelas por série contra o gabarito v1">
+  <figcaption><strong>Medição.</strong> A tela “Quanto acerta” mostra os números contra o gabarito v1, por série, sempre com a conta que gerou cada porcentagem. A seção 4 deste documento repete esses números.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-07-ocr-etiqueta.jpg" alt="Leitura por OCR de uma etiqueta impressa com o texto do item 311960">
-  <figcaption><strong>Foto de etiqueta impressa.</strong> O OCR no navegador leu a etiqueta com confiança média de 89%. A pessoa confere o texto antes de resolver. A etiqueta foi gerada pela equipe a partir do texto do item CATMAT 311960. Ela não é foto de campo.</figcaption>
+  <img src="img/desktop-07-ocr-etiqueta.jpg" alt="Leitura da foto de uma etiqueta impressa com o texto do item 311960, marcada como Leitura boa">
+  <figcaption><strong>Foto de etiqueta impressa.</strong> O OCR no navegador leu a etiqueta, e a tela marca “Leitura boa” (confiança média de 89% no leitor). A pessoa confere o texto antes de identificar. A etiqueta foi gerada pela equipe a partir do texto do item CATMAT 311960. Ela não é foto de campo.</figcaption>
 </figure>
 
 <figure class="figura">
-  <img src="img/desktop-08-ocr-foto-gravada.jpg" alt="Leitura por OCR de foto de anel de rolamento gravado com confiança baixa">
-  <figcaption><strong>Foto de anel gravado.</strong> Na foto real de um rolamento 6203 C3 com marcação gravada no metal, o OCR falha (confiança média de 31%). O protótipo avisa e pede o código digitado. A foto não identifica a peça sozinha. Foto: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0.</figcaption>
+  <img src="img/desktop-08-ocr-foto-gravada.jpg" alt="Leitura da foto de um anel de rolamento gravado, marcada como Leitura ruim">
+  <figcaption><strong>Foto de anel gravado.</strong> Na foto real de um rolamento 6203 C3 com marcação gravada no metal, o OCR falha (confiança média de 31% no leitor). A tela marca “Leitura ruim” e pede o código digitado. A foto não identifica a peça sozinha. Foto: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0.</figcaption>
 </figure>
 
 <div class="figura" style="display:grid; grid-template-columns:1fr 1fr; gap:6mm; align-items:start;">
@@ -163,7 +163,7 @@
 
 <h2>Fontes</h2>
 <ul class="fonte">
-  <li>Capturas feitas em 05/10/2026 com Chrome, desktop (1366 px) e celular (390 px). Recortes em <code>docs/rota-inova/img/</code>.</li>
+  <li>Capturas feitas em 05/10/2026 com Chrome, desktop (1366 px) e celular (390 px), depois da revisão visual da interface. Recortes em <code>docs/rota-inova/img/</code>.</li>
   <li>Números: <code>docs/medicao/gabarito-v1.md</code>, gerado por <code>bun run medir</code> com as regras v1 de 05/10/2026.</li>
   <li>Fontes e licenças dos dados: <code>docs/pesquisa/fontes-do-prototipo.md</code>. Pilha: ADR 0021 em <code>docs/decisoes/</code>.</li>
   <li>CATMAT e compras públicas: API de Dados Abertos do Compras.gov.br, consulta de 05/10/2026. Decreto 8.777/2016, art. 4.</li>
