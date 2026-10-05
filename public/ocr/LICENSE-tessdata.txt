@@ -1,0 +1,3 @@
+eng.traineddata.gz: modelo "eng" de https://github.com/tesseract-ocr/tessdata_fast,
+licenciado sob Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+Copyright Google e colaboradores do Tesseract. Arquivo comprimido com gzip, sem outras alterações.

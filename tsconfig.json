@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "isolatedModules": true
   },
-  "include": ["src", "functions", "scripts", "tests"]
+  "include": ["src", "functions", "scripts", "tests", "vite.config.ts"]
 }

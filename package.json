@@ -7,7 +7,7 @@
   "scripts": {
     "dados": "bun scripts/baixar-dados.ts",
     "medir": "bun scripts/medir.ts",
-    "build": "tsc --noEmit && vite build && bun scripts/copiar-ocr.ts",
+    "build": "tsc --noEmit && tsc --noEmit -p web && vite build && bun scripts/copiar-ocr.ts",
     "test": "vitest run",
     "demo": "bun run build && wrangler pages dev dist --port 8788",
     "deploy": "wrangler pages deploy dist --project-name agroparts --branch main"
