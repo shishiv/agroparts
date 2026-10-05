@@ -1,0 +1,152 @@
+{
+ "schemaVersion": 2,
+ "generatedAt": "2026-10-05T14:04:50+00:00",
+ "title": "Design System: AgroParts",
+ "extensions": {
+  "colorMeta": {
+   "verde": {
+    "role": "secondary",
+    "displayName": "Verde de condição segura (RAL 6032)"
+   },
+   "amarelo": {
+    "role": "secondary",
+    "displayName": "Amarelo de atenção (RAL 1003)"
+   },
+   "vermelho": {
+    "role": "secondary",
+    "displayName": "Vermelho de proibição (RAL 3001)"
+   },
+   "azul": {
+    "role": "primary",
+    "displayName": "Azul de ação (RAL 5005)"
+   },
+   "chapa": {
+    "role": "neutral",
+    "displayName": "Chapa de alumínio"
+   },
+   "tinta": {
+    "role": "neutral",
+    "displayName": "Tinta"
+   }
+  },
+  "typographyMeta": {
+   "display": {
+    "displayName": "Display",
+    "purpose": "Título de cada aba."
+   },
+   "placa": {
+    "displayName": "Placa",
+    "purpose": "Frase da decisão dentro da faixa colorida, legível na projeção."
+   },
+   "titulo": {
+    "displayName": "Título",
+    "purpose": "Seções e grupos de resultado."
+   },
+   "body": {
+    "displayName": "Corpo",
+    "purpose": "Texto corrido e tabelas, com números tabulares."
+   },
+   "rotulo": {
+    "displayName": "Rótulo",
+    "purpose": "Rótulos de campo e de bloco, em caixa normal."
+   }
+  },
+  "shadows": [
+   {
+    "name": "placa-chega",
+    "value": "0 14px 28px -14px rgb(21 25 26 / 0.45)",
+    "purpose": "Só na chegada da placa de resultado; some em 0,45s."
+   }
+  ],
+  "motion": [
+   {
+    "name": "saida",
+    "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "purpose": "Curva exponencial de saída para a chegada da placa e a pressão dos botões."
+   },
+   {
+    "name": "placa-chega",
+    "value": "0.45s",
+    "purpose": "A placa sobe 10px e o pictograma bate como carimbo (1,18 para 1). Nada se move com movimento reduzido."
+   }
+  ],
+  "breakpoints": [
+   {
+    "name": "roteiro-3",
+    "value": "1100px"
+   },
+   {
+    "name": "uma-coluna",
+    "value": "860px"
+   },
+   {
+    "name": "celular",
+    "value": "560px"
+   },
+   {
+    "name": "projecao",
+    "value": "1440px"
+   }
+  ]
+ },
+ "components": [
+  {
+   "name": "Botão primário",
+   "kind": "button",
+   "refersTo": "botao-primario",
+   "description": "Uma ação principal por tarefa.",
+   "html": "<button class=\"ds-primario\">Identificar</button>",
+   "css": ".ds-primario{font-family:'Barlow Semi Condensed',Barlow,Arial,sans-serif;font-weight:700;font-size:1.25rem;color:#fff;background:#154889;border:2px solid #154889;border-radius:4px;min-height:52px;padding:.6rem 1.4rem;cursor:pointer}.ds-primario:hover{background:#0f3566;border-color:#0f3566}.ds-primario:focus-visible{outline:3px solid #154889;outline-offset:2px}"
+  },
+  {
+   "name": "Selo de decisão",
+   "kind": "chip",
+   "refersTo": "placa-resolve",
+   "description": "Estado carimbado de uma decisão.",
+   "html": "<span class=\"ds-selo ds-ok\">Confirmado</span> <span class=\"ds-selo ds-pessoa\">Precisa de uma pessoa</span> <span class=\"ds-selo ds-nao\">Recusado</span>",
+   "css": ".ds-selo{display:inline-flex;font-family:Barlow,Arial,sans-serif;font-weight:700;font-size:.85rem;padding:.3rem .55rem;border-radius:2px}.ds-ok{background:#237f52;color:#fff}.ds-pessoa{background:#f9a800;color:#15191a}.ds-nao{background:#a52019;color:#fff}"
+  },
+  {
+   "name": "Placa de resultado",
+   "kind": "custom",
+   "refersTo": "placa-recusa",
+   "description": "A resposta principal em cor cheia, com pictograma e filete interno.",
+   "html": "<div class=\"ds-placa\"><span class=\"ds-picto\"></span><div><p class=\"ds-t\">Parece, mas não é</p><p>O texto é parecido, mas um detalhe técnico muda a peça.</p></div></div>",
+   "css": ".ds-placa{position:relative;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center;padding:1.25rem 1.5rem;background:#a52019;color:#fff;font-family:Barlow,Arial,sans-serif;border:2px solid #15191a;border-radius:4px}.ds-placa::after{content:'';position:absolute;inset:6px;border:2px solid #fff;opacity:.55;border-radius:2px}.ds-picto{width:72px;height:72px;background:#fff;border-radius:2px}.ds-t{margin:0;font-family:'Barlow Semi Condensed',Barlow,Arial,sans-serif;font-weight:700;font-size:2.2rem;line-height:1}"
+  },
+  {
+   "name": "Campo",
+   "kind": "input",
+   "refersTo": "campo",
+   "description": "Entrada com borda de tinta.",
+   "html": "<input class=\"ds-campo\" placeholder=\"311960 ou 6205-2RS C3\">",
+   "css": ".ds-campo{font:1.15rem Barlow,Arial,sans-serif;color:#15191a;background:#fff;border:2px solid #15191a;border-radius:4px;padding:.7rem .85rem}.ds-campo:focus-visible{outline:3px solid #154889;outline-offset:2px}"
+  }
+ ],
+ "narrative": {
+  "northStar": "Sinalização de segurança industrial",
+  "overview": "A resposta a 'qual é esta peça?' é uma placa: verde quando é a mesma peça, amarelo quando precisa de uma pessoa, vermelho quando parece mas não é. A superfície é clara, séria e plana: chapa, tinta e bordas de 2px. O azul só aparece no que se pode apertar.",
+  "rules": [
+   {
+    "name": "The Placa Rule",
+    "body": "Toda decisão do sistema aparece como placa ou selo de cor cheia com pictograma. Nunca como filete, borda lateral ou número.",
+    "section": "colors"
+   },
+   {
+    "name": "The Nada Técnico Rule",
+    "body": "Código de relação, nome de norma, pontuação interna e registro do sistema ficam atrás de 'Ver detalhes'.",
+    "section": "typography"
+   },
+   {
+    "name": "The Uma Cor, Um Sentido Rule",
+    "body": "Verde, amarelo e vermelho só dizem decisão. Azul só diz ação.",
+    "section": "colors"
+   },
+   {
+    "name": "The Frase Inteira Rule",
+    "body": "Toda resposta é uma frase completa em pt-BR, com sujeito e verbo.",
+    "section": "typography"
+   }
+  ]
+ }
+}
