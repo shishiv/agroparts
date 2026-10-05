@@ -12,37 +12,161 @@
 <header class="capa">
   <p class="eyebrow">Rota Inova UEMG 2026 · Entrega 3 de 4 · Workshop de Prototipagem (21/09/2026)</p>
   <h1>Prototipagem: o protótipo funcional da AgroParts</h1>
-  <p class="lede">O protótipo executa o fluxo da AgroParts sobre dados públicos e verdadeiros. Ele mostra como a decisão resolve, revisa ou recusa funciona. Ele ainda não usa cadastro de cliente.</p>
+  <p class="lede">O protótipo está publicado em <a href="https://agroparts.pages.dev"><strong>agroparts.pages.dev</strong></a>. Ele identifica rolamentos rígidos de esferas das séries 60, 62 e 63 a partir de código, descrição livre ou foto de etiqueta. Ele roda sobre dados públicos e verdadeiros do CATMAT e de compras do Compras.gov.br, não sobre cadastro de cliente.</p>
   <dl class="ficha">
     <dt>Equipe</dt><dd>AgroParts · Camada inteligente de interoperabilidade para peças agroindustriais</dd>
     <dt>Desafio</dt><dd>AGR08 · Eficiência na Gestão de Peças</dd>
     <dt>Integrantes</dt><dd>Allana Eduarda Braga Iquegami, Gabrielle Henrique Arruda Longo, Alberto Gabriel Rodrigues Bispo, Davi de Sousa Almeida, Myke Matos dos Santos</dd>
     <dt>Curso</dt><dd>Sistemas de Informação · UEMG Frutal</dd>
     <dt>Etapa</dt><dd>Prototipagem</dd>
+    <dt>Protótipo</dt><dd>https://agroparts.pages.dev · código em github.com/shishiv/agroparts</dd>
   </dl>
 </header>
 
-<h2>1. O que o protótipo precisa provar</h2>
-<p>O protótipo testa as cinco capacidades da demonstração definidas na Entrega 2 (MVP):</p>
+<h2>1. O que o protótipo prova</h2>
+<p>O protótipo executa as cinco provas definidas na Entrega 2 (MVP). Cada prova usa um item real do CATMAT:</p>
+<table>
+  <tr><th style="width:36mm">Prova</th><th>Caso real no protótipo</th><th style="width:30mm">Decisão</th></tr>
+  <tr><td>1. Duplicidade exata</td><td>Os itens CATMAT 311960 e 311963 descrevem o mesmo rolamento 6318ZZ C3</td><td><span class="tag resolve">resolve</span> mesma peça</td></tr>
+  <tr><td>2. Falsa semelhança</td><td>O item 317388 (6211ZZ) tem 7 itens de texto parecido. Um deles, o 290385, tem folga C3 e blindagem em um lado só</td><td><span class="tag recusa">recusa</span> com o motivo</td></tr>
+  <tr><td>3. Referência cruzada</td><td>O item 624270 publica SKF 6206 2RS1 e NSK 6206 DDU</td><td><span class="tag resolve">resolve</span> a referência; <span class="tag revisa">revisa</span> a substituição</td></tr>
+  <tr><td>4. Tradução em lote</td><td>Os 396 itens ativos do padrão descritivo CATMAT 11797 (rolamento de esfera)</td><td>contagens por série</td></tr>
+  <tr><td>5. Revisão humana</td><td>O item 472447 declara furo de 60 mm, mas o código 6013 tem furo de 65 mm</td><td><span class="tag recusa">recusa</span> e registro da pessoa</td></tr>
+</table>
+
+<h2>2. Fluxo</h2>
+<div class="fluxo" style="grid-template-columns:repeat(6,1fr);">
+  <div class="passo"><b>1. Entrada</b>Código CATMAT, designação, descrição livre ou foto de etiqueta</div>
+  <div class="passo"><b>2. Leitura</b>OCR no navegador. A pessoa confere o texto lido</div>
+  <div class="passo"><b>3. Extração</b>Série, furo, vedação, folga e medidas</div>
+  <div class="passo"><b>4. Candidatos</b>Itens do CATMAT com texto parecido</div>
+  <div class="passo"><b>5. Regras</b>Atributo divergente recusa. Sufixo desconhecido manda para revisão</div>
+  <div class="passo"><b>6. Saída</b>Relação tipada, evidência e registro da revisão</div>
+</div>
+<p>A interface chama uma API HTTP documentada (<code>/api/openapi.json</code>). A API só lê dados públicos e não grava nada. Por isso ela não tem autenticação. O registro de revisão fica no navegador e pode ser exportado em JSON.</p>
+
+<h2 class="quebra">3. Telas e o que cada tela prova</h2>
+
+<figure class="figura">
+  <img src="img/desktop-00-inicio.jpg" alt="Tela inicial do protótipo AgroParts com o campo de entrada e os botões do roteiro das cinco provas">
+  <figcaption><strong>Tela inicial.</strong> A pessoa escolhe a entrada: código, descrição livre ou foto de etiqueta. Os botões do roteiro abrem as cinco provas. O aviso do topo declara o recorte e que os dados são públicos.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-01-duplicidade-exata.jpg" alt="Resultado RESOLVE para o item CATMAT 311960 com relação SAME_AS para o item 311963">
+  <figcaption><strong>Prova 1: duplicidade exata.</strong> O item 311960 resolve com a designação 6318ZZ C3 lida por inteiro. O item 311963 aparece como <code>SAME_AS</code> (mesma peça), com o motivo “mesmas palavras e mesma especificação”. A tela também declara o limite: a tabela dimensional aberta não cobre a série 6318, então diâmetro externo e largura não foram conferidos.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-02-falsa-semelhanca.jpg" alt="Resultado do item 317388 com itens parecidos recusados">
+  <figcaption><strong>Prova 2: falsa semelhança recusada.</strong> O item 317388 (6211ZZ, folga CN) tem o item 472510 como mesma peça. Outros 7 itens têm texto parecido e terminam em <span class="tag recusa">recusa</span>. Para o item 290385, o motivo é “folga radial CN x C3” e “blindagem nos dois lados x em um lado”, mesmo com semelhança de texto de 0,8.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-03-referencia-cruzada.jpg" alt="Resultado do item 624270 com referência cruzada SKF para NSK e intercâmbio em revisão">
+  <figcaption><strong>Prova 3: referência cruzada com condições e fonte.</strong> O item 624270 publica SKF 6206 2RS1 e NSK 6206 DDU. A referência cruzada resolve, com a condição “mesma designação básica, mesmas dimensões de contorno pela série ISO”. A substituição (<code>INTERCHANGEABLE_FOR</code>) fica em <span class="tag revisa">revisa</span>: o sufixo DDU não está nas fontes de regra, e o texto pede aço inoxidável que a designação não confirma.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-04-traducao-em-lote.jpg" alt="Tela de tradução em lote com 396 itens traduzidos e 28 grupos de duplicidade">
+  <figcaption><strong>Prova 4: tradução em lote.</strong> Um clique traduz os 396 itens ativos do padrão 11797 e encontra 28 grupos de duplicidade. A tabela mostra resolve, revisa e recusa por série, com denominadores. O mapa de códigos sai em CSV, com o texto original ao lado da tradução.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-05a-recusa-472447.jpg" alt="Resultado RECUSA do item 472447 com contradição de diâmetro interno">
+  <img src="img/desktop-05c-formulario-revisao.jpg" alt="Formulário de revisão humana com decisão registrada" style="margin-top:2mm;">
+  <figcaption><strong>Prova 5: revisão humana.</strong> O item 472447 declara furo de 60 mm e o código 6013, que tem furo de 65 mm. O motor recusa e mostra a contradição. Uma pessoa registra a própria decisão e a justificativa no formulário. O original não muda.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-05b-registro-de-revisoes.jpg" alt="Registro de revisões com original, decisão do motor, decisão da pessoa e hash do original">
+  <figcaption><strong>Registro de revisões.</strong> Cada registro guarda o texto original, a decisão do motor, a decisão da pessoa, a justificativa, o hash SHA-256 do original e a versão das regras.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-06-medicao.jpg" alt="Tela de medição contra o gabarito v1 com tabelas por série">
+  <figcaption><strong>Medição.</strong> A aba Medição mostra os números contra o gabarito v1, por série, sempre com o número absoluto. A seção 4 deste documento repete esses números.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-07-ocr-etiqueta.jpg" alt="Leitura por OCR de uma etiqueta impressa com o texto do item 311960">
+  <figcaption><strong>Foto de etiqueta impressa.</strong> O OCR no navegador leu a etiqueta com confiança média de 89%. A pessoa confere o texto antes de resolver. A etiqueta foi gerada pela equipe a partir do texto do item CATMAT 311960. Ela não é foto de campo.</figcaption>
+</figure>
+
+<figure class="figura">
+  <img src="img/desktop-08-ocr-foto-gravada.jpg" alt="Leitura por OCR de foto de anel de rolamento gravado com confiança baixa">
+  <figcaption><strong>Foto de anel gravado.</strong> Na foto real de um rolamento 6203 C3 com marcação gravada no metal, o OCR falha (confiança média de 31%). O protótipo avisa e pede o código digitado. A foto não identifica a peça sozinha. Foto: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0.</figcaption>
+</figure>
+
+<div class="figura" style="display:grid; grid-template-columns:1fr 1fr; gap:6mm; align-items:start;">
+  <figure style="margin:0;"><img src="img/celular-00-inicio.jpg" alt="Tela inicial do protótipo no celular" style="width:100%; border:1px solid var(--line);"></figure>
+  <figure style="margin:0;"><img src="img/celular-01-duplicidade-exata.jpg" alt="Resultado da duplicidade exata no celular" style="width:100%; border:1px solid var(--line);"></figure>
+</div>
+<p class="fonte" style="margin-top:-2mm;"><strong>Celular (390 px).</strong> À esquerda, a tela inicial. À direita, o resultado da prova 1. A interface funciona no celular, onde a câmera tira a foto da etiqueta.</p>
+
+<h2 class="quebra">4. Números medidos</h2>
+<p>O gabarito v1 foi rotulado e congelado antes de o motor existir. Ele tem 42 itens do CATMAT, 31 textos livres de fornecedores e 140 pares de identidade. A equipe não usa uma acurácia geral única. Precisão automática é resolvidos corretos sobre resolvidos. Cobertura automática é elegíveis resolvidos sobre elegíveis.</p>
+
+<h3>Tradução de itens do CATMAT</h3>
+<table>
+  <tr><th>Série</th><th>Itens</th><th>Elegíveis</th><th>Resolve</th><th>Revisa</th><th>Recusa</th><th>Precisão automática</th><th>Cobertura automática</th></tr>
+  <tr><td>60</td><td>8</td><td>7</td><td>7</td><td>1</td><td>0</td><td>7/7 (100%)</td><td>7/7 (100%)</td></tr>
+  <tr><td>62</td><td>17</td><td>14</td><td>14</td><td>2</td><td>1</td><td>14/14 (100%)</td><td>14/14 (100%)</td></tr>
+  <tr><td>63</td><td>17</td><td>15</td><td>15</td><td>1</td><td>1</td><td>15/15 (100%)</td><td>15/15 (100%)</td></tr>
+</table>
+
+<h3>Tradução de texto livre de fornecedores</h3>
+<p>Os textos vêm do campo “marca” de compras públicas, como o fornecedor digitou. Exemplos: <code>BLK Modelo 6205-2rs</code> e <code>6206 ZZC3</code>.</p>
+<table>
+  <tr><th>Série</th><th>Itens</th><th>Elegíveis</th><th>Resolve</th><th>Revisa</th><th>Recusa</th><th>Precisão automática</th><th>Cobertura automática</th></tr>
+  <tr><td>60</td><td>2</td><td>2</td><td>2</td><td>0</td><td>0</td><td>2/2 (100%)</td><td>2/2 (100%)</td></tr>
+  <tr><td>62</td><td>17</td><td>16</td><td>16</td><td>1</td><td>0</td><td>16/16 (100%)</td><td>16/16 (100%)</td></tr>
+  <tr><td>63</td><td>12</td><td>11</td><td>11</td><td>0</td><td>1</td><td>11/11 (100%)</td><td>11/11 (100%)</td></tr>
+</table>
+
+<h3>Identidade entre códigos (mesma peça)</h3>
+<table>
+  <tr><th>Série</th><th>Pares</th><th>Verdadeiros</th><th>Falsos</th><th>Indeterminados</th><th>Precisão</th><th>Recall</th><th>Falsos recusados</th></tr>
+  <tr><td>60</td><td>12</td><td>0</td><td>9</td><td>3</td><td>não se aplica</td><td>não se aplica</td><td>9/9 (100%)</td></tr>
+  <tr><td>62</td><td>64</td><td>7</td><td>39</td><td>18</td><td>7/7 (100%)</td><td>7/7 (100%)</td><td>39/39 (100%)</td></tr>
+  <tr><td>63</td><td>64</td><td>7</td><td>42</td><td>15</td><td>7/7 (100%)</td><td>7/7 (100%)</td><td>42/42 (100%)</td></tr>
+</table>
+<p>Um par é indeterminado quando um dos dois itens não é elegível no gabarito. Esse par fica fora da precisão e do recall.</p>
+
+<h3>Referência cruzada e lote</h3>
+<ul>
+  <li>Referência cruzada recuperada com fonte: 1/1. Com um único caso, o número não sustenta taxa.</li>
+  <li>Substituições resolvidas automaticamente: 0. O contrato do produto exige 0.</li>
+  <li>Lote do padrão 11797 inteiro, sem gabarito: 396 itens ativos e 28 grupos de duplicidade. Na série 60, 41/48 itens resolveram. Na série 62, 72/89. Na série 63, 70/78. Fora da família, 60/60 itens foram recusados. Essas contagens não medem precisão, porque só o gabarito tem rótulo.</li>
+  <li>Testes automatizados: 29 testes do motor e da API. Todos passaram em 05/10/2026.</li>
+</ul>
+
+<div class="nota">
+  <p><strong>Como ler os 100%.</strong> Os 100% mostram que o motor aplica as regras sem errar nos textos reais do gabarito. Eles não mostram que as regras acertam a peça física. O gabarito é pequeno, e a nota de evidência ainda não está calibrada. Na primeira execução, o motor errou 6 pares de identidade por um defeito na leitura de “6206-2Z”. O defeito foi corrigido sem mudar rótulos nem limites. A equipe ainda precisa revisar os rótulos do gabarito, que foram escritos pela mesma origem que escreveu o motor.</p>
+</div>
+
+<h2>5. Limites do protótipo</h2>
+<ul>
+  <li><strong>Dados públicos.</strong> O protótipo não prova valor para uma usina. Essa prova exige uma amostra real e autorizada de cadastro.</li>
+  <li><strong>Sem catálogo de fabricante.</strong> Os termos da SKF e da Timken não permitem repassar seus dados a terceiros sem autorização escrita. O protótipo usa só a regra pública de designação da SKF, reimplementada, e a tabela aberta DIN 625-1 do projeto BOLTS. Essa tabela cobre só parte das séries.</li>
+  <li><strong>Foto não identifica peça.</strong> A câmera lê texto de etiqueta. A pessoa confere o texto lido.</li>
+  <li><strong>Sem ERP e sem compra.</strong> O protótipo não escreve em ERP, não gera requisição e não compra. Ele também não infere compatibilidade com máquina.</li>
+</ul>
+
+<h2>6. Como rodar e conferir</h2>
 <ol>
-  <li>uma duplicidade exata entre dois códigos, que termina em <span class="tag resolve">resolve</span>;</li>
-  <li>uma peça parecida com contradição de atributo, que termina em <span class="tag recusa">recusa</span> com o motivo;</li>
-  <li>uma referência cruzada entre fabricantes, mostrada com a condição e a fonte;</li>
-  <li>a tradução de um lote, com cobertura e precisão por família sobre um gabarito rotulado;</li>
-  <li>uma revisão humana que preserva o original e registra a decisão.</li>
+  <li>Abra https://agroparts.pages.dev no computador ou no celular.</li>
+  <li>Clique nos botões do roteiro, de 1 a 5.</li>
+  <li>Para rodar sem internet, siga o README do repositório: <code>bun install</code> e depois <code>bun run demo</code>.</li>
+  <li>Para refazer a medição, rode <code>bun run medir</code>. O resultado regrava <code>docs/medicao/gabarito-v1.md</code>.</li>
 </ol>
 
-<h2>2. Telas e o que cada tela prova</h2>
-<div class="pendente">PENDENTE: esta seção recebe as capturas do protótipo (desktop e celular) e a descrição do que cada tela prova. A equipe não usa tela inventada.</div>
-
-<h2>3. Números medidos</h2>
-<div class="pendente">PENDENTE: esta seção recebe os números medidos sobre o gabarito, com denominadores visíveis.</div>
-
-<h2>4. Limites do protótipo</h2>
-<ul>
-  <li>O protótipo usa dados públicos. Ele não prova valor para uma usina. Essa prova exige amostra real autorizada.</li>
-  <li>A foto serve para ler código e etiqueta. A foto sozinha não identifica a peça.</li>
-  <li>O protótipo não escreve no ERP, não gera requisição e não compra.</li>
+<h2>Fontes</h2>
+<ul class="fonte">
+  <li>Capturas feitas em 05/10/2026 com Chrome, desktop (1366 px) e celular (390 px). Recortes em <code>docs/rota-inova/img/</code>.</li>
+  <li>Números: <code>docs/medicao/gabarito-v1.md</code>, gerado por <code>bun run medir</code> com as regras v1 de 05/10/2026.</li>
+  <li>Fontes e licenças dos dados: <code>docs/pesquisa/fontes-do-prototipo.md</code>. Pilha: ADR 0021 em <code>docs/decisoes/</code>.</li>
+  <li>CATMAT e compras públicas: API de Dados Abertos do Compras.gov.br, consulta de 05/10/2026. Decreto 8.777/2016, art. 4.</li>
 </ul>
 </main>
 </body>

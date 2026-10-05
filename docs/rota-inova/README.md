@@ -10,7 +10,7 @@ O formulário aceita um arquivo de até 10 MB por envio, e o prazo é 16/10/2026
 | Prototipagem (21/09/2026) | [`03-prototipagem.html`](03-prototipagem.html) | [`entregas/03-prototipagem.pdf`](entregas/03-prototipagem.pdf) |
 | Pitch (09/10/2026) | [`04-pitch.html`](04-pitch.html) | [`entregas/04-pitch.pdf`](entregas/04-pitch.pdf) |
 
-O PDF do pitch traz o deck de 10 slides em 16:9, o roteiro de 4 minutos e a versão de 60 segundos.
+O PDF do pitch traz o deck de 10 slides em 16:9, o roteiro de 4 minutos e meio e a versão de 60 segundos.
 O arquivo [`entregas/04-pitch-deck-para-projetar.pdf`](entregas/04-pitch-deck-para-projetar.pdf) traz só os slides, para o projetor do encontro de 09/10 e da apresentação presencial de 21/10.
 
 ## Como editar e gerar os PDFs
