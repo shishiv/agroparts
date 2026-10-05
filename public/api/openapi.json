@@ -1,7 +1,7 @@
 {
  "openapi": "3.1.0",
  "info": {
-  "title": "API AgroParts (protótipo PartsGraph)",
+  "title": "API AgroParts (protótipo)",
   "version": "0.1.0",
   "description": "Resolução de rolamentos rígidos de esferas (séries 60, 62, 63) sobre dados públicos. Sem autenticação: a API só lê corpora públicos e não guarda estado. Cada resposta declara decisão (resolve, revisa, recusa), relações tipadas (SAME_AS, CROSS_REFERENCE, INTERCHANGEABLE_FOR, COMPATIBLE_WITH, SIMILAR_TO) e evidências."
  },

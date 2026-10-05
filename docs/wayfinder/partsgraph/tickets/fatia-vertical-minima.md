@@ -15,7 +15,8 @@ Como fazer de dez a cinquenta itens reais atravessarem importação, extração,
 
 ## Evidência que torna a pergunta difícil
 
-O repositório ainda não contém motor, dataset, API, interface nem teste executável.
+Em 05/10/2026, o repositório contém motor, dataset público versionado, API, interface e testes, sobre dados públicos do CATMAT ([ADR 0021](../../../decisoes/adr-0021-pilha-do-prototipo-publico.md)).
+Falta a amostra autorizada de cadastro real, por isso o ticket continua aberto.
 O [recon profundo](../../../pesquisa/recon-profundo-2026-08-25.md) recomenda provar o fluxo mínimo sobre amostra autorizada antes de implementação ampla ou pitch.
 
 ## Opções e o que pesa contra cada uma

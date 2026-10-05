@@ -187,9 +187,12 @@ async function lerImagem(imagem: Blob, legenda: string) {
     const { data } = await worker.recognize(imagem);
     const texto = data.text.replace(/\n{2,}/g, "\n").trim();
     $<HTMLTextAreaElement>("#texto-ocr").value = texto;
-    estado.textContent = texto
-      ? `Texto lido com confiança média ${Math.round(data.confidence)}%. Confira antes de resolver: a câmera só lê texto, não reconhece a peça.`
-      : "Nenhum texto lido. Digite o código da etiqueta no campo abaixo.";
+    const confianca = Math.round(data.confidence);
+    estado.textContent = !texto
+      ? "Nenhum texto lido. Digite o código da etiqueta no campo abaixo."
+      : confianca < 60
+        ? `Leitura pouco confiável (confiança média ${confianca}%). Marcação gravada em metal curvo costuma falhar. Digite o código no campo abaixo.`
+        : `Texto lido com confiança média ${confianca}%. Confira antes de resolver: a câmera só lê texto, não reconhece a peça.`;
   } catch (e) {
     estado.textContent = `O leitor de texto falhou (${(e as Error).message}). Digite o código no campo abaixo.`;
   }
@@ -357,6 +360,7 @@ async function carregarMedicao() {
         <p>Recuperadas com fonte: ${fracao(m.referencia_cruzada.com_fonte, m.referencia_cruzada.total)}. Intercâmbio resolvido automaticamente: <strong>${m.referencia_cruzada.intercambio_resolvido_automaticamente}</strong> (esperado 0).</p>
         <p class="pequeno">Só um item do CATMAT nesta família publica referências de duas marcas. n = 1 não sustenta taxa.</p></div>
       <div class="cartao texto"><h2>Limites desta medição</h2><ul>
+        <li>A elegibilidade usa as mesmas fontes de regra que o motor. Os 100% medem se o motor aplica as regras sem errar nos textos reais, não se as regras acertam a peça física.</li>
         <li>Quem rotulou o gabarito é a mesma origem que escreveu o motor. A revisão humana da equipe ainda não foi feita.</li>
         <li>O gabarito tem ${m.traducao_catmat.reduce((s, l) => s + l.total, 0) + m.traducao_texto_livre.reduce((s, l) => s + l.total, 0)} textos. A nota de evidência não está calibrada.</li>
         <li>Erros encontrados: <strong>${m.erros.length}</strong>${m.erros.length ? `: ${m.erros.map((e) => esc(`${e.item} (esperado ${e.esperado}, obtido ${e.obtido})`)).join("; ")}` : "."}</li>

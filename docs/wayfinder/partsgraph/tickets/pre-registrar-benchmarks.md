@@ -28,3 +28,9 @@ O pré-registro falha se qualquer denominador, família, positivo, negativo ou l
 ## Artefato de fechamento
 
 O ticket fecha com três conjuntos congelados, critérios de inclusão, positivos e negativos, métricas e limiares próprios, além de um formato fixo de relatório com total bruto, elegíveis, resolvidos, enviados à revisão, recusados e precisão por família e tipo de relação.
+
+## Estado em 05/10/2026
+
+O gabarito v1 sobre dados públicos está em `dados/gabarito/v1/`, com regras de seleção, elegibilidade, limiares e métricas, gravado no commit anterior ao motor.
+Ele cobre tradução para a forma canônica, identidade em pares e uma referência cruzada (n = 1); intercâmbio não tem positivos.
+O ticket continua aberto porque o pré-registro sobre cadastro autorizado ainda não existe e porque a equipe ainda não revisou os rótulos da v1.
