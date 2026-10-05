@@ -244,7 +244,16 @@ Faixa de marca em tinta com o pictograma de rolamento, o nome AgroParts e as aba
 
 ### Placa de resultado (signature component)
 
-Ao chegar, a placa sobe 10px e o pictograma bate como um carimbo, de 1,18 para 1, em curva exponencial de saída. Com movimento reduzido, nada se move. É o único momento animado do site.
+Ao chegar, a placa sobe 10px e o pictograma bate como um carimbo, de 1,18 para 1, em curva exponencial de saída. Com movimento reduzido, nada se move. Fora do passo a passo, é o único momento animado do site.
+
+### Passo a passo (Como funciona)
+
+O botão "Como funciona" fica na faixa da marca e, até 860px, preso no canto de baixo da tela, em azul cheio. Ele abre a lista de explicações: a visão geral e uma por prova do roteiro. Cada placa do roteiro tem um link "Explicar" embaixo. A visão geral abre sozinha na primeira visita e fica lembrada no navegador.
+
+- O balão é papel com borda de tinta de 2px e canto de 4px, sem sombra. Título em Semi Condensed 700, texto em Barlow 400 na cor tinta 2, uma ou duas frases curtas.
+- "Avançar" é o botão primário, "Voltar" é o secundário e "Pular explicação" é um link discreto em cor suave.
+- O fundo escurece em tinta e deixa o elemento explicado recortado. O balão nunca cobre esse elemento, nem no celular.
+- Teclado: setas avançam e voltam, Esc sai, e o foco entra no balão. Com movimento reduzido, nada desliza nem esmaece.
 
 ## Do's and Don'ts
 
