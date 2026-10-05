@@ -1,0 +1,324 @@
+{
+ "versao": "v1",
+ "fonte": "dados/publico/catmat-pdm-11797.json",
+ "rotulos": [
+  {
+   "codigoItem": 317393,
+   "elegivel": true,
+   "designacao_basica": "6001",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472477,
+   "elegivel": true,
+   "designacao_basica": "6001",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472478,
+   "elegivel": true,
+   "designacao_basica": "6001",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 601352,
+   "elegivel": true,
+   "designacao_basica": "6001",
+   "protecao": "blindagem_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 317398,
+   "elegivel": true,
+   "designacao_basica": "6006",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472469,
+   "elegivel": true,
+   "designacao_basica": "6006",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472470,
+   "elegivel": true,
+   "designacao_basica": "6006",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 485889,
+   "elegivel": false,
+   "motivo": "sufixo LLU (NTN) fora das fontes de regra registradas"
+  },
+  {
+   "codigoItem": 290385,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "blindagem_simples",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 317388,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 346383,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "blindagem_simples",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 472505,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472506,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "aberto",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 472507,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "blindagem_simples",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472508,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "blindagem_simples",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 472509,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "blindagem_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 472510,
+   "elegivel": true,
+   "designacao_basica": "6211",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 248358,
+   "elegivel": true,
+   "designacao_basica": "6206",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 283525,
+   "elegivel": false,
+   "motivo": "texto diz 'METÁLICO E BLINDADO' e o sufixo 2RS1 indica vedação de contato"
+  },
+  {
+   "codigoItem": 346335,
+   "elegivel": true,
+   "designacao_basica": "6206",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 357382,
+   "elegivel": false,
+   "motivo": "sufixo 2ZR (notação FAG) fora das fontes de regra registradas"
+  },
+  {
+   "codigoItem": 472488,
+   "elegivel": true,
+   "designacao_basica": "6206",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 481989,
+   "elegivel": true,
+   "designacao_basica": "6206",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 605719,
+   "elegivel": true,
+   "designacao_basica": "6206",
+   "protecao": "vedacao_sem_contato_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 624270,
+   "elegivel": false,
+   "motivo": "texto declara aço inoxidável, mas a referência SKF 6206 2RS1 não tem o prefixo W de inoxidável"
+  },
+  {
+   "codigoItem": 283529,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 292852,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 311967,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "blindagem_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 317412,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 346385,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "blindagem_simples",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 346386,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "aberto",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 357380,
+   "elegivel": false,
+   "motivo": "sufixo 2ZR (notação FAG) fora das fontes de regra registradas"
+  },
+  {
+   "codigoItem": 472656,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "aberto",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 472657,
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 283527,
+   "elegivel": false,
+   "motivo": "texto diz 'METÁLICO E BLINDADO' e o sufixo 2RS1 indica vedação de contato"
+  },
+  {
+   "codigoItem": 283528,
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 346379,
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 387945,
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "blindagem_simples",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472547,
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "codigoItem": 472548,
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "aberto",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 472549,
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "blindagem_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "codigoItem": 472550,
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "versao": "v1",
+ "registrado_em": "2026-10-05",
+ "rotulador": "worker agent Kiro, a mesma origem que escreve o motor; revisão humana da equipe pendente",
+ "aviso": "Gabarito congelado antes de o motor existir. Qualquer mudança de rótulo, regra ou limiar cria a versão v2; os números da v1 continuam publicados.",
+ "familia": {
+  "nome": "rolamento rígido de esferas de uma carreira, séries métricas 60, 62 e 63",
+  "corpus": "CATMAT, padrão descritivo 11797 ROLAMENTO DE ESFERA, itens ativos",
+  "estratos": ["60", "62", "63"]
+ },
+ "conjuntos": {
+  "traducao_catmat": {
+   "arquivo": "catmat.json",
+   "regra_de_selecao": "Itens ativos do PDM 11797 agrupados pela designação básica 60xx, 62xx ou 63xx citada na descrição. Em cada série, entram os dois grupos com mais itens; empate decidido pelo menor código de designação. Resultado: 6001, 6006, 6211, 6206, 6312 e 6308, com todos os itens de cada grupo.",
+   "rotulo": "designação básica, proteção, folga e inox verdadeiros, ou não elegível com motivo"
+  },
+  "traducao_texto_livre": {
+   "arquivo": "textos-livres.json",
+   "regra_de_selecao": "Valores distintos do campo marca das linhas de compra (comparação em maiúsculas) que contêm 60xx, 62xx, 63xx ou dimensões AxBxC, ordenados; entra um a cada três, começando pelo primeiro (índices 0, 3, 6, ...).",
+   "rotulo": "o mesmo da tradução do CATMAT"
+  },
+  "identidade_pares": {
+   "origem": "todos os pares de itens de traducao_catmat dentro do mesmo grupo de designação básica",
+   "regra_do_rotulo": "SAME_AS verdadeiro quando os dois itens são elegíveis e têm a mesma designação básica, proteção, folga e inox; falso quando os dois são elegíveis e algum desses atributos difere; indeterminado quando um dos dois não é elegível. Pares indeterminados ficam fora dos denominadores de precisão e recall e aparecem contados à parte."
+  },
+  "referencia_cruzada": {
+   "rotulos": [
+    {
+     "codigoItem": 624270,
+     "cross_reference": {"origem": "SKF 6206-2RS1", "alvo": "NSK 6206 DDU", "publicada_por": "CATMAT item 624270", "verdadeiro": true},
+     "interchangeable_for": {"resolve": false, "motivo": "o item exige aço inoxidável e a designação SKF citada não tem o prefixo W; a vedação DDU não está nas fontes de regra"}
+    }
+   ]
+  }
+ },
+ "elegibilidade": "A ausência de sufixo de proteção ou de folga significa aberto e folga normal (CN), como no sistema de designação SKF. Um texto é elegível quando a designação, lida pelas fontes de regra registradas (sistema de designação SKF e convenção BOLTS), determina designação básica, proteção e folga, e o texto não contradiz esses valores.",
+ "limiares": {
+  "resolve": "designação da família lida por inteiro, sem sufixo não decodificado e sem contradição entre a designação, o texto e a tabela dimensional DIN 625-1 quando ela cobre a designação",
+  "revisa": "sem contradição, mas com sufixo não decodificado ou designação ausente (por exemplo, só dimensões)",
+  "recusa": "fora da família, sem evidência mínima, ou com contradição entre atributos"
+ },
+ "metricas": {
+  "traducao": "por estrato: total, elegíveis, resolvidos, revisados, recusados, resolvidos corretos; precisão automática = corretos / resolvidos; cobertura automática = resolvidos elegíveis / elegíveis",
+  "identidade": "por estrato: pares verdadeiros, falsos e indeterminados; SAME_AS resolvidos; precisão = verdadeiros resolvidos / resolvidos; recall = verdadeiros resolvidos / verdadeiros",
+  "proibido": "acurácia geral única"
+ },
+ "calibracao": "não medida na v1: o gabarito é pequeno demais para estimar taxa de acerto por faixa de nota"
+}

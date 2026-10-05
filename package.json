@@ -1,0 +1,26 @@
+{
+  "name": "partsgraph-prototipo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Protótipo navegável da fatia vertical do PartsGraph (agroparts, Rota Inova AGR08)",
+  "type": "module",
+  "scripts": {
+    "dados": "bun scripts/baixar-dados.ts",
+    "medir": "bun scripts/medir.ts",
+    "build": "tsc --noEmit && vite build && bun scripts/copiar-ocr.ts",
+    "test": "vitest run",
+    "demo": "bun run build && wrangler pages dev dist --port 8788",
+    "deploy": "wrangler pages deploy dist --project-name agroparts --branch main"
+  },
+  "dependencies": {
+    "tesseract.js": "7.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261005.1",
+    "@types/bun": "1.4.2",
+    "typescript": "5.9.3",
+    "vite": "8.3.2",
+    "vitest": "5.0.3",
+    "wrangler": "4.147.0"
+  }
+}
