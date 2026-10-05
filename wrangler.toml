@@ -1,0 +1,4 @@
+# Cloudflare Pages: site estático em dist/ e rotas da API em functions/.
+name = "agroparts"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-01"

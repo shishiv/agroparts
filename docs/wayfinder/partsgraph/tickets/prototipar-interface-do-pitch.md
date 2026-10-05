@@ -30,3 +30,9 @@ Também falha se depender de vídeo, dado falso, métrica sem denominador visív
 ## Artefato de fechamento
 
 O ticket fecha com protótipo descartável testado por roteiro sobre a fatia vertical, tempo total medido, entradas congeladas e verdadeiras, as cinco provas visíveis e plano de recuperação que não falsifique o resultado.
+
+## Estado em 05/10/2026
+
+O protótipo está em https://agroparts.pages.dev e mostra as cinco provas sobre entradas públicas, reais e congeladas ([README](../../../../README.md)).
+O roteiro está automatizado nos testes `tests/motor.test.ts` ("as cinco provas do roteiro").
+O ticket continua aberto porque depende da fatia vertical sobre cadastro autorizado e porque o tempo total do roteiro ao vivo ainda não foi cronometrado com a equipe.

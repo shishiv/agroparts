@@ -1,0 +1,542 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "API AgroParts (protótipo)",
+  "version": "0.1.0",
+  "description": "Resolução de rolamentos rígidos de esferas (séries 60, 62, 63) sobre dados públicos. Sem autenticação: a API só lê corpora públicos e não guarda estado. Cada resposta declara decisão (resolve, revisa, recusa), relações tipadas (SAME_AS, CROSS_REFERENCE, INTERCHANGEABLE_FOR, COMPATIBLE_WITH, SIMILAR_TO) e evidências."
+ },
+ "paths": {
+  "/api/resolver": {
+   "post": {
+    "summary": "Resolver um código, descrição ou texto de OCR",
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "texto"
+        ],
+        "properties": {
+         "tipo": {
+          "type": "string",
+          "enum": [
+           "codigo",
+           "descricao",
+           "ocr"
+          ],
+          "default": "descricao",
+          "description": "codigo: código CATMAT ou designação; descricao: texto livre; ocr: texto lido de foto de etiqueta e conferido pela pessoa"
+         },
+         "texto": {
+          "type": "string",
+          "maxLength": 2000
+         }
+        }
+       },
+       "examples": {
+        "duplicidade": {
+         "value": {
+          "tipo": "codigo",
+          "texto": "311960"
+         }
+        },
+        "texto": {
+         "value": {
+          "tipo": "descricao",
+          "texto": "BLK Modelo 6205-2rs"
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Resposta na forma canônica",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Resposta"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Entrada inválida",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Erro"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/lote": {
+   "get": {
+    "summary": "Traduzir o cadastro inteiro (itens ativos do CATMAT PDM 11797)",
+    "parameters": [
+     {
+      "name": "formato",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "json",
+        "csv"
+       ]
+      },
+      "description": "csv devolve o mapa de códigos"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Lote traduzido",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Lote"
+        }
+       },
+       "text/csv": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "summary": "Traduzir um lote enviado (até 500 itens)",
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "itens"
+        ],
+        "properties": {
+         "itens": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+           "type": "object",
+           "required": [
+            "texto"
+           ],
+           "properties": {
+            "codigo": {
+             "type": "string",
+             "maxLength": 40
+            },
+            "texto": {
+             "type": "string",
+             "maxLength": 2000
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Lote traduzido",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Lote"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Entrada inválida",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Erro"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/medicao": {
+   "get": {
+    "summary": "Números do gabarito v1, estratificados, com denominadores",
+    "responses": {
+     "200": {
+      "description": "Medição",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/revisoes": {
+   "post": {
+    "summary": "Registrar decisão humana sobre uma resolução",
+    "description": "Devolve o registro com o original intacto e seu sha256. A API não guarda o registro; o cliente o mantém.",
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "allOf": [
+         {
+          "type": "object",
+          "required": [
+           "texto"
+          ],
+          "properties": {
+           "tipo": {
+            "type": "string",
+            "enum": [
+             "codigo",
+             "descricao",
+             "ocr"
+            ],
+            "default": "descricao",
+            "description": "codigo: código CATMAT ou designação; descricao: texto livre; ocr: texto lido de foto de etiqueta e conferido pela pessoa"
+           },
+           "texto": {
+            "type": "string",
+            "maxLength": 2000
+           }
+          }
+         },
+         {
+          "type": "object",
+          "required": [
+           "revisor",
+           "decisao",
+           "justificativa"
+          ],
+          "properties": {
+           "revisor": {
+            "type": "string",
+            "maxLength": 80
+           },
+           "decisao": {
+            "type": "string",
+            "enum": [
+             "resolve",
+             "revisa",
+             "recusa"
+            ]
+           },
+           "justificativa": {
+            "type": "string",
+            "maxLength": 500
+           },
+           "especificacao_aceita": {
+            "type": "string",
+            "maxLength": 300
+           }
+          }
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Decisão registrada",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DecisaoHumana"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Entrada inválida",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Erro"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/fontes": {
+   "get": {
+    "summary": "Fontes, datas e licenças",
+    "responses": {
+     "200": {
+      "description": "Fontes",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Erro": {
+    "type": "object",
+    "properties": {
+     "erro": {
+      "type": "string"
+     }
+    }
+   },
+   "Decisao": {
+    "type": "string",
+    "enum": [
+     "resolve",
+     "revisa",
+     "recusa"
+    ]
+   },
+   "Evidencia": {
+    "type": "object",
+    "properties": {
+     "fonte": {
+      "type": "string"
+     },
+     "url": {
+      "type": "string"
+     },
+     "trecho": {
+      "type": "string"
+     },
+     "licenca": {
+      "type": "string"
+     },
+     "consultado_em": {
+      "type": "string"
+     }
+    }
+   },
+   "Relacao": {
+    "type": "object",
+    "properties": {
+     "tipo": {
+      "type": "string",
+      "enum": [
+       "SAME_AS",
+       "CROSS_REFERENCE",
+       "INTERCHANGEABLE_FOR",
+       "COMPATIBLE_WITH",
+       "SIMILAR_TO"
+      ]
+     },
+     "decisao": {
+      "$ref": "#/components/schemas/Decisao"
+     },
+     "alvo": {
+      "type": "string"
+     },
+     "alvo_texto": {
+      "type": "string"
+     },
+     "nota": {
+      "type": "number"
+     },
+     "motivos": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "condicoes": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "evidencias": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Evidencia"
+      }
+     }
+    }
+   },
+   "Especificacao": {
+    "type": "object",
+    "description": "TechnicalSpecification: substantivo, modificador e atributos tipados",
+    "properties": {
+     "substantivo": {
+      "type": "string"
+     },
+     "modificador": {
+      "type": "string"
+     },
+     "familia": {
+      "type": "string"
+     },
+     "serie": {
+      "type": "string"
+     },
+     "designacao_basica": {
+      "type": "string"
+     },
+     "protecao": {
+      "type": "string"
+     },
+     "folga": {
+      "type": "string"
+     },
+     "inox": {
+      "type": "boolean"
+     },
+     "atributos": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     },
+     "descricao_por_regra": {
+      "type": "string"
+     }
+    }
+   },
+   "Resposta": {
+    "type": "object",
+    "properties": {
+     "versao_regras": {
+      "type": "string"
+     },
+     "original": {
+      "type": "object",
+      "description": "CustomerMaterial como chegou, nunca alterado"
+     },
+     "decisao": {
+      "$ref": "#/components/schemas/Decisao"
+     },
+     "nota": {
+      "type": "number",
+      "description": "fração de checagens aprovadas; não calibrada"
+     },
+     "motivos": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "especificacao": {
+      "oneOf": [
+       {
+        "$ref": "#/components/schemas/Especificacao"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "relacoes": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Relacao"
+      }
+     },
+     "aplicabilidade": {
+      "type": "string"
+     },
+     "evidencias": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Evidencia"
+      }
+     }
+    }
+   },
+   "Lote": {
+    "type": "object",
+    "properties": {
+     "versao_regras": {
+      "type": "string"
+     },
+     "linhas": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     },
+     "por_estrato": {
+      "type": "object"
+     },
+     "grupos_duplicidade": {
+      "type": "array",
+      "items": {
+       "type": "object"
+      }
+     }
+    }
+   },
+   "DecisaoHumana": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "registrado_em": {
+      "type": "string"
+     },
+     "revisor": {
+      "type": "string"
+     },
+     "original": {
+      "type": "object"
+     },
+     "sha256_original": {
+      "type": "string"
+     },
+     "decisao_motor": {
+      "$ref": "#/components/schemas/Decisao"
+     },
+     "motivos_motor": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "decisao_humana": {
+      "$ref": "#/components/schemas/Decisao"
+     },
+     "especificacao_aceita": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "justificativa": {
+      "type": "string"
+     },
+     "versao_regras": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}

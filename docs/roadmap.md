@@ -41,18 +41,22 @@ O portão de prova é a licença verificada, a fonte reproduzível e a recomenda
 
 Fazer de dez a cinquenta itens reais atravessarem importação, extração, candidatos, regras, decisão ternária, revisão e exportação.
 O portão de prova é um mapa auditável que preserve os originais e mostre tipo de relação, diferenças, condições e evidências.
+Em 05/10/2026, um protótipo sobre dados públicos atravessa as sete etapas com 396 itens do CATMAT, como descreve o [ADR 0021](decisoes/adr-0021-pilha-do-prototipo-publico.md).
+Esse protótipo não fecha o portão, porque o portão exige cadastro real autorizado.
 
 ### Medição
 
 Medir cobertura e precisão estratificadas conforme o pré-registro.
 Medir também tempo mediano de localização e revisão antes e depois, concordância entre revisores, candidatos por item, recusas corretas, decisões revertidas e itens bloqueados por atributo ausente.
 O portão de prova é o relatório com números absolutos e percentuais por família e tipo de relação, sem inventar resultados ausentes.
+A [medição do gabarito v1](medicao/gabarito-v1.md) já publica esse formato para dados públicos; tempo de revisão e concordância entre revisores ainda não foram medidos.
 
 ## P3: pitch depois da prova
 
 Preparar interface, narrativa e material somente sobre a fatia vertical medida.
 A demonstração precisa mostrar uma duplicidade exata entre códigos locais, uma falsa semelhança corretamente recusada, uma referência cruzada com condições e fonte, tradução em lote com cobertura e precisão estratificadas e revisão humana que preserve o original e registre a decisão.
 O portão de prova é o roteiro executado sobre entradas reais e congeladas, sem vídeo como substituto de falha, dado fabricado ou compra automática.
+O roteiro roda em https://agroparts.pages.dev sobre entradas públicas, reais e congeladas; a versão sobre cadastro autorizado depende de P0.
 
 ## Comitê de incubação
 

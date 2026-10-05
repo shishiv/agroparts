@@ -1,0 +1,279 @@
+{
+ "versao": "v1",
+ "fonte": "dados/publico/compras-pdm-11797.json, campo marca",
+ "rotulos": [
+  {
+   "idCompraItem": "1581220600150202500001",
+   "texto": " (NSK) 6204-DDU=NACIONAL",
+   "elegivel": false,
+   "motivo": "sufixo DDU (NSK) fora das fontes de regra registradas"
+  },
+  {
+   "idCompraItem": "7420500590048202500019",
+   "texto": "6000 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6000",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7918000590043202400211",
+   "texto": "6003 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6003",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1680080590043202500003",
+   "texto": "6200 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6200",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "0301000590064202500001",
+   "texto": "6201 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6201",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1206380590037202400130",
+   "texto": "6202 RS",
+   "elegivel": true,
+   "designacao_basica": "6202",
+   "protecao": "vedacao_simples",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7420500590048202500025",
+   "texto": "6203 2RSC3",
+   "elegivel": true,
+   "designacao_basica": "6203",
+   "protecao": "vedacao_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7420500590048202500026",
+   "texto": "6203-ZZ",
+   "elegivel": true,
+   "designacao_basica": "6203",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "0301000590064202500003",
+   "texto": "6204 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6204",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1680080590043202500021",
+   "texto": "6205",
+   "elegivel": true,
+   "designacao_basica": "6205",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1200720590083202500009",
+   "texto": "6205 2RSC3",
+   "elegivel": true,
+   "designacao_basica": "6205",
+   "protecao": "vedacao_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1206250590089202500005",
+   "texto": "6205-2RS",
+   "elegivel": true,
+   "designacao_basica": "6205",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "0301000590064202500005",
+   "texto": "6206 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6206",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1680080590043202500020",
+   "texto": "6207",
+   "elegivel": true,
+   "designacao_basica": "6207",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1200640590015202400172",
+   "texto": "6207-Z",
+   "elegivel": true,
+   "designacao_basica": "6207",
+   "protecao": "blindagem_simples",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1680080590043202500019",
+   "texto": "6209",
+   "elegivel": true,
+   "designacao_basica": "6209",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "2544450590296202400048",
+   "texto": "6210",
+   "elegivel": true,
+   "designacao_basica": "6210",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7420500590048202500036",
+   "texto": "6212 ZZC3",
+   "elegivel": true,
+   "designacao_basica": "6212",
+   "protecao": "blindagem_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "idCompraItem": "9820950590040202500288",
+   "texto": "6302",
+   "elegivel": true,
+   "designacao_basica": "6302",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7918000590043202400224",
+   "texto": "6303 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6303",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "2544450590296202400049",
+   "texto": "6305",
+   "elegivel": true,
+   "designacao_basica": "6305",
+   "protecao": "aberto",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1680080590043202500007",
+   "texto": "6305 ZZC3",
+   "elegivel": true,
+   "designacao_basica": "6305",
+   "protecao": "blindagem_dupla",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7420500590048202500041",
+   "texto": "6307 2RS",
+   "elegivel": true,
+   "designacao_basica": "6307",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1206690590013202400001",
+   "texto": "6307zz",
+   "elegivel": true,
+   "designacao_basica": "6307",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1300580590173202500044",
+   "texto": "6308 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6308",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7420500590048202500046",
+   "texto": "6309 2RS",
+   "elegivel": true,
+   "designacao_basica": "6309",
+   "protecao": "vedacao_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "1581310590037202400186",
+   "texto": "6309 ZZ",
+   "elegivel": true,
+   "designacao_basica": "6309",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7420500590048202500049",
+   "texto": "6310 C3",
+   "elegivel": true,
+   "designacao_basica": "6310",
+   "protecao": "aberto",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "idCompraItem": "7420500590048202500050",
+   "texto": "6312 ZC3",
+   "elegivel": true,
+   "designacao_basica": "6312",
+   "protecao": "blindagem_simples",
+   "folga": "C3",
+   "inox": false
+  },
+  {
+   "idCompraItem": "3733010590662202500005",
+   "texto": "KE/6311H52MRE5C4E01P",
+   "elegivel": false,
+   "motivo": "código com sufixos H52, MRE5 e E01P fora das fontes de regra registradas"
+  },
+  {
+   "idCompraItem": "1201950590173202400055",
+   "texto": "ROLAMENTO 6205-ZZ",
+   "elegivel": true,
+   "designacao_basica": "6205",
+   "protecao": "blindagem_dupla",
+   "folga": "CN",
+   "inox": false
+  }
+ ]
+}

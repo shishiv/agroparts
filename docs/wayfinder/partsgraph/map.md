@@ -40,6 +40,7 @@ A reconciliação atual se apoia no [recon profundo](../../pesquisa/recon-profun
 18. [ADR 0018](../../decisoes/adr-0018-isolamento-estrito-no-piloto.md): dados e decisões privadas permanecem no inquilino durante o piloto.
 19. [ADR 0019](../../decisoes/adr-0019-comissao-fora-do-caminho-critico.md): comissão só pode ser reaberta com canal, atribuição e demanda comprovadas.
 20. [ADR 0020](../../decisoes/adr-0020-prova-antes-do-pitch.md): amostra, benchmark, fatia vertical e medição vêm antes do pitch.
+21. [ADR 0021](../../decisoes/adr-0021-pilha-do-prototipo-publico.md): o protótipo público é site estático com API serverless no Cloudflare Pages, só com dados abertos.
 
 ## Not yet specified
 

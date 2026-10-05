@@ -24,6 +24,18 @@ Tratar repositório público como domínio público foi descartado porque public
 Cada dependência ou corpus futuro exige uma verificação de licença antes de uso.
 A pesquisa de ferramentas registra licença e data de consulta como evidência.
 
+## Termos de fabricantes verificados em 05/10/2026
+
+Os termos de uso da SKF permitem que um indivíduo reproduza, guarde e baixe as informações do site sem autorização prévia.
+Os mesmos termos proíbem uso comercial sem aprovação escrita e proíbem, em qualquer caso, fornecer essas informações a terceiros.
+Os termos de uso da Timken proíbem copiar, distribuir, exibir ou usar qualquer informação do site sem permissão escrita.
+Um site público redistribui o que contém, e um proxy da equipe para a API da SKF também redistribui.
+Por isso, o protótipo público do [ADR 0021](adr-0021-pilha-do-prototipo-publico.md) não contém dado da SKF nem da Timken.
+A SKF aparece só como link para o sistema de designação, usado como regra.
+Uma etapa local para o pitch pode baixar um snapshot da SKF para uso individual, fora do repositório e do site publicado.
+Essa etapa fica para depois do site público e só acontece se houver prazo antes de 09/10/2026.
+Evidência, URLs e corpora abertos usados no lugar estão em [fontes do protótipo](../pesquisa/fontes-do-prototipo.md).
+
 ## Status
 
 Aceita.
