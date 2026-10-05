@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>AgroParts · Entrega 2 · MVP</title>
+<link rel="stylesheet" href="estilo.css">
+<style>@page { @bottom-left { content: "AgroParts · AGR08 · Entrega 2 de 4: MVP · versão de 05/10/2026"; font: 7.8pt "Noto Sans", Arial, sans-serif; color: #46505a; } }</style>
+</head>
+<body>
+<main class="doc">
+
+<header class="capa">
+  <p class="eyebrow">Rota Inova UEMG 2026 · Entrega 2 de 4 · Workshop de MVP (10/09/2026)</p>
+  <h1>MVP: a menor prova de que a AgroParts gera valor</h1>
+  <p class="lede">O MVP da AgroParts não é um sistema completo de peças. É uma fatia estreita: uma família de peça, um catálogo de fabricante e de 10 a 50 itens que atravessam o fluxo inteiro, da importação ao mapa de códigos revisado.</p>
+  <dl class="ficha">
+    <dt>Equipe</dt><dd>AgroParts · Camada inteligente de interoperabilidade para peças agroindustriais</dd>
+    <dt>Desafio</dt><dd>AGR08 · Eficiência na Gestão de Peças</dd>
+    <dt>Integrantes</dt><dd>Allana Eduarda Braga Iquegami, Gabrielle Henrique Arruda Longo, Alberto Gabriel Rodrigues Bispo, Davi de Sousa Almeida, Myke Matos dos Santos</dd>
+    <dt>Curso</dt><dd>Sistemas de Informação · UEMG Frutal</dd>
+    <dt>Etapa</dt><dd>MVP</dd>
+  </dl>
+</header>
+
+<h2>1. Hipótese principal</h2>
+<div class="nota"><p><strong>Se a AgroParts ligar os códigos e descrições de uma família de peça à referência do fabricante, e recusar quando houver contradição, então quem trabalha no almoxarifado ou na manutenção localiza e revisa um item em menos tempo, e as decisões automáticas erram em menos de 1% dos casos.</strong></p></div>
+<p>A hipótese principal tem três partes. Cada parte pode falhar sozinha:</p>
+<table>
+  <tr><th>Parte</th><th>Pergunta</th><th>A hipótese falha se…</th></tr>
+  <tr><td><strong>Valor</strong></td><td>A resposta da AgroParts reduz o tempo para localizar e revisar um material?</td><td>O tempo mediano com a AgroParts não for menor que o tempo da busca atual.</td></tr>
+  <tr><td><strong>Segurança</strong></td><td>As decisões automáticas são confiáveis?</td><td>O erro na faixa <span class="tag resolve">resolve</span> passar de 1% na família e no tipo de relação medidos.</td></tr>
+  <tr><td><strong>Viabilidade</strong></td><td>Uma usina entrega uma amostra do cadastro para o teste?</td><td>Nenhuma empresa aceitar enviar uma exportação autorizada, com dicionário de campos e regras de retenção.</td></tr>
+</table>
+<p>O limite de 1% é um contrato interno da equipe. Ele não vem de referência externa. Se a precisão não alcançar esse limite, a AgroParts resolve menos itens sozinha e manda mais itens para revisão. O limite não é afrouxado.</p>
+
+<h2>2. O mínimo que prova o valor</h2>
+<p>O MVP é uma <strong>fatia vertical</strong>: poucos itens reais passam por todas as etapas. A equipe escolheu esse formato porque uma busca bonita sem decisão medida não prova nada.</p>
+<div class="fluxo">
+  <div class="passo"><b>1. Importar</b>Arquivo CSV ou XLSX do cadastro, sem alterar a origem</div>
+  <div class="passo"><b>2. Extrair</b>Referência, fabricante, família, medidas</div>
+  <div class="passo"><b>3. Buscar</b>Candidatos no catálogo do fabricante e no CATMAT</div>
+  <div class="passo"><b>4. Regras</b>Contradição de atributo reprova o candidato</div>
+  <div class="passo"><b>5. Decidir</b>Resolve, revisa ou recusa, com o tipo de relação</div>
+  <div class="passo"><b>6. Revisar</b>Pessoa vê original, candidato, diferença e fonte</div>
+  <div class="passo"><b>7. Exportar</b>Mapa de códigos versionado e auditável</div>
+</div>
+<p>A demonstração do MVP precisa mostrar cinco casos:</p>
+<ol>
+  <li>uma duplicidade exata entre dois códigos locais, que termina em <span class="tag resolve">resolve</span>;</li>
+  <li>uma peça parecida, mas com medida ou folga diferente, que termina em <span class="tag recusa">recusa</span>;</li>
+  <li>uma referência cruzada entre fabricantes, mostrada com a condição e a fonte;</li>
+  <li>a tradução de um lote inteiro, com cobertura e precisão por família;</li>
+  <li>uma revisão humana que preserva o registro original e grava quem decidiu.</li>
+</ol>
+
+<h3>Escolhas do recorte</h3>
+<ul>
+  <li><strong>Família:</strong> um subtipo de rolamento. Rolamentos têm designação padronizada, medidas estruturadas e catálogos oficiais com referência cruzada.</li>
+  <li><strong>Catálogo:</strong> um único fabricante com licença de uso verificada. Um segundo fabricante só entra com licença e fonte claras.</li>
+  <li><strong>Vocabulário:</strong> o CATMAT, catálogo público do governo federal, com 343.880 itens de material e 20.419 padrões descritivos na consulta de 25/08/2026. O CATMAT dá o vocabulário em português, mas não prova que duas peças de fabricantes diferentes são intercambiáveis.</li>
+  <li><strong>Entrega:</strong> arquivo de entrada e resultado por API. Nenhuma escrita automática no ERP.</li>
+</ul>
+
+<h2>3. O que entra e o que fica para depois</h2>
+<table>
+  <tr><th style="width:50%">Entra no MVP</th><th>Fica para depois</th></tr>
+  <tr><td>Importação de arquivo sem alterar a origem</td><td>Integração nativa com SAP, Maximo ou outro ERP. O primeiro piloto define qual.</td></tr>
+  <tr><td>Uma família de rolamento e um fabricante</td><td>Outras famílias: bombas, vedações, componentes de transporte</td></tr>
+  <tr><td>Decisão resolve, revisa ou recusa com tipo de relação e evidência</td><td>Geração automática de requisição. Ela depende do vínculo real entre peça e equipamento.</td></tr>
+  <tr><td>Fila de revisão humana com registro de quem decidiu</td><td>Compatibilidade com equipamento por número de série</td></tr>
+  <tr><td>Leitura de código e etiqueta por câmera, como entrada de texto</td><td>Classificação da peça só pela foto. Aparência não prova medida.</td></tr>
+  <tr><td>Mapa de códigos exportável e consulta por API</td><td>Preço, estoque, compra e comissão sobre venda</td></tr>
+  <tr><td>Dados de cada cliente isolados, sem aprendizagem entre clientes</td><td>Base comum de relações entre empresas</td></tr>
+</table>
+
+<h2>4. Métricas de sucesso e como medir</h2>
+<p>A equipe congela os conjuntos de teste, os limites e as métricas <strong>antes</strong> de ver os resultados. Isso impede escolher o denominador que favorece o resultado. A equipe não usa uma “acurácia geral” única. Cada porcentagem vem com o número absoluto.</p>
+<table>
+  <tr><th>Métrica</th><th>Como medir</th><th>Critério de sucesso</th></tr>
+  <tr><td>Precisão da faixa automática</td><td>Revisores conferem todas as decisões <span class="tag resolve">resolve</span> contra o gabarito. Resultado separado por família e por tipo de relação.</td><td>Erro menor que 1%</td></tr>
+  <tr><td>Cobertura</td><td>Total bruto, elegíveis, resolvidos, enviados à revisão e recusados, em números absolutos e porcentagens</td><td>Relatório completo. A cobertura pode cair para manter a precisão.</td></tr>
+  <tr><td>Recusas corretas</td><td>Pares negativos do gabarito: mesma aparência, medida ou folga diferente</td><td>Nenhum negativo vira <span class="tag resolve">resolve</span></td></tr>
+  <tr><td>Tempo para localizar e revisar</td><td>Cronometrar a mesma lista de itens com a busca atual e com a AgroParts. Comparar as medianas.</td><td>Mediana menor com a AgroParts. A meta numérica entra no pré-registro com o cliente.</td></tr>
+  <tr><td>Concordância entre revisores</td><td>Dois revisores decidem os mesmos itens sem ver a resposta do outro</td><td>Medida e registrada. Discordância vira regra nova ou item recusado.</td></tr>
+  <tr><td>Decisões revertidas</td><td>Contar quantas decisões a revisão desfez</td><td>Registrada por família e por motivo</td></tr>
+  <tr><td>Itens bloqueados por falta de atributo</td><td>Contar itens sem medida, fabricante ou referência suficiente</td><td>Registrada. Mostra onde o cadastro precisa de dado.</td></tr>
+  <tr><td>Escritas no ERP do cliente</td><td>Registro de chamadas de integração</td><td>Zero</td></tr>
+</table>
+
+<h3>Três conjuntos de teste separados</h3>
+<ul>
+  <li><strong>Identidade:</strong> pares com a mesma referência, fabricante e revisão contra pares com texto parecido e referência diferente.</li>
+  <li><strong>Referência cruzada:</strong> relações publicadas pelo fabricante contra peças com medida próxima e contradição relevante.</li>
+  <li><strong>Substituição sob condição:</strong> substituições validadas para uma aplicação. No MVP, este tipo vai sempre para revisão humana.</li>
+</ul>
+
+<h2>5. Ordem de execução</h2>
+<ol>
+  <li>Conseguir uma amostra real do cadastro, com autorização, dicionário de campos e regras de retenção e eliminação.</li>
+  <li>Congelar os conjuntos de teste e os limites antes de rodar o sistema.</li>
+  <li>Verificar a licença do catálogo do fabricante.</li>
+  <li>Passar de 10 a 50 itens reais pelo fluxo completo.</li>
+  <li>Medir e publicar o relatório por família e por tipo de relação.</li>
+</ol>
+<p>Enquanto a amostra real não chega, o protótipo da Entrega 3 usa somente dados públicos. Ele mostra o fluxo e as regras. Ele não prova valor para cliente.</p>
+
+<h2>6. Riscos e respostas</h2>
+<table>
+  <tr><th>Risco</th><th>Resposta</th></tr>
+  <tr><td>Nenhuma empresa envia amostra autorizada</td><td>A fatia vertical não começa. A equipe não afirma valor para cliente.</td></tr>
+  <tr><td>Catálogo sem licença compatível</td><td>A família não avança para a prova técnica.</td></tr>
+  <tr><td>Precisão abaixo do limite</td><td>A cobertura automática diminui. O limite não muda.</td></tr>
+  <tr><td>Revisores não concordam sobre o gabarito</td><td>Os itens em disputa saem do conjunto automático e viram regra ou recusa.</td></tr>
+</table>
+
+<h2>Fontes</h2>
+<ul class="fonte">
+  <li>Contagens do CATMAT: API de Dados Abertos do Compras.gov.br, consulta de 25/08/2026 (<code>docs/pesquisa/catmat-pncp.md</code>)</li>
+  <li>Roadmap de prova e decisões: <code>docs/roadmap.md</code>, ADR 0006, ADR 0014, ADR 0016 e ADR 0020 em <code>docs/decisoes/</code></li>
+  <li>Métricas do piloto: <code>docs/pesquisa/aprofundamento-jornada-integracao.md</code>, seção 5.4</li>
+</ul>
+</main>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>AgroParts · Entrega 4 · Pitch</title>
+<link rel="stylesheet" href="estilo.css">
+<style>@page { @bottom-left { content: "AgroParts · AGR08 · Entrega 4 de 4: Pitch · versão de 05/10/2026"; font: 7.8pt "Noto Sans", Arial, sans-serif; color: #46505a; } }</style>
+<script>
+  // ?somente=deck gera o PDF só com os slides, para projetar.
+  if (new URLSearchParams(location.search).get('somente') === 'deck') {
+    document.documentElement.classList.add('somente-deck');
+  }
+</script>
+<style>.somente-deck .parte-texto { display: none; }</style>
+</head>
+<body>
+
+<!-- ===================== DECK (10 slides) ===================== -->
+
+<section class="slide capa-deck">
+  <p class="kicker">Rota Inova UEMG 2026 · Desafio AGR08 · Eficiência na Gestão de Peças</p>
+  <h1>AgroParts</h1>
+  <p style="font-size:24pt; max-width:80%; margin-bottom:10mm;">Saber se é a mesma peça, com a fonte do fabricante, sem mexer no ERP.</p>
+  <p style="font-size:13pt; color:#c8cdd3;">Allana Eduarda Braga Iquegami · Gabrielle Henrique Arruda Longo · Alberto Gabriel Rodrigues Bispo · Davi de Sousa Almeida · Myke Matos dos Santos<br>Sistemas de Informação · UEMG Frutal</p>
+  <div class="rodape"><span>AgroParts · Camada inteligente de interoperabilidade para peças agroindustriais</span><span>1 / 10</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">O problema</p>
+  <h2>A mesma peça tem vários códigos. Ninguém sabe se ela já está no estoque.</h2>
+  <table>
+    <tr><th>Código local</th><th>Descrição no cadastro</th></tr>
+    <tr><td><code>100234</code></td><td>ROL 6318 ZZ C3</td></tr>
+    <tr><td><code>A-77812</code></td><td>ROLAMENTO RIG. ESFERAS 6318-2Z/C3</td></tr>
+    <tr><td><code>55901</code></td><td>ROLAM 6318ZZC3 P/ BOMBA</td></tr>
+  </table>
+  <p>É o mesmo rolamento? Uma folga ou vedação diferente muda a resposta. Foto e texto parecido não provam que é a mesma peça.</p>
+  <p class="fonte">Exemplo ilustrativo, não é cadastro de cliente. A referência 6318ZZ C3 existe no CATMAT, item 311960.</p>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>2 / 10</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Por que importa</p>
+  <h2>Manutenção pesa muito, a janela é curta e o cadastro diverge do físico.</h2>
+  <div class="cols3">
+    <div class="card"><div class="big">R$ 1,249 bi</div><p>de capex de manutenção da São Martinho em 9 meses da safra 2025/26</p></div>
+    <div class="card"><div class="big">195 → 250</div><p>usinas em operação no Centro-Sul entre a 1ª quinzena de abril e a 2ª de maio de 2026</p></div>
+    <div class="card"><div class="big">16%</div><p>menos itens físicos que o sistema registrava, em auditoria de uma empresa de energia dos EUA</p></div>
+  </div>
+  <p class="fonte">Fontes: São Martinho, Resultados 3T26 (09/02/2026) · UNICA (30/04 e 24/06/2026) · U.S. DOE OIG, DOE-OIG-24-30 (09/2024), setor elétrico. Números de cada fonte, não do setor inteiro.</p>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>3 / 10</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Como resolvem hoje</p>
+  <h2>Hoje a resposta depende de uma pessoa ou de um projeto longo.</h2>
+  <div class="cols">
+    <ul>
+      <li><b>Busca por texto no ERP</b> e pergunta ao almoxarife que “conhece o estoque”</li>
+      <li><b>Saneamento pontual</b>: Santa Catarina contratou a revisão de cerca de 49,7 mil itens, em até 12 meses</li>
+      <li><b>Módulos de governança do ERP</b>, como SAP MDG e IBM Maximo</li>
+    </ul>
+    <div class="card" style="align-self:start;">
+      <p style="font-size:17pt;"><b>O que falta:</b> uma resposta em português, com a fonte do fabricante, que diga “não sei” quando a evidência não basta.</p>
+    </div>
+  </div>
+  <p class="fonte">Fontes: Secretaria de Estado da Administração de SC · learning.sap.com · ibm.com/docs (Maximo, itens duplicados).</p>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>4 / 10</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">A solução</p>
+  <h2>A AgroParts lê o código, busca no catálogo e decide com regras.</h2>
+  <div class="fluxo">
+    <div class="passo"><b>Entrada</b>Código, descrição ou foto da etiqueta</div>
+    <div class="passo"><b>Extração</b>Referência, fabricante, medidas</div>
+    <div class="passo"><b>Candidatos</b>CATMAT e catálogo do fabricante licenciado</div>
+    <div class="passo"><b>Regras</b>Contradição de atributo reprova</div>
+    <div class="passo"><b>Mapa</b>Código original preservado, decisão registrada</div>
+  </div>
+  <div class="decisoes">
+    <div class="resolve"><b>Resolve</b>mesma referência, sem contradição</div>
+    <div class="revisa"><b>Revisa</b>candidato plausível, falta evidência: uma pessoa decide</div>
+    <div class="recusa"><b>Recusa</b>medida, folga ou vedação diferente</div>
+  </div>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>5 / 10</span></div>
+</section>
+
+<section class="slide" id="slide-demo">
+  <p class="kicker">Protótipo funcionando · agroparts.pages.dev</p>
+  <h2>Parecido não é igual: o protótipo recusa e explica por quê.</h2>
+  <div class="shot">
+    <img src="img/desktop-02-falsa-semelhanca.jpg" alt="Protótipo recusa itens parecidos com folga diferente" style="max-height:104mm;">
+    <div style="flex:1; font-size:13.5pt;">
+      <p><b>396</b> itens públicos do CATMAT traduzidos em lote, com <b>28</b> grupos de duplicidade</p>
+      <p><b>90/90</b> pares falsos do gabarito recusados</p>
+      <p><b>14/14</b> pares de mesma peça encontrados</p>
+      <p><b>0</b> substituições automáticas: sempre vão para uma pessoa</p>
+      <p class="fonte" style="margin:0; padding:0;">Gabarito v1 pequeno, dados públicos, sem cadastro de cliente. Os números mostram que o motor aplica as regras. Eles não provam valor para uma usina.</p>
+    </div>
+  </div>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>6 / 10</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Por que confiar</p>
+  <h2>A AgroParts prefere recusar a errar.</h2>
+  <div class="cols">
+    <ul>
+      <li><b>Cada resposta diz o tipo de relação:</b> mesma peça, referência cruzada, substituição sob condição, compatível com o equipamento ou só parecida</li>
+      <li><b>Parecida nunca vira “mesma peça” sozinha</b></li>
+      <li><b>Evidência em cada decisão:</b> fonte, trecho e regra usada</li>
+    </ul>
+    <ul>
+      <li><b>O ERP continua igual:</b> nada é apagado nem fundido</li>
+      <li><b>Dados de cada empresa isolados:</b> sem aprendizagem entre clientes</li>
+      <li><b>Erro menor que 1%</b> nas decisões automáticas, medido por família. Se não alcançar, a AgroParts automatiza menos</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>7 / 10</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Mercado</p>
+  <h2>O mercado de dados de materiais existe. O espaço da AgroParts é o agro em português.</h2>
+  <table>
+    <tr><th>Quem</th><th>O que mostra</th></tr>
+    <tr><td>Verusen (EUA)</td><td>Harmoniza materiais entre ERPs e plantas. Publica caso com 29 plantas e mais de 3 mil materiais potencialmente duplicados.</td></tr>
+    <tr><td>SAP MDG, IBM Maximo</td><td>Governança e detecção de duplicidade dentro do ERP</td></tr>
+    <tr><td>Merit Data</td><td>Publica 100% de acurácia em 85% dos registros de autopeças: os outros 15% pedem revisão humana</td></tr>
+  </table>
+  <p><b>AgroParts:</b> material agroindustrial, português técnico, evidência de fabricante e recusa explícita.</p>
+  <p class="fonte">Números publicados pelas próprias empresas (verusen.com, meritdata-tech.com), consultados em 25/08/2026. Não são validação da AgroParts.</p>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>8 / 10</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker">Próximo passo</p>
+  <h2>Um piloto: uma planta, uma família de peça, de 10 a 50 itens reais.</h2>
+  <div class="cols">
+    <div>
+      <p><b>O que medimos</b></p>
+      <ul>
+        <li>Precisão e cobertura por família e tipo de relação</li>
+        <li>Tempo para localizar e revisar um item, antes e depois</li>
+        <li>Recusas corretas e decisões revertidas</li>
+      </ul>
+    </div>
+    <div>
+      <p><b>Modelo de receita (hipótese)</b></p>
+      <ul>
+        <li>Contrato B2B de resolução do cadastro, por planta ou por lote</li>
+        <li>Preço validado no piloto</li>
+        <li>Sem comissão sobre compra</li>
+      </ul>
+    </div>
+  </div>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>9 / 10</span></div>
+</section>
+
+<section class="slide capa-deck">
+  <p class="kicker">O que pedimos</p>
+  <h2 style="font-size:34pt; color:#fff;">Uma exportação autorizada do cadastro de uma família de peça e uma pessoa da manutenção ou do almoxarifado para revisar os resultados.</h2>
+  <p style="font-size:16pt; color:#c8cdd3;">Com isso, a equipe entrega o relatório medido. Sem esse dado, a equipe não promete economia.</p>
+  <p style="font-size:13pt; color:#c8cdd3; margin-top:6mm;">Equipe AgroParts · Allana Iquegami · Gabrielle Longo · Alberto Bispo · Davi Almeida · Myke Santos · SI UEMG Frutal</p>
+  <div class="rodape"><span>AgroParts · AGR08</span><span>10 / 10</span></div>
+</section>
+
+<!-- ===================== ROTEIRO (A4) ===================== -->
+
+<main class="doc parte-texto roteiro">
+<header class="capa">
+  <p class="eyebrow">Rota Inova UEMG 2026 · Entrega 4 de 4 · Workshop de Pitch (09/10/2026)</p>
+  <h1>Pitch: deck, roteiro de 4 minutos e meio e versão de 60 segundos</h1>
+  <dl class="ficha">
+    <dt>Equipe</dt><dd>AgroParts · Camada inteligente de interoperabilidade para peças agroindustriais</dd>
+    <dt>Desafio</dt><dd>AGR08 · Eficiência na Gestão de Peças</dd>
+    <dt>Integrantes</dt><dd>Allana Eduarda Braga Iquegami, Gabrielle Henrique Arruda Longo, Alberto Gabriel Rodrigues Bispo, Davi de Sousa Almeida, Myke Matos dos Santos</dd>
+    <dt>Curso</dt><dd>Sistemas de Informação · UEMG Frutal</dd>
+    <dt>Etapa</dt><dd>Pitch</dd>
+    <dt>Uso</dt><dd>Encontro de 09/10/2026 e apresentação presencial de 21/10/2026</dd>
+  </dl>
+</header>
+<p>As páginas anteriores trazem os 10 slides do deck. O arquivo <code>04-pitch-deck-para-projetar.pdf</code> traz só os slides, para o projetor. O roteiro abaixo dura cerca de 4 minutos e meio em fala calma, dentro do limite de 3 a 5 minutos. Os tempos são acumulados.</p>
+
+<h2>Roteiro falado de 4 minutos e meio</h2>
+<table>
+  <tr><th style="width:17mm">Tempo</th><th style="width:15mm">Slide</th><th>Fala</th></tr>
+  <tr><td class="tempo">0:00</td><td>1</td><td>Boa tarde. Somos a AgroParts, do curso de Sistemas de Informação da UEMG Frutal. Trabalhamos no desafio AGR08, Eficiência na Gestão de Peças. A nossa proposta cabe em uma frase: saber se é a mesma peça, com a fonte do fabricante, sem mexer no ERP.</td></tr>
+  <tr><td class="tempo">0:20</td><td>2</td><td>Olhem estes três códigos. Os três descrevem um rolamento 6318 com vedação e folga C3. Será que são a mesma peça? No cadastro de uma usina isso acontece o tempo todo: cada planta e cada pessoa escreve a peça de um jeito. Uma folga ou uma vedação diferente muda a resposta. Por isso foto e texto parecido não bastam.</td></tr>
+  <tr><td class="tempo">0:50</td><td>3</td><td>Por que isso importa? A São Martinho reportou mais de 1,2 bilhão de reais de capex de manutenção em nove meses de safra. A safra começa rápido: em poucas semanas o Centro-Sul passou de 195 para 250 usinas operando. E uma auditoria do governo americano, numa empresa de energia que já tinha sistema de ativos, encontrou 16% menos itens no almoxarifado do que o sistema dizia. Quando o cadastro não bate, alguém procura peça na hora errada.</td></tr>
+  <tr><td class="tempo">1:30</td><td>4</td><td>Hoje a resposta depende de uma pessoa que conhece o estoque, ou de um projeto longo de saneamento. O Governo de Santa Catarina, por exemplo, contratou a revisão de quase 50 mil itens em até um ano. Os módulos de ERP ajudam, mas falta uma resposta em português, com a fonte do fabricante, que saiba dizer “não sei”.</td></tr>
+  <tr><td class="tempo">2:00</td><td>5</td><td>A AgroParts recebe um código, uma descrição ou a foto da etiqueta. Ela extrai referência, fabricante e medidas. Busca candidatos no CATMAT, o catálogo público do governo, e no catálogo do fabricante quando a licença permite. Depois regras comparam os atributos. O resultado é uma de três decisões: resolve, revisa ou recusa. O código original fica intacto no ERP.</td></tr>
+  <tr><td class="tempo">2:30</td><td>6</td><td>Isto não é maquete. O protótipo está no ar em agroparts.pages.dev, com dados públicos do CATMAT. <em>[Clique em “2 · Falsa semelhança”.]</em> Este rolamento 6211ZZ tem sete itens de texto quase igual. O protótipo recusa todos e diz por quê: aqui, a folga é C3 e não CN. <em>[Clique em “4 · Tradução em lote”.]</em> O cadastro público inteiro, 396 itens, sai traduzido, com 28 grupos de duplicidade. No nosso gabarito, os 90 pares falsos foram recusados e os 14 pares de mesma peça foram encontrados. São dados públicos e um gabarito pequeno. O próximo passo é medir num cadastro real.</td></tr>
+  <tr><td class="tempo">3:20</td><td>7</td><td>Por que confiar? Cada resposta diz o tipo de relação: mesma peça, referência cruzada, substituição sob condição, ou só parecida. Parecida nunca vira mesma peça sozinha. Cada decisão guarda a fonte e a regra. Nossa meta é erro menor que 1% nas decisões automáticas. Se não alcançarmos, a AgroParts automatiza menos e manda mais itens para revisão.</td></tr>
+  <tr><td class="tempo">3:45</td><td>8</td><td>Esse mercado existe. A Verusen, nos Estados Unidos, harmoniza materiais entre ERPs. SAP e IBM têm módulos de duplicidade. O nosso espaço é o material agroindustrial em português, com evidência de fabricante e recusa explícita.</td></tr>
+  <tr><td class="tempo">4:00</td><td>9</td><td>O próximo passo é um piloto: uma planta, uma família de peça e de 10 a 50 itens reais. Vamos medir precisão, cobertura e tempo de busca, antes e depois.</td></tr>
+  <tr><td class="tempo">4:15</td><td>10</td><td>Para isso pedimos duas coisas: uma exportação autorizada do cadastro de uma família de peça e uma pessoa da manutenção ou do almoxarifado para revisar os resultados. Com isso entregamos o relatório medido. Obrigado.</td></tr>
+</table>
+
+<h3>Regras para o dia</h3>
+<ul>
+  <li>Se a demonstração ao vivo falhar, mostre as capturas do protótipo e diga que são capturas.</li>
+  <li>Não fale em economia, compra evitada ou redução de parada. A equipe ainda não tem dado de piloto.</li>
+  <li>Use o nome AgroParts. Não use o codinome interno do repositório.</li>
+  <li>Se alguém perguntar sobre clientes, diga que a equipe procura a primeira amostra autorizada.</li>
+</ul>
+
+<h2>Versão curta de 60 segundos</h2>
+<div class="nota">
+  <p>Somos a AgroParts, da UEMG Frutal, no desafio AGR08. No cadastro de uma usina, a mesma peça aparece com vários códigos e descrições. Ninguém sabe se ela já está no estoque.</p>
+  <p>A AgroParts lê o código, a descrição ou a etiqueta. Ela busca a peça no catálogo público CATMAT e no catálogo do fabricante, quando a licença permite. Regras comparam as medidas. A resposta é resolve, revisa ou recusa, sempre com a fonte. O ERP continua igual, sem nada apagado.</p>
+  <p>Nossa diferença é dizer “não sei” quando a evidência não basta. O protótipo já roda em agroparts.pages.dev, com dados públicos. O próximo passo é um piloto com uma planta e de 10 a 50 itens reais. Pedimos uma exportação autorizada do cadastro e uma pessoa da manutenção para revisar. Obrigado.</p>
+</div>
+<p class="fonte">A versão curta tem cerca de 130 palavras, ou 60 segundos em fala calma.</p>
+
+<h2>Fontes dos números do deck</h2>
+<ul class="fonte">
+  <li>São Martinho, Resultados 3º Trimestre, safra 2025/26, 09/02/2026: ri.saomartinho.com.br</li>
+  <li>UNICA, publicações de 30/04/2026 e 24/06/2026: unica.com.br</li>
+  <li>U.S. Department of Energy, Office of Inspector General, DOE-OIG-24-30, 24/09/2024: energy.gov</li>
+  <li>Secretaria de Estado da Administração de Santa Catarina, padronização do cadastro de materiais: sea.sc.gov.br</li>
+  <li>Verusen, caso de fabricante Fortune 500: verusen.com · Merit Data, caso de autopeças: meritdata-tech.com</li>
+  <li>CATMAT, item 311960: API de Dados Abertos do Compras.gov.br, consulta de 25/08/2026</li>
+  <li>Detalhes e comandos de reprodução: <code>docs/pesquisa/</code> no repositório <code>shishiv/agroparts</code></li>
+</ul>
+</main>
+</body>
+</html>

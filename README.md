@@ -62,3 +62,4 @@ Se a internet falhar no dia do pitch, rode `bun run demo` num notebook com o rep
 [Pesquisa](docs/pesquisa/) preserva fontes e medições reconferidas.
 [Wayfinder](docs/wayfinder/partsgraph/map.md) mantém decisões, névoa e tickets locais.
 [Visão geral](docs/visao-geral.html) explica o problema, as relações tipadas e o que ainda não está provado.
+[Entregas do Rota Inova](docs/rota-inova/) guardam as quatro entregas do formulário em HTML e PDF.

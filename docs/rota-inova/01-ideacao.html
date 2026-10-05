@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>AgroParts · Entrega 1 · Ideação</title>
+<link rel="stylesheet" href="estilo.css">
+<style>@page { @bottom-left { content: "AgroParts · AGR08 · Entrega 1 de 4: Ideação · versão de 05/10/2026"; font: 7.8pt "Noto Sans", Arial, sans-serif; color: #46505a; } }</style>
+</head>
+<body>
+<main class="doc">
+
+<header class="capa">
+  <p class="eyebrow">Rota Inova UEMG 2026 · Entrega 1 de 4 · Workshop de Ideação (25/08/2026)</p>
+  <h1>Ideação: o problema, quem o enfrenta e a proposta de valor</h1>
+  <p class="lede">A mesma peça aparece com vários códigos e descrições no cadastro de uma usina. Ninguém tem certeza de que ela já existe no estoque. A AgroParts propõe uma camada que diz, com evidência do fabricante, quando dois registros são a mesma peça e quando não são.</p>
+  <dl class="ficha">
+    <dt>Equipe</dt><dd>AgroParts · Camada inteligente de interoperabilidade para peças agroindustriais</dd>
+    <dt>Desafio</dt><dd>AGR08 · Eficiência na Gestão de Peças</dd>
+    <dt>Integrantes</dt><dd>Allana Eduarda Braga Iquegami, Gabrielle Henrique Arruda Longo, Alberto Gabriel Rodrigues Bispo, Davi de Sousa Almeida, Myke Matos dos Santos</dd>
+    <dt>Curso</dt><dd>Sistemas de Informação · UEMG Frutal</dd>
+    <dt>Etapa</dt><dd>Ideação</dd>
+  </dl>
+</header>
+
+<h2>1. O desafio AGR08</h2>
+<p>O texto oficial do desafio pede uma “aplicação que realiza identificação automática de peças, integrando com catálogo dos fabricantes, para geração automática de requisições, correlacionar peças e classificando os materiais, evitando solicitações indevidas”.</p>
+<p>A equipe lê o desafio como um problema de dados de materiais de manutenção (MRO: manutenção, reparo e operação). A pergunta central é: <strong>este código e esta descrição representam qual peça, e com que certeza?</strong> Requisição, compra e estoque dependem dessa resposta.</p>
+
+<h2>2. O problema</h2>
+<p>O cadastro de materiais de uma operação industrial acumula descrições livres, códigos locais, sinônimos, abreviações e duplicidades históricas entre plantas e sistemas. O exemplo abaixo é ilustrativo. Ele não vem de cadastro de cliente.</p>
+<table>
+  <tr><th>Código local</th><th>Descrição no cadastro</th><th>O que a pessoa precisa saber</th></tr>
+  <tr><td><code>100234</code></td><td>ROL 6318 ZZ C3</td><td rowspan="3">Os três registros são o mesmo rolamento? Algum tem folga, vedação ou fabricante diferente?</td></tr>
+  <tr><td><code>A-77812</code></td><td>ROLAMENTO RIG. ESFERAS 6318-2Z/C3</td></tr>
+  <tr><td><code>55901</code></td><td>ROLAM 6318ZZC3 P/ BOMBA</td></tr>
+</table>
+<p>A dúvida é real no catálogo público. O item CATMAT 311960 registra a característica <code>REFERÊNCIA FABRICANTE = 6318ZZ C3</code>. Duas peças podem ter a mesma aparência e diferir só em dimensão, folga ou vedação. Por isso foto ou texto parecido não provam que são a mesma peça.</p>
+<p>Apagar ou fundir registros também não resolve. Os códigos antigos continuam ligados a pedidos, contratos, notas fiscais, garantias e ordens de manutenção.</p>
+
+<h2>3. Quem enfrenta o problema</h2>
+<p>O público são usinas sucroenergéticas e agroindústrias com estoque de manutenção, várias plantas ou sistemas e um ERP ou CMMS em uso. Quatro funções sentem o problema:</p>
+<table>
+  <tr><th>Função</th><th>O que faz com a peça</th><th>Onde o problema aparece</th></tr>
+  <tr><td>Almoxarifado</td><td>Recebe, endereça e entrega a peça</td><td>Não sabe se o item pedido já existe com outro código. Depende de quem “conhece o estoque”.</td></tr>
+  <tr><td>Manutenção e PCM</td><td>Planeja a ordem e pede o material</td><td>Descreve a peça do seu jeito. Na entressafra precisa preparar muitas ordens no mesmo período.</td></tr>
+  <tr><td>Compras e suprimentos</td><td>Transforma a requisição em pedido</td><td>Recebe pedido de item que talvez já esteja em estoque. Compara fornecedores sem saber se a peça é a mesma.</td></tr>
+  <tr><td>Dados mestres e TI</td><td>Mantém o cadastro do ERP</td><td>Sanear o cadastro exige projeto longo. O problema volta com novas descrições livres.</td></tr>
+</table>
+
+<h2>4. Causas</h2>
+<ul>
+  <li><strong>Descrição livre.</strong> Cada pessoa escreve a peça de um jeito, com abreviações próprias.</li>
+  <li><strong>Códigos locais por planta e por sistema.</strong> Fusões, aquisições e migrações deixam o mesmo item com vários códigos.</li>
+  <li><strong>Catálogo do fabricante fora do sistema.</strong> A referência técnica está em PDF ou site do fabricante, não ligada ao cadastro.</li>
+  <li><strong>Conhecimento tácito.</strong> Quem sabe onde está a peça é uma pessoa, não o sistema.</li>
+  <li><strong>Peças parecidas que não são iguais.</strong> Semelhança de texto ou de foto leva a equivalência errada.</li>
+</ul>
+
+<h2>5. Impacto</h2>
+<p>Separamos o que as fontes provam do que ainda é hipótese da equipe.</p>
+<h3>O que as fontes mostram</h3>
+<ul>
+  <li><strong>Peso da manutenção.</strong> A São Martinho reportou R$ 1,249 bilhão de capex de manutenção no acumulado de 9 meses da safra 2025/26. Este é o número de uma empresa, não uma média do setor. [S3]</li>
+  <li><strong>Janela curta.</strong> A UNICA reportou 195 unidades produtoras em operação na 1ª quinzena de abril de 2026 e 250 na 2ª quinzena de maio. A retomada da safra concentra a demanda de manutenção. [S5]</li>
+  <li><strong>Cadastro diferente do físico.</strong> Uma auditoria do Departamento de Energia dos EUA numa empresa de transmissão elétrica, que já tinha sistema de gestão de ativos, encontrou 16% menos itens físicos do que o sistema registrava em 13 almoxarifados. A auditoria também registrou dependência do conhecimento dos empregados. O setor é outro, mas o mecanismo é o mesmo. [S6]</li>
+  <li><strong>Problema que gera contratação.</strong> O Governo de Santa Catarina abriu contratação para sanear e padronizar cerca de 49,7 mil itens de catálogo e eliminar duplicidades, em até 12 meses. [S12]</li>
+</ul>
+<h3>O que ainda é hipótese</h3>
+<ul>
+  <li>Tempo perdido para localizar e revisar um material.</li>
+  <li>Compra de item que já existe em estoque com outro código.</li>
+  <li>Atraso de manutenção por peça errada ou não encontrada.</li>
+</ul>
+<p>A equipe não afirma economia, compra evitada nem redução de parada. Esses números só podem vir de um piloto com dados reais.</p>
+
+<h2>6. Como resolvem hoje</h2>
+<table>
+  <tr><th>Solução atual</th><th>Limite</th></tr>
+  <tr><td>Busca por texto no ERP e pergunta ao almoxarife experiente</td><td>Depende de quem conhece o estoque. Não deixa registro de por que dois itens são iguais.</td></tr>
+  <tr><td>Projeto pontual de saneamento do cadastro [S12]</td><td>Longo e caro. O cadastro volta a sujar com novas descrições livres.</td></tr>
+  <tr><td>Módulos de governança do ERP: SAP MDG (busca aproximada e checagem de duplicidade) e IBM Maximo (relatório de códigos ligados ao mesmo part number)</td><td>Exigem projeto de ERP. Tratam o cadastro de uma empresa, sem evidência de fabricante em português.</td></tr>
+  <tr><td>Fornecedores especializados, como a Verusen (EUA)</td><td>Mostram que o mercado existe. Não há foco declarado em material agroindustrial em português.</td></tr>
+</table>
+
+<h2 class="quebra">7. Proposta de valor</h2>
+<div class="nota"><p><strong>A AgroParts resolve códigos e descrições de materiais agroindustriais em português contra evidência técnica do fabricante, sem apagar o ERP e sem automatizar equivalência incerta.</strong></p></div>
+<p>Para cada código ou descrição, a AgroParts devolve uma de três decisões:</p>
+<ul>
+  <li><span class="tag resolve">resolve</span> quando a evidência sustenta a relação, por exemplo mesma referência de fabricante sem atributo contraditório;</li>
+  <li><span class="tag revisa">revisa</span> quando há candidato plausível, mas falta evidência. Uma pessoa decide;</li>
+  <li><span class="tag recusa">recusa</span> quando há contradição, por exemplo dimensão ou folga diferente.</li>
+</ul>
+<p>A resposta sempre declara o tipo de relação: mesma peça, referência cruzada entre fabricantes, substituição sob condição, compatibilidade com um equipamento ou apenas semelhança. Semelhança nunca vira “mesma peça” sozinha. O benefício que a equipe declara agora é visibilidade e menos tempo de análise.</p>
+
+<h3>Lean Canvas</h3>
+<div class="canvas">
+  <div class="c c-prob"><h4>Problema</h4><ul>
+    <li>Mesma peça com vários códigos e descrições</li>
+    <li>Não se sabe se o item já está em estoque</li>
+    <li>Semelhança de texto ou foto gera equivalência errada</li>
+    <li>Conhecimento do estoque fica com pessoas</li></ul>
+    <p><b>Alternativas hoje:</b> busca manual, saneamento pontual, módulo de governança do ERP.</p></div>
+  <div class="c c-sol"><h4>Solução</h4><ul>
+    <li>Leitura de código, texto e etiqueta</li>
+    <li>Candidatos + regras por atributo</li>
+    <li>Decisão resolve, revisa ou recusa com evidência</li></ul></div>
+  <div class="c c-met"><h4>Métricas-chave</h4><ul>
+    <li>Precisão e cobertura por família e relação</li>
+    <li>Tempo para localizar e revisar um item</li>
+    <li>Recusas corretas</li></ul></div>
+  <div class="c c-uvp"><h4>Proposta de valor única</h4>
+    <p><b>Saber se é a mesma peça, com a fonte do fabricante, sem mexer no ERP.</b></p>
+    <p>A AgroParts recusa quando não tem certeza. Esse é o ponto central da proposta.</p></div>
+  <div class="c c-vant"><h4>Vantagem difícil de copiar</h4><ul>
+    <li>Português técnico agroindustrial</li>
+    <li>Vocabulário público CATMAT</li>
+    <li>Relações tipadas e recusa explícita</li></ul></div>
+  <div class="c c-can"><h4>Canais</h4><ul>
+    <li>Rota Inova e empresas cotistas</li>
+    <li>Piloto com uma planta</li>
+    <li>Integração por arquivo e API</li></ul></div>
+  <div class="c c-seg"><h4>Segmentos de clientes</h4><ul>
+    <li>Usinas sucroenergéticas e agroindústrias com estoque de manutenção</li>
+    <li>Usuários: almoxarifado, manutenção/PCM, compras</li>
+    <li>Patrocinador: suprimentos, manutenção ou confiabilidade</li></ul>
+    <p><b>Primeiros adotantes:</b> operações com mais de uma planta ou sistema.</p></div>
+  <div class="c c-cust"><h4>Estrutura de custos</h4><ul>
+    <li>Equipe de desenvolvimento e revisão</li>
+    <li>Licença de catálogo de fabricante</li>
+    <li>Hospedagem isolada por cliente</li></ul></div>
+  <div class="c c-rec"><h4>Fontes de receita (hipótese)</h4><ul>
+    <li>Contrato B2B de resolução e normalização do cadastro, por planta ou por lote</li>
+    <li>Preço a validar no piloto. Comissão sobre venda fica fora do modelo</li></ul></div>
+</div>
+
+<h3>Mapa de proposta de valor</h3>
+<div class="vpm">
+  <div class="lado">
+    <h4>Cliente: almoxarifado, manutenção e compras</h4>
+    <div class="bloco"><h5>Tarefas</h5><ul><li>Encontrar a peça certa para a ordem</li><li>Saber se já existe em estoque</li><li>Comprar só o que falta</li></ul></div>
+    <div class="bloco"><h5>Dores</h5><ul><li>Vários códigos para o mesmo item</li><li>Medo de trocar por peça parecida e errada</li><li>Pressa na entressafra</li></ul></div>
+    <div class="bloco"><h5>Ganhos desejados</h5><ul><li>Resposta rápida e explicada</li><li>Histórico de quem decidiu e por quê</li><li>Nenhuma mudança forçada no ERP</li></ul></div>
+  </div>
+  <div class="lado">
+    <h4>AgroParts</h4>
+    <div class="bloco"><h5>Produto e serviço</h5><ul><li>Serviço de resolução por arquivo e API</li><li>Fila de revisão humana</li><li>Mapa de códigos exportável</li></ul></div>
+    <div class="bloco"><h5>Aliviadores de dor</h5><ul><li>Liga códigos locais à referência do fabricante</li><li>Recusa quando há contradição de atributo</li><li>Preserva o registro original</li></ul></div>
+    <div class="bloco"><h5>Criadores de ganho</h5><ul><li>Evidência e fonte em cada decisão</li><li>Visão entre plantas e sistemas</li><li>Números de precisão e cobertura medidos</li></ul></div>
+  </div>
+</div>
+
+<h2>8. O que a AgroParts não é</h2>
+<p>A AgroParts não é loja, marketplace, ERP nem CMMS. Preço, disponibilidade, requisição e compra continuam nos sistemas da empresa. A câmera serve para ler código e etiqueta. A foto sozinha não identifica a peça.</p>
+
+<h2>9. Hipóteses que precisam de validação</h2>
+<p>Este documento não usa entrevista, cliente nem depoimento. As hipóteses abaixo dependem de conversa com usinas e de uma amostra real de cadastro.</p>
+<ol>
+  <li>Quem compra a solução: manutenção, almoxarifado, suprimentos ou dados mestres.</li>
+  <li>Qual família de peça tem mais duplicidade e risco. A primeira candidata é rolamento, porque tem designação e dimensões padronizadas.</li>
+  <li>Quanto tempo a equipe da usina leva hoje para localizar e revisar um item.</li>
+  <li>Se a usina aceita enviar uma exportação do cadastro com autorização e regras de retenção.</li>
+</ol>
+
+<h2>Fontes</h2>
+<ul class="fonte">
+  <li>Desafio AGR08 e jornada do programa: <a href="https://rotainovarural.com.br/">rotainovarural.com.br</a></li>
+  <li>[S3] São Martinho, Resultados 3T26, 09/02/2026: ri.saomartinho.com.br</li>
+  <li>[S5] UNICA, publicações de 30/04/2026 e 24/06/2026: unica.com.br</li>
+  <li>[S6] U.S. DOE, Office of Inspector General, DOE-OIG-24-30, 24/09/2024: energy.gov</li>
+  <li>[S12] Secretaria de Estado da Administração de Santa Catarina, padronização do cadastro de materiais: sea.sc.gov.br</li>
+  <li>CATMAT item 311960, API de Dados Abertos do Compras.gov.br, consulta de 25/08/2026: dadosabertos.compras.gov.br</li>
+  <li>SAP MDG Material: learning.sap.com · IBM Maximo, relatório de itens duplicados: ibm.com/docs · Verusen: verusen.com/faq</li>
+  <li>Detalhes e comandos de reprodução: <code>docs/pesquisa/</code> no repositório <code>shishiv/agroparts</code></li>
+</ul>
+
+</main>
+</body>
+</html>
