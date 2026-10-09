@@ -147,6 +147,14 @@ export function agrupar(relacoes: Relacao[]): Grupo[] {
 /** "CATMAT 311963" vira "Código 311963"; marcas ficam como estão. */
 export const alvoTexto = (alvo: string) => alvo.replace(/^CATMAT (\d+)$/, "Código $1");
 
+/** Os itens de um grupo em uma linha: "Códigos 290385, 346383 e 472505" ou "NSK 6206 DDU". */
+export function alvosTexto(relacoes: Relacao[]): string {
+  const e = (l: string[]) => (l.length > 1 ? `${l.slice(0, -1).join(", ")} e ${l.at(-1)}` : (l[0] ?? ""));
+  const codigos = relacoes.map((r) => /^CATMAT (\d+)$/.exec(r.alvo)?.[1]);
+  if (codigos.every((c) => c !== undefined)) return `${codigos.length > 1 ? "Códigos" : "Código"} ${e(codigos as string[])}`;
+  return e(relacoes.map((r) => alvoTexto(r.alvo)));
+}
+
 /** Semelhança de texto em palavras, nunca em número. */
 export function semelhancaEmPalavras(valor: number): string {
   if (valor >= 0.95) return "Textos iguais";

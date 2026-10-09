@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>AgroParts · Entrega 3 · Prototipagem</title>
 <link rel="stylesheet" href="estilo.css">
-<style>@page { @bottom-left { content: "AgroParts · AGR08 · Entrega 3 de 4: Prototipagem · versão de 05/10/2026"; font: 7.8pt "Noto Sans", Arial, sans-serif; color: #46505a; } }</style>
+<style>@page { @bottom-left { content: "AgroParts · AGR08 · Entrega 3 de 4: Prototipagem · versão de 09/10/2026"; font: 7.8pt "Noto Sans", Arial, sans-serif; color: #46505a; } }</style>
 </head>
 <body>
 <main class="doc">
@@ -48,23 +48,23 @@
 <h2 class="quebra">3. Telas e o que cada tela prova</h2>
 
 <figure class="figura">
-  <img src="img/desktop-00-inicio.jpg" alt="Tela inicial do protótipo AgroParts com a pergunta Qual é esta peça, o roteiro das cinco provas e o campo de entrada">
-  <figcaption><strong>Tela inicial.</strong> A pessoa escolhe a entrada: código, descrição ou foto da etiqueta. Os botões do roteiro abrem as cinco provas, e o link Explicar embaixo de cada botão mostra a prova passo a passo. O botão Como funciona abre a explicação do site para quem nunca o viu. O aviso ao lado do título declara o recorte e que os dados são públicos.</figcaption>
+  <img src="img/desktop-00-inicio.jpg" alt="Tela inicial do protótipo AgroParts com a pergunta Qual é esta peça, o campo de entrada, o botão Identificar e o link Exemplos da apresentação">
+  <figcaption><strong>Tela inicial.</strong> A tela tem uma coisa só: a pergunta, o campo e o botão Identificar. A pessoa escolhe a entrada: código, descrição ou foto da etiqueta. O aviso embaixo do campo declara o recorte e que os dados são públicos. O link Exemplos da apresentação abre as cinco provas. Depois de escolher uma, o link Explicar passo a passo mostra a prova. O botão Como funciona, no topo, abre a explicação do site para quem nunca o viu. As telas de conferência (cadastro inteiro, medição, decisões e fontes) ficam no rodapé.</figcaption>
 </figure>
 
 <figure class="figura">
   <img src="img/desktop-01-duplicidade-exata.jpg" alt="Placa verde Peça identificada para o item CATMAT 311960, com o item 311963 no grupo É a mesma peça">
-  <figcaption><strong>Prova 1: duplicidade exata.</strong> O item 311960 aparece como peça identificada: o código 6318ZZ C3 foi lido inteiro. O item 311963 aparece no grupo “É a mesma peça”, com a etiqueta “Cadastro duplicado”: mesmas palavras e mesma especificação (relação <code>SAME_AS</code> no motor). A tela também declara o limite: a tabela aberta da norma não traz o tamanho 6318, então diâmetro externo e largura não foram conferidos.</figcaption>
+  <figcaption><strong>Prova 1: duplicidade exata.</strong> O item 311960 aparece como peça identificada: o código 6318ZZ C3 foi lido inteiro. O item 311963 aparece no grupo “É a mesma peça”. Em “Ver por quê”, a etiqueta “Cadastro duplicado” diz: mesmas palavras e mesma especificação (relação <code>SAME_AS</code> no motor). Em “Ver detalhes da resposta”, a tela declara o limite: a tabela aberta da norma não traz o tamanho 6318, então diâmetro externo e largura não foram conferidos.</figcaption>
 </figure>
 
 <figure class="figura">
   <img src="img/desktop-02-falsa-semelhanca.jpg" alt="Item 317388 identificado, com sete itens parecidos no grupo vermelho Parece, mas não é">
-  <figcaption><strong>Prova 2: falsa semelhança recusada.</strong> O item 317388 (6211ZZ, folga normal) tem o item 472510 como a mesma peça. Outros 7 itens têm texto parecido e caem no grupo vermelho “Parece, mas não é”. Para o item 290385, a tela diz “Textos quase iguais” e explica: a proteção é diferente (dos dois lados contra um lado só) e a folga é diferente (normal contra C3).</figcaption>
+  <figcaption><strong>Prova 2: falsa semelhança recusada.</strong> O item 317388 (6211ZZ, folga normal) tem o item 472510 como a mesma peça. Outros 7 itens têm texto parecido e caem no grupo vermelho “Parece, mas não é”. Em “Ver por quê”, para o item 290385, a tela diz “Textos quase iguais” e explica: a proteção é diferente (dos dois lados contra um lado só) e a folga é diferente (normal contra C3).</figcaption>
 </figure>
 
 <figure class="figura">
   <img src="img/desktop-03-referencia-cruzada.jpg" alt="Item 624270 em placa amarela Precisa de uma pessoa, com SKF e NSK no grupo Equivale na medida, com condições, e a troca de marca no grupo amarelo">
-  <figcaption><strong>Prova 3: referência cruzada com condições e fonte.</strong> O item 624270 cita SKF 6206 2RS1 e NSK 6206 DDU. A tela mostra “Equivale na medida, com condições”: as duas têm o mesmo tamanho básico e, pela norma ISO, as mesmas medidas externas (<code>CROSS_REFERENCE</code> no motor). A troca de uma marca pela outra fica em “Precisa de uma pessoa” (<code>INTERCHANGEABLE_FOR</code> em revisão): ninguém conferiu o que significa o final DDU, e a descrição pede aço inoxidável que o código não confirma.</figcaption>
+  <figcaption><strong>Prova 3: referência cruzada com condições e fonte.</strong> O item 624270 cita SKF 6206 2RS1 e NSK 6206 DDU. A tela mostra “Equivale na medida, com condições”. Em “Ver por quê”, ela explica: as duas têm o mesmo tamanho básico e, pela norma ISO, as mesmas medidas externas (<code>CROSS_REFERENCE</code> no motor). A troca de uma marca pela outra fica no grupo amarelo “Trocar uma marca pela outra precisa de uma pessoa” (<code>INTERCHANGEABLE_FOR</code> em revisão): ninguém conferiu o que significa o final DDU, e a descrição pede aço inoxidável que o código não confirma.</figcaption>
 </figure>
 
 <figure class="figura">
@@ -75,7 +75,7 @@
 <figure class="figura">
   <img src="img/desktop-05a-recusa-472447.jpg" alt="Placa vermelha O cadastro se contradiz para o item 472447: furo de 60 mm contra o código 6013, que tem furo de 65 mm">
   <img src="img/desktop-05c-formulario-revisao.jpg" alt="Formulário Decisão de uma pessoa com a decisão registrada" style="margin-top:2mm;">
-  <figcaption><strong>Prova 5: revisão humana.</strong> O item 472447 declara furo de 60 mm e o código 6013, que tem furo de 65 mm. A placa vermelha diz “O cadastro se contradiz” e mostra a contradição em uma frase. Uma pessoa registra a própria decisão e o motivo no formulário “Decisão de uma pessoa”. O original não muda.</figcaption>
+  <figcaption><strong>Prova 5: revisão humana.</strong> O item 472447 declara furo de 60 mm e o código 6013, que tem furo de 65 mm. A placa vermelha diz “O cadastro se contradiz” e mostra a contradição em uma frase. Em “Registrar a decisão de uma pessoa”, quem conhece a peça registra a própria decisão e o motivo. O original não muda.</figcaption>
 </figure>
 
 <figure class="figura">
@@ -156,14 +156,14 @@
 <h2>6. Como rodar e conferir</h2>
 <ol>
   <li>Abra https://agroparts.pages.dev no computador ou no celular.</li>
-  <li>Clique nos botões do roteiro, de 1 a 5.</li>
+  <li>Abra “Exemplos da apresentação” e escolha as provas, de 1 a 5.</li>
   <li>Para rodar sem internet, siga o README do repositório: <code>bun install</code> e depois <code>bun run demo</code>.</li>
   <li>Para refazer a medição, rode <code>bun run medir</code>. O resultado regrava <code>docs/medicao/gabarito-v1.md</code>.</li>
 </ol>
 
 <h2>Fontes</h2>
 <ul class="fonte">
-  <li>Capturas feitas em 05/10/2026 com Chrome, desktop (1366 px) e celular (390 px), depois da revisão visual da interface. Recortes em <code>docs/rota-inova/img/</code>.</li>
+  <li>Capturas feitas em 09/10/2026 com Chromium, desktop (1366 px) e celular (390 px), depois da repaginação da interface. Recortes em <code>docs/rota-inova/img/</code>.</li>
   <li>Números: <code>docs/medicao/gabarito-v1.md</code>, gerado por <code>bun run medir</code> com as regras v1 de 05/10/2026.</li>
   <li>Fontes e licenças dos dados: <code>docs/pesquisa/fontes-do-prototipo.md</code>. Pilha: ADR 0021 em <code>docs/decisoes/</code>.</li>
   <li>CATMAT e compras públicas: API de Dados Abertos do Compras.gov.br, consulta de 05/10/2026. Decreto 8.777/2016, art. 4.</li>

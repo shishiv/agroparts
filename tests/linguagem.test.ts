@@ -4,7 +4,7 @@ import { ITENS_ATIVOS } from "../src/motor/corpus";
 import { loteCatmat } from "../src/motor/lote";
 import { resolver } from "../src/motor/resolucao";
 import type { Resposta } from "../src/motor/tipos";
-import { agrupar, descreverPeca, explicar, frases, semelhancaEmPalavras, veredito } from "../web/linguagem";
+import { agrupar, alvosTexto, descreverPeca, explicar, frases, semelhancaEmPalavras, veredito } from "../web/linguagem";
 
 // Toda resposta que o protótipo pode mostrar: o cadastro inteiro, o gabarito de texto livre e entradas de borda.
 const respostas: Resposta[] = [
@@ -58,6 +58,13 @@ describe("linguagem da interface", () => {
     expect(veredito(prova("624270")).titulo).toBe("Precisa de uma pessoa");
     expect(veredito(prova("472447")).titulo).toBe("O cadastro se contradiz");
     expect(frases(prova("472447").motivos)).toEqual(["A descrição diz furo de 60 mm, mas o código 6013 tem furo de 65 mm."]);
+  });
+
+  test("cada grupo lista seus itens em uma linha", () => {
+    const grupos = (c: string) => Object.fromEntries(agrupar(resolver("codigo", c).relacoes).map((g) => [g.chave, alvosTexto(g.relacoes)]));
+    expect(grupos("311960")).toEqual({ mesma: "Código 311963" });
+    expect(grupos("317388").parece).toBe("Códigos 290385, 346383, 472505, 472506, 472507, 472508 e 472509");
+    expect(grupos("624270")["outra-marca"]).toBe("NSK 6206 DDU");
   });
 
   test("semelhança de texto vira palavra", () => {

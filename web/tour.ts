@@ -27,13 +27,19 @@ type Passo = {
 };
 export type Tour = { titulo: string; passos: Passo[] };
 
-const grupo = (chave: string, parte = ".grupo-cabeca"): Alvo => () => document.getElementById(`g-${chave}`)?.closest(".grupo")?.querySelector(parte) ?? null;
+const grupo = (chave: string, parte?: string): Alvo => () => {
+  const g = document.getElementById(`g-${chave}`)?.closest(".grupo");
+  return (parte ? g?.querySelector(parte) : g) ?? null;
+};
 const selos = `<span class="tour-selos">
   <span class="selo selo-resolve"><svg aria-hidden="true"><use href="#p-resolve" /></svg>Verde: é a peça</span>
   <span class="selo selo-revisa"><svg aria-hidden="true"><use href="#p-revisa" /></svg>Amarelo: falta conferir</span>
   <span class="selo selo-recusa"><svg aria-hidden="true"><use href="#p-recusa" /></svg>Vermelho: não é, ou o cadastro tem erro</span>
 </span>`;
-const prova = (n: number): Alvo => `.roteiro li:nth-child(${n}) [data-exemplo], .roteiro li:nth-child(${n}) [data-ir]`;
+const ROTEIRO = "#roteiro > summary";
+const prova = (n: number): Alvo => `#roteiro li:nth-child(${n}) button`;
+const DETALHES = "#resultado .ver-detalhes > summary";
+const DECIDIR = "#resultado .decidir > summary";
 
 export const TOURS: Record<string, Tour> = {
   inicio: {
@@ -46,11 +52,10 @@ export const TOURS: Record<string, Tour> = {
       { alvo: "#t-resolver", titulo: "Uma pergunta só", texto: "O site responde a uma pergunta: qual é esta peça?" },
       { alvo: ".recorte", titulo: "O que o protótipo cobre", texto: "Por enquanto, só rolamentos de esferas. Os dados são públicos, do governo federal." },
       { alvo: "#form-resolver .modos", titulo: "Como informar a peça", texto: "Escolha uma forma: o código, a descrição do cadastro ou a foto da etiqueta." },
-      { alvo: "#campo-texto", titulo: "Onde digitar", texto: "Digite o código ou cole a descrição do jeito que está no cadastro." },
       {
-        alvo: "#form-resolver .primario",
+        alvo: "#form-resolver .entrada-linha",
         titulo: "Identificar",
-        texto: "Aperte Identificar. A resposta aparece logo abaixo. Vamos ver um exemplo com o código 311960.",
+        texto: "Digite no campo e aperte Identificar. Vamos ver um exemplo com o código 311960.",
       },
       {
         alvo: "#resultado .placa-faixa",
@@ -60,20 +65,20 @@ export const TOURS: Record<string, Tour> = {
         rotuloAntes: "Ver o exemplo",
       },
       { alvo: "#resultado .peca", titulo: "A peça", texto: "A peça em poucas palavras: o tamanho, a proteção e a folga." },
-      { alvo: "#resultado .resumo", titulo: "O que mais apareceu", texto: "Outros cadastros encontrados, separados em grupos. Toque num grupo para ir até ele." },
+      { alvo: grupo("mesma"), titulo: "O que mais apareceu", texto: "Outros cadastros encontrados, separados pelo que são. Aqui está outro código da mesma peça." },
+      { alvo: DETALHES, titulo: "Os detalhes", texto: "O texto original, a descrição padronizada e as fontes ficam aqui, a um toque." },
       { alvo: "#resultado .original", titulo: "O original fica intacto", texto: "Este é o texto do cadastro, sem nenhuma mudança. O AgroParts não apaga nem altera o cadastro." },
-      { alvo: "#resultado .padronizada", titulo: "A descrição padronizada", texto: "A mesma peça escrita sempre do mesmo jeito. Assim fica fácil achar cadastro repetido." },
-      { alvo: grupo("mesma"), titulo: "Os grupos", texto: "Cada grupo junta cadastros com a mesma resposta. Aqui está outro código da mesma peça." },
       {
-        alvo: "#form-revisao .escolhas",
+        alvo: DECIDIR,
         titulo: "Quem decide é uma pessoa",
-        texto: "Quem conhece a peça confirma ou corrige o sistema. O sistema nunca troca uma peça sozinho.",
+        texto: "Aqui quem conhece a peça confirma ou corrige o sistema. O sistema nunca troca uma peça sozinho.",
       },
       {
-        alvo: ".roteiro li:first-child",
+        alvo: ROTEIRO,
         titulo: "As provas da apresentação",
-        texto: "Cada placa numerada roda um exemplo da apresentação. Toque em Explicar, embaixo dela, para ver a prova passo a passo.",
+        texto: "Cada exemplo roda uma prova da apresentação. Depois de escolher, toque em Explicar para ver a prova passo a passo.",
       },
+      { alvo: ".rodape-nav", titulo: "Para conferir", texto: "O cadastro inteiro, quanto o protótipo acerta, as decisões e as fontes ficam aqui embaixo." },
       { alvo: "#como-funciona", titulo: "Para ver de novo", texto: "Toque em Como funciona quando quiser rever esta explicação ou outra prova." },
     ],
   },
@@ -89,8 +94,8 @@ export const TOURS: Record<string, Tour> = {
         rotuloAntes: "Procurar",
       },
       { alvo: "#resultado .peca", titulo: "A peça", texto: "Rolamento 6318, com blindagem nos dois lados e folga C3." },
-      { alvo: grupo("mesma"), titulo: "É a mesma peça", texto: "O sistema achou outro código com a mesma especificação." },
-      { alvo: grupo("mesma", ".item-alvo"), titulo: "O cadastro repetido", texto: "O código 311963 é a mesma peça. Os dois códigos continuam no cadastro." },
+      { alvo: grupo("mesma"), titulo: "É a mesma peça", texto: "O código 311963 tem a mesma especificação. É a mesma peça, cadastrada duas vezes." },
+      { alvo: grupo("mesma", ".item-alvo"), titulo: "O cadastro repetido", texto: "As mesmas palavras e a mesma especificação. Os dois códigos continuam no cadastro." },
       { alvo: "#resultado .original", titulo: "O original fica intacto", texto: "O texto do cadastro aparece como está, sem nenhuma mudança." },
       { alvo: "#resultado .padronizada", titulo: "A descrição padronizada", texto: "Os dois códigos ganham a mesma descrição. É assim que o repetido aparece." },
       { alvo: "#form-revisao .escolhas", titulo: "A pessoa confirma", texto: "Quem conhece o estoque confirma se pode juntar os dois cadastros." },
@@ -107,10 +112,9 @@ export const TOURS: Record<string, Tour> = {
         antes: (a) => a.exemplo("codigo|317388"),
         rotuloAntes: "Procurar",
       },
-      { alvo: "#resultado .resumo", titulo: "Muitos parecidos", texto: "Apareceram 7 cadastros com texto parecido. Só 1 é a mesma peça." },
-      { alvo: grupo("parece"), titulo: "Grupo vermelho", texto: "Estes cadastros parecem, mas não são a mesma peça." },
+      { alvo: grupo("parece"), titulo: "Grupo vermelho", texto: "Apareceram 7 cadastros com texto parecido. Eles parecem, mas não são a mesma peça." },
       { alvo: grupo("parece", ".item .motivos"), titulo: "O detalhe que muda tudo", texto: "Cada item diz o que muda. Aqui mudam a proteção e a folga. Com isso, a peça é outra." },
-      { alvo: grupo("mesma"), titulo: "Só este é igual", texto: "Este outro código tem a mesma especificação. Ele é a mesma peça." },
+      { alvo: grupo("mesma"), titulo: "Só este é igual", texto: "Só 1 é a mesma peça: este outro código tem a mesma especificação." },
       { titulo: "Parecido não é igual", texto: "O sistema nunca chama de igual o que só parece. Ele recusa e diz o motivo." },
     ],
   },
@@ -171,7 +175,7 @@ export const TOURS: Record<string, Tour> = {
       { alvo: "#form-revisao .escolhas", titulo: "A pessoa escolhe", texto: "É esta peça, ainda falta conferir, ou não é esta peça." },
       { alvo: "#form-revisao .linha", titulo: "Quem e por quê", texto: "A pessoa diz o nome ou a função e o motivo. Por exemplo: conferi na etiqueta." },
       { alvo: "#form-revisao .primario", titulo: "Registrar", texto: "A decisão fica guardada ao lado do cadastro original. O registro fica só neste navegador." },
-      { alvo: 'nav a[data-aba="revisoes"]', titulo: "Ver as decisões", texto: "Todas as decisões ficam na tela Decisões, com o que o sistema tinha dito." },
+      { alvo: '.rodape-nav a[data-aba="revisoes"]', titulo: "Ver as decisões", texto: "Todas as decisões ficam na tela Decisões, com o que o sistema tinha dito." },
     ],
   },
   fornecedor: {
@@ -186,9 +190,9 @@ export const TOURS: Record<string, Tour> = {
         rotuloAntes: "Procurar",
       },
       { alvo: "#resultado .peca", titulo: "A peça", texto: "Rolamento 6205 com vedação de borracha nos dois lados." },
+      { alvo: grupo("mesma"), titulo: "Já está no cadastro", texto: "Esta peça já tem código no cadastro. Não precisa criar outro." },
       { alvo: "#resultado .original", titulo: "O texto como veio", texto: "O texto do fornecedor fica guardado como veio." },
       { alvo: "#resultado .padronizada", titulo: "Do jeito do cadastro", texto: "A mesma peça na descrição padronizada, igual à do cadastro." },
-      { alvo: grupo("mesma"), titulo: "Já está no cadastro", texto: "Esta peça já tem código no cadastro. Não precisa criar outro." },
     ],
   },
   foto: {
@@ -232,8 +236,14 @@ let atual: Driver | null = null;
 
 function alvoDe(alvo: Alvo | undefined): DriveStep["element"] {
   if (alvo === undefined) return undefined;
-  // Sem elemento na tela (por exemplo, a API falhou), o passo aparece no centro.
-  return () => (typeof alvo === "string" ? document.querySelector(alvo) : alvo()) ?? document.body;
+  return () => {
+    const el = typeof alvo === "string" ? document.querySelector(alvo) : alvo();
+    // O que está atrás de um "Ver detalhes" fica fechado na tela; o passo abre o caminho até o elemento.
+    // Um resumo (summary) é o próprio controle: ele aparece fechado, como a pessoa o veria.
+    for (let d = el?.matches("summary") ? null : el?.closest("details"); d; d = d.parentElement?.closest("details")) d.open = true;
+    // Sem elemento na tela (por exemplo, a API falhou), o passo aparece no centro.
+    return el ?? document.body;
+  };
 }
 
 export function abrirTour(nome: string, acoes: Acoes) {

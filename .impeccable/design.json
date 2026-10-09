@@ -32,7 +32,7 @@
   "typographyMeta": {
    "display": {
     "displayName": "Display",
-    "purpose": "Título de cada aba."
+    "purpose": "Título de cada tela."
    },
    "placa": {
     "displayName": "Placa",
@@ -72,11 +72,7 @@
   ],
   "breakpoints": [
    {
-    "name": "roteiro-3",
-    "value": "1100px"
-   },
-   {
-    "name": "uma-coluna",
+    "name": "estreita",
     "value": "860px"
    },
    {
@@ -112,7 +108,7 @@
    "refersTo": "placa-recusa",
    "description": "A resposta principal em cor cheia, com pictograma e filete interno.",
    "html": "<div class=\"ds-placa\"><span class=\"ds-picto\"></span><div><p class=\"ds-t\">Parece, mas não é</p><p>O texto é parecido, mas um detalhe técnico muda a peça.</p></div></div>",
-   "css": ".ds-placa{position:relative;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center;padding:1.25rem 1.5rem;background:#a52019;color:#fff;font-family:Barlow,Arial,sans-serif;border:2px solid #15191a;border-radius:4px}.ds-placa::after{content:'';position:absolute;inset:6px;border:2px solid #fff;opacity:.55;border-radius:2px}.ds-picto{width:72px;height:72px;background:#fff;border-radius:2px}.ds-t{margin:0;font-family:'Barlow Semi Condensed',Barlow,Arial,sans-serif;font-weight:700;font-size:2.2rem;line-height:1}"
+   "css": ".ds-placa{position:relative;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center;padding:1.25rem 1.5rem;background:#a52019;color:#fff;font-family:Barlow,Arial,sans-serif;border-radius:4px}.ds-placa::after{content:'';position:absolute;inset:6px;border:2px solid #fff;opacity:.55;border-radius:2px}.ds-picto{width:72px;height:72px;background:#fff;border-radius:2px}.ds-t{margin:0;font-family:'Barlow Semi Condensed',Barlow,Arial,sans-serif;font-weight:700;font-size:2.2rem;line-height:1}"
   },
   {
    "name": "Campo",
@@ -125,7 +121,7 @@
  ],
  "narrative": {
   "northStar": "Sinalização de segurança industrial",
-  "overview": "A resposta a 'qual é esta peça?' é uma placa: verde quando é a mesma peça, amarelo quando precisa de uma pessoa, vermelho quando parece mas não é. A superfície é clara, séria e plana: chapa, tinta e bordas de 2px. O azul só aparece no que se pode apertar.",
+  "overview": "A resposta a 'qual é esta peça?' é uma placa: verde quando é a mesma peça, amarelo quando precisa de uma pessoa, vermelho quando parece mas não é. A superfície é clara, séria e plana: chapa, tinta e muito espaço. Cada tela mostra uma coisa, e o processo fica a um toque. O azul só aparece no que se pode apertar.",
   "rules": [
    {
     "name": "The Placa Rule",
@@ -141,6 +137,11 @@
     "name": "The Uma Cor, Um Sentido Rule",
     "body": "Verde, amarelo e vermelho só dizem decisão. Azul só diz ação.",
     "section": "colors"
+   },
+   {
+    "name": "The Uma Coisa Por Tela Rule",
+    "body": "Uma ação primária por tela. O resto é link de texto ou fica atrás de 'Ver detalhes'. Espaço separa; moldura só onde a pessoa digita ou escolhe.",
+    "section": "layout"
    },
    {
     "name": "The Frase Inteira Rule",
