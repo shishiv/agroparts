@@ -10,6 +10,7 @@ import type { Decisao, DecisaoHumana, Relacao, Resposta } from "../src/motor/tip
 import type { Medicao, MedicaoIdentidade, MedicaoTraducao, ResultadoLote } from "../src/motor/lote";
 import {
   agrupar,
+  alvosTexto,
   alvoTexto,
   APLICABILIDADE,
   descreverPeca,
@@ -44,12 +45,14 @@ async function api<T>(caminho: string, corpo?: unknown): Promise<T> {
   return dados as T;
 }
 
-// ---------- Abas ----------
+// ---------- Telas ----------
+// Identificar é a tela principal; as outras ficam no rodapé, para quem quer conferir.
 const ABAS = ["resolver", "lote", "medicao", "revisoes", "fontes"];
 function mostrarAba(nome: string) {
   const aba = ABAS.includes(nome) ? nome : "resolver";
   for (const a of ABAS) $(`#aba-${a}`).hidden = a !== aba;
-  document.querySelectorAll<HTMLAnchorElement>("nav a").forEach((l) => {
+  if (aba !== "resolver") $<HTMLDetailsElement>("#roteiro").open = false;
+  document.querySelectorAll<HTMLAnchorElement>(".rodape-nav a").forEach((l) => {
     if (l.dataset.aba === aba) l.setAttribute("aria-current", "page");
     else l.removeAttribute("aria-current");
   });
@@ -76,6 +79,7 @@ function ajustarModo() {
   $("#campo-texto").hidden = tipo === "ocr";
   $("#rotulo-texto").textContent = tipo === "codigo" ? "Código do cadastro ou da peça" : "Descrição, do jeito que está no cadastro";
   $<HTMLTextAreaElement>("#texto").placeholder = tipo === "codigo" ? "311960 ou 6205-2RS C3" : "ROLAMENTO 6205 2RS C3 RIGIDO DE ESFERAS";
+  $<HTMLTextAreaElement>("#texto").rows = tipo === "codigo" ? 1 : 3;
 }
 document.querySelectorAll('input[name="tipo"]').forEach((r) => r.addEventListener("change", ajustarModo));
 
@@ -93,7 +97,7 @@ function itemRelacao(r: Relacao): string {
       ${r.alvo_texto && r.tipo !== "CROSS_REFERENCE" && r.tipo !== "INTERCHANGEABLE_FOR" ? `<p class="item-texto">${esc(r.alvo_texto)}</p>` : ""}
       ${lista(motivos)}
       ${condicoes.length ? lista(condicoes, "condicoes") : ""}
-      <details class="detalhes"><summary>Ver detalhes</summary>
+      <details class="detalhes"><summary>Ver fonte e registro</summary>
         <div class="detalhes-corpo">
           ${fontes ? `<div><h3>Fonte</h3><ul class="fontes-regra">${fontes}</ul></div>` : ""}
           <div><h3>Como o sistema registrou</h3>${lista([`Relação ${r.tipo}, decisão ${r.decisao}`, ...r.motivos, ...(r.condicoes ?? [])], "registro")}</div>
@@ -105,14 +109,13 @@ function itemRelacao(r: Relacao): string {
 
 function blocoGrupo(g: Grupo): string {
   return `<section class="grupo grupo-${g.nivel}" aria-labelledby="g-${g.chave}">
-    <div class="grupo-cabeca">
-      ${picto(g.nivel, "grupo-picto")}
-      <div>
-        <h3 id="g-${g.chave}">${esc(g.titulo)}<span class="contagem">${g.relacoes.length} ${g.relacoes.length === 1 ? "item" : "itens"}</span></h3>
-        <p>${esc(g.explicacao)}</p>
-      </div>
+    ${picto(g.nivel, "grupo-picto")}
+    <div class="grupo-corpo">
+      <h3 id="g-${g.chave}"><span class="grupo-n">${g.relacoes.length}</span> ${esc(g.titulo)}</h3>
+      <p class="grupo-alvos">${esc(alvosTexto(g.relacoes))}</p>
+      <p class="grupo-explica">${esc(g.explicacao)}</p>
+      <details class="detalhes"><summary>Ver por quê</summary><ul class="itens">${g.relacoes.map(itemRelacao).join("")}</ul></details>
     </div>
-    <ul class="itens">${g.relacoes.map(itemRelacao).join("")}</ul>
   </section>`;
 }
 
@@ -122,6 +125,8 @@ function desenharResposta(r: Resposta) {
   const o = r.original;
   const grupos = agrupar(r.relacoes);
   const origem = o.origem === "CATMAT" ? `Cadastro original, código ${o.codigo}` : o.origem === "OCR" ? "Texto lido na foto" : "Texto digitado";
+  const motivos = lista(frases(r.motivos), v.nivel === "resolve" ? "motivos" : "motivos forte");
+  // A resposta vem primeiro: a placa, a peça e o que mais apareceu. O resto fica a um toque.
   $("#resultado").innerHTML = `
   <section class="placa placa-${v.nivel} nova" aria-labelledby="placa-titulo">
     <div class="placa-faixa">
@@ -132,34 +137,26 @@ function desenharResposta(r: Resposta) {
       </div>
     </div>
     <div class="placa-corpo">
-      ${e ? `<div class="peca"><p class="rotulo">A peça</p><p class="peca-nome">${esc(descreverPeca(e))}</p></div>` : ""}
-      ${
-        grupos.length
-          ? `<div class="resumo"><p class="rotulo">Outros itens encontrados</p><ul>${grupos
-              .map((g) => `<li><button type="button" class="resumo-${g.nivel}" data-grupo="g-${g.chave}">${picto(g.nivel)}<b>${g.relacoes.length}</b><span>${esc(g.titulo)}</span></button></li>`)
-              .join("")}</ul></div>`
-          : ""
-      }
-      ${lista(frases(r.motivos), "motivos forte")}
+      ${e ? `<p class="peca">${esc(descreverPeca(e))}</p>` : ""}
+      ${v.nivel === "resolve" ? "" : motivos}
+      ${grupos.length ? `<div class="evidencia">${grupos.map(blocoGrupo).join("")}</div>` : ""}
 
-      <div class="par">
-        <div>
-          <p class="rotulo">${esc(origem)}, sem alteração</p>
-          <blockquote class="original">${esc(o.texto)}</blockquote>
-          ${o.url ? `<p class="pequeno">${link(o.url, "Abrir no catálogo público do governo")}</p>` : ""}
-        </div>
-        <div>
-          <p class="rotulo">Descrição padronizada</p>
-          ${e ? `<p class="padronizada">${esc(e.descricao_por_regra)}</p>` : `<p class="vazio">Sem descrição padronizada: o texto não chegou a uma peça que o protótipo reconhece.</p>`}
-        </div>
-      </div>
-
-      ${grupos.map(blocoGrupo).join("")}
-
-      <p class="nota-final">${picto("info", "picto-mini")}<span>${esc(APLICABILIDADE)}</span></p>
-
-      <details class="detalhes"><summary>Ver detalhes da leitura</summary>
+      <div class="resposta-mais">
+      <details class="detalhes ver-detalhes"><summary>Ver detalhes da resposta</summary>
         <div class="detalhes-corpo">
+          ${v.nivel === "resolve" ? motivos : ""}
+          <div class="par">
+            <div>
+              <p class="rotulo">${esc(origem)}, sem alteração</p>
+              <blockquote class="original">${esc(o.texto)}</blockquote>
+              ${o.url ? `<p class="pequeno">${link(o.url, "Abrir no catálogo público do governo")}</p>` : ""}
+            </div>
+            <div>
+              <p class="rotulo">Descrição padronizada</p>
+              ${e ? `<p class="padronizada">${esc(e.descricao_por_regra)}</p>` : `<p class="vazio">Sem descrição padronizada: o texto não chegou a uma peça que o protótipo reconhece.</p>`}
+            </div>
+          </div>
+          <p class="nota-final">${picto("info", "picto-mini")}<span>${esc(APLICABILIDADE)}</span></p>
           ${
             e
               ? `<div><h3>Como lemos a peça</h3><div class="rolagem"><table>
@@ -184,8 +181,8 @@ function desenharResposta(r: Resposta) {
         </div>
       </details>
 
+      <details class="detalhes decidir"><summary id="t-revisao">Registrar a decisão de uma pessoa</summary>
       <form id="form-revisao" class="revisao" novalidate aria-labelledby="t-revisao">
-        <h2 id="t-revisao">Decisão de uma pessoa</h2>
         <p>Quem conhece a peça confirma ou corrige o sistema. A decisão fica registrada ao lado do cadastro original, que não muda.</p>
         <fieldset class="escolhas">
           <legend>O que você decide?</legend>
@@ -209,16 +206,27 @@ function desenharResposta(r: Resposta) {
         <button class="primario" type="submit">Registrar decisão ${picto("seta")}</button>
         <p class="revisao-estado" id="revisao-estado" role="status" aria-live="polite"></p>
       </form>
+      </details>
+      </div>
     </div>
   </section>`;
   $("#form-revisao").addEventListener("submit", registrarRevisao);
-  document.querySelectorAll<HTMLButtonElement>("[data-grupo]").forEach((b) =>
-    b.addEventListener("click", () => document.getElementById(b.dataset.grupo!)?.closest(".grupo")?.scrollIntoView({ block: "start" })),
-  );
 }
 
+/** Marca o exemplo escolhido no roteiro e oferece a explicação passo a passo dele. */
 function marcarRoteiro(valor: string | null) {
-  document.querySelectorAll<HTMLButtonElement>("[data-exemplo]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.exemplo === valor)));
+  let atual: HTMLButtonElement | undefined;
+  document.querySelectorAll<HTMLButtonElement>("#roteiro [data-prova]").forEach((b) => {
+    const escolhido = valor !== null && (b.dataset.exemplo ?? b.dataset.exemploFoto) === valor;
+    b.setAttribute("aria-pressed", String(escolhido));
+    if (escolhido) atual = b;
+  });
+  const explicar = $<HTMLButtonElement>("#explicar-prova");
+  explicar.hidden = !atual;
+  if (atual) {
+    explicar.dataset.tour = atual.dataset.prova;
+    explicar.textContent = `Explicar passo a passo: ${atual.lastElementChild!.textContent}`;
+  }
 }
 
 async function resolver(tipo: Tipo, texto: string, rolar = true) {
@@ -251,6 +259,13 @@ $("#form-resolver").addEventListener("submit", (ev) => {
   ev.preventDefault();
   identificar();
 });
+// O campo de código tem uma linha: Enter identifica, como num campo de busca.
+$("#texto").addEventListener("keydown", (ev) => {
+  if (ev.key === "Enter" && !ev.shiftKey && tipoAtual() === "codigo") {
+    ev.preventDefault();
+    $<HTMLFormElement>("#form-resolver").requestSubmit();
+  }
+});
 
 function escolherModo(tipo: Tipo) {
   document.querySelector<HTMLInputElement>(`input[name="tipo"][value="${tipo}"]`)!.checked = true;
@@ -259,13 +274,25 @@ function escolherModo(tipo: Tipo) {
 function rodarExemplo(valor: string, rolar = true): Promise<void> {
   const [tipo, texto] = valor.split("|") as [Tipo, string];
   if (location.hash && location.hash !== "#resolver") location.hash = "resolver";
+  $<HTMLDetailsElement>("#roteiro").open = false;
   escolherModo(tipo);
   $<HTMLTextAreaElement>("#texto").value = texto;
   marcarRoteiro(valor);
   return resolver(tipo, texto, rolar);
 }
-document.querySelectorAll<HTMLButtonElement>("[data-exemplo]").forEach((b) => b.addEventListener("click", () => rodarExemplo(b.dataset.exemplo!)));
-document.querySelectorAll<HTMLButtonElement>("[data-ir]").forEach((b) => b.addEventListener("click", () => (location.hash = b.dataset.ir!)));
+$("#roteiro").addEventListener("click", (ev) => {
+  const b = (ev.target as HTMLElement).closest<HTMLButtonElement>("ol button");
+  if (!b) return;
+  const roteiro = $<HTMLDetailsElement>("#roteiro");
+  roteiro.open = false;
+  roteiro.querySelector("summary")!.focus({ preventScroll: true });
+  if (b.dataset.ir) location.hash = b.dataset.ir;
+  else if (b.dataset.exemploFoto) {
+    escolherModo("ocr");
+    marcarRoteiro(b.dataset.exemploFoto);
+    lerFotoExemplo(b.dataset.exemploFoto);
+  } else rodarExemplo(b.dataset.exemplo!);
+});
 
 // ---------- Leitura da foto no navegador ----------
 let workerOcr: Promise<import("tesseract.js").Worker> | null = null;
@@ -365,7 +392,7 @@ function desenharRevisoes() {
     </article>`,
         )
         .join("")
-    : `<p class="vazio" style="margin-top:1.5rem">Nenhuma decisão registrada neste navegador. Identifique uma peça e use "Decisão de uma pessoa" no fim da resposta.</p>`;
+    : `<p class="vazio" style="margin-top:1.5rem">Nenhuma decisão registrada neste navegador. Identifique uma peça e use "Registrar a decisão de uma pessoa" no fim da resposta.</p>`;
 }
 $("#exportar-revisoes").addEventListener("click", () => {
   const blob = new Blob([JSON.stringify(lerRevisoes(), null, 2)], { type: "application/json" });

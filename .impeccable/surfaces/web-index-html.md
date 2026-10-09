@@ -7,7 +7,7 @@ related_targets: []
 
 # Surface brief: protótipo AgroParts (web/index.html)
 
-Scope: o site inteiro do protótipo (Identificar, Cadastro inteiro, Quanto acerta, Decisões, Fontes). Visitor mode: Operate.
+Scope: o site inteiro do protótipo. Identificar é a tela principal; Cadastro inteiro, Quanto acerta, Decisões e Fontes são telas de conferência no rodapé. Visitor mode: Operate.
 Audience: quem cuida de almoxarifado, manutenção e compras; a banca do Rota Inova vendo o site projetado a 1920x1080; o celular a 390-440px.
 Task: digitar um código, colar uma descrição ou fotografar uma etiqueta, e entender em segundos se é a mesma peça, se parece mas não é, ou se precisa de uma pessoa.
 Proof/content: as cinco provas do roteiro (311960, 317388, 624270, lote, 472447) e a leitura da foto. Dados vêm só da API.
@@ -22,7 +22,7 @@ OWN-WORLD: Chapa de alumínio clara (#F3F4F2) e tinta quase preta. As três core
 
 STORY: A pessoa vê a placa e sabe a resposta sem ler mais nada. Depois lê uma frase simples do porquê. Só abre "ver detalhes" quando quer conferir a fonte.
 
-FIRST VIEWPORT: Faixa de marca fina em tinta. Abaixo, a pergunta "Qual é esta peça?" grande à esquerda. O campo de entrada ocupa a coluna principal com o botão azul "Identificar". O roteiro das cinco provas fica numa régua de placas pequenas numeradas acima do campo. Ao resolver, a placa de resultado ocupa a largura toda.
+FIRST VIEWPORT: Topo claro com a marca e "Como funciona". Abaixo, com muito espaço, a pergunta "Qual é esta peça?" grande à esquerda, uma frase de instrução, o campo e o botão azul "Identificar". O roteiro das provas fica atrás de um link discreto, "Exemplos da apresentação". Ao resolver, a página rola até a resposta, que ocupa a tela: a placa, a peça e os grupos; o processo fica atrás de "Ver detalhes" (repaginação de 09/10/2026, inspirada na calma de uma coisa por tela).
 
 FORM: Sinalização de segurança industrial (NR-26 e ISO 7010), posição 4 da lista ordenada, seed c5394e59. Raises: azul só para ação (do app de consumo); a decisão do sistema riscada, não apagada, quando a pessoa discorda (do léxico); estado carimbado, nada some (da carteira de bilhetes); tabela de lote densa sem desculpa (do catálogo de evento).
 

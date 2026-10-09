@@ -137,11 +137,12 @@ describe.each(Object.keys(TELAS))("passo a passo no %s", (tela) => {
     const ctx = await browser.newContext(TELAS[tela]);
     const page = await ctx.newPage();
     await page.goto(base);
+    const total = TOURS.inicio.passos.length;
     await retrato(page, "");
     await page.keyboard.press("ArrowRight");
-    await retrato(page, "1 de 15");
+    await retrato(page, `1 de ${total}`);
     await page.keyboard.press("ArrowLeft");
-    expect((await retrato(page, "2 de 15")).progresso).toBe("1 de 15");
+    expect((await retrato(page, `2 de ${total}`)).progresso).toBe(`1 de ${total}`);
     await page.keyboard.press("Escape");
     await expect.poll(() => page.locator(".driver-popover").count()).toBe(0);
     expect(await page.evaluate(() => document.activeElement?.id)).toBe("como-funciona");
