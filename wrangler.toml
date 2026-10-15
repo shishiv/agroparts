@@ -2,3 +2,8 @@
 name = "agroparts"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-10-01"
+
+# O build do Cloudflare lê as variáveis deste bloco, não as do painel.
+# O Bun padrão do Cloudflare (1.2) não lê o formato do bun.lock.
+[vars]
+BUN_VERSION = "1.4.2"
