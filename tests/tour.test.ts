@@ -1,12 +1,13 @@
-// Percorre cada explicação passo a passo num Chromium de verdade, no desktop e no celular,
-// contra o site construído (dist/) e as mesmas rotas /api/* do Cloudflare Pages.
-// Defina TOUR_CAPTURAS=/pasta para guardar uma captura de cada passo.
+// Percorre cada explicação passo a passo e cada caso dos exemplos da apresentação num Chromium
+// de verdade, no desktop e no celular, contra o site construído (dist/) e as mesmas rotas /api/*
+// do Cloudflare Pages. Defina TOUR_CAPTURAS=/pasta para guardar uma captura de cada passo.
 import { execSync } from "node:child_process";
 import { existsSync, mkdirSync } from "node:fs";
 import type { Server } from "node:http";
 import { join, resolve } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import { chromium, type Browser, type BrowserContextOptions, type Page } from "playwright-core";
+import { CASOS } from "../web/casos";
 import { TOURS } from "../web/tour";
 import { servir } from "./servidor";
 
@@ -155,6 +156,54 @@ describe.each(Object.keys(TELAS))("passo a passo no %s", (tela) => {
     expect(await page.evaluate(() => localStorage.getItem("agroparts.tour.v1"))).toBe("sim");
     await ctx.close();
   }, 120_000);
+});
+
+/** A tela não rola na horizontal e toda imagem visível carregou. */
+async function telaInteira(page: Page) {
+  await page.evaluate(() => document.querySelectorAll<HTMLImageElement>("img[loading=lazy]").forEach((i) => (i.loading = "eager")));
+  await page.waitForFunction(() => [...document.images].filter((i) => i.getBoundingClientRect().width > 0).every((i) => i.complete), null, { timeout: 30_000 });
+  return page.evaluate(() => ({
+    rola: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    quebradas: [...document.images].filter((i) => i.getBoundingClientRect().width > 0 && i.naturalWidth === 0).map((i) => i.src),
+  }));
+}
+
+describe.each(Object.keys(TELAS))("exemplos da apresentação no %s", (tela) => {
+  test("dois toques levam da tela inicial a cada caso; um roda o caso e outro volta", async () => {
+    const ctx = await browser.newContext(TELAS[tela]);
+    await ctx.addInitScript(() => localStorage.setItem("agroparts.tour.v1", "sim"));
+    const page = await ctx.newPage();
+    const erros: string[] = [];
+    page.on("pageerror", (e) => erros.push(e.message));
+    page.on("console", (m) => m.type() === "error" && erros.push(m.text()));
+    await page.goto(base);
+    for (const c of CASOS) {
+      await page.goto(base);
+      await page.click(".exemplos-link");
+      await expect.poll(() => page.locator("#t-casos").textContent()).toBe("Exemplos da apresentação");
+      await page.click(`.casos-lista a[href="#casos/${c.chave}"]`);
+      await expect.poll(() => page.locator("#t-casos").textContent()).toBe(c.titulo);
+      expect(await page.locator(".etapa").count()).toBe(5);
+      expect(await telaInteira(page), `${tela} caso ${c.chave}`).toEqual({ rola: false, quebradas: [] });
+
+      await page.click(`[data-rodar="${c.chave}"]`);
+      if ("numeros" in c.resposta) {
+        await page.waitForSelector("#lote-resultado .resumo-lote", { timeout: 60_000 });
+        expect(await page.locator("#lote-resultado .resumo-lote strong").first().textContent()).toBe(c.resposta.numeros[0].numero);
+      } else {
+        await page.waitForSelector("#resultado .placa", { timeout: 90_000 });
+        expect(await page.locator("#placa-titulo").textContent()).toBe(c.resposta.titulo);
+        expect(await page.locator("#resultado .grupo-cabeca h3").evaluateAll((h) => h.map((x) => x.firstChild!.textContent!.trim()))).toEqual(c.resposta.grupos.map((g) => g.titulo));
+      }
+      expect(await telaInteira(page), `${tela} caso ${c.chave} ao vivo`).toEqual({ rola: false, quebradas: [] });
+
+      await page.click("#resultado .voltar-caso, #lote-voltar[href^='#casos']");
+      await expect.poll(() => page.evaluate(() => location.hash)).toBe(`#casos/${c.chave}`);
+      await expect.poll(() => page.locator("#t-casos").textContent()).toBe(c.titulo);
+    }
+    expect(erros).toEqual([]);
+    await ctx.close();
+  }, 400_000);
 });
 
 test("com movimento reduzido, o passo a passo não anima", async () => {

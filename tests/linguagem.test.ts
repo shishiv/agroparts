@@ -4,7 +4,7 @@ import { ITENS_ATIVOS } from "../src/motor/corpus";
 import { loteCatmat } from "../src/motor/lote";
 import { resolver } from "../src/motor/resolucao";
 import type { Resposta } from "../src/motor/tipos";
-import { agrupar, alvosTexto, descreverPeca, explicar, frases, semelhancaEmPalavras, veredito } from "../web/linguagem";
+import { agrupar, alvosTexto, comparar, descreverPeca, explicar, frases, semelhancaEmPalavras, veredito } from "../web/linguagem";
 
 // Toda resposta que o protótipo pode mostrar: o cadastro inteiro, o gabarito de texto livre e entradas de borda.
 const respostas: Resposta[] = [
@@ -65,6 +65,32 @@ describe("linguagem da interface", () => {
     expect(grupos("311960")).toEqual({ mesma: "Código 311963" });
     expect(grupos("317388").parece).toBe("Códigos 290385, 346383, 472505, 472506, 472507, 472508 e 472509");
     expect(grupos("624270")["outra-marca"]).toBe("NSK 6206 DDU");
+  });
+
+  test("cada cadastro comparado mostra o que bate e o que muda, dado a dado", () => {
+    const r = resolver("codigo", "317388");
+    const com = (alvo: string) => comparar(r.especificacao, r.relacoes.find((x) => x.alvo === alvo)!);
+    expect(com("CATMAT 290385")).toEqual({
+      protecao: "blindagem_simples",
+      diferencas: [
+        { nome: "Proteção", outro: "blindagem metálica em um lado", procurada: "blindagem metálica nos dois lados" },
+        { nome: "Folga", outro: "C3, maior que a normal", procurada: "normal" },
+      ],
+      iguais: "Mesmo tamanho (6211) e mesmo material.",
+    });
+    expect(com("CATMAT 472510")).toEqual({ protecao: "blindagem_dupla", diferencas: [], iguais: "Mesmo tamanho (6211), mesma proteção, mesma folga e mesmo material." });
+    expect(com("CATMAT 472506")?.protecao).toBe("aberto");
+    const marca = resolver("codigo", "624270");
+    expect(comparar(marca.especificacao, marca.relacoes.find((x) => x.tipo === "CROSS_REFERENCE")!)).toBeNull();
+  });
+
+  test("toda comparação do motor vira ficha, com uma linha por divergência", () => {
+    for (const r of respostas)
+      for (const x of r.relacoes.filter((x) => x.tipo === "SAME_AS" && !x.motivos[0].startsWith("um dos itens"))) {
+        const c = comparar(r.especificacao, x);
+        expect(c, `${r.original.texto} x ${x.alvo}`).not.toBeNull();
+        expect(c!.diferencas.length).toBe(x.motivos.filter((m) => m.startsWith("atributo diverge")).length);
+      }
   });
 
   test("semelhança de texto vira palavra", () => {

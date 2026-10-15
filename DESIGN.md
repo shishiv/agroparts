@@ -145,7 +145,7 @@ components:
 
 O site fala como a sinalização de segurança de um almoxarifado ou de uma planta industrial. A resposta a "qual é esta peça?" é uma placa: verde quando é a mesma peça, amarelo quando precisa de uma pessoa, vermelho quando parece mas não é. Quem trabalha com manutenção conhece essas cores pela NR-26 e pela ISO 7010 e lê a resposta antes de ler o texto.
 
-A superfície é clara, séria e plana: chapa de alumínio, tinta quase preta e muito espaço. Cada tela mostra uma coisa: a pergunta e o campo, ou a resposta. O que é processo (como o sistema leu, as fontes, o cadastro inteiro, a medição) fica a um toque, nunca no caminho de quem só quer a resposta. Não há gradiente, vidro, sombra decorativa nem número de confiança. A cor de segurança só aparece quando diz uma decisão. O azul só aparece no que se pode apertar.
+A superfície é clara, séria e plana: chapa de alumínio, tinta quase preta e muito espaço. Cada tela mostra uma coisa: a pergunta e o campo, a resposta ou um caso da apresentação. O que é processo (como o sistema leu, as fontes, o cadastro inteiro, a medição) fica a um toque, nunca no caminho de quem só quer a resposta. Os exemplos da apresentação têm a profundidade do PDF do Rota Inova: a situação, a foto, a entrada, a resposta e o porquê, passo a passo (decisão do capitão, 14/10/2026). Não há gradiente, vidro, sombra decorativa nem número de confiança. A cor de segurança só aparece quando diz uma decisão. O azul só aparece no que se pode apertar.
 
 **The Uma Coisa Por Tela Rule.** Uma ação primária por tela. O resto é link de texto ou fica atrás de "Ver detalhes". Espaço separa; moldura só onde a pessoa digita ou escolhe.
 
@@ -192,7 +192,7 @@ Barlow e Barlow Semi Condensed, letras de placa de estrada (SIL Open Font Licens
 - **Placa** (placa): a frase da decisão dentro da faixa colorida. Precisa ser legível do fundo de uma sala com projetor.
 - **Título** (titulo): seções e grupos de resultado ("É a mesma peça", "Parece, mas não é"), em Semi Condensed 600 a 700.
 - **Corpo** (body): Barlow 400 em 17px, 18px a partir de 1440px e 19px a partir de 1800px, para a projeção a 1920x1080. No celular, 16px.
-- **Número** (numero): os totais grandes do cadastro inteiro. A contagem de cada grupo da resposta usa o mesmo desenho, 1,35 vez o título do grupo.
+- **Número** (numero): os totais grandes do cadastro inteiro e dos casos. A contagem de cada grupo da resposta vem em palavras ("7 cadastros"), em Barlow 600 na cor suave, logo depois do título do grupo.
 - **Peça e grupo** (peca, grupo, subtitulo): a peça em uma linha e o título de cada grupo de resultado.
 - **Lead e interface** (lead, ui): introdução de cada tela, frases da placa e códigos de cada grupo; botões, listas e células. O campo de entrada usa o tamanho campo, de 1,25rem a 1,55rem.
 - **Rótulo e meta** (rotulo, meta): Barlow 600 em caixa normal, cor suave. Não há sobretítulo em caixa alta espaçada.
@@ -204,13 +204,14 @@ Barlow e Barlow Semi Condensed, letras de placa de estrada (SIL Open Font Licens
 
 Coluna única de 62rem, com margem lateral de 1rem a 3rem. O topo e o rodapé alinham com a coluna.
 
-- **Identificar:** o título grande, uma frase de instrução e o campo com o botão "Identificar" ao lado, em até 52rem. Embaixo do campo, o aviso de recorte em letra pequena e o link "Exemplos da apresentação". Nada mais.
-- **A resposta:** depois de identificar, a página rola até a resposta, e a resposta ocupa no mínimo a altura da tela. A ordem é fixa: a placa da decisão; a peça em uma linha; os motivos, quando a decisão é amarela ou vermelha; um grupo por pergunta ("É a mesma peça", "Parece, mas não é"…), com a contagem, os códigos e uma frase; e duas linhas discretas, "Ver detalhes da resposta" e "Registrar a decisão de uma pessoa".
-- **Ver por quê**, em cada grupo, abre os itens com o texto original e os motivos. **Ver detalhes da resposta** abre o original ao lado da descrição padronizada, a nota sobre aplicação em máquina, a leitura, as fontes e o registro.
+- **Identificar:** o título grande, uma frase de instrução e o campo com o botão "Identificar" ao lado, em até 52rem. Embaixo do campo, o aviso de recorte em letra pequena e o link grande "Exemplos da apresentação", com as duas fotos de "parecido não é igual". Nada mais.
+- **A resposta:** depois de identificar, a página rola até a resposta, e a resposta ocupa no mínimo a altura da tela. A ordem é fixa: a placa da decisão; a peça em uma linha, com o desenho dos dois lados dela; os motivos, quando a decisão é amarela ou vermelha; um grupo por pergunta ("É a mesma peça", "Parece, mas não é"…), com o título, a contagem e uma frase; dentro de cada grupo, cada cadastro à vista; e duas linhas discretas, "Ver detalhes da resposta" e "Registrar a decisão de uma pessoa".
+- **Cada cadastro** de um grupo mostra, sem abrir nada, o desenho dos dois lados, o código e a ficha: o que muda e o que bate com a peça procurada. "Ver o texto do cadastro e a fonte" abre o texto original, a fonte e o registro. **Ver detalhes da resposta** abre o original ao lado da descrição padronizada, a nota sobre aplicação em máquina, a leitura, as fontes e o registro.
+- **Exemplos da apresentação** (`#casos`): a lista dos sete casos e uma tela por caso (`#casos/<caso>`). Um toque na tela inicial abre a lista; outro abre o caso. Quando a pessoa roda o caso, a resposta começa com "Voltar ao caso".
 - **Telas de conferência:** Cadastro inteiro, Quanto acerta, Decisões e Fontes ficam fora do caminho principal, numa linha do rodapé ("Por dentro do protótipo"). Cada uma abre com o link "Identificar uma peça" para voltar.
 
-- Até 860px: a descrição padronizada vai para baixo do original, os itens e as escolhas viram uma coluna e a planilha de-para empilha cada linha.
-- Até 560px: o botão Identificar vai para baixo do campo, na largura toda; a faixa da placa empilha o pictograma acima da frase; o roteiro vira uma coluna.
+- Até 860px: a descrição padronizada vai para baixo do original, os itens e as escolhas viram uma coluna, a planilha de-para empilha cada linha e, num caso, a foto vai para baixo do texto e a resposta para cima do porquê.
+- Até 560px: o botão Identificar e o botão "Rodar no protótipo" vão para baixo do campo, na largura toda; a faixa da placa empilha o pictograma acima da frase; o desenho da peça vai para cima da peça; as duas fotos de um caso ficam uma embaixo da outra.
 
 Tabelas largas rolam dentro da própria área, com largura mínima de 44rem; a página nunca rola na horizontal.
 
@@ -221,17 +222,18 @@ A interface é plana. A profundidade vem da cor cheia da placa e do espaço, nã
 ## Shapes
 
 - **Canto de placa** (canto, 4px): placas, botões e campos.
-- **Canto de pictograma** (pictograma, 2px): quadrados de pictograma, selos e números do roteiro.
+- **Canto de pictograma** (pictograma, 2px): quadrados de pictograma, selos e números dos casos e dos passos.
 - A faixa da placa tem um filete interno de 2px a 6px da borda, como a margem branca de uma placa de sinalização.
-- Marcadores de lista são quadrados de tinta; condições são quadrados vazados.
+- Marcadores de lista são quadrados de tinta; condições são traços curtos de tinta. Nenhum marcador parece caixa de marcar.
 
 ## Components
 
 ### Buttons
 
-- **Primário:** azul cheio, texto branco em Semi Condensed 700, seta à direita; na tela de identificar, da altura do campo. Um por tela: "Identificar", "Ler o cadastro inteiro", "Registrar decisão". Desabilitado fica cinza durante a espera.
-- **Link de ação:** texto azul sublinhado, sem caixa, com 44px de altura de toque. É a ação secundária padrão: "Baixar planilha de-para (CSV)", "Baixar registro (JSON)", exemplos de foto, "Explicar passo a passo", "Identificar uma peça".
-- **Abrir e fechar:** "Exemplos da apresentação", "Ver por quê", "Ver detalhes da resposta" e "Registrar a decisão de uma pessoa" são textos azuis com uma seta que gira.
+- **Primário:** azul cheio, texto branco em Semi Condensed 700, seta à direita; na tela de identificar, da altura do campo. Um por tela: "Identificar", "Ler o cadastro inteiro", "Registrar decisão", "Rodar no protótipo" (em cada caso). Desabilitado fica cinza durante a espera.
+- **Link de ação:** texto azul sublinhado, sem caixa, com 44px de altura de toque. É a ação secundária padrão: "Baixar planilha de-para (CSV)", "Baixar registro (JSON)", exemplos de foto, "Identificar uma peça", "Voltar ao caso", caso anterior e próximo.
+- **Link grande:** "Exemplos da apresentação", na tela inicial, em Semi Condensed 700 no tamanho de título, com seta e duas fotos pequenas. Os títulos da lista de casos seguem o mesmo desenho.
+- **Abrir e fechar:** "Ver detalhes da resposta", "Registrar a decisão de uma pessoa" e "Ver o texto do cadastro e a fonte" são textos azuis com uma seta que gira.
 - **Secundário com borda:** papel com borda azul de 2px, só para "Tirar ou escolher foto" e "Mostrar mais".
 - **Perigo:** link vermelho, só para "Apagar registro deste navegador", sempre com confirmação.
 - **Código clicável:** texto azul sublinhado, leva o código do lote para a tela de identificar.
@@ -239,12 +241,14 @@ A interface é plana. A profundidade vem da cor cheia da placa e do espaço, nã
 ### Chips
 
 - **Selo de decisão:** retângulo de cor cheia com pictograma e nome curto: "Confirmado", "Precisa de uma pessoa", "Recusado". Quando a pessoa discorda do sistema, o selo do sistema aparece riscado, nunca apagado.
-- **Etiqueta neutra:** papel com borda de linha, para "Cadastro duplicado" ou a semelhança de texto em palavras ("Textos quase iguais").
+- **Nota do cadastro:** texto pequeno em cor suave, sem caixa, para "Cadastro duplicado" ou a semelhança de texto em palavras ("Textos quase iguais"). Não parece botão.
 
 ### Containers
 
 - **Placa de resultado:** só a faixa tem cor e moldura. Faixa da decisão com pictograma de até 136px num quadrado branco (no amarelo, quadrado vazado em tinta). O resto da resposta fica direto na chapa, separado por espaço e por divisórias de 1px.
-- **Grupo:** divisória de 1px no topo, pictograma de 52px, contagem grande, título, os códigos em uma linha e uma frase. Os itens, atrás de "Ver por quê", são linhas com divisória de 1px, não cartões.
+- **Grupo:** divisória de 1px no topo, pictograma de 52px, título com a contagem em palavras e uma frase. Os cadastros vêm logo abaixo, à vista, em linhas com divisória de 1px, não cartões.
+- **Ficha do cadastro:** uma linha por dado que decide se é a mesma peça (tamanho, proteção, folga e material). O que muda vem com o pictograma de proibição em vermelho, o valor do outro cadastro e o valor da peça procurada. O que bate vem numa linha só, com o visto em verde. Notas sobre o texto vêm com o pictograma de informação; um problema do cadastro, com o pictograma de pessoa em amarelo escuro. Os pictogramas aparecem sem quadrado, para não parecerem caixa de marcar.
+- **Desenho da peça:** os dois lados do rolamento, lado a lado, desenhados pela equipe: esferas à mostra (aberto), disco cinza-claro (blindagem de metal) ou disco preto (vedação de borracha). "Em um lado" e "nos dois lados" aparecem diferentes. Embaixo do desenho de cada cadastro, "Igual por fora" ou "Muda por fora": folga e material não aparecem por fora, e é isso que "parece, mas não é" quer dizer. Outra marca, cujo final de código ninguém conferiu, aparece em contorno tracejado com "?" e "Proteção não conferida". A resposta explica o desenho uma vez, embaixo da peça. O desenho usa só chapa, papel, linha e tinta; a cor de segurança fica com a decisão.
 - Nada de cartão, nem cartão dentro de cartão. Nada de fileira de cartões.
 
 ### Inputs / Fields
@@ -259,13 +263,25 @@ Topo claro, na chapa, com divisória de 1px: o pictograma de rolamento, o nome A
 
 Ao chegar, a faixa sobe 10px e o pictograma bate como um carimbo, de 1,18 para 1, em curva exponencial de saída. Com movimento reduzido, nada se move. Fora do passo a passo, é o único momento animado do site.
 
-### Roteiro da apresentação
+### Exemplos da apresentação
 
-"Exemplos da apresentação" abre, na própria página, a lista das provas: 1 a 5, Texto de fornecedor e Foto da etiqueta. Cada linha tem o quadrado de número em tinta e o nome. Escolher uma prova fecha a lista, preenche o campo e mostra a resposta (a prova 4 abre o Cadastro inteiro, e a foto lê a etiqueta de exemplo). Depois da escolha, o link "Explicar passo a passo: …" aparece ao lado e abre a explicação daquela prova.
+A lista mostra os sete casos na ordem do PDF: as cinco provas do pitch, o texto de fornecedor e a foto da etiqueta. Cada linha tem uma foto quadrada (no texto de fornecedor, o desenho da peça), o quadrado de número em tinta, o título do caso e uma frase. O título do caso é o nome dele em todo o site: lista, menu "Como funciona" e explicação passo a passo. Embaixo da lista ficam as três respostas, em placas pequenas, e os quatro passos do código à resposta.
+
+Cada caso é uma tela, com os números dos casos no topo (o atual em tinta) e cinco passos numerados:
+
+1. A situação no campo, com a foto do cenário quando o PDF tem uma.
+2. A imagem que mostra o que é "a mesma peça" ou "parece, mas não é": as fotos do PDF, os textos reais dos cadastros com os trechos que importam em negrito ou os números do cadastro inteiro.
+3. O que a pessoa informa, como texto (não é campo), com o botão "Rodar no protótipo". O botão roda o caso pelos mesmos caminhos da pessoa: preenche e identifica, lê o cadastro inteiro ou lê a etiqueta e identifica.
+4. O que a AgroParts responde: uma frase e a placa pequena com os grupos.
+5. Por quê, em frases curtas.
+
+No desktop, os passos 4 e 5 ficam lado a lado. No fim, o caso anterior e o próximo. O teste `tests/casos.test.ts` confere no motor cada resposta escrita num caso.
+
+As fotos vêm do PDF, com o crédito embaixo de cada uma, e aparecem só nos exemplos e no link da tela inicial. A paleta do Canva fica no PDF; os exemplos usam os tokens deste arquivo.
 
 ### Passo a passo (Como funciona)
 
-O botão "Como funciona" fica no topo, em texto azul com o pictograma de informação. Ele abre a lista de explicações: a visão geral e uma por prova do roteiro. A visão geral abre sozinha na primeira visita e fica lembrada no navegador. Quando um passo aponta para algo atrás de "Ver por quê" ou "Ver detalhes", o passo abre esse detalhe antes de destacar.
+O botão "Como funciona" fica no topo, em texto azul com o pictograma de informação. Ele abre o link para os exemplos da apresentação e a lista de explicações: a visão geral e uma por caso. A visão geral abre sozinha na primeira visita e fica lembrada no navegador. Quando um passo aponta para algo atrás de "Ver detalhes", o passo abre esse detalhe antes de destacar.
 
 - O balão é papel com borda de tinta de 2px e canto de 4px, sem sombra. Título em Semi Condensed 700, texto em Barlow 400 na cor tinta 2, uma ou duas frases curtas.
 - "Avançar" é o botão primário, "Voltar" é o secundário e "Pular explicação" é um link discreto em cor suave.
@@ -279,6 +295,7 @@ O botão "Como funciona" fica no topo, em texto azul com o pictograma de informa
 - **Do** escrever a decisão como frase: "É a mesma peça", "Equivale na medida, com condições", "Parece, mas não é", "Precisa de uma pessoa".
 - **Do** mostrar o texto original sem alteração ao lado da descrição padronizada.
 - **Do** dar a semelhança e a qualidade da leitura em palavras ("Textos quase iguais", "Leitura ruim").
+- **Do** mostrar em cada cadastro, sem abrir nada, se é a mesma peça e o que muda.
 - **Do** acompanhar toda porcentagem da medição com a conta que a gerou ("7 de 7").
 
 ### Don't:

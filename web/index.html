@@ -18,6 +18,11 @@
         <symbol id="p-info" viewBox="0 0 48 48"><circle cx="24" cy="12" r="4" fill="currentColor" /><path d="M19 20h8v18h4v4H17v-4h4V24h-2z" fill="currentColor" /></symbol>
         <symbol id="p-peca" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="4" /><circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="4" /><g fill="currentColor"><circle cx="24" cy="11.5" r="3" /><circle cx="24" cy="36.5" r="3" /><circle cx="11.5" cy="24" r="3" /><circle cx="36.5" cy="24" r="3" /><circle cx="15.2" cy="15.2" r="3" /><circle cx="32.8" cy="32.8" r="3" /><circle cx="32.8" cy="15.2" r="3" /><circle cx="15.2" cy="32.8" r="3" /></g></symbol>
         <symbol id="p-seta" viewBox="0 0 24 24"><path d="M5 12h12M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" /></symbol>
+        <!-- Desenhos do rolamento visto de um lado, feitos pela equipe: aberto, com blindagem de metal e com vedação de borracha. -->
+        <symbol id="r-aberto" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.75" fill="#fff" stroke="#15191a" stroke-width="2.5" /><circle cx="24" cy="24" r="19" fill="#fff" stroke="#15191a" stroke-width="1.5" /><circle cx="24" cy="24" r="13" fill="#fff" stroke="#15191a" stroke-width="1.5" /><circle cx="24" cy="24" r="9.5" fill="#f3f4f2" stroke="#15191a" stroke-width="2" /><g fill="#15191a"><circle cx="40" cy="24" r="2.9" /><circle cx="36.94" cy="33.4" r="2.9" /><circle cx="28.94" cy="39.22" r="2.9" /><circle cx="19.06" cy="39.22" r="2.9" /><circle cx="11.06" cy="33.4" r="2.9" /><circle cx="8" cy="24" r="2.9" /><circle cx="11.06" cy="14.6" r="2.9" /><circle cx="19.06" cy="8.78" r="2.9" /><circle cx="28.94" cy="8.78" r="2.9" /><circle cx="36.94" cy="14.6" r="2.9" /></g></symbol>
+        <symbol id="r-metal" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.75" fill="#fff" stroke="#15191a" stroke-width="2.5" /><circle cx="24" cy="24" r="19" fill="#dde0e0" stroke="#15191a" stroke-width="1.5" /><circle cx="24" cy="24" r="16" fill="none" stroke="#6a7477" stroke-width="1.5" /><circle cx="24" cy="24" r="14.25" fill="none" stroke="#6a7477" stroke-width="0.75" /><circle cx="24" cy="24" r="13" fill="#fff" stroke="#15191a" stroke-width="1.5" /><circle cx="24" cy="24" r="9.5" fill="#f3f4f2" stroke="#15191a" stroke-width="2" /></symbol>
+        <symbol id="r-incerto" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.75" fill="#fff" stroke="#6a7477" stroke-width="2" stroke-dasharray="4 3" /><circle cx="24" cy="24" r="9.5" fill="#f3f4f2" stroke="#6a7477" stroke-width="1.5" stroke-dasharray="3 2.5" /><text x="24" y="31" text-anchor="middle" font-family="Barlow Semi Condensed, Arial, sans-serif" font-weight="700" font-size="20" fill="#4f585b">?</text></symbol>
+        <symbol id="r-borracha" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.75" fill="#fff" stroke="#15191a" stroke-width="2.5" /><circle cx="24" cy="24" r="19" fill="#15191a" stroke="#15191a" stroke-width="1.5" /><circle cx="24" cy="24" r="14.5" fill="none" stroke="#8f989b" stroke-width="1.2" /><circle cx="24" cy="24" r="13" fill="#fff" stroke="#15191a" stroke-width="1.5" /><circle cx="24" cy="24" r="9.5" fill="#f3f4f2" stroke="#15191a" stroke-width="2" /></symbol>
       </defs>
     </svg>
 
@@ -34,14 +39,15 @@
       <div id="menu-tours" class="menu-tours" popover aria-labelledby="t-menu-tours">
         <p id="t-menu-tours" class="menu-tours-titulo">Explicação passo a passo</p>
         <ul>
+          <li><a class="menu-casos" href="#casos"><span class="num"><svg aria-hidden="true"><use href="#p-seta" /></svg></span><span>Exemplos da apresentação, com fotos</span></a></li>
           <li><button type="button" data-tour="inicio"><span class="num"><svg aria-hidden="true"><use href="#p-info" /></svg></span><span>Visão geral do site</span></button></li>
-          <li><button type="button" data-tour="duplicado"><span class="num">1</span><span>Cadastro duplicado</span></button></li>
+          <li><button type="button" data-tour="duplicado"><span class="num">1</span><span>Dois cadastros, a mesma peça</span></button></li>
           <li><button type="button" data-tour="parece"><span class="num">2</span><span>Parece, mas não é</span></button></li>
-          <li><button type="button" data-tour="marca"><span class="num">3</span><span>Outra marca</span></button></li>
-          <li><button type="button" data-tour="lote"><span class="num">4</span><span>Cadastro inteiro</span></button></li>
-          <li><button type="button" data-tour="pessoa"><span class="num">5</span><span>Decisão de uma pessoa</span></button></li>
-          <li><button type="button" data-tour="fornecedor"><span class="num">+</span><span>Texto de fornecedor</span></button></li>
-          <li><button type="button" data-tour="foto"><span class="num">+</span><span>Foto da etiqueta</span></button></li>
+          <li><button type="button" data-tour="marca"><span class="num">3</span><span>Outra marca, mesma medida</span></button></li>
+          <li><button type="button" data-tour="lote"><span class="num">4</span><span>A lista inteira de uma vez</span></button></li>
+          <li><button type="button" data-tour="pessoa"><span class="num">5</span><span>O cadastro se contradiz</span></button></li>
+          <li><button type="button" data-tour="fornecedor"><span class="num">6</span><span>Texto curto de fornecedor</span></button></li>
+          <li><button type="button" data-tour="foto"><span class="num">7</span><span>A foto serve para ler a etiqueta</span></button></li>
         </ul>
       </div>
     </header>
@@ -78,7 +84,7 @@
                 <button type="button" class="link" data-foto="/exemplos/foto-rolamento-6203-c3-rkw.jpg">Anel gravado no metal</button>
               </div>
               <figure id="previa" hidden><figcaption></figcaption></figure>
-              <p id="ocr-estado" class="ocr-estado" role="status" aria-live="polite"></p>
+              <p id="ocr-estado" class="ocr-estado" role="status" aria-live="polite" tabindex="-1"></p>
               <label for="texto-ocr" class="rotulo">Texto lido na foto. Confira e corrija antes de identificar.</label>
               <textarea id="texto-ocr" rows="3" maxlength="2000" spellcheck="false" placeholder="O texto lido aparece aqui."></textarea>
             </div>
@@ -89,28 +95,25 @@
 
         <p class="recorte">Só rolamento rígido de esferas das séries 60, 62 e 63. Dados públicos do governo federal, não de um cliente. O protótipo não compra nem faz pedido.</p>
 
-        <div class="roteiro">
-          <details id="roteiro">
-            <summary>Exemplos da apresentação</summary>
-            <ol>
-              <li><button type="button" data-exemplo="codigo|311960" data-prova="duplicado"><span class="num">1</span><span>Cadastro duplicado</span></button></li>
-              <li><button type="button" data-exemplo="codigo|317388" data-prova="parece"><span class="num">2</span><span>Parece, mas não é</span></button></li>
-              <li><button type="button" data-exemplo="codigo|624270" data-prova="marca"><span class="num">3</span><span>Outra marca</span></button></li>
-              <li><button type="button" data-ir="lote"><span class="num">4</span><span>Cadastro inteiro</span></button></li>
-              <li><button type="button" data-exemplo="codigo|472447" data-prova="pessoa"><span class="num">5</span><span>Decisão de uma pessoa</span></button></li>
-              <li><button type="button" data-exemplo="descricao|BLK Modelo 6205-2rs" data-prova="fornecedor"><span class="num">+</span><span>Texto de fornecedor</span></button></li>
-              <li><button type="button" data-exemplo-foto="/exemplos/etiqueta-impressa-catmat-311960.png" data-prova="foto"><span class="num">+</span><span>Foto da etiqueta</span></button></li>
-            </ol>
-          </details>
-          <button type="button" class="explicar" id="explicar-prova" data-tour="inicio" hidden>Explicar passo a passo</button>
-        </div>
+        <a class="exemplos-link" href="#casos">
+          <span class="exemplos-fotos" aria-hidden="true">
+            <img src="/exemplos/miniaturas/foto-rolamento-6203-c3-rkw.jpg" alt="" width="240" height="240" />
+            <img src="/exemplos/miniaturas/rolamento-com-tampa-6007.jpg" alt="" width="240" height="240" />
+          </span>
+          <span class="exemplos-texto">
+            <span class="exemplos-titulo">Exemplos da apresentação <svg aria-hidden="true"><use href="#p-seta" /></svg></span>
+            <span class="exemplos-frase">Sete casos, passo a passo e com fotos. Cada caso roda no protótipo com um toque.</span>
+          </span>
+        </a>
 
         <div id="resultado" aria-live="polite"></div>
       </section>
 
+      <section id="aba-casos" class="aba" aria-labelledby="t-casos" hidden></section>
+
       <section id="aba-lote" class="aba" aria-labelledby="t-lote" hidden>
-        <a class="voltar" href="#resolver"><svg aria-hidden="true"><use href="#p-seta" /></svg>Identificar uma peça</a>
-        <h1 id="t-lote">O cadastro inteiro de uma vez</h1>
+        <a class="voltar" id="lote-voltar" href="#resolver"><svg aria-hidden="true"><use href="#p-seta" /></svg>Identificar uma peça</a>
+        <h1 id="t-lote" tabindex="-1">O cadastro inteiro de uma vez</h1>
         <p class="lead">O protótipo lê todos os rolamentos de esferas ativos do catálogo público de materiais do governo federal. A descrição original fica intacta ao lado da descrição padronizada.</p>
         <div class="acoes">
           <button class="primario" id="rodar-lote" type="button">Ler o cadastro inteiro <svg aria-hidden="true"><use href="#p-seta" /></svg></button>
