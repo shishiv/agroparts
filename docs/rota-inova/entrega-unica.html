@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>AgroParts · AGR08 · Rota Inova UEMG 2026 · Entregas de ideação, MVP, prototipagem e pitch</title>
+<link rel="stylesheet" href="estilo-slides.css">
+</head>
+<body>
+<!--
+  Slides novos do PDF único. O script gerar-pdf-unico.sh junta estes slides com as páginas 1 e 2
+  do modelo do Canva (capa e canvas de ideação), nesta ordem:
+  página 1 do modelo, slide 1 desta página (divisória da ideação), página 2 do modelo, slides 2 em diante.
+-->
+
+<!-- ===================== 1. IDEAÇÃO ===================== -->
+
+<section class="slide divisor">
+  <img class="ilus chave-roxa-canto" src="modelo/ilustracoes/chave-roxa-canto.svg" alt="">
+  <div class="texto">
+    <p class="olho">Entrega 1 de 4 · Workshop de 25/08/2026</p>
+    <h1>Ideação</h1>
+    <p class="sub">O problema, quem o enfrenta e a proposta de valor da AgroParts.</p>
+  </div>
+  <img class="ilus grande" src="modelo/ilustracoes/lampada.svg" alt="">
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">Ideação · como a equipe leu o desafio</p>
+  <h2>Um problema de dados de materiais de manutenção</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <p class="sub">A equipe AgroParts, de Sistemas de Informação da UEMG Frutal, lê o desafio AGR08 como um problema de dados de materiais de manutenção, reparo e operação.</p>
+    <div class="painel roxo destaque" style="max-width:1500px;">Este código e esta descrição representam qual peça, e com que certeza?</div>
+    <p class="sub">Requisição, compra e estoque dependem dessa resposta.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · o problema</p>
+  <h2>A mesma peça aparece com vários códigos e descrições</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns: 1.25fr 1fr; align-items:start;">
+      <table>
+        <tr><th>Código local</th><th>Descrição no cadastro</th></tr>
+        <tr><td><code>100234</code></td><td>ROL 6318 ZZ C3</td></tr>
+        <tr><td><code>A-77812</code></td><td>ROLAMENTO RIG. ESFERAS 6318-2Z/C3</td></tr>
+        <tr><td><code>55901</code></td><td>ROLAM 6318ZZC3 P/ BOMBA</td></tr>
+      </table>
+      <div class="painel roxo destaque">Os três registros são o mesmo rolamento? Algum tem folga, vedação ou fabricante diferente?</div>
+    </div>
+    <p>O cadastro de uma operação industrial acumula descrições livres, códigos locais, sinônimos, abreviações e duplicidades antigas entre plantas e sistemas.</p>
+    <p class="fonte">Exemplo ilustrativo. Ele não vem de cadastro de cliente.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · o problema</p>
+  <h2>Por que a resposta não é simples</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g2">
+      <div class="painel">
+        <h3>Parecer igual não prova nada</h3>
+        <p>A dúvida existe no catálogo público. O item CATMAT 311960 registra <code>REFERÊNCIA FABRICANTE = 6318ZZ C3</code>.</p>
+        <p>Duas peças podem ter a mesma aparência e diferir só em dimensão, folga ou vedação. Foto ou texto parecido não provam que são a mesma peça.</p>
+      </div>
+      <div class="painel roxo">
+        <h3>Apagar ou fundir não resolve</h3>
+        <p>Os códigos antigos continuam ligados a pedidos, contratos, notas fiscais, garantias e ordens de manutenção.</p>
+        <p>Por isso o cadastro original precisa ficar como está.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · quem enfrenta o problema</p>
+  <h2>Usinas e agroindústrias com estoque de manutenção</h2>
+  <div class="regua"></div>
+  <p class="sub">O público tem várias plantas ou sistemas e um ERP ou sistema de manutenção em uso. Quatro funções sentem o problema:</p>
+  <div class="corpo">
+    <div class="grade g2">
+      <div class="painel"><h3>Almoxarifado</h3>Recebe, guarda e entrega a peça. Não sabe se o item pedido já existe com outro código. Depende de quem “conhece o estoque”.</div>
+      <div class="painel"><h3>Manutenção e planejamento</h3>Planeja a ordem e pede o material. Descreve a peça do seu jeito. Na entressafra, prepara muitas ordens ao mesmo tempo.</div>
+      <div class="painel roxo"><h3>Compras e suprimentos</h3>Transforma a requisição em pedido. Recebe pedido de item que talvez já esteja em estoque. Compara fornecedores sem saber se a peça é a mesma.</div>
+      <div class="painel roxo"><h3>Cadastro e TI</h3>Mantém o cadastro do ERP. Arrumar o cadastro exige projeto longo, e o problema volta com novas descrições livres.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">Ideação · causas</p>
+  <h2>Mais três causas do problema</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><h3>Códigos locais por planta e por sistema</h3>Fusões, aquisições e migrações deixam o mesmo item com vários códigos.</div>
+      <div class="painel"><h3>Catálogo do fabricante fora do sistema</h3>A referência técnica está em PDF ou no site do fabricante, não ligada ao cadastro.</div>
+      <div class="painel"><h3>Conhecimento guardado na cabeça</h3>Quem sabe onde está a peça é uma pessoa, não o sistema.</div>
+    </div>
+    <p class="sub">Elas se somam às causas do canvas de ideação: descrição sem padrão e peças parecidas que não são iguais.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · impacto</p>
+  <h2>O que as fontes mostram</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g4" style="flex:1;">
+      <div class="painel"><div class="numero">R$ 1,249 bi</div>de capex de manutenção da São Martinho em 9 meses da safra 2025/26. É o número de uma empresa, não do setor. [S3]</div>
+      <div class="painel"><div class="numero">195 → 250</div>unidades em operação da 1ª quinzena de abril à 2ª de maio de 2026. A volta da safra concentra a manutenção. [S5]</div>
+      <div class="painel roxo"><div class="numero">16%</div>menos itens físicos do que o sistema registrava em 13 almoxarifados de uma empresa elétrica dos EUA. A auditoria viu dependência do conhecimento dos empregados. [S6]</div>
+      <div class="painel roxo"><div class="numero">49,7 mil</div>itens de catálogo que o Governo de Santa Catarina contratou para padronizar e tirar duplicidades, em até 12 meses. [S12]</div>
+    </div>
+    <p class="fonte">A auditoria [S6] é de outro setor, mas mostra o mesmo mecanismo. As fontes estão no último slide da ideação.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">Ideação · impacto</p>
+  <h2>O que ainda é hipótese</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel destaque claro">Tempo perdido para localizar e revisar um material</div>
+      <div class="painel destaque claro">Compra de item que já existe em estoque com outro código</div>
+      <div class="painel destaque claro">Atraso de manutenção por peça errada ou não encontrada</div>
+    </div>
+    <div class="painel roxo destaque">A equipe não afirma economia, compra evitada nem redução de parada. Esses números só podem vir de um piloto com dados reais.</div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · como resolvem hoje</p>
+  <h2>As soluções atuais e o limite de cada uma</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table>
+      <tr><th style="width:46%">Solução atual</th><th>Limite</th></tr>
+      <tr><td>Busca por texto no ERP e pergunta ao almoxarife experiente</td><td>Depende de quem conhece o estoque. Não registra por que dois itens são iguais.</td></tr>
+      <tr><td>Projeto pontual para arrumar o cadastro [S12]</td><td>Longo e caro. O cadastro volta a sujar com novas descrições livres.</td></tr>
+      <tr><td>Módulos de governança do ERP: SAP MDG (busca aproximada e checagem de duplicidade) e IBM Maximo (relatório de códigos ligados ao mesmo número de peça)</td><td>Exigem projeto de ERP. Tratam o cadastro de uma empresa, sem evidência de fabricante em português.</td></tr>
+      <tr><td>Fornecedores especializados, como a Verusen (EUA)</td><td>Mostram que o mercado existe. Não têm foco declarado em material agroindustrial em português.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · proposta de valor</p>
+  <h2>Uma de três decisões para cada código ou descrição</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="painel roxo" style="font-size:31px; font-weight:700;">A AgroParts confere códigos e descrições de materiais agroindustriais em português contra a evidência técnica do fabricante, sem apagar o ERP e sem automatizar equivalência incerta.</div>
+    <div class="grade g3">
+      <div class="painel resolve"><span class="tag resolve">resolve</span><p style="margin-top:12px;">A evidência sustenta a relação. Exemplo: mesma referência de fabricante, sem atributo contraditório.</p></div>
+      <div class="painel revisa"><span class="tag revisa">revisa</span><p style="margin-top:12px;">Há um candidato plausível, mas falta evidência. Uma pessoa decide.</p></div>
+      <div class="painel recusa"><span class="tag recusa">recusa</span><p style="margin-top:12px;">Há contradição. Exemplo: dimensão ou folga diferente.</p></div>
+    </div>
+    <p style="font-size:28px;">A resposta sempre diz o tipo de relação: mesma peça, referência cruzada entre fabricantes, substituição sob condição, compatível com um equipamento ou apenas parecida. Parecida nunca vira “mesma peça” sozinha. O benefício declarado agora é visibilidade e menos tempo de análise.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · Lean Canvas, parte 1 de 2</p>
+  <h2>Problema, solução, proposta e clientes</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g4 denso" style="flex:1;">
+      <div class="painel"><h3>Problema</h3><ul>
+        <li>Mesma peça com vários códigos e descrições</li>
+        <li>Não se sabe se o item já está em estoque</li>
+        <li>Texto ou foto parecidos geram equivalência errada</li>
+        <li>O conhecimento do estoque fica com pessoas</li></ul>
+        <p><b>Alternativas hoje:</b> busca manual, arrumação pontual, módulo do ERP.</p></div>
+      <div class="painel"><h3>Solução</h3><ul>
+        <li>Leitura de código, texto e etiqueta</li>
+        <li>Candidatos e regras por atributo</li>
+        <li>Decisão resolve, revisa ou recusa, com evidência</li></ul></div>
+      <div class="painel roxo"><h3>Proposta de valor única</h3>
+        <p><b>Saber se é a mesma peça, com a fonte do fabricante, sem mexer no ERP.</b></p>
+        <p>A AgroParts recusa quando não tem certeza. Esse é o ponto central da proposta.</p></div>
+      <div class="painel"><h3>Segmentos de clientes</h3><ul>
+        <li>Usinas e agroindústrias com estoque de manutenção</li>
+        <li>Usuários: almoxarifado, manutenção, compras</li>
+        <li>Patrocinador: suprimentos, manutenção ou confiabilidade</li></ul>
+        <p><b>Primeiros clientes:</b> operações com mais de uma planta ou sistema.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · Lean Canvas, parte 2 de 2</p>
+  <h2>Vantagem, canais, métricas, custos e receita</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel roxo"><h3>Vantagem difícil de copiar</h3><ul>
+        <li>Português técnico agroindustrial</li>
+        <li>Vocabulário público do CATMAT</li>
+        <li>Tipo de relação declarado e recusa explícita</li></ul></div>
+      <div class="painel"><h3>Canais</h3><ul>
+        <li>Rota Inova e empresas cotistas</li>
+        <li>Piloto com uma planta</li>
+        <li>Integração por arquivo e API</li></ul></div>
+      <div class="painel"><h3>Métricas-chave</h3><ul>
+        <li>Precisão e cobertura por família e por relação</li>
+        <li>Tempo para localizar e revisar um item</li>
+        <li>Recusas corretas</li></ul></div>
+    </div>
+    <div class="grade g2">
+      <div class="painel"><h3>Estrutura de custos</h3><ul>
+        <li>Equipe de desenvolvimento e revisão</li>
+        <li>Licença de catálogo de fabricante</li>
+        <li>Hospedagem separada por cliente</li></ul></div>
+      <div class="painel roxo"><h3>Fontes de receita (hipótese)</h3><ul>
+        <li>Contrato entre empresas para conferir e padronizar o cadastro, por planta ou por lote</li>
+        <li>Preço a validar no piloto. Sem comissão sobre venda</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · mapa de proposta de valor</p>
+  <h2>O que o cliente precisa e o que a AgroParts entrega</h2>
+  <div class="regua"></div>
+  <div class="corpo" style="gap:16px;">
+    <p style="margin:0; font-weight:800; color:var(--tinta);">Cliente: almoxarifado, manutenção e compras</p>
+    <div class="grade g3 denso">
+      <div class="painel lavanda"><h3>Tarefas</h3><ul><li>Encontrar a peça certa para a ordem</li><li>Saber se já existe em estoque</li><li>Comprar só o que falta</li></ul></div>
+      <div class="painel lavanda"><h3>Dores</h3><ul><li>Vários códigos para o mesmo item</li><li>Medo de trocar por peça parecida e errada</li><li>Pressa na entressafra</li></ul></div>
+      <div class="painel lavanda"><h3>Ganhos desejados</h3><ul><li>Resposta rápida e explicada</li><li>Histórico de quem decidiu e por quê</li><li>Nenhuma mudança forçada no ERP</li></ul></div>
+    </div>
+    <p style="margin:0; font-weight:800; color:var(--tinta);">AgroParts</p>
+    <div class="grade g3 denso">
+      <div class="painel"><h3>Produto e serviço</h3><ul><li>Serviço de conferência por arquivo e API</li><li>Fila de revisão por pessoas</li><li>Mapa de códigos exportável</li></ul></div>
+      <div class="painel"><h3>Aliviadores de dor</h3><ul><li>Liga códigos locais à referência do fabricante</li><li>Recusa quando há contradição</li><li>Preserva o registro original</li></ul></div>
+      <div class="painel"><h3>Criadores de ganho</h3><ul><li>Evidência e fonte em cada decisão</li><li>Visão entre plantas e sistemas</li><li>Precisão e cobertura medidas</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · limites e próximas perguntas</p>
+  <h2>O que a AgroParts não é e o que falta validar</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns: 1fr 1.45fr; align-items:start;">
+      <div class="painel roxo"><h3>O que a AgroParts não é</h3>
+        <p>Não é loja, marketplace, ERP nem sistema de manutenção. Preço, estoque, requisição e compra continuam nos sistemas da empresa.</p>
+        <p>A câmera lê código e etiqueta. A foto sozinha não identifica a peça.</p></div>
+      <div class="painel"><h3>Hipóteses que precisam de validação</h3><ol>
+        <li>Quem compra a solução: manutenção, almoxarifado, suprimentos ou cadastro.</li>
+        <li>Qual família de peça tem mais duplicidade e risco. A primeira candidata é o rolamento, que tem designação e medidas padronizadas.</li>
+        <li>Quanto tempo a usina leva hoje para localizar e revisar um item.</li>
+        <li>Se a usina aceita enviar uma exportação do cadastro, com autorização e regras de guarda dos dados.</li></ol>
+        <p style="font-size:24px;">Esta entrega não usa entrevista, cliente nem depoimento.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 1 · Ideação">
+  <p class="olho">Ideação · fontes</p>
+  <h2>Fontes da ideação</h2>
+  <div class="regua"></div>
+  <img class="ilus livro" src="modelo/ilustracoes/livro.svg" alt="">
+  <ul class="fontes">
+    <li>Desafio AGR08 e jornada do programa: rotainovarural.com.br</li>
+    <li>[S3] São Martinho, Resultados 3T26, 09/02/2026: ri.saomartinho.com.br</li>
+    <li>[S5] UNICA, publicações de 30/04/2026 e 24/06/2026: unica.com.br</li>
+    <li>[S6] U.S. DOE, Office of Inspector General, DOE-OIG-24-30, 24/09/2024: energy.gov</li>
+    <li>[S12] Secretaria de Estado da Administração de Santa Catarina, padronização do cadastro de materiais: sea.sc.gov.br</li>
+    <li>CATMAT item 311960, API de Dados Abertos do Compras.gov.br, consulta de 25/08/2026: dadosabertos.compras.gov.br</li>
+    <li>SAP MDG Material: learning.sap.com · IBM Maximo, relatório de itens duplicados: ibm.com/docs · Verusen: verusen.com/faq</li>
+    <li>Detalhes e comandos para refazer as consultas: pasta <code>docs/pesquisa/</code> do repositório github.com/shishiv/agroparts</li>
+  </ul>
+</section>
+
+<!-- ===================== 2. MVP ===================== -->
+
+<section class="slide divisor">
+  <img class="ilus chave-roxa-canto" src="modelo/ilustracoes/chave-roxa-canto.svg" alt="">
+  <div class="texto">
+    <p class="olho">Entrega 2 de 4 · Workshop de 10/09/2026</p>
+    <h1>MVP</h1>
+    <p class="sub">A menor prova de que a AgroParts gera valor.</p>
+  </div>
+  <img class="ilus notebook-grande" src="modelo/ilustracoes/notebook-grande.svg" alt="">
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">MVP · o recorte</p>
+  <h2>Uma fatia estreita, não um sistema completo de peças</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <p class="sub">Uma família de peça, um catálogo de fabricante e de 10 a 50 itens que passam pelo fluxo inteiro, da importação ao mapa de códigos revisado.</p>
+    <div class="painel roxo">
+      <p class="olho">Hipótese principal</p>
+      <p style="font-size:33px; font-weight:700; line-height:1.34;">Se a AgroParts ligar os códigos e descrições de uma família de peça à referência do fabricante, e recusar quando houver contradição, então quem trabalha no almoxarifado ou na manutenção localiza e revisa um item em menos tempo, e as decisões automáticas erram em menos de 1% dos casos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · hipótese</p>
+  <h2>A hipótese tem três partes. Cada uma pode falhar sozinha</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><h3>Valor</h3><p>A resposta reduz o tempo para localizar e revisar um material?</p><p><b>Falha se</b> o tempo mediano com a AgroParts não for menor que o da busca atual.</p></div>
+      <div class="painel"><h3>Segurança</h3><p>As decisões automáticas são confiáveis?</p><p><b>Falha se</b> o erro na faixa <span class="tag resolve">resolve</span> passar de 1% na família e no tipo de relação medidos.</p></div>
+      <div class="painel"><h3>Viabilidade</h3><p>Uma usina entrega uma amostra do cadastro para o teste?</p><p><b>Falha se</b> nenhuma empresa enviar uma exportação autorizada, com a explicação dos campos e regras de guarda.</p></div>
+    </div>
+    <p style="font-size:28px;">O limite de 1% é um contrato interno da equipe. Ele não vem de referência externa. Se a precisão não chegar a esse limite, a AgroParts resolve menos itens sozinha e manda mais itens para revisão. O limite não é afrouxado.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · o mínimo que prova o valor</p>
+  <h2>Poucos itens reais passam por todas as etapas</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="fluxo g4 grade" style="column-gap:40px;">
+      <div class="passo"><b>1. Importar</b>Arquivo CSV ou XLSX do cadastro, sem alterar a origem</div>
+      <div class="passo"><b>2. Extrair</b>Referência, fabricante, família, medidas</div>
+      <div class="passo"><b>3. Buscar</b>Candidatos no catálogo do fabricante e no CATMAT</div>
+      <div class="passo"><b>4. Regras</b>Atributo contraditório reprova o candidato</div>
+    </div>
+    <div class="fluxo g4 grade" style="column-gap:40px;">
+      <div class="passo"><b>5. Decidir</b>Resolve, revisa ou recusa, com o tipo de relação</div>
+      <div class="passo"><b>6. Revisar</b>A pessoa vê o original, o candidato, a diferença e a fonte</div>
+      <div class="passo"><b>7. Exportar</b>Mapa de códigos com versão e histórico</div>
+    </div>
+    <p class="sub">A equipe escolheu esse formato porque uma busca bonita sem decisão medida não prova nada.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · demonstração</p>
+  <h2>A demonstração precisa mostrar cinco casos</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g5" style="flex:1;">
+      <div class="painel"><div class="numero">1</div>Uma duplicidade exata entre dois códigos locais, que termina em <span class="tag resolve">resolve</span>.</div>
+      <div class="painel"><div class="numero">2</div>Uma peça parecida, mas com medida ou folga diferente, que termina em <span class="tag recusa">recusa</span>.</div>
+      <div class="painel"><div class="numero">3</div>Uma referência cruzada entre fabricantes, mostrada com a condição e a fonte.</div>
+      <div class="painel"><div class="numero">4</div>A tradução de um lote inteiro, com cobertura e precisão por família.</div>
+      <div class="painel roxo"><div class="numero">5</div>Uma revisão por uma pessoa, que preserva o registro original e grava quem decidiu.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · escolhas do recorte</p>
+  <h2>Uma família, um fabricante, um vocabulário, sem tocar no ERP</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g2" style="font-size:27px;">
+      <div class="painel"><h3>Família</h3>Um subtipo de rolamento. Rolamentos têm designação padronizada, medidas organizadas e catálogos oficiais com referência cruzada.</div>
+      <div class="painel"><h3>Catálogo</h3>Um único fabricante, com licença de uso verificada. Um segundo fabricante só entra com licença e fonte claras.</div>
+      <div class="painel"><h3>Vocabulário</h3>O CATMAT, catálogo público do governo federal: 343.880 itens de material e 20.419 padrões de descrição em 25/08/2026. Ele dá o vocabulário em português, mas não prova que peças de fabricantes diferentes se trocam.</div>
+      <div class="painel"><h3>Entrega</h3>Arquivo de entrada e resultado por API. Nenhuma escrita automática no ERP.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · escopo</p>
+  <h2>O que entra no MVP e o que fica para depois</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table class="compacta">
+      <tr><th style="width:48%">Entra no MVP</th><th>Fica para depois</th></tr>
+      <tr><td>Importação de arquivo sem alterar a origem</td><td>Integração direta com SAP, Maximo ou outro ERP. O primeiro piloto define qual.</td></tr>
+      <tr><td>Uma família de rolamento e um fabricante</td><td>Outras famílias: bombas, vedações, peças de transporte</td></tr>
+      <tr><td>Decisão resolve, revisa ou recusa, com tipo de relação e evidência</td><td>Requisição automática. Ela depende do vínculo real entre peça e equipamento.</td></tr>
+      <tr><td>Fila de revisão com registro de quem decidiu</td><td>Compatibilidade com equipamento pelo número de série</td></tr>
+      <tr><td>Leitura de código e etiqueta pela câmera, como entrada de texto</td><td>Classificar a peça só pela foto. Aparência não prova medida.</td></tr>
+      <tr><td>Mapa de códigos exportável e consulta por API</td><td>Preço, estoque, compra e comissão sobre venda</td></tr>
+      <tr><td>Dados de cada cliente separados, sem aprendizado entre clientes</td><td>Base comum de relações entre empresas</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · métricas, parte 1 de 2</p>
+  <h2>Como medir o sucesso</h2>
+  <div class="regua"></div>
+  <p class="sub" style="font-size:28px;">A equipe congela os testes, os limites e as métricas <b>antes</b> de ver os resultados. Não existe uma “acurácia geral” única. Cada porcentagem vem com o número absoluto.</p>
+  <div class="corpo">
+    <table class="compacta">
+      <tr><th style="width:24%">Métrica</th><th>Como medir</th><th style="width:28%">Sucesso</th></tr>
+      <tr><td><b>Precisão da faixa automática</b></td><td>Revisores conferem todas as decisões <span class="tag resolve">resolve</span> contra o gabarito, por família e por tipo de relação.</td><td>Erro menor que 1%</td></tr>
+      <tr><td><b>Cobertura</b></td><td>Total, elegíveis, resolvidos, enviados à revisão e recusados, em números absolutos e porcentagens</td><td>Relatório completo. A cobertura pode cair para manter a precisão.</td></tr>
+      <tr><td><b>Recusas corretas</b></td><td>Pares negativos do gabarito: mesma aparência, medida ou folga diferente</td><td>Nenhum negativo vira <span class="tag resolve">resolve</span></td></tr>
+      <tr><td><b>Tempo para localizar e revisar</b></td><td>Cronometrar a mesma lista com a busca atual e com a AgroParts. Comparar as medianas.</td><td>Mediana menor com a AgroParts. A meta entra no acordo com o cliente.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · métricas, parte 2 de 2</p>
+  <h2>O que mais a equipe registra</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table>
+      <tr><th style="width:26%">Métrica</th><th>Como medir</th><th style="width:30%">Sucesso</th></tr>
+      <tr><td><b>Concordância entre revisores</b></td><td>Dois revisores decidem os mesmos itens sem ver a resposta do outro</td><td>Medida e registrada. Discordância vira regra nova ou item recusado.</td></tr>
+      <tr><td><b>Decisões revertidas</b></td><td>Contar quantas decisões a revisão desfez</td><td>Registrada por família e por motivo</td></tr>
+      <tr><td><b>Itens bloqueados por falta de dado</b></td><td>Contar itens sem medida, fabricante ou referência suficiente</td><td>Registrada. Mostra onde o cadastro precisa de dado.</td></tr>
+      <tr><td><b>Escritas no ERP do cliente</b></td><td>Registro das chamadas de integração</td><td>Zero</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">MVP · testes</p>
+  <h2>Três conjuntos de teste separados</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><h3>Identidade</h3>Pares com a mesma referência, fabricante e revisão, contra pares com texto parecido e referência diferente.</div>
+      <div class="painel"><h3>Referência cruzada</h3>Relações publicadas pelo fabricante, contra peças com medida próxima e contradição relevante.</div>
+      <div class="painel roxo"><h3>Substituição sob condição</h3>Substituições validadas para uma aplicação. No MVP, este tipo vai sempre para revisão por uma pessoa.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · ordem de execução</p>
+  <h2>Cinco passos, nesta ordem</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g5">
+      <div class="painel"><div class="numero">1</div>Conseguir uma amostra real do cadastro, com autorização, explicação dos campos e regras de guarda e descarte.</div>
+      <div class="painel"><div class="numero">2</div>Congelar os testes e os limites antes de rodar o sistema.</div>
+      <div class="painel"><div class="numero">3</div>Verificar a licença do catálogo do fabricante.</div>
+      <div class="painel"><div class="numero">4</div>Passar de 10 a 50 itens reais pelo fluxo completo.</div>
+      <div class="painel"><div class="numero">5</div>Medir e publicar o relatório por família e por tipo de relação.</div>
+    </div>
+    <p class="sub">Enquanto a amostra real não chega, o protótipo da Entrega 3 usa só dados públicos. Ele mostra o fluxo e as regras. Ele não prova valor para cliente.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · riscos</p>
+  <h2>Riscos e respostas</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table>
+      <tr><th style="width:46%">Risco</th><th>Resposta</th></tr>
+      <tr><td>Nenhuma empresa envia amostra autorizada</td><td>A fatia completa não começa. A equipe não afirma valor para cliente.</td></tr>
+      <tr><td>Catálogo sem licença compatível</td><td>A família não avança para a prova técnica.</td></tr>
+      <tr><td>Precisão abaixo do limite</td><td>A cobertura automática diminui. O limite não muda.</td></tr>
+      <tr><td>Revisores não concordam sobre o gabarito</td><td>Os itens em disputa saem do conjunto automático e viram regra ou recusa.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · no ar</p>
+  <h2>Veja o MVP funcionando</h2>
+  <div class="regua"></div>
+  <div class="corpo" style="max-width:900px;">
+    <p style="font-size:52px; margin:20px 0 10px;"><a class="link" href="https://agroparts.pages.dev/">https://agroparts.pages.dev/</a></p>
+    <p class="sub">Abra o endereço no computador ou no celular. Em “Exemplos da apresentação”, escolha as provas de 1 a 5.</p>
+    <p class="sub">O site roda com dados públicos do CATMAT. A Entrega 3 mostra as telas e os números medidos.</p>
+  </div>
+  <img class="ilus" src="modelo/ilustracoes/pessoa-no-computador.svg" alt="" style="left:1060px; top:240px; width:760px; height:720px;">
+</section>
+
+<section class="slide" data-rodape="Entrega 2 · MVP">
+  <p class="olho">MVP · fontes</p>
+  <h2>Fontes do MVP</h2>
+  <div class="regua"></div>
+  <img class="ilus livro" src="modelo/ilustracoes/livro.svg" alt="">
+  <ul class="fontes">
+    <li>Contagens do CATMAT: API de Dados Abertos do Compras.gov.br, consulta de 25/08/2026 (<code>docs/pesquisa/catmat-pncp.md</code>)</li>
+    <li>Plano de provas e decisões: <code>docs/roadmap.md</code> e as decisões 0006, 0014, 0016 e 0020 em <code>docs/decisoes/</code></li>
+    <li>Métricas do piloto: <code>docs/pesquisa/aprofundamento-jornada-integracao.md</code>, seção 5.4</li>
+    <li>Todos os arquivos estão no repositório github.com/shishiv/agroparts</li>
+  </ul>
+</section>
+
+<!-- ===================== 3. PROTOTIPAGEM ===================== -->
+
+<section class="slide divisor">
+  <img class="ilus chave-roxa-canto" src="modelo/ilustracoes/chave-roxa-canto.svg" alt="">
+  <div class="texto">
+    <p class="olho">Entrega 3 de 4 · Workshop de 21/09/2026</p>
+    <h1 style="font-size:104px;">Prototipagem</h1>
+    <p class="sub">O protótipo funcional da AgroParts, as telas e os números medidos.</p>
+  </div>
+  <img class="ilus grande" src="modelo/ilustracoes/janelas-grandes.svg" alt="">
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · o que é</p>
+  <h2>O protótipo está publicado e funciona</h2>
+  <div class="regua"></div>
+  <div class="corpo" style="max-width:1080px;">
+    <p style="font-size:48px; margin:6px 0 8px;"><a class="link" href="https://agroparts.pages.dev/">https://agroparts.pages.dev/</a></p>
+    <ul style="font-size:31px;">
+      <li>Identifica rolamentos rígidos de esferas das séries 60, 62 e 63.</li>
+      <li>Aceita código, descrição livre ou foto de etiqueta.</li>
+      <li>Usa dados públicos e verdadeiros do CATMAT e de compras do Compras.gov.br, não cadastro de cliente.</li>
+      <li>O código está em github.com/shishiv/agroparts.</li>
+    </ul>
+  </div>
+  <img class="ilus" src="modelo/ilustracoes/janelas.svg" alt="" style="left:1300px; top:300px; width:500px; height:590px;">
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · o que o protótipo prova</p>
+  <h2>As cinco provas do MVP, cada uma com um item real do CATMAT</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table class="compacta">
+      <tr><th style="width:22%">Prova</th><th>Caso real no protótipo</th><th style="width:27%">Decisão</th></tr>
+      <tr><td><b>1. Duplicidade exata</b></td><td>Os itens 311960 e 311963 descrevem o mesmo rolamento 6318ZZ C3</td><td><span class="tag resolve">resolve</span> mesma peça</td></tr>
+      <tr><td><b>2. Falsa semelhança</b></td><td>O item 317388 (6211ZZ) tem 7 itens de texto parecido. Um deles, o 290385, tem folga C3 e proteção de um lado só.</td><td><span class="tag recusa">recusa</span> com o motivo</td></tr>
+      <tr><td><b>3. Referência cruzada</b></td><td>O item 624270 cita SKF 6206 2RS1 e NSK 6206 DDU</td><td><span class="tag resolve">resolve</span> a referência; <span class="tag revisa">revisa</span> a troca</td></tr>
+      <tr><td><b>4. Tradução em lote</b></td><td>Os 396 itens ativos do padrão CATMAT 11797 (rolamento de esfera)</td><td>contagens por série</td></tr>
+      <tr><td><b>5. Revisão por uma pessoa</b></td><td>O item 472447 declara furo de 60 mm, mas o código 6013 tem furo de 65 mm</td><td><span class="tag recusa">recusa</span> e registro da pessoa</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · fluxo</p>
+  <h2>Da entrada à resposta, em seis passos</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="fluxo grade g3" style="column-gap:40px;">
+      <div class="passo"><b>1. Entrada</b>Código CATMAT, designação, descrição livre ou foto de etiqueta</div>
+      <div class="passo"><b>2. Leitura</b>O navegador lê o texto da foto. A pessoa confere o texto lido.</div>
+      <div class="passo"><b>3. Extração</b>Série, furo, vedação, folga e medidas</div>
+    </div>
+    <div class="fluxo grade g3" style="column-gap:40px;">
+      <div class="passo"><b>4. Candidatos</b>Itens do CATMAT com texto parecido</div>
+      <div class="passo"><b>5. Regras</b>Atributo diferente recusa. Final de código desconhecido vai para revisão.</div>
+      <div class="passo"><b>6. Saída</b>Tipo de relação, evidência e registro da revisão</div>
+    </div>
+    <p style="font-size:28px;">A tela chama uma API HTTP documentada (<code>/api/openapi.json</code>). A API só lê dados públicos e não grava nada, por isso não pede login. O registro de revisão fica no navegador e pode ser exportado em JSON.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-00-inicio.jpg" alt="Tela inicial do protótipo AgroParts com a pergunta Qual é esta peça, o campo de entrada, o botão Identificar e o link Exemplos da apresentação" style="width:1100px;"></div>
+    <div class="texto">
+      <p class="olho">Tela inicial</p>
+      <h2>Uma coisa só: a pergunta, o campo e o botão</h2>
+      <ul>
+        <li>A pessoa escolhe a entrada: código, descrição ou foto da etiqueta.</li>
+        <li>O aviso sob o campo diz o recorte e que os dados são públicos.</li>
+        <li>“Exemplos da apresentação” abre as cinco provas. “Explicar passo a passo” mostra cada prova.</li>
+        <li>“Como funciona”, no topo, explica o site. As telas de conferência ficam no rodapé.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-01-duplicidade-exata.jpg" alt="Placa verde Peça identificada para o item CATMAT 311960, com o item 311963 no grupo É a mesma peça" style="height:840px;"></div>
+    <div class="texto">
+      <p class="olho">Prova 1 · duplicidade exata</p>
+      <h2>Dois cadastros, a mesma peça</h2>
+      <ul>
+        <li>O item 311960 aparece como peça identificada: o código 6318ZZ C3 foi lido inteiro.</li>
+        <li>O item 311963 aparece em “É a mesma peça”. “Ver por quê” mostra “Cadastro duplicado”: mesmas palavras e mesma especificação.</li>
+        <li>A tela declara o limite: a tabela aberta da norma não traz o tamanho 6318, então diâmetro externo e largura não foram conferidos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-02-falsa-semelhanca.jpg" alt="Item 317388 identificado, com sete itens parecidos no grupo vermelho Parece, mas não é" style="height:840px;"></div>
+    <div class="texto">
+      <p class="olho">Prova 2 · falsa semelhança</p>
+      <h2>Parece, mas não é: o protótipo recusa</h2>
+      <ul>
+        <li>O item 317388 (6211ZZ, folga normal) tem o item 472510 como a mesma peça.</li>
+        <li>Outros 7 itens têm texto parecido e caem no grupo vermelho “Parece, mas não é”.</li>
+        <li>Para o item 290385, a tela diz “Textos quase iguais” e explica: a proteção é diferente (dos dois lados contra um lado só) e a folga também (normal contra C3).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-03-referencia-cruzada.jpg" alt="Item 624270 em placa amarela Precisa de uma pessoa, com SKF e NSK no grupo Equivale na medida, com condições, e a troca de marca no grupo amarelo" style="height:840px;"></div>
+    <div class="texto" style="font-size:28px;">
+      <p class="olho">Prova 3 · referência cruzada</p>
+      <h2>Equivale na medida, com condições e fonte</h2>
+      <ul>
+        <li>O item 624270 cita SKF 6206 2RS1 e NSK 6206 DDU. A tela mostra “Equivale na medida, com condições”.</li>
+        <li>“Ver por quê” explica: pela norma ISO, as duas têm o mesmo tamanho básico e as mesmas medidas externas.</li>
+        <li>Trocar uma marca pela outra fica no grupo amarelo, que pede uma pessoa: ninguém conferiu o que significa o final DDU, e a descrição pede aço inoxidável que o código não confirma.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-04-traducao-em-lote.jpg" alt="Tela Cadastro inteiro com 396 cadastros lidos e 28 grupos de cadastros duplicados" style="height:840px;"></div>
+    <div class="texto">
+      <p class="olho">Prova 4 · tradução em lote</p>
+      <h2>O cadastro inteiro em um clique</h2>
+      <ul>
+        <li>Um clique lê os 396 itens ativos do padrão 11797 e acha 28 grupos de cadastros duplicados.</li>
+        <li>A tabela mostra, por série, quantos itens foram confirmados, quantos precisam de uma pessoa e quantos foram recusados, sempre com o total.</li>
+        <li>A planilha de-para sai em CSV, com o texto original ao lado da tradução.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens">
+      <img src="img/desktop-05a-recusa-472447.jpg" alt="Placa vermelha O cadastro se contradiz para o item 472447: furo de 60 mm contra o código 6013, que tem furo de 65 mm" style="width:880px;">
+      <img src="img/desktop-05c-formulario-revisao.jpg" alt="Formulário Decisão de uma pessoa com a decisão registrada" style="width:880px;">
+    </div>
+    <div class="texto">
+      <p class="olho">Prova 5 · revisão por uma pessoa</p>
+      <h2>O cadastro se contradiz</h2>
+      <ul>
+        <li>O item 472447 declara furo de 60 mm, mas o código 6013 tem furo de 65 mm.</li>
+        <li>A placa vermelha diz “O cadastro se contradiz” e mostra a contradição em uma frase.</li>
+        <li>Em “Registrar a decisão de uma pessoa”, quem conhece a peça grava a decisão e o motivo. O original não muda.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-05b-registro-de-revisoes.jpg" alt="Tela Decisões das pessoas com o que o sistema disse, o que a pessoa decidiu, o motivo e o texto original" style="width:1100px;"></div>
+    <div class="texto">
+      <p class="olho">Registro de revisões</p>
+      <h2>Quem decidiu, o quê e por quê</h2>
+      <ul>
+        <li>Cada registro guarda o texto original, a decisão do sistema, a decisão da pessoa e o motivo.</li>
+        <li>Quando a pessoa discorda, o selo do sistema aparece riscado, não apagado.</li>
+        <li>“Ver detalhes” mostra a impressão digital (SHA-256) do original e a versão das regras.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-06-medicao.jpg" alt="Tela Quanto o protótipo acerta, com tabelas por série contra o gabarito v1" style="width:1100px;"></div>
+    <div class="texto">
+      <p class="olho">Medição</p>
+      <h2>Quanto o protótipo acerta</h2>
+      <ul>
+        <li>A tela “Quanto acerta” mostra os números contra o gabarito v1, por série.</li>
+        <li>Cada porcentagem vem com a conta que a gerou.</li>
+        <li>Os próximos slides repetem esses números.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-07-ocr-etiqueta.jpg" alt="Leitura da foto de uma etiqueta impressa com o texto do item 311960, marcada como Leitura boa" style="height:840px;"></div>
+    <div class="texto">
+      <p class="olho">Foto de etiqueta impressa</p>
+      <h2>Leitura boa: a pessoa confere e segue</h2>
+      <ul>
+        <li>O navegador leu o texto da etiqueta e a tela marca “Leitura boa” (confiança média de 89%).</li>
+        <li>A pessoa confere o texto antes de identificar.</li>
+        <li>A equipe gerou a etiqueta a partir do texto do item CATMAT 311960. Ela não é foto de campo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens"><img src="img/desktop-08-ocr-foto-gravada.jpg" alt="Leitura da foto de um anel de rolamento gravado, marcada como Leitura ruim" style="width:1060px;"></div>
+    <div class="texto">
+      <p class="olho">Foto de anel gravado</p>
+      <h2>Leitura ruim: a tela pede o código</h2>
+      <ul>
+        <li>Na foto real de um rolamento 6203 C3 com marcação gravada no metal, a leitura falha (confiança média de 31%).</li>
+        <li>A tela marca “Leitura ruim” e pede o código digitado. A foto não identifica a peça sozinha.</li>
+      </ul>
+      <p class="fonte">Foto: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <div class="tela">
+    <div class="imagens" style="flex-direction:row; gap:48px;">
+      <img src="img/celular-00-inicio.jpg" alt="Tela inicial do protótipo no celular" style="height:840px;">
+      <img src="img/celular-01-duplicidade-exata.jpg" alt="Resultado da duplicidade exata no celular" style="height:840px;">
+    </div>
+    <div class="texto">
+      <p class="olho">Celular · 390 px</p>
+      <h2>Funciona no celular, onde a câmera tira a foto</h2>
+      <ul>
+        <li>À esquerda, a tela inicial.</li>
+        <li>À direita, o resultado da prova 1.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">Prototipagem · números medidos</p>
+  <h2>Um gabarito congelado antes do motor existir</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><div class="numero">42</div>itens do CATMAT</div>
+      <div class="painel"><div class="numero">31</div>textos livres de fornecedores</div>
+      <div class="painel"><div class="numero">140</div>pares de identidade</div>
+    </div>
+    <div class="grade g2">
+      <div class="painel roxo"><h3>Precisão automática</h3>Resolvidos corretos sobre resolvidos.</div>
+      <div class="painel roxo"><h3>Cobertura automática</h3>Elegíveis resolvidos sobre elegíveis.</div>
+    </div>
+    <p style="font-size:28px;">A equipe rotulou e congelou o gabarito v1 antes de escrever o motor. Não existe uma acurácia geral única.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · números medidos</p>
+  <h2>Tradução de itens do CATMAT e de texto livre</h2>
+  <div class="regua"></div>
+  <div class="corpo" style="gap:22px;">
+    <p style="margin:0; font-weight:800; color:var(--tinta);">Itens do CATMAT</p>
+    <table class="compacta">
+      <tr><th>Série</th><th class="num">Itens</th><th class="num">Elegíveis</th><th class="num">Resolve</th><th class="num">Revisa</th><th class="num">Recusa</th><th class="num">Precisão automática</th><th class="num">Cobertura automática</th></tr>
+      <tr><td>60</td><td class="num">8</td><td class="num">7</td><td class="num">7</td><td class="num">1</td><td class="num">0</td><td class="num">7/7 (100%)</td><td class="num">7/7 (100%)</td></tr>
+      <tr><td>62</td><td class="num">17</td><td class="num">14</td><td class="num">14</td><td class="num">2</td><td class="num">1</td><td class="num">14/14 (100%)</td><td class="num">14/14 (100%)</td></tr>
+      <tr><td>63</td><td class="num">17</td><td class="num">15</td><td class="num">15</td><td class="num">1</td><td class="num">1</td><td class="num">15/15 (100%)</td><td class="num">15/15 (100%)</td></tr>
+    </table>
+    <p style="margin:6px 0 0; font-weight:800; color:var(--tinta);">Texto livre de fornecedores, do campo “marca” de compras públicas. Exemplos: <code>BLK Modelo 6205-2rs</code> e <code>6206 ZZC3</code></p>
+    <table class="compacta">
+      <tr><th>Série</th><th class="num">Itens</th><th class="num">Elegíveis</th><th class="num">Resolve</th><th class="num">Revisa</th><th class="num">Recusa</th><th class="num">Precisão automática</th><th class="num">Cobertura automática</th></tr>
+      <tr><td>60</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">2/2 (100%)</td><td class="num">2/2 (100%)</td></tr>
+      <tr><td>62</td><td class="num">17</td><td class="num">16</td><td class="num">16</td><td class="num">1</td><td class="num">0</td><td class="num">16/16 (100%)</td><td class="num">16/16 (100%)</td></tr>
+      <tr><td>63</td><td class="num">12</td><td class="num">11</td><td class="num">11</td><td class="num">0</td><td class="num">1</td><td class="num">11/11 (100%)</td><td class="num">11/11 (100%)</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · números medidos</p>
+  <h2>Identidade entre códigos: é a mesma peça?</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table>
+      <tr><th>Série</th><th class="num">Pares</th><th class="num">Verdadeiros</th><th class="num">Falsos</th><th class="num">Indeterminados</th><th class="num">Precisão</th><th class="num">Recall</th><th class="num">Falsos recusados</th></tr>
+      <tr><td>60</td><td class="num">12</td><td class="num">0</td><td class="num">9</td><td class="num">3</td><td class="num">não se aplica</td><td class="num">não se aplica</td><td class="num">9/9 (100%)</td></tr>
+      <tr><td>62</td><td class="num">64</td><td class="num">7</td><td class="num">39</td><td class="num">18</td><td class="num">7/7 (100%)</td><td class="num">7/7 (100%)</td><td class="num">39/39 (100%)</td></tr>
+      <tr><td>63</td><td class="num">64</td><td class="num">7</td><td class="num">42</td><td class="num">15</td><td class="num">7/7 (100%)</td><td class="num">7/7 (100%)</td><td class="num">42/42 (100%)</td></tr>
+    </table>
+    <p style="font-size:28px;">Recall é a parte dos pares verdadeiros que o motor encontrou. Um par é indeterminado quando um dos dois itens não é elegível no gabarito. Esse par fica fora da precisão e do recall.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · números medidos</p>
+  <h2>Referência cruzada, lote inteiro e testes</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><div class="numero">1/1</div>referência cruzada recuperada com fonte. Com um caso só, o número não sustenta taxa.</div>
+      <div class="painel"><div class="numero">0</div>substituições resolvidas sozinhas. O contrato do produto exige 0.</div>
+      <div class="painel"><div class="numero">29</div>testes automáticos do motor e da API. Todos passaram em 05/10/2026.</div>
+    </div>
+    <div class="painel roxo" style="font-size:28px;"><h3>Lote do padrão 11797 inteiro, sem gabarito</h3>396 itens ativos e 28 grupos de duplicidade. Resolveram 41 de 48 itens na série 60, 72 de 89 na série 62 e 70 de 78 na série 63. Fora da família, 60 de 60 itens foram recusados. Essas contagens não medem precisão, porque só o gabarito tem rótulo.</div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">Prototipagem · como ler os 100%</p>
+  <h2>O motor aplica as regras. Isso ainda não prova a peça física</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g2">
+      <div class="painel"><h3>O que os 100% mostram</h3>O motor aplica as regras sem errar nos textos reais do gabarito. Eles não mostram que as regras acertam a peça física.</div>
+      <div class="painel"><h3>Por que ainda é pouco</h3>O gabarito é pequeno, e a nota de evidência ainda não está calibrada.</div>
+      <div class="painel roxo"><h3>Um erro já corrigido</h3>Na primeira execução, o motor errou 6 pares por um defeito na leitura de “6206-2Z”. A equipe corrigiu o defeito sem mudar rótulos nem limites.</div>
+      <div class="painel roxo"><h3>O que falta</h3>Revisar os rótulos do gabarito. Quem escreveu os rótulos também escreveu o motor.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · limites</p>
+  <h2>O que o protótipo ainda não faz</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g2" style="font-size:27px;">
+      <div class="painel"><h3>Dados públicos</h3>O protótipo não prova valor para uma usina. Essa prova exige uma amostra real e autorizada de cadastro.</div>
+      <div class="painel"><h3>Sem catálogo de fabricante</h3>Os termos da SKF e da Timken não permitem repassar seus dados sem autorização escrita. O protótipo usa só a regra pública de designação da SKF, refeita pela equipe, e a tabela aberta DIN 625-1 do projeto BOLTS, que cobre só parte das séries.</div>
+      <div class="painel roxo"><h3>Foto não identifica peça</h3>A câmera lê o texto da etiqueta. A pessoa confere o texto lido.</div>
+      <div class="painel roxo"><h3>Sem ERP e sem compra</h3>O protótipo não escreve em ERP, não gera requisição e não compra. Ele também não deduz compatibilidade com máquina.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · como rodar e conferir</p>
+  <h2>Qualquer pessoa pode conferir</h2>
+  <div class="regua"></div>
+  <div class="corpo" style="max-width:1150px;">
+    <ol style="font-size:31px;">
+      <li>Abra <a href="https://agroparts.pages.dev/"><b>https://agroparts.pages.dev/</b></a> no computador ou no celular.</li>
+      <li>Abra “Exemplos da apresentação” e escolha as provas, de 1 a 5.</li>
+      <li>Para rodar sem internet, siga o README do repositório: <code>bun install</code> e depois <code>bun run demo</code>.</li>
+      <li>Para refazer a medição, rode <code>bun run medir</code>. O resultado regrava <code>docs/medicao/gabarito-v1.md</code>.</li>
+    </ol>
+  </div>
+  <img class="ilus" src="modelo/ilustracoes/busca.svg" alt="" style="left:1380px; top:380px; width:420px; height:380px;">
+</section>
+
+<section class="slide" data-rodape="Entrega 3 · Prototipagem">
+  <p class="olho">Prototipagem · fontes</p>
+  <h2>Fontes da prototipagem</h2>
+  <div class="regua"></div>
+  <img class="ilus livro" src="modelo/ilustracoes/livro.svg" alt="">
+  <ul class="fontes">
+    <li>Capturas de 09/10/2026 com Chromium, no computador (1366 px) e no celular (390 px), depois da nova interface. Arquivos em <code>docs/rota-inova/img/</code>.</li>
+    <li>Números: <code>docs/medicao/gabarito-v1.md</code>, gerado por <code>bun run medir</code> com as regras v1 de 05/10/2026.</li>
+    <li>Fontes e licenças dos dados: <code>docs/pesquisa/fontes-do-prototipo.md</code>. Ferramentas: decisão 0021 em <code>docs/decisoes/</code>.</li>
+    <li>CATMAT e compras públicas: API de Dados Abertos do Compras.gov.br, consulta de 05/10/2026. Decreto 8.777/2016, art. 4.</li>
+    <li>Repositório: github.com/shishiv/agroparts</li>
+  </ul>
+</section>
+
+<!-- ===================== 4. PITCH ===================== -->
+
+<section class="slide divisor">
+  <img class="ilus chave-roxa-canto" src="modelo/ilustracoes/chave-roxa-canto.svg" alt="">
+  <div class="texto">
+    <p class="olho">Entrega 4 de 4 · Workshop de 09/10/2026</p>
+    <h1>Pitch</h1>
+    <p class="sub">Os 10 slides do pitch, o roteiro de 4 minutos e meio e a versão de 60 segundos.</p>
+  </div>
+  <img class="ilus grande" src="modelo/ilustracoes/aviao.svg" alt="">
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 1 de 10">
+  <img class="ilus chave-branca-canto" src="modelo/ilustracoes/chave-branca-canto.svg" alt="">
+  <div style="margin:auto 0; padding-left:110px;">
+    <p class="olho">Rota Inova UEMG 2026 · Desafio AGR08 · Eficiência na Gestão de Peças</p>
+    <h1 style="font-size:150px; line-height:1.05; margin:10px 0 26px;"><span style="color:var(--menta); font-weight:300;">{</span> AgroParts <span style="color:var(--menta); font-weight:300;">}</span></h1>
+    <p style="font-size:46px; font-weight:700; max-width:1300px; line-height:1.25;">Saber se é a mesma peça, com a fonte do fabricante, sem mexer no ERP.</p>
+    <div class="regua"></div>
+    <p style="font-size:26px; max-width:1300px;"><span class="nome">Allana Eduarda Braga Iquegami</span> · <span class="nome">Gabrielle Henrique Arruda Longo</span> · <span class="nome">Alberto Gabriel Rodrigues Bispo</span> · <span class="nome">Davi de Sousa Almeida</span> · <span class="nome">Myke Matos dos Santos</span></p>
+    <p style="font-size:26px;">Sistemas de Informação · UEMG Frutal</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 2 de 10">
+  <p class="olho">O problema</p>
+  <h2>A mesma peça tem vários códigos. Ninguém sabe se ela já está no estoque.</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns: 1.2fr 1fr; align-items:start;">
+      <table>
+        <tr><th>Código local</th><th>Descrição no cadastro</th></tr>
+        <tr><td><code>100234</code></td><td>ROL 6318 ZZ C3</td></tr>
+        <tr><td><code>A-77812</code></td><td>ROLAMENTO RIG. ESFERAS 6318-2Z/C3</td></tr>
+        <tr><td><code>55901</code></td><td>ROLAM 6318ZZC3 P/ BOMBA</td></tr>
+      </table>
+      <div class="painel roxo destaque">É o mesmo rolamento? Uma folga ou vedação diferente muda a resposta.</div>
+    </div>
+    <p class="sub">Foto e texto parecido não provam que é a mesma peça.</p>
+    <p class="fonte">Exemplo ilustrativo, não é cadastro de cliente. A referência 6318ZZ C3 existe no CATMAT, item 311960.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 3 de 10">
+  <p class="olho">Por que importa</p>
+  <h2>Manutenção pesa muito, a janela é curta e o cadastro diverge do físico.</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><div class="numero">R$ 1,249 bi</div>de capex de manutenção da São Martinho em 9 meses da safra 2025/26</div>
+      <div class="painel"><div class="numero">195 → 250</div>usinas em operação no Centro-Sul entre a 1ª quinzena de abril e a 2ª de maio de 2026</div>
+      <div class="painel"><div class="numero">16%</div>menos itens físicos que o sistema registrava, em auditoria de uma empresa de energia dos EUA</div>
+    </div>
+    <p class="fonte">Fontes: São Martinho, Resultados 3T26 (09/02/2026) · UNICA (30/04 e 24/06/2026) · U.S. DOE OIG, DOE-OIG-24-30 (09/2024), setor elétrico. Números de cada fonte, não do setor inteiro.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 4 de 10">
+  <p class="olho">Como resolvem hoje</p>
+  <h2>Hoje a resposta depende de uma pessoa ou de um projeto longo.</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns: 1.15fr 1fr; align-items:start; column-gap:56px;">
+      <ul style="font-size:31px;">
+        <li><b>Busca por texto no ERP</b> e pergunta ao almoxarife que “conhece o estoque”</li>
+        <li><b>Arrumação pontual do cadastro:</b> Santa Catarina contratou a revisão de cerca de 49,7 mil itens, em até 12 meses</li>
+        <li><b>Módulos de governança do ERP</b>, como SAP MDG e IBM Maximo</li>
+      </ul>
+      <div class="painel roxo destaque"><b>O que falta:</b> uma resposta em português, com a fonte do fabricante, que diga “não sei” quando a evidência não basta.</div>
+    </div>
+    <p class="fonte">Fontes: Secretaria de Estado da Administração de SC · learning.sap.com · ibm.com/docs (Maximo, itens duplicados).</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 5 de 10">
+  <p class="olho">A solução</p>
+  <h2>A AgroParts lê o código, busca no catálogo e decide com regras.</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="fluxo grade g5" style="column-gap:40px;">
+      <div class="passo"><b>Entrada</b>Código, descrição ou foto da etiqueta</div>
+      <div class="passo"><b>Extração</b>Referência, fabricante, medidas</div>
+      <div class="passo"><b>Candidatos</b>CATMAT e catálogo do fabricante licenciado</div>
+      <div class="passo"><b>Regras</b>Atributo contraditório reprova</div>
+      <div class="passo"><b>Mapa</b>Código original preservado, decisão registrada</div>
+    </div>
+    <div class="grade g3">
+      <div class="painel resolve"><span class="tag resolve">Resolve</span><p style="margin-top:12px;">mesma referência, sem contradição</p></div>
+      <div class="painel revisa"><span class="tag revisa">Revisa</span><p style="margin-top:12px;">candidato plausível, falta evidência: uma pessoa decide</p></div>
+      <div class="painel recusa"><span class="tag recusa">Recusa</span><p style="margin-top:12px;">medida, folga ou vedação diferente</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 6 de 10">
+  <div class="tela" style="grid-template-columns: auto 1fr; gap:60px;">
+    <div class="imagens"><img src="img/desktop-02-falsa-semelhanca.jpg" alt="Protótipo mostra itens parecidos no grupo vermelho Parece, mas não é, com a proteção e a folga diferentes" style="height:830px;"></div>
+    <div class="texto" style="font-size:28px;">
+      <p class="olho">Protótipo funcionando</p>
+      <h2 style="font-size:44px; margin-bottom:18px;">Parecido não é igual: o protótipo recusa e explica por quê.</h2>
+      <p style="margin-bottom:22px;"><a class="link" href="https://agroparts.pages.dev/">agroparts.pages.dev</a></p>
+      <ul>
+        <li><b>396</b> itens públicos do CATMAT traduzidos em lote, com <b>28</b> grupos de duplicidade</li>
+        <li><b>90/90</b> pares falsos do gabarito recusados</li>
+        <li><b>14/14</b> pares de mesma peça encontrados</li>
+        <li><b>0</b> substituições automáticas: sempre vão para uma pessoa</li>
+      </ul>
+      <p class="fonte">Gabarito v1 pequeno, dados públicos, sem cadastro de cliente. Os números mostram que o motor aplica as regras. Eles não provam valor para uma usina.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 7 de 10">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">Por que confiar</p>
+  <h2>A AgroParts prefere recusar a errar.</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><h3>Diz o tipo de relação</h3>Mesma peça, referência cruzada, substituição sob condição, compatível com o equipamento ou só parecida.</div>
+      <div class="painel"><h3>Parecida nunca vira “mesma peça” sozinha</h3></div>
+      <div class="painel"><h3>Mostra a evidência</h3>Fonte, trecho e regra usada em cada decisão.</div>
+      <div class="painel roxo"><h3>O ERP continua igual</h3>Nada é apagado nem fundido.</div>
+      <div class="painel roxo"><h3>Dados de cada empresa separados</h3>Sem aprendizado entre clientes.</div>
+      <div class="painel roxo"><h3>Erro menor que 1%</h3>Nas decisões automáticas, medido por família. Se não alcançar, a AgroParts automatiza menos.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 8 de 10">
+  <p class="olho">Mercado</p>
+  <h2>O mercado de dados de materiais existe. O espaço da AgroParts é o agro em português.</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table>
+      <tr><th style="width:26%">Quem</th><th>O que mostra</th></tr>
+      <tr><td>Verusen (EUA)</td><td>Harmoniza materiais entre ERPs e plantas. Publica caso com 29 plantas e mais de 3 mil materiais possivelmente duplicados.</td></tr>
+      <tr><td>SAP MDG, IBM Maximo</td><td>Governança e busca de duplicidade dentro do ERP</td></tr>
+      <tr><td>Merit Data</td><td>Publica 100% de acerto em 85% dos registros de autopeças. Os outros 15% pedem revisão por pessoas.</td></tr>
+    </table>
+    <div class="painel roxo" style="font-size:31px;"><b>AgroParts:</b> material agroindustrial, português técnico, evidência de fabricante e recusa explícita.</div>
+    <p class="fonte">Números publicados pelas próprias empresas (verusen.com, meritdata-tech.com), consultados em 25/08/2026. Não são validação da AgroParts.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 9 de 10">
+  <p class="olho">Próximo passo</p>
+  <h2>Um piloto: uma planta, uma família de peça, de 10 a 50 itens reais.</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g2" style="font-size:32px;">
+      <div class="painel" style="font-size:32px;"><h3>O que medimos</h3><ul>
+        <li>Precisão e cobertura por família e tipo de relação</li>
+        <li>Tempo para localizar e revisar um item, antes e depois</li>
+        <li>Recusas corretas e decisões revertidas</li></ul></div>
+      <div class="painel roxo" style="font-size:32px;"><h3>Modelo de receita (hipótese)</h3><ul>
+        <li>Contrato entre empresas para conferir o cadastro, por planta ou por lote</li>
+        <li>Preço validado no piloto</li>
+        <li>Sem comissão sobre compra</li></ul></div>
+    </div>
+  </div>
+  <img class="ilus" src="modelo/ilustracoes/tomada.svg" alt="" style="left:1500px; top:800px; width:300px; height:200px;">
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · slide 10 de 10">
+  <img class="ilus chave-branca-canto" src="modelo/ilustracoes/chave-branca-canto.svg" alt="">
+  <div style="margin:auto 0; padding-left:110px; max-width:1620px;">
+    <p class="olho">O que pedimos</p>
+    <h2 style="font-size:58px; line-height:1.2; color:#fff;">Uma exportação autorizada do cadastro de uma família de peça e uma pessoa da manutenção ou do almoxarifado para revisar os resultados.</h2>
+    <div class="regua"></div>
+    <p class="sub" style="font-weight:700; color:var(--tinta);">Com isso, a equipe entrega o relatório medido. Sem esse dado, a equipe não promete economia.</p>
+    <p style="font-size:26px; margin-top:30px;"><span class="nome">Equipe AgroParts</span> · <span class="nome">Allana Iquegami</span> · <span class="nome">Gabrielle Longo</span> · <span class="nome">Alberto Bispo</span> · <span class="nome">Davi Almeida</span> · <span class="nome">Myke Santos</span> · <span class="nome">SI UEMG Frutal</span></p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
+  <p class="olho">Pitch · roteiro falado, parte 1 de 3</p>
+  <h2>Roteiro de 4 minutos e meio</h2>
+  <div class="regua"></div>
+  <p style="font-size:26px;">Fala calma, dentro do limite de 3 a 5 minutos. Os tempos são acumulados. Uso: encontro de 09/10/2026 e apresentação presencial de 21/10/2026.</p>
+  <div class="corpo">
+    <table class="compacta">
+      <tr><th style="width:9%">Tempo</th><th style="width:8%">Slide</th><th>Fala</th></tr>
+      <tr><td><b>0:00</b></td><td>1</td><td>Boa tarde. Somos a AgroParts, do curso de Sistemas de Informação da UEMG Frutal. Trabalhamos no desafio AGR08, Eficiência na Gestão de Peças. A nossa proposta cabe em uma frase: saber se é a mesma peça, com a fonte do fabricante, sem mexer no ERP.</td></tr>
+      <tr><td><b>0:20</b></td><td>2</td><td>Olhem estes três códigos. Os três descrevem um rolamento 6318 com vedação e folga C3. Será que são a mesma peça? No cadastro de uma usina isso acontece o tempo todo: cada planta e cada pessoa escreve a peça de um jeito. Uma folga ou uma vedação diferente muda a resposta. Por isso foto e texto parecido não bastam.</td></tr>
+      <tr><td><b>0:50</b></td><td>3</td><td>Por que isso importa? A São Martinho reportou mais de 1,2 bilhão de reais de capex de manutenção em nove meses de safra. A safra começa rápido: em poucas semanas o Centro-Sul passou de 195 para 250 usinas operando. E uma auditoria do governo americano, numa empresa de energia que já tinha sistema de ativos, encontrou 16% menos itens no almoxarifado do que o sistema dizia. Quando o cadastro não bate, alguém procura peça na hora errada.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
+  <p class="olho">Pitch · roteiro falado, parte 2 de 3</p>
+  <h2>Roteiro de 4 minutos e meio</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table class="compacta">
+      <tr><th style="width:9%">Tempo</th><th style="width:8%">Slide</th><th>Fala</th></tr>
+      <tr><td><b>1:30</b></td><td>4</td><td>Hoje a resposta depende de uma pessoa que conhece o estoque, ou de um projeto longo de saneamento. O Governo de Santa Catarina, por exemplo, contratou a revisão de quase 50 mil itens em até um ano. Os módulos de ERP ajudam, mas falta uma resposta em português, com a fonte do fabricante, que saiba dizer “não sei”.</td></tr>
+      <tr><td><b>2:00</b></td><td>5</td><td>A AgroParts recebe um código, uma descrição ou a foto da etiqueta. Ela extrai referência, fabricante e medidas. Busca candidatos no CATMAT, o catálogo público do governo, e no catálogo do fabricante quando a licença permite. Depois regras comparam os atributos. O resultado é uma de três decisões: resolve, revisa ou recusa. O código original fica intacto no ERP.</td></tr>
+      <tr><td><b>2:30</b></td><td>6</td><td>Isto não é maquete. O protótipo está no ar em agroparts.pages.dev, com dados públicos do CATMAT. <i>[Abra “Exemplos da apresentação” e clique em “2 Parece, mas não é”. No grupo vermelho, toque em “Ver por quê”.]</i> Este rolamento 6211ZZ tem sete itens de texto quase igual. O protótipo recusa todos e diz por quê: aqui, a folga é C3 e não CN. <i>[Abra “Exemplos da apresentação”, clique em “4 Cadastro inteiro” e depois em “Ler o cadastro inteiro”.]</i> O cadastro público inteiro, 396 itens, sai traduzido, com 28 grupos de duplicidade. No nosso gabarito, os 90 pares falsos foram recusados e os 14 pares de mesma peça foram encontrados. São dados públicos e um gabarito pequeno. O próximo passo é medir num cadastro real.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
+  <p class="olho">Pitch · roteiro falado, parte 3 de 3</p>
+  <h2>Roteiro de 4 minutos e meio</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table class="compacta">
+      <tr><th style="width:9%">Tempo</th><th style="width:8%">Slide</th><th>Fala</th></tr>
+      <tr><td><b>3:20</b></td><td>7</td><td>Por que confiar? Cada resposta diz o tipo de relação: mesma peça, referência cruzada, substituição sob condição, ou só parecida. Parecida nunca vira mesma peça sozinha. Cada decisão guarda a fonte e a regra. Nossa meta é erro menor que 1% nas decisões automáticas. Se não alcançarmos, a AgroParts automatiza menos e manda mais itens para revisão.</td></tr>
+      <tr><td><b>3:45</b></td><td>8</td><td>Esse mercado existe. A Verusen, nos Estados Unidos, harmoniza materiais entre ERPs. SAP e IBM têm módulos de duplicidade. O nosso espaço é o material agroindustrial em português, com evidência de fabricante e recusa explícita.</td></tr>
+      <tr><td><b>4:00</b></td><td>9</td><td>O próximo passo é um piloto: uma planta, uma família de peça e de 10 a 50 itens reais. Vamos medir precisão, cobertura e tempo de busca, antes e depois.</td></tr>
+      <tr><td><b>4:15</b></td><td>10</td><td>Para isso pedimos duas coisas: uma exportação autorizada do cadastro de uma família de peça e uma pessoa da manutenção ou do almoxarifado para revisar os resultados. Com isso entregamos o relatório medido. Obrigado.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
+  <img class="ilus chave-verde-topo" src="modelo/ilustracoes/chave-verde-topo.svg" alt="">
+  <p class="olho">Pitch · regras para o dia</p>
+  <h2>Quatro regras para a apresentação</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g2">
+      <div class="painel"><h3>Se a demonstração falhar</h3>Mostre as capturas do protótipo e diga que são capturas.</div>
+      <div class="painel"><h3>Sem promessa de economia</h3>Não fale em economia, compra evitada ou redução de parada. A equipe ainda não tem dado de piloto.</div>
+      <div class="painel roxo"><h3>Use o nome AgroParts</h3>Não use o codinome interno do repositório.</div>
+      <div class="painel roxo"><h3>Se perguntarem sobre clientes</h3>Diga que a equipe procura a primeira amostra autorizada.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · versão curta">
+  <p class="olho">Pitch · versão curta</p>
+  <h2>Versão de 60 segundos</h2>
+  <div class="regua" style="margin-bottom:30px;"></div>
+  <div class="corpo">
+    <div class="painel roxo" style="font-size:29px; line-height:1.42;">
+      <p>Somos a AgroParts, da UEMG Frutal, no desafio AGR08. No cadastro de uma usina, a mesma peça aparece com vários códigos e descrições. Ninguém sabe se ela já está no estoque.</p>
+      <p>A AgroParts lê o código, a descrição ou a etiqueta. Ela busca a peça no catálogo público CATMAT e no catálogo do fabricante, quando a licença permite. Regras comparam as medidas. A resposta é resolve, revisa ou recusa, sempre com a fonte. O ERP continua igual, sem nada apagado.</p>
+      <p>Nossa diferença é dizer “não sei” quando a evidência não basta. O protótipo já roda em <a href="https://agroparts.pages.dev/"><b>agroparts.pages.dev</b></a>, com dados públicos. O próximo passo é um piloto com uma planta e de 10 a 50 itens reais. Pedimos uma exportação autorizada do cadastro e uma pessoa da manutenção para revisar. Obrigado.</p>
+    </div>
+    <p class="fonte">Cerca de 130 palavras, ou 60 segundos em fala calma.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · fontes">
+  <p class="olho">Pitch · fontes</p>
+  <h2>Fontes dos números do pitch</h2>
+  <div class="regua"></div>
+  <img class="ilus livro" src="modelo/ilustracoes/livro.svg" alt="">
+  <ul class="fontes">
+    <li>São Martinho, Resultados 3º Trimestre, safra 2025/26, 09/02/2026: ri.saomartinho.com.br</li>
+    <li>UNICA, publicações de 30/04/2026 e 24/06/2026: unica.com.br</li>
+    <li>U.S. Department of Energy, Office of Inspector General, DOE-OIG-24-30, 24/09/2024: energy.gov</li>
+    <li>Secretaria de Estado da Administração de Santa Catarina, padronização do cadastro de materiais: sea.sc.gov.br</li>
+    <li>Verusen, caso de fabricante Fortune 500: verusen.com · Merit Data, caso de autopeças: meritdata-tech.com</li>
+    <li>CATMAT, item 311960: API de Dados Abertos do Compras.gov.br, consulta de 25/08/2026</li>
+    <li>Detalhes e comandos para refazer as consultas: pasta <code>docs/pesquisa/</code> do repositório github.com/shishiv/agroparts</li>
+  </ul>
+</section>
+
+<script>
+  // Número de página no PDF final: a página 1 do modelo vem antes do primeiro slide,
+  // e a página 2 do modelo vem logo depois dele (ver gerar-pdf-unico.sh).
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length + 2;
+  slides.forEach((slide, i) => {
+    const texto = slide.dataset.rodape;
+    if (!texto) return;
+    const pagina = i === 0 ? 2 : i + 3;
+    const rodape = document.createElement('div');
+    rodape.className = 'rodape';
+    rodape.innerHTML = `<span>AgroParts · AGR08 · ${texto}</span><span>${pagina} / ${total}</span>`;
+    slide.appendChild(rodape);
+  });
+
+  // ?checar=1 lista problemas de layout no elemento #checagem. O gerar-pdf-unico.sh para se houver algum.
+  // Regras: todo texto fica dentro da área útil do slide, dentro do painel ou célula que o contém,
+  // e longe das ilustrações; toda imagem carrega.
+  if (new URLSearchParams(location.search).has('checar')) window.addEventListener('load', async () => {
+    await document.fonts.ready;
+    const problemas = [];
+    const dentro = (r, c, folga = 1) => r.left >= c.left - folga && r.right <= c.right + folga && r.top >= c.top - folga && r.bottom <= c.bottom + folga;
+    const cruza = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+    slides.forEach((slide, i) => {
+      const pagina = i === 0 ? 2 : i + 3;
+      const s = slide.getBoundingClientRect();
+      const util = { left: s.left + 40, right: s.right - 40, top: s.top + 30, bottom: s.bottom - 70 };
+      const ilus = [...slide.querySelectorAll('.ilus')].map(el => el.getBoundingClientRect());
+      const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT);
+      for (let no = walker.nextNode(); no; no = walker.nextNode()) {
+        if (!no.textContent.trim() || no.parentElement.closest('.rodape')) continue;
+        const range = document.createRange();
+        range.selectNodeContents(no);
+        const caixa = no.parentElement.closest('.painel, .passo, td, th');
+        const c = caixa && caixa.getBoundingClientRect();
+        const trecho = no.textContent.trim().slice(0, 40);
+        for (const r of range.getClientRects()) {
+          if (!dentro(r, util)) problemas.push(`página ${pagina}: texto fora da área útil: "${trecho}"`);
+          if (c && !dentro(r, c)) problemas.push(`página ${pagina}: texto vaza da caixa: "${trecho}"`);
+          if (ilus.some(b => cruza(r, b))) problemas.push(`página ${pagina}: texto sobre ilustração: "${trecho}"`);
+        }
+      }
+      // Painéis, passos, tabelas e capturas também ficam acima do rodapé.
+      slide.querySelectorAll('.painel, .passo, table, img:not(.ilus)').forEach(el => {
+        if (ilus.some(b => cruza(el.getBoundingClientRect(), b))) problemas.push(`página ${pagina}: caixa sobre ilustração: ${el.className || el.tagName}`);
+        if (!dentro(el.getBoundingClientRect(), { ...util, bottom: s.bottom - 80 })) problemas.push(`página ${pagina}: caixa fora da área útil: ${el.className || el.tagName} "${el.textContent.trim().slice(0, 40)}"`);
+      });
+      const rodape = slide.querySelector('.rodape');
+      if (rodape && ilus.some(b => cruza(rodape.getBoundingClientRect(), b))) problemas.push(`página ${pagina}: rodapé sobre ilustração`);
+      slide.querySelectorAll('img:not(.ilus)').forEach(img => {
+        if (!img.complete || img.naturalWidth === 0) problemas.push(`página ${pagina}: imagem não carregou: ${img.getAttribute('src')}`);
+      });
+      slide.querySelectorAll('img.ilus').forEach(img => {
+        if (!img.complete || img.naturalWidth === 0) problemas.push(`página ${pagina}: ilustração não carregou: ${img.getAttribute('src')}`);
+      });
+    });
+    const saida = document.createElement('pre');
+    saida.id = 'checagem';
+    saida.textContent = [...new Set(problemas)].join('\n') || 'ok';
+    document.body.appendChild(saida);
+  });
+</script>
+</body>
+</html>
