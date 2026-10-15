@@ -12,6 +12,11 @@
   página 1 do modelo, slide 1 desta página (divisória da ideação), página 2 do modelo, slides 2 em diante.
   Público: avaliadores e pessoas do agro, sem formação técnica. Uma ideia por slide, frases curtas.
   ?versao=curta gera a versão curta: só os slides marcados com data-curto. O primeiro slide precisa estar nas duas versões.
+  ?entrega=1, 2, 3 ou 4 gera o PDF de uma entrega só: a divisória da entrega, os slides dela e os slides data-fim
+  (fontes e créditos). Cada divisória abre uma entrega. Os PDFs das entregas 2, 3 e 4 não têm o canvas de ideação.
+  data-entregas="completa curta 1 4" deixa um slide ou trecho só nos PDFs listados, para que as fontes e os créditos
+  citem só o que aparece em cada PDF.
+  Os slides data-pitch recebem "slide n de N" no rodapé, contados pelo script.
 -->
 
 <!-- ===================== 1. IDEAÇÃO ===================== -->
@@ -35,7 +40,7 @@
     <p class="frase">Se não está, alguém precisa comprar, e rápido.</p>
   </div>
   <img class="foto-lado" src="img/cenario/usina-uberaba.jpg" alt="Usina de açúcar e álcool perto de Uberaba, com chaminés soltando vapor">
-  <p class="credito">Usina perto de Uberaba (MG). Foto: Jonathan Wilkins, Wikimedia Commons, CC BY-SA 3.0</p>
+  <p class="credito">Usina perto de Uberaba (MG). Foto: Jonathan Wilkins, Wikimedia Commons, <span class="nome">CC BY-SA 3.0</span></p>
 </section>
 
 <section class="slide grande" data-rodape="Entrega 1 · Ideação">
@@ -44,11 +49,11 @@
   <div class="regua"></div>
   <div class="corpo">
     <div class="painel"><div class="numero">195 → 250</div>usinas em operação no Centro-Sul, entre o começo de abril e o fim de maio de 2026</div>
-    <p class="frase">É quando a manutenção mais precisa de peça.</p>
+    <p class="frase">É quando a manutenção mais precisa de peças.</p>
     <p class="fonte">Fonte: UNICA, 30/04 e 24/06/2026.</p>
   </div>
   <img class="foto-lado" src="img/cenario/colheita-piracicaba.jpg" alt="Colhedora de cana carregando um caminhão em Piracicaba">
-  <p class="credito">Colheita em Piracicaba (SP). Foto: Mariordo, Wikimedia Commons, CC BY 3.0</p>
+  <p class="credito">Colheita em Piracicaba (SP). Foto: Mariordo, Wikimedia Commons, <span class="nome">CC BY 3.0</span></p>
 </section>
 
 <section class="slide" data-rodape="Entrega 1 · Ideação" data-curto>
@@ -63,7 +68,7 @@
     <p class="fonte">Exemplo ilustrativo. Não vem de uma usina real.</p>
   </div>
   <img class="foto-lado" src="img/cenario/estoque-de-pecas.jpg" alt="Depósito cheio de peças de máquina no chão e nas prateleiras">
-  <p class="credito">Foto: Ikiwaner, Wikimedia Commons, CC BY-SA 3.0</p>
+  <p class="credito">Foto: Ikiwaner, Wikimedia Commons, <span class="nome">CC BY-SA 3.0</span></p>
 </section>
 
 <section class="slide" data-rodape="Entrega 1 · Ideação" data-curto>
@@ -73,11 +78,11 @@
   <div class="corpo">
     <div class="grade g2" style="gap:48px; align-items:start;">
       <figure style="margin:0;">
-        <img src="img/cenario/rolamento-aberto-6203.jpg" alt="Rolamento de esferas aberto, com as esferas à mostra" style="width:100%; height:500px; object-fit:cover; display:block;">
+        <img src="img/cenario/rolamento-aberto-6203.jpg" alt="Rolamento de esferas aberto, com as esferas à mostra" style="width:100%; height:470px; object-fit:cover; display:block;">
         <p class="frase" style="margin-top:20px;"><b>Aberto</b>, com as esferas à mostra</p>
       </figure>
       <figure style="margin:0;">
-        <img src="img/cenario/rolamento-com-tampa-6007.jpg" alt="Rolamento de esferas fechado com tampa de metal" style="width:100%; height:500px; object-fit:cover; display:block;">
+        <img src="img/cenario/rolamento-com-tampa-6007.jpg" alt="Rolamento de esferas fechado com tampa de metal" style="width:100%; height:470px; object-fit:cover; display:block;">
         <p class="frase" style="margin-top:20px;"><b>Fechado</b>, com tampa de metal</p>
       </figure>
     </div>
@@ -188,13 +193,13 @@
   <p class="olho">Começar pequeno</p>
   <h2>Um teste pequeno, com peças de verdade</h2>
   <div class="regua"></div>
-  <div class="corpo">
+  <div class="corpo junto">
     <div class="painel"><div class="numero">1 tipo de peça</div>o rolamento, que tem código e medidas padronizados</div>
     <div class="painel"><div class="numero">1 fabricante</div>com licença para usar o catálogo</div>
     <div class="painel roxo"><div class="numero">10 a 50 peças</div>reais, da lista de uma usina</div>
   </div>
   <img class="foto-lado" src="img/cenario/rolamento-aberto-6203.jpg" alt="Rolamento de esferas">
-  <p class="credito">Foto: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0</p>
+  <p class="credito">Foto: R. Henrik Nilsson, Wikimedia Commons, <span class="nome">CC BY 4.0</span></p>
 </section>
 
 <section class="slide" data-rodape="Entrega 2 · MVP">
@@ -314,7 +319,7 @@
     <div class="texto">
       <p class="olho" data-texto-curto="Exemplo: a lista inteira">Caso 4</p>
       <h2>A lista inteira de uma vez</h2>
-      <div class="painel" style="margin-bottom:22px;"><div class="numero">396</div>peças de uma lista pública, lidas em um clique</div>
+      <div class="painel" style="margin-bottom:22px;"><div class="numero">396</div>cadastros de uma lista pública, lidos em um clique</div>
       <div class="painel roxo"><div class="numero">28</div>grupos de cadastros repetidos</div>
     </div>
   </div>
@@ -329,7 +334,7 @@
     <div class="texto">
       <p class="olho">Caso 5</p>
       <h2>O cadastro se contradiz</h2>
-      <p class="frase">O texto diz 60 mm. O código diz 65 mm. A pessoa decide, e o sistema guarda quem decidiu e por quê.</p>
+      <p class="frase">O texto diz 60&nbsp;mm. O código diz 65&nbsp;mm. A pessoa decide, e o sistema guarda quem decidiu e por quê.</p>
     </div>
   </div>
 </section>
@@ -340,11 +345,11 @@
   <div class="corpo" style="margin-top:40px;">
     <div class="grade g2" style="gap:64px; align-items:start;">
       <figure style="margin:0;">
-        <img src="img/desktop-07-ocr-etiqueta.jpg" alt="Foto de etiqueta impressa lida com sucesso, marcada Leitura boa" style="width:100%; height:620px; object-fit:contain; background:#fff; display:block; border:8px solid #fff;">
+        <img src="img/desktop-07-ocr-etiqueta.jpg" alt="Foto de etiqueta impressa lida com sucesso, marcada Leitura boa" style="width:100%; height:600px; object-fit:contain; background:#fff; display:block; border:8px solid #fff;">
         <p class="frase" style="margin-top:22px;"><b>Etiqueta impressa:</b> leu.</p>
       </figure>
       <figure style="margin:0;">
-        <img src="img/desktop-08-ocr-foto-gravada.jpg" alt="Foto de rolamento com código gravado no metal, marcada Leitura ruim" style="width:100%; height:620px; object-fit:contain; background:#fff; display:block; border:8px solid #fff;">
+        <img src="img/desktop-08-ocr-foto-gravada.jpg" alt="Foto de rolamento com código gravado no metal, marcada Leitura ruim" style="width:100%; height:600px; object-fit:contain; background:#fff; display:block; border:8px solid #fff;">
         <p class="frase" style="margin-top:22px;"><b>Código gravado no metal:</b> não leu. Pede para digitar.</p>
       </figure>
     </div>
@@ -360,6 +365,7 @@
     <div class="texto">
       <p class="olho">No celular</p>
       <h2>Funciona no celular, no meio do almoxarifado</h2>
+      <p class="frase">A pessoa confere a peça ali mesmo, ao lado da prateleira.</p>
     </div>
   </div>
 </section>
@@ -399,24 +405,24 @@
   <div class="texto">
     <p class="olho">Entrega 4 de 4 · Workshop de 09/10/2026</p>
     <h1>Pitch</h1>
-    <p class="sub" data-texto-curto="Os pontos principais da apresentação.">Os 10 slides da apresentação e o que falar em cada um.</p>
+    <p class="sub" data-texto-curto="Os pontos principais da apresentação.">Os 13 slides da apresentação e o que falar em cada um.</p>
   </div>
   <img class="ilus grande" src="modelo/ilustracoes/aviao.svg" alt="">
 </section>
 
-<section class="slide" data-rodape="Entrega 4 · Pitch · slide 1 de 10" data-curto>
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch data-curto>
   <img class="ilus chave-branca-canto" src="modelo/ilustracoes/chave-branca-canto.svg" alt="">
   <div style="margin:auto 0; padding-left:110px;">
     <p class="olho">Rota Inova UEMG 2026 · Desafio AGR08 · Eficiência na Gestão de Peças</p>
     <h1 style="font-size:150px; line-height:1.05; margin:10px 0 26px;"><span style="color:var(--menta); font-weight:300;">{</span> AgroParts <span style="color:var(--menta); font-weight:300;">}</span></h1>
     <p style="font-size:48px; font-weight:700; max-width:1300px; line-height:1.25;">Antes de comprar, saber se a peça já está no estoque.</p>
     <div class="regua"></div>
-    <p style="font-size:26px; max-width:1300px;"><span class="nome">Allana Eduarda Braga Iquegami</span> · <span class="nome">Gabrielle Henrique Arruda Longo</span> · <span class="nome">Alberto Gabriel Rodrigues Bispo</span> · <span class="nome">Davi de Sousa Almeida</span> · <span class="nome">Myke Matos dos Santos</span></p>
+    <p style="font-size:26px; max-width:1530px;"><span class="nome">Allana Eduarda Braga Iquegami</span> · <span class="nome">Gabrielle Henrique Arruda Longo</span> · <span class="nome">Alberto Gabriel Rodrigues Bispo</span><br><span class="nome">Davi de Sousa Almeida</span> · <span class="nome">Myke Matos dos Santos</span></p>
     <p style="font-size:26px;">Sistemas de Informação · UEMG Frutal</p>
   </div>
 </section>
 
-<section class="slide grande" data-rodape="Entrega 4 · Pitch · slide 2 de 10">
+<section class="slide grande" data-rodape="Entrega 4 · Pitch" data-pitch>
   <p class="olho">O problema</p>
   <h2>A mesma peça tem vários nomes no estoque</h2>
   <div class="regua"></div>
@@ -427,23 +433,41 @@
     <p class="frase" style="margin-top:10px;">É a mesma peça? Ninguém tem certeza.</p>
   </div>
   <img class="foto-lado" src="img/cenario/estoque-de-pecas.jpg" alt="Depósito cheio de peças de máquina">
-  <p class="credito">Foto: Ikiwaner, Wikimedia Commons, CC BY-SA 3.0</p>
+  <p class="credito">Foto: Ikiwaner, Wikimedia Commons, <span class="nome">CC BY-SA 3.0</span></p>
 </section>
 
-<section class="slide grande" data-rodape="Entrega 4 · Pitch · slide 3 de 10">
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch>
+  <p class="olho">O problema</p>
+  <h2>E a peça chega de muitos jeitos</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="painel"><h3>Código do fabricante</h3>6318-2Z/C3</div>
+      <div class="painel"><h3>Código da usina</h3>Cadastro 100234</div>
+      <div class="painel"><h3>Descrição curta</h3>ROL 6318 ZZ C3</div>
+      <div class="painel roxo"><h3>Nome do dia a dia</h3>“o rolamento da bomba”</div>
+      <div class="painel roxo"><h3>Outra marca</h3>Parece a mesma. Uma pessoa confere.</div>
+      <div class="painel roxo"><h3>Foto da etiqueta</h3>Tirada no almoxarifado</div>
+    </div>
+    <p class="frase">A AgroParts aceita o código, a descrição ou a foto da etiqueta. Ninguém precisa fotografar peça por peça.</p>
+    <p class="fonte">Exemplo ilustrativo. Não vem de uma usina real.</p>
+  </div>
+</section>
+
+<section class="slide grande" data-rodape="Entrega 4 · Pitch" data-pitch>
   <p class="olho">Por que importa</p>
   <h2>Manutenção custa caro e a safra não espera</h2>
   <div class="regua"></div>
-  <div class="corpo">
+  <div class="corpo junto">
     <div class="painel"><h3>Numa usina</h3><div class="numero">R$ 1,2 bi</div>gastos da São Martinho com manutenção em 9 meses de safra</div>
     <div class="painel roxo"><h3>Em outro setor</h3><div class="numero">16%</div>menos peças na prateleira do que o sistema dizia, numa empresa de energia dos EUA</div>
     <p class="fonte">Fontes: São Martinho (02/2026) · Departamento de Energia dos EUA (2024).</p>
   </div>
   <img class="foto-lado" src="img/cenario/usina-uberaba.jpg" alt="Usina de açúcar e álcool perto de Uberaba">
-  <p class="credito">Usina perto de Uberaba (MG). Foto: Jonathan Wilkins, Wikimedia Commons, CC BY-SA 3.0</p>
+  <p class="credito">Usina perto de Uberaba (MG). Foto: Jonathan Wilkins, Wikimedia Commons, <span class="nome">CC BY-SA 3.0</span></p>
 </section>
 
-<section class="slide" data-rodape="Entrega 4 · Pitch · slide 4 de 10">
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch>
   <p class="olho">Como é hoje</p>
   <h2>Hoje, quem sabe é uma pessoa</h2>
   <div class="regua"></div>
@@ -455,7 +479,7 @@
   </div>
 </section>
 
-<section class="slide" data-rodape="Entrega 4 · Pitch · slide 5 de 10">
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch>
   <p class="olho">A solução</p>
   <h2>A AgroParts confere a peça e responde</h2>
   <div class="regua"></div>
@@ -474,7 +498,7 @@
       </div>
 </section>
 
-<section class="slide" data-rodape="Entrega 4 · Pitch · slide 6 de 10">
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch>
   <div class="tela">
     <div class="imagens"><img src="img/desktop-02-falsa-semelhanca.jpg" alt="Protótipo mostra itens parecidos no grupo vermelho Parece, mas não é" style="height:840px;"></div>
     <div class="texto">
@@ -486,7 +510,7 @@
   </div>
 </section>
 
-<section class="slide" data-rodape="Entrega 4 · Pitch · slide 7 de 10" data-curto>
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch data-curto>
   <p class="olho">Por que confiar</p>
   <h2>Na dúvida, a AgroParts não arrisca: chama uma pessoa</h2>
   <div class="regua"></div>
@@ -494,12 +518,12 @@
     <div class="grade g3">
       <div class="passo-ilus"><img src="modelo/ilustracoes/livro.svg" alt=""><b>Mostra a prova</b>Cada resposta diz de onde veio.</div>
       <div class="passo-ilus"><img src="modelo/ilustracoes/janelas.svg" alt=""><b>Não apaga nada</b>O sistema da usina continua igual.</div>
-      <div class="passo-ilus"><img src="modelo/ilustracoes/lampada.svg" alt=""><b>Erra pouco</b>A meta é menos de 1 erro em 100 respostas automáticas.</div>
+      <div class="passo-ilus"><img src="modelo/ilustracoes/lampada.svg" alt=""><b>Meta: errar pouco</b>Menos de 1 erro em 100 respostas automáticas.</div>
     </div>
   </div>
 </section>
 
-<section class="slide" data-rodape="Entrega 4 · Pitch · slide 8 de 10">
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch>
   <p class="olho">Mercado</p>
   <h2>Lá fora, isso já é negócio. No agro, em português, ainda não</h2>
   <div class="regua"></div>
@@ -515,7 +539,46 @@
   </div>
 </section>
 
-<section class="slide grande" data-rodape="Entrega 4 · Pitch · slide 9 de 10">
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch data-curto>
+  <p class="olho">Visão · desafio AGR08</p>
+  <h2>O que já funciona e o que vem depois</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g2" style="gap:48px; align-items:stretch;">
+      <div class="painel"><h3>Já funciona no protótipo, com rolamentos</h3>
+        <ul>
+          <li>Acha o rolamento pelo código, pela descrição ou pela foto da etiqueta</li>
+          <li>Encontra cadastros repetidos numa lista pública</li>
+          <li>Recusa o rolamento parecido que não é igual</li>
+        </ul>
+      </div>
+      <div class="painel roxo"><h3>Próximos passos: ainda não faz</h3>
+        <ul>
+          <li>Usar o catálogo do fabricante, com licença</li>
+          <li>Passar a resposta ao sistema da usina, que faz o pedido de compra</li>
+          <li>Responder a outros sistemas e a assistentes de IA</li>
+          <li>Atender outras peças, como bombas e vedações</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch>
+  <p class="olho">A equipe</p>
+  <h2>Cinco estudantes de Sistemas de Informação da UEMG Frutal</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="passo-ilus"><img src="modelo/ilustracoes/notebook-grande.svg" alt=""><b>Já temos experiência</b>Um de nós já criou soluções assim para clientes de móveis e de automóveis.</div>
+      <div class="passo-ilus"><img src="modelo/ilustracoes/livro.svg" alt=""><b>Começamos com dados públicos</b>Assim o protótipo saiu sem esperar o acesso a uma empresa.</div>
+      <div class="passo-ilus"><img src="modelo/ilustracoes/busca.svg" alt=""><b>Queremos o agro</b>Viemos ao Rota Inova para conhecer usinas e testar com elas.</div>
+    </div>
+    <p style="font-size:26px; margin:0;"><span class="nome">Allana Eduarda Braga Iquegami</span> · <span class="nome">Gabrielle Henrique Arruda Longo</span> · <span class="nome">Alberto Gabriel Rodrigues Bispo</span><br><span class="nome">Davi de Sousa Almeida</span> · <span class="nome">Myke Matos dos Santos</span></p>
+  </div>
+</section>
+
+<section class="slide grande" data-rodape="Entrega 4 · Pitch" data-pitch>
   <p class="olho">Próximo passo</p>
   <h2>Um teste com uma usina de verdade</h2>
   <div class="regua"></div>
@@ -524,10 +587,10 @@
     <div class="painel roxo"><div class="numero">10 a 50 peças</div>reais, conferidas antes e depois</div>
   </div>
   <img class="foto-lado" src="img/cenario/colheita-piracicaba.jpg" alt="Colheita mecanizada de cana">
-  <p class="credito">Colheita em Piracicaba (SP). Foto: Mariordo, Wikimedia Commons, CC BY 3.0</p>
+  <p class="credito">Colheita em Piracicaba (SP). Foto: Mariordo, Wikimedia Commons, <span class="nome">CC BY 3.0</span></p>
 </section>
 
-<section class="slide" data-rodape="Entrega 4 · Pitch · slide 10 de 10" data-curto>
+<section class="slide" data-rodape="Entrega 4 · Pitch" data-pitch data-curto>
   <img class="ilus chave-branca-canto" src="modelo/ilustracoes/chave-branca-canto.svg" alt="">
   <div style="margin:auto 0; padding-left:110px; max-width:1620px;">
     <p class="olho">O que pedimos</p>
@@ -537,12 +600,12 @@
       <li>A lista de um tipo de peça</li>
       <li>Uma pessoa do almoxarifado para conferir as respostas</li>
     </ul>
-    <p style="font-size:26px; margin-top:30px;"><span class="nome">Equipe AgroParts</span> · <span class="nome">Allana Iquegami</span> · <span class="nome">Gabrielle Longo</span> · <span class="nome">Alberto Bispo</span> · <span class="nome">Davi Almeida</span> · <span class="nome">Myke Santos</span> · <span class="nome">Sistemas de Informação, UEMG Frutal</span></p>
+    <p style="font-size:26px; margin-top:30px;"><span class="nome">Equipe AgroParts</span> · <span class="nome">Allana Iquegami</span> · <span class="nome">Gabrielle Longo</span> · <span class="nome">Alberto Bispo</span> · <span class="nome">Davi Almeida</span> · <span class="nome">Myke Santos</span><br>Sistemas de Informação, UEMG Frutal</p>
   </div>
 </section>
 
 <section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
-  <p class="olho">Roteiro para quem apresenta, parte 1 de 3</p>
+  <p class="olho">Roteiro para quem apresenta, parte 1 de 4</p>
   <h2>O que falar em cada slide</h2>
   <div class="regua"></div>
   <div class="corpo">
@@ -550,38 +613,52 @@
       <tr><th style="width:10%">Tempo</th><th style="width:9%">Slide</th><th>Fala</th></tr>
       <tr><td><b>0:00</b></td><td>1</td><td>Boa tarde. Somos a AgroParts, do curso de Sistemas de Informação da UEMG Frutal, no desafio AGR08, Eficiência na Gestão de Peças. A nossa ideia é simples: antes de comprar uma peça, saber se ela já está no estoque.</td></tr>
       <tr><td><b>0:20</b></td><td>2</td><td>Olhem estes três nomes. São do mesmo rolamento? Numa usina, cada pessoa cadastra a peça do seu jeito. Com o tempo, a mesma peça ganha vários nomes, e ninguém tem certeza do que já tem na prateleira.</td></tr>
-      <tr><td><b>0:45</b></td><td>3</td><td>Isso pesa. Só a São Martinho gastou mais de 1,2 bilhão de reais com manutenção em nove meses de safra. E uma auditoria nos Estados Unidos achou 16% menos peças na prateleira do que o sistema dizia. Quando a lista não bate, a peça falta na hora errada.</td></tr>
-      <tr><td><b>1:15</b></td><td>4</td><td>Hoje, quem resolve é a pessoa que conhece o estoque. Quando a lista cresce demais, a usina faz um mutirão para arrumar o cadastro. Depois de um tempo, a bagunça volta.</td></tr>
+      <tr><td><b>0:40</b></td><td>3</td><td>E não é só o nome. A peça chega como código do fabricante, código da usina, descrição curta, nome do dia a dia, outra marca ou foto da etiqueta. Cada fabricante organiza o catálogo do seu jeito. A AgroParts aceita o código, a descrição ou a foto, sem fotografar peça por peça.</td></tr>
+      <tr><td><b>1:05</b></td><td>4</td><td>Isso pesa. Só a São Martinho gastou mais de 1,2 bilhão de reais com manutenção em nove meses de safra. E uma auditoria nos Estados Unidos achou 16% menos peças na prateleira do que o sistema dizia. Quando a lista não bate, a peça falta na hora errada.</td></tr>
     </table>
   </div>
 </section>
 
 <section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
-  <p class="olho">Roteiro para quem apresenta, parte 2 de 3</p>
+  <p class="olho">Roteiro para quem apresenta, parte 2 de 4</p>
   <h2>O que falar em cada slide</h2>
   <div class="regua"></div>
   <div class="corpo">
     <table>
       <tr><th style="width:10%">Tempo</th><th style="width:9%">Slide</th><th>Fala</th></tr>
-      <tr><td><b>1:35</b></td><td>5</td><td>A AgroParts resolve isso. A pessoa digita o código, a descrição ou fotografa a etiqueta. A AgroParts procura a peça no catálogo, compara as medidas e responde: é a mesma peça, não é, ou precisa de uma pessoa para decidir.</td></tr>
-      <tr><td><b>2:00</b></td><td>6</td><td>Isto não é maquete: o site está no ar. <i>[Abra “Exemplos da apresentação” e o caso 2.]</i> Aqui há sete peças com nome quase igual. O sistema recusa todas e mostra a diferença de cada uma. No nosso teste, 90 de 90 peças parecidas foram recusadas.</td></tr>
-      <tr><td><b>2:30</b></td><td>7</td><td>Por que confiar? Porque, na dúvida, a AgroParts não arrisca: chama uma pessoa. Cada resposta mostra de onde veio, e nada é apagado do sistema da usina. A meta é errar menos de uma vez em cada cem respostas automáticas.</td></tr>
+      <tr><td><b>1:30</b></td><td>5</td><td>Hoje, quem resolve é a pessoa que conhece o estoque. Quando a lista cresce demais, a usina faz um mutirão para arrumar o cadastro. Depois de um tempo, a bagunça volta.</td></tr>
+      <tr><td><b>1:50</b></td><td>6</td><td>A AgroParts resolve isso. A pessoa digita o código, a descrição ou fotografa a etiqueta. A AgroParts procura a peça no catálogo, compara as medidas e responde: é a mesma peça, não é, ou precisa de uma pessoa para decidir.</td></tr>
+      <tr><td><b>2:10</b></td><td>7</td><td>Isto não é maquete: o site está no ar. <i>[Abra “Exemplos da apresentação” e o caso 2.]</i> Aqui há sete peças com nome quase igual. O sistema recusa todas e mostra a diferença de cada uma. No nosso teste, 90 de 90 peças parecidas foram recusadas.</td></tr>
     </table>
   </div>
 </section>
 
 <section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
-  <p class="olho">Roteiro para quem apresenta, parte 3 de 3</p>
+  <p class="olho">Roteiro para quem apresenta, parte 3 de 4</p>
   <h2>O que falar em cada slide</h2>
   <div class="regua"></div>
   <div class="corpo">
     <table>
       <tr><th style="width:10%">Tempo</th><th style="width:9%">Slide</th><th>Fala</th></tr>
-      <tr><td><b>2:55</b></td><td>8</td><td>Esse mercado existe. Lá fora, empresas como a Verusen, a SAP e a IBM já vendem soluções para organizar listas de peças. Para o agro brasileiro, em português, ainda não existe.</td></tr>
-      <tr><td><b>3:10</b></td><td>9</td><td>O próximo passo é um teste com uma usina de verdade: um tipo de peça, de 10 a 50 peças reais. Vamos medir quanto tempo se leva para achar a peça, antes e depois.</td></tr>
-      <tr><td><b>3:25</b></td><td>10</td><td>Para isso, procuramos uma usina parceira, que nos mostre a lista de um tipo de peça e indique uma pessoa do almoxarifado para conferir as respostas. Obrigado.</td></tr>
+      <tr><td><b>2:40</b></td><td>8</td><td>Por que confiar? Porque, na dúvida, a AgroParts não arrisca: chama uma pessoa. Cada resposta mostra de onde veio, e nada é apagado do sistema da usina. A meta é errar menos de uma vez em cada cem respostas automáticas.</td></tr>
+      <tr><td><b>3:00</b></td><td>9</td><td>Esse mercado existe. Lá fora, empresas como a Verusen, a SAP e a IBM já vendem soluções para organizar listas de peças. Para o agro brasileiro, em português, ainda não existe.</td></tr>
+      <tr><td><b>3:20</b></td><td>10</td><td>O desafio AGR08 pede mais, e sabemos o que falta. Hoje, com rolamentos, a AgroParts já acha a peça, encontra cadastros repetidos e recusa a parecida. Depois vêm o catálogo do fabricante e outras peças. E a resposta vai para o sistema da usina, que faz o pedido de compra.</td></tr>
     </table>
-    <p class="fonte">Cerca de 3 minutos e meio em fala calma, dentro do limite de 3 a 5 minutos. Se o site falhar, mostre as telas deste PDF e diga que são capturas. Não prometa economia: ainda não há teste com usina.</p>
+  </div>
+</section>
+
+<section class="slide" data-rodape="Entrega 4 · Pitch · roteiro">
+  <p class="olho">Roteiro para quem apresenta, parte 4 de 4</p>
+  <h2>O que falar em cada slide</h2>
+  <div class="regua"></div>
+  <div class="corpo">
+    <table>
+      <tr><th style="width:10%">Tempo</th><th style="width:9%">Slide</th><th>Fala</th></tr>
+      <tr><td><b>3:40</b></td><td>11</td><td>Somos cinco estudantes de Sistemas de Informação. Um de nós já criou soluções assim para clientes de móveis e de automóveis. Começamos com dados públicos para não esperar uma empresa. Agora queremos testar no agro.</td></tr>
+      <tr><td><b>4:00</b></td><td>12</td><td>O próximo passo é um teste com uma usina de verdade: um tipo de peça, de 10 a 50 peças reais. Vamos medir quanto tempo se leva para achar a peça, antes e depois.</td></tr>
+      <tr><td><b>4:20</b></td><td>13</td><td>Para isso, procuramos uma usina parceira, que nos mostre a lista de um tipo de peça e indique uma pessoa do almoxarifado para conferir as respostas. Obrigado.</td></tr>
+    </table>
+    <p class="fonte">Cerca de 4 minutos e meio em fala calma, dentro do limite de 3 a 5 minutos. Se o site falhar, mostre as telas deste PDF e diga que são capturas. Não prometa economia: ainda não há teste com usina.</p>
   </div>
 </section>
 
@@ -600,53 +677,75 @@
 
 <!-- ===================== FONTES E CRÉDITOS ===================== -->
 
-<section class="slide" data-rodape="Fontes e créditos">
+<section class="slide" data-rodape="Fontes e créditos" data-fim data-entregas="completa 1 3 4">
   <p class="olho">Fontes</p>
   <h2>De onde vêm os números</h2>
   <div class="regua"></div>
   <img class="ilus livro" src="modelo/ilustracoes/livro.svg" alt="">
   <ul class="fontes">
-    <li>São Martinho, resultados do 3º trimestre da safra 2025/26, 09/02/2026: ri.saomartinho.com.br</li>
-    <li>UNICA, publicações de 30/04/2026 e 24/06/2026: unica.com.br</li>
-    <li>Departamento de Energia dos EUA, auditoria DOE-OIG-24-30, 24/09/2024: energy.gov</li>
-    <li>Governo de Santa Catarina, organização do cadastro de materiais: sea.sc.gov.br</li>
-    <li>Verusen, SAP e IBM: verusen.com, learning.sap.com, ibm.com/docs, consultados em 25/08/2026</li>
-    <li>Dados do protótipo: catálogo público de materiais do governo federal (CATMAT) e compras públicas, Compras.gov.br</li>
+    <li data-entregas="completa 1 4">São Martinho, resultados do 3º trimestre da safra 2025/26, 09/02/2026: ri.saomartinho.com.br</li>
+    <li data-entregas="completa 1">UNICA, publicações de 30/04/2026 e 24/06/2026: unica.com.br</li>
+    <li data-entregas="completa 1 4">Departamento de Energia dos EUA, auditoria DOE-OIG-24-30, 24/09/2024: energy.gov</li>
+    <li data-entregas="completa 1">Governo de Santa Catarina, organização do cadastro de materiais: sea.sc.gov.br</li>
+    <li data-entregas="completa 4">Verusen, SAP e IBM: verusen.com, learning.sap.com, ibm.com/docs, consultados em 25/08/2026</li>
+    <li data-entregas="completa 3 4">Dados do protótipo: catálogo público de materiais do governo federal (CATMAT) e compras públicas, Compras.gov.br</li>
     <li>Detalhes e cálculos: repositório github.com/shishiv/agroparts</li>
   </ul>
 </section>
 
-<section class="slide" data-rodape="Fontes e créditos" data-curto>
+<section class="slide" data-rodape="Fontes e créditos" data-curto data-fim>
   <p class="olho">Créditos</p>
   <h2>Fotos e ilustrações</h2>
   <div class="regua"></div>
   <ul class="fontes">
-    <li>Usina perto de Uberaba (MG): Jonathan Wilkins, Wikimedia Commons, CC BY-SA 3.0. Foto recortada.</li>
-    <li>Colheita em Piracicaba (SP): Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0. Foto recortada.</li>
-    <li>Depósito de peças: Ikiwaner, Wikimedia Commons, CC BY-SA 3.0. Foto recortada.</li>
-    <li>Rolamentos: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0. Fotos recortadas. A mesma foto do rolamento 6203 aparece na tela da câmera.</li>
-    <li>Telas do protótipo: equipe AgroParts, 09/10/2026.</li>
-    <li>Ilustrações, capa e canvas de ideação: modelo do Canva da equipe.</li>
-    <li>Licenças: creativecommons.org/licenses/by/3.0, by/4.0 e by-sa/3.0. Lista completa em docs/rota-inova/img/cenario/CREDITOS.md.</li>
+    <li data-entregas="completa curta 1 4">Usina perto de Uberaba (MG): Jonathan Wilkins, Wikimedia Commons, CC BY-SA 3.0. Foto recortada.</li>
+    <li data-entregas="completa 1 4">Colheita em Piracicaba (SP): Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0. Foto recortada.</li>
+    <li data-entregas="completa curta 1 4">Depósito de peças: Ikiwaner, Wikimedia Commons, CC BY-SA 3.0. Foto recortada.</li>
+    <li data-entregas="completa curta 1 2 3">Rolamentos: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0, com recorte.<span data-entregas="completa 3"> A mesma foto do rolamento 6203 aparece na tela da câmera.</span></li>
+    <li data-entregas="completa curta 3 4">Telas do protótipo: equipe AgroParts, capturadas em 09/10/2026.</li>
+    <li data-entregas="completa curta 1">Ilustrações, capa e canvas de ideação: modelo do Canva da equipe.</li>
+    <li data-entregas="2 3 4">Ilustrações e capa: modelo do Canva da equipe.</li>
+    <li data-entregas="completa 1 4">Licença CC BY 3.0: creativecommons.org/licenses/by/3.0</li>
+    <li data-entregas="completa curta 1 2 3">Licença CC BY 4.0: creativecommons.org/licenses/by/4.0</li>
+    <li data-entregas="completa curta 1 4">Licença CC BY-SA 3.0: creativecommons.org/licenses/by-sa/3.0</li>
+    <li>Lista completa dos créditos no repositório, em <span class="nome">docs/rota-inova/img/cenario/CREDITOS.md</span>.</li>
   </ul>
 </section>
 
 <script>
-  // Número de página no PDF final: a página 1 do modelo vem antes do primeiro slide,
-  // e a página 2 do modelo vem logo depois dele (ver gerar-pdf-unico.sh).
-  const curta = new URLSearchParams(location.search).get('versao') === 'curta';
+  const parametros = new URLSearchParams(location.search);
+  const curta = parametros.get('versao') === 'curta';
+  const entrega = Number(parametros.get('entrega')) || 0; // 0 = as quatro entregas juntas
+  let atual = 0;
+  document.querySelectorAll('.slide').forEach(slide => {
+    if (slide.classList.contains('divisor')) atual += 1;
+    if (entrega && !slide.hasAttribute('data-fim') && atual !== entrega) slide.remove();
+  });
+  // data-entregas="completa curta 1 4": o slide ou trecho só aparece nos PDFs listados.
+  // completa e curta são os PDFs das quatro entregas juntas; 1 a 4 são os PDFs de uma entrega.
+  const pdf = entrega ? String(entrega) : (curta ? 'curta' : 'completa');
+  document.querySelectorAll('[data-entregas]').forEach(el => {
+    if (!el.dataset.entregas.split(' ').includes(pdf)) el.remove();
+  });
+  if (entrega) document.title += ` · entrega ${entrega}`;
   if (curta) {
     document.querySelectorAll('.slide:not([data-curto])').forEach(slide => slide.remove());
     document.querySelectorAll('[data-texto-curto]').forEach(el => { el.textContent = el.dataset.textoCurto; });
     document.title += ' · versão curta';
   }
+  // Número de página no PDF final (ver gerar-pdf-unico.sh): a página 1 do modelo vem antes do primeiro slide.
+  // A página 2 do modelo vem logo depois dele, menos nos PDFs das entregas 2, 3 e 4.
   const slides = document.querySelectorAll('.slide');
-  const total = slides.length + 2;
+  const comCanvas = entrega <= 1;
+  const total = slides.length + (comCanvas ? 2 : 1);
+  const paginaDo = i => comCanvas ? (i === 0 ? 2 : i + 3) : i + 2;
+  const pitch = [...slides].filter(slide => slide.hasAttribute('data-pitch'));
   slides.forEach((slide, i) => {
-    // Na versão curta, o pitch não tem os 10 slides, então o rodapé não diz "slide n de 10".
-    const texto = curta ? slide.dataset.rodape?.replace(/ · slide \d+ de 10$/, '') : slide.dataset.rodape;
+    let texto = slide.dataset.rodape;
     if (!texto) return;
-    const pagina = i === 0 ? 2 : i + 3;
+    // Na versão curta, o pitch não tem todos os slides, então o rodapé não diz "slide n de N".
+    if (slide.hasAttribute('data-pitch') && !curta) texto += ` · slide ${pitch.indexOf(slide) + 1} de ${pitch.length}`;
+    const pagina = paginaDo(i);
     const rodape = document.createElement('div');
     rodape.className = 'rodape';
     rodape.innerHTML = `<span>AgroParts · AGR08 · ${texto}</span><span>${pagina} / ${total}</span>`;
@@ -662,9 +761,9 @@
     const problemas = [];
     const dentro = (r, c, folga = 1) => r.left >= c.left - folga && r.right <= c.right + folga && r.top >= c.top - folga && r.bottom <= c.bottom + folga;
     const cruza = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
-    if (!slides[0].classList.contains('divisor')) problemas.push('o primeiro slide não é a divisória da ideação');
+    if (!slides[0].classList.contains('divisor')) problemas.push('o primeiro slide não é uma divisória');
     slides.forEach((slide, i) => {
-      const pagina = i === 0 ? 2 : i + 3;
+      const pagina = paginaDo(i);
       const s = slide.getBoundingClientRect();
       const util = { left: s.left + 40, right: s.right - 40, top: s.top + 30, bottom: s.bottom - 70 };
       const ilus = [...slide.querySelectorAll('.ilus, .foto-lado')].map(el => el.getBoundingClientRect());
@@ -693,6 +792,12 @@
       slide.querySelectorAll('.painel, .passo, .placa, .passo-ilus, .etiqueta, table, img:not(.ilus):not(.foto-lado)').forEach(el => {
         if (ilus.some(b => cruza(el.getBoundingClientRect(), b))) problemas.push(`página ${pagina}: caixa sobre ilustração: ${el.className || el.tagName}`);
         if (!dentro(el.getBoundingClientRect(), { ...util, bottom: s.bottom - 80 })) problemas.push(`página ${pagina}: caixa fora da área útil: ${el.className || el.tagName} "${el.textContent.trim().slice(0, 40)}"`);
+      });
+      slide.querySelectorAll('.corpo').forEach(corpo => {
+        const c = corpo.getBoundingClientRect();
+        const filhos = [...corpo.children].map(el => el.getBoundingClientRect()).filter(r => r.height);
+        const sobra = Math.round(Math.max(0, ...filhos.map(r => Math.max(c.top - r.top, r.bottom - c.bottom))));
+        if (sobra > 1) problemas.push(`página ${pagina}: o conteúdo passa ${sobra} px do espaço abaixo do título`);
       });
       const rodape = slide.querySelector('.rodape');
       if (rodape && ilus.some(b => cruza(rodape.getBoundingClientRect(), b))) problemas.push(`página ${pagina}: rodapé sobre ilustração`);

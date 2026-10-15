@@ -80,6 +80,9 @@ h2 { font-size: 56px; line-height: 1.12; max-width: 1560px; text-wrap: balance; 
 .branco .regua::after { background: var(--roxo); }
 .sub { font-size: 32px; max-width: 1500px; }
 .corpo { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+.corpo.junto { gap: 16px; }
+.corpo.junto .painel { padding: 20px 30px; }
+.corpo.junto .numero { margin-bottom: 6px; }
 
 /* Grades e painéis brancos */
 .grade { display: grid; gap: 28px; }
@@ -249,6 +252,6 @@ table.compacta td, table.compacta th { padding: 10px 16px; }
 .divisor .texto { position: absolute; left: 196px; top: 300px; width: 900px; }
 .divisor .olho { font-size: 30px; color: var(--azul); margin-bottom: 18px; }
 .divisor h1 { font-size: 128px; line-height: 1.02; }
-.divisor .sub { margin-top: 34px; font-size: 34px; max-width: 860px; }
+.divisor .sub { margin-top: 34px; font-size: 34px; max-width: 860px; text-wrap: pretty; }
 .divisor .grande { right: 60px; top: 80px; width: 760px; height: 920px; object-fit: contain; }
 .divisor .notebook-grande { left: 1143px; top: 55px; width: 777px; height: 947px; }
