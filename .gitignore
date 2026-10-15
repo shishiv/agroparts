@@ -3,3 +3,6 @@ dist/
 .wrangler/
 dados/local/
 *.log
+
+# Ilustrações recortadas do modelo do Canva: o gerar-pdf-unico.sh recria a cada execução.
+docs/rota-inova/modelo/ilustracoes/

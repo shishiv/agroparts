@@ -1,0 +1,254 @@
+/* Estilo do PDF único do Rota Inova, no visual do modelo do Canva da equipe.
+   Página 16:9 de 1440 x 810 pt. No navegador, 1440 pt = 1920 px, então cada slide mede 1920 x 1080 px.
+   Cores tiradas do modelo (modelo/modelo-canva.pdf). O modelo usa Agrandir nos títulos e Montserrat no texto.
+   Agrandir não tem licença livre, então os títulos usam Montserrat ExtraBold, que o modelo também usa na capa. */
+
+/* Arquivos estáticos: com a fonte variável, o Chrome grava fontes Type 3 no PDF. */
+@font-face { font-family: "Montserrat"; src: url("fontes/Montserrat-Light.ttf"); font-weight: 300; }
+@font-face { font-family: "Montserrat"; src: url("fontes/Montserrat-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "Montserrat"; src: url("fontes/Montserrat-Italic.ttf"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Montserrat"; src: url("fontes/Montserrat-SemiBold.ttf"); font-weight: 600; }
+@font-face { font-family: "Montserrat"; src: url("fontes/Montserrat-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Montserrat"; src: url("fontes/Montserrat-ExtraBold.ttf"); font-weight: 800; }
+
+@page { size: 1440pt 810pt; margin: 0; }
+
+:root {
+  --azul: #606cf5;     /* fundo dos slides */
+  --tinta: #0e073f;    /* títulos e texto sobre branco */
+  --menta: #05f1c7;
+  --roxo: #a531b4;
+  --lavanda: #9fa4eb;
+  --violeta: #321eb1;  /* títulos de bloco da página de ideação */
+  /* Decisões nas cores do modelo: menta resolve, lavanda revisa, roxo recusa. */
+  --resolve: #05f1c7;
+  --revisa: #9fa4eb;
+  --recusa: #a531b4;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font-family: "Montserrat", sans-serif; }
+
+.slide {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  break-after: page;
+  background: var(--azul);
+  color: #fff;
+  padding: 84px 140px 120px;
+  font-size: 30px;
+  line-height: 1.38;
+  display: flex;
+  flex-direction: column;
+}
+.slide:last-child { break-after: auto; }
+.slide.branco { background: #fff; color: var(--tinta); }
+
+p { margin: 0 0 18px; }
+b, strong { font-weight: 700; }
+code { font-family: "Montserrat", sans-serif; font-weight: 700; letter-spacing: 0.01em; }
+a { color: inherit; }
+
+/* Título, olho e régua pontilhada */
+.olho { margin: 0 0 14px; font-size: 26px; font-weight: 700; color: var(--menta); letter-spacing: 0.02em; }
+.branco .olho, .painel .olho { color: var(--azul); }
+h1, h2 { margin: 0; color: var(--tinta); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 56px; line-height: 1.12; max-width: 1560px; text-wrap: balance; }
+.nome { white-space: nowrap; }
+.regua {
+  position: relative;
+  flex: none;
+  width: 560px;
+  height: 4px;
+  margin: 30px 0 40px;
+  background: repeating-linear-gradient(90deg, #fff 0 9px, transparent 9px 12px);
+}
+.regua::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  top: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--menta);
+}
+.branco .regua { background: repeating-linear-gradient(90deg, var(--roxo) 0 9px, transparent 9px 12px); }
+.branco .regua::after { background: var(--roxo); }
+.sub { font-size: 32px; max-width: 1500px; }
+.corpo { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+
+/* Grades e painéis brancos */
+.grade { display: grid; gap: 28px; }
+.g2 { grid-template-columns: 1fr 1fr; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); }
+.g5 { grid-template-columns: repeat(5, 1fr); }
+.painel {
+  background: #fff;
+  color: var(--tinta);
+  padding: 28px 34px;
+  font-size: 31px;
+  line-height: 1.36;
+  border-top: 12px solid var(--menta);
+}
+.painel.roxo { border-top-color: var(--roxo); }
+.painel.lavanda { border-top-color: var(--lavanda); }
+.painel.sem-borda { border-top: 0; }
+.painel h3 { margin: 0 0 12px; font-size: 32px; line-height: 1.18; font-weight: 800; color: var(--violeta); }
+.painel p:last-child, .painel ul:last-child, .painel ol:last-child { margin-bottom: 0; }
+.destaque { font-size: 40px; line-height: 1.3; font-weight: 700; }
+.numero { font-size: 66px; line-height: 1.05; font-weight: 800; color: var(--azul); margin-bottom: 12px; }
+.claro { font-weight: 400; }
+
+ul, ol { margin: 0 0 18px; padding-left: 1.15em; }
+li { margin: 0 0 10px; }
+li::marker { color: var(--menta); font-weight: 800; }
+.painel li::marker, .branco li::marker { color: var(--roxo); }
+
+/* Passos de um fluxo */
+.fluxo { display: grid; gap: 34px; }
+.passo {
+  position: relative;
+  background: #fff;
+  color: var(--tinta);
+  padding: 22px 24px;
+  font-size: 26px;
+  line-height: 1.3;
+}
+.passo b { display: block; margin-bottom: 8px; font-size: 30px; font-weight: 800; color: var(--azul); }
+.passo:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -26px;
+  margin-top: -11px;
+  border: 11px solid transparent;
+  border-left: 16px solid var(--menta);
+}
+
+/* Decisões resolve, revisa, recusa */
+.tag {
+  display: inline-block;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-weight: 800;
+  color: var(--tinta);
+  line-height: 1.35;
+}
+.tag.resolve { background: var(--resolve); }
+.tag.revisa { background: var(--revisa); }
+.tag.recusa { background: var(--recusa); color: #fff; }
+.painel.resolve { border-top-color: var(--resolve); }
+.painel.revisa { border-top-color: var(--revisa); }
+.painel.recusa { border-top-color: var(--recusa); }
+
+/* Tabelas */
+/* Slides com muitos blocos curtos */
+.denso .painel { padding: 22px 28px; font-size: 26px; border-top-width: 10px; }
+.denso .painel h3 { font-size: 30px; margin-bottom: 8px; }
+.denso li { margin-bottom: 6px; }
+
+table { width: 100%; border-collapse: collapse; background: #fff; color: var(--tinta); font-size: 27px; line-height: 1.3; }
+th { background: var(--tinta); color: #fff; font-weight: 700; text-align: left; padding: 14px 20px; }
+td { padding: 14px 20px; vertical-align: top; border-bottom: 3px dotted var(--lavanda); }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+table.compacta { font-size: 26px; }
+table.compacta td, table.compacta th { padding: 10px 16px; }
+
+/* Capturas do protótipo */
+.tela { flex: 1; min-height: 0; display: grid; grid-template-columns: auto 1fr; gap: 64px; align-items: center; }
+.tela .imagens { display: flex; flex-direction: column; gap: 26px; align-items: flex-start; }
+.tela img { display: block; border: 8px solid #fff; box-shadow: 16px 16px 0 var(--tinta); }
+.tela .texto { font-size: 29px; }
+.tela .texto h2 { font-size: 48px; margin-bottom: 26px; }
+.tela .texto li { margin-bottom: 14px; }
+
+.fonte { font-size: 22px; line-height: 1.35; opacity: 0.95; }
+.fontes { max-width: 1240px; }
+.fontes li { font-size: 24px; margin-bottom: 10px; }
+.livro { left: 1460px; top: 640px; width: 340px; height: 215px; }
+.link { font-weight: 800; color: var(--tinta); background: var(--menta); padding: 2px 16px; text-decoration: none; }
+
+/* Ilustrações do modelo */
+.ilus { position: absolute; display: block; pointer-events: none; }
+.chave-verde-topo { left: 1753px; top: 0; width: 155px; height: 348px; }
+.slide:has(.chave-verde-topo) { padding-right: 190px; }
+.chave-branca-canto { left: 49px; top: 707px; width: 155px; height: 373px; }
+
+/* Fotos do cenário: metade direita do slide, com crédito sobre a foto */
+.foto-lado { position: absolute; top: 0; right: 0; width: 800px; height: 1080px; object-fit: cover; display: block; }
+.slide:has(.foto-lado) { padding-right: 880px; }
+.slide:has(.foto-lado) .rodape { right: 860px; }
+.credito {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  max-width: 760px;
+  padding: 4px 12px;
+  font-size: 17px;
+  line-height: 1.3;
+  color: #fff;
+  background: rgba(14, 7, 63, 0.75);
+}
+.legenda { font-size: 19px; line-height: 1.3; margin: 12px 0 0; }
+
+/* Slides de uma ideia só: título maior e pouco texto */
+.grande h2 { font-size: 66px; line-height: 1.1; }
+.grande .sub { font-size: 36px; line-height: 1.35; }
+.frase { font-size: 36px; line-height: 1.35; margin: 0; }
+
+/* Etiquetas de cadastro da mesma peça */
+.etiqueta { background: #fff; color: var(--tinta); padding: 18px 26px; border-left: 12px solid var(--roxo); }
+.etiqueta small { display: block; font-size: 22px; font-weight: 600; color: var(--azul); }
+.etiqueta b { font-size: 32px; font-weight: 800; letter-spacing: 0.01em; }
+
+/* As três respostas, como placas */
+.placa { padding: 30px 32px; font-size: 28px; line-height: 1.3; background: #fff; color: var(--tinta); border-top: 16px solid var(--menta); }
+.placa b { display: block; margin-bottom: 8px; font-size: 38px; font-weight: 800; line-height: 1.15; }
+.placa.sim b { color: #007a66; }
+.placa.talvez { border-top-color: var(--lavanda); }
+.placa.talvez b { color: var(--violeta); }
+.placa.nao { border-top-color: var(--roxo); }
+.placa.nao b { color: var(--roxo); }
+
+/* Passos com ilustração do modelo */
+.passo-ilus { background: #fff; color: var(--tinta); padding: 26px 26px 30px; font-size: 30px; line-height: 1.3; }
+.passo-ilus img { display: block; height: 170px; width: 100%; object-fit: contain; margin-bottom: 18px; }
+.passo-ilus b { display: block; font-size: 30px; font-weight: 800; color: var(--azul); margin-bottom: 6px; }
+.passo-ilus.alto { padding: 34px 30px 40px; font-size: 32px; }
+.passo-ilus.alto img { height: 300px; margin-bottom: 26px; }
+.passo-ilus.alto b { font-size: 34px; }
+.passo-ilus.curto { padding: 20px 24px 22px; }
+.passo-ilus.curto img { height: 120px; margin-bottom: 12px; }
+.passo-ilus.curto b { margin: 0; text-align: center; }
+
+/* Rodapé de cada slide, preenchido por script */
+.rodape {
+  position: absolute;
+  left: 140px;
+  right: 140px;
+  bottom: 36px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0.92;
+}
+.branco .rodape { color: var(--tinta); }
+.slide:has(.chave-branca-canto) .rodape { left: 250px; }
+
+/* Divisória de seção, no layout da página 7 do modelo */
+.divisor { background: #fff; color: var(--tinta); padding: 0; }
+.divisor .chave-roxa-canto { left: 33px; top: 701px; width: 155px; height: 379px; }
+.divisor .texto { position: absolute; left: 196px; top: 300px; width: 900px; }
+.divisor .olho { font-size: 30px; color: var(--azul); margin-bottom: 18px; }
+.divisor h1 { font-size: 128px; line-height: 1.02; }
+.divisor .sub { margin-top: 34px; font-size: 34px; max-width: 860px; }
+.divisor .grande { right: 60px; top: 80px; width: 760px; height: 920px; object-fit: contain; }
+.divisor .notebook-grande { left: 1143px; top: 55px; width: 777px; height: 947px; }
