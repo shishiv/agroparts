@@ -12,7 +12,11 @@ Cada entrega começa com uma divisória.
 
 - A capa e o canvas de ideação são as páginas 1 e 2 do modelo do Canva, sem redesenho.
 - Os outros slides vêm de [`entrega-unica.html`](entrega-unica.html), com o estilo de [`estilo-slides.css`](estilo-slides.css).
+- O público não é técnico. Cada slide tem uma ideia, frases curtas e uma foto, captura ou ilustração.
+- As fotos do cenário (usina, colheita, estoque, rolamentos) estão em [`img/cenario/`](img/cenario/), com autor e licença em [`img/cenario/CREDITOS.md`](img/cenario/CREDITOS.md). O último slide repete os créditos.
 - O link do MVP, https://agroparts.pages.dev/, é clicável no PDF.
+
+O PDF único resume as entregas. Os detalhes técnicos, as tabelas de medição e as fontes completas ficam nas entregas separadas, abaixo.
 
 [`entregas/agroparts-rota-inova-miniaturas.jpg`](entregas/agroparts-rota-inova-miniaturas.jpg) mostra todas as páginas em miniatura.
 
@@ -25,7 +29,7 @@ Cada entrega começa com uma divisória.
 
 O script recorta as ilustrações do modelo para `modelo/ilustracoes/` a cada execução, com [`modelo/extrair-ilustracoes.py`](modelo/extrair-ilustracoes.py).
 Essa pasta fica fora do Git, porque as ilustrações são elementos do Canva.
-Antes de imprimir, o script confere cada slide: texto fora do slide, texto vazando de um painel, texto ou painel sobre uma ilustração e imagem que não carrega.
+Antes de imprimir, o script confere cada slide: texto fora do slide, texto vazando de um painel, texto ou painel sobre uma ilustração ou foto, crédito fora da foto e imagem que não carrega.
 O modelo usa a fonte Agrandir, que não tem licença livre. Os slides novos usam Montserrat, que o modelo também usa e que tem licença livre ([`fontes/OFL.txt`](fontes/OFL.txt)).
 
 ## Entregas separadas

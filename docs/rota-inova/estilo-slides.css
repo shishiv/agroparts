@@ -79,7 +79,7 @@ h2 { font-size: 56px; line-height: 1.12; max-width: 1560px; text-wrap: balance; 
 .branco .regua { background: repeating-linear-gradient(90deg, var(--roxo) 0 9px, transparent 9px 12px); }
 .branco .regua::after { background: var(--roxo); }
 .sub { font-size: 32px; max-width: 1500px; }
-.corpo { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 28px; }
+.corpo { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
 
 /* Grades e painéis brancos */
 .grade { display: grid; gap: 28px; }
@@ -91,7 +91,7 @@ h2 { font-size: 56px; line-height: 1.12; max-width: 1560px; text-wrap: balance; 
   background: #fff;
   color: var(--tinta);
   padding: 28px 34px;
-  font-size: 28px;
+  font-size: 31px;
   line-height: 1.36;
   border-top: 12px solid var(--menta);
 }
@@ -179,6 +179,53 @@ table.compacta td, table.compacta th { padding: 10px 16px; }
 .chave-verde-topo { left: 1753px; top: 0; width: 155px; height: 348px; }
 .slide:has(.chave-verde-topo) { padding-right: 190px; }
 .chave-branca-canto { left: 49px; top: 707px; width: 155px; height: 373px; }
+
+/* Fotos do cenário: metade direita do slide, com crédito sobre a foto */
+.foto-lado { position: absolute; top: 0; right: 0; width: 800px; height: 1080px; object-fit: cover; display: block; }
+.slide:has(.foto-lado) { padding-right: 880px; }
+.slide:has(.foto-lado) .rodape { right: 860px; }
+.credito {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  max-width: 760px;
+  padding: 4px 12px;
+  font-size: 17px;
+  line-height: 1.3;
+  color: #fff;
+  background: rgba(14, 7, 63, 0.75);
+}
+.legenda { font-size: 19px; line-height: 1.3; margin: 12px 0 0; }
+
+/* Slides de uma ideia só: título maior e pouco texto */
+.grande h2 { font-size: 66px; line-height: 1.1; }
+.grande .sub { font-size: 36px; line-height: 1.35; }
+.frase { font-size: 36px; line-height: 1.35; margin: 0; }
+
+/* Etiquetas de cadastro da mesma peça */
+.etiqueta { background: #fff; color: var(--tinta); padding: 18px 26px; border-left: 12px solid var(--roxo); }
+.etiqueta small { display: block; font-size: 22px; font-weight: 600; color: var(--azul); }
+.etiqueta b { font-size: 32px; font-weight: 800; letter-spacing: 0.01em; }
+
+/* As três respostas, como placas */
+.placa { padding: 30px 32px; font-size: 28px; line-height: 1.3; background: #fff; color: var(--tinta); border-top: 16px solid var(--menta); }
+.placa b { display: block; margin-bottom: 8px; font-size: 38px; font-weight: 800; line-height: 1.15; }
+.placa.sim b { color: #007a66; }
+.placa.talvez { border-top-color: var(--lavanda); }
+.placa.talvez b { color: var(--violeta); }
+.placa.nao { border-top-color: var(--roxo); }
+.placa.nao b { color: var(--roxo); }
+
+/* Passos com ilustração do modelo */
+.passo-ilus { background: #fff; color: var(--tinta); padding: 26px 26px 30px; font-size: 30px; line-height: 1.3; }
+.passo-ilus img { display: block; height: 170px; width: 100%; object-fit: contain; margin-bottom: 18px; }
+.passo-ilus b { display: block; font-size: 30px; font-weight: 800; color: var(--azul); margin-bottom: 6px; }
+.passo-ilus.alto { padding: 34px 30px 40px; font-size: 32px; }
+.passo-ilus.alto img { height: 300px; margin-bottom: 26px; }
+.passo-ilus.alto b { font-size: 34px; }
+.passo-ilus.curto { padding: 20px 24px 22px; }
+.passo-ilus.curto img { height: 120px; margin-bottom: 12px; }
+.passo-ilus.curto b { margin: 0; text-align: center; }
 
 /* Rodapé de cada slide, preenchido por script */
 .rodape {
