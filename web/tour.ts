@@ -27,17 +27,15 @@ type Passo = {
 };
 export type Tour = { titulo: string; passos: Passo[] };
 
-const grupo = (chave: string, parte?: string): Alvo => () => {
-  const g = document.getElementById(`g-${chave}`)?.closest(".grupo");
-  return (parte ? g?.querySelector(parte) : g) ?? null;
-};
+/** Uma parte de um grupo da resposta; sem parte, o título e a frase do grupo. */
+const grupo = (chave: string, parte = ".grupo-cabeca"): Alvo => () =>
+  document.getElementById(`g-${chave}`)?.closest(".grupo")?.querySelector(parte) ?? null;
 const selos = `<span class="tour-selos">
   <span class="selo selo-resolve"><svg aria-hidden="true"><use href="#p-resolve" /></svg>Verde: é a peça</span>
   <span class="selo selo-revisa"><svg aria-hidden="true"><use href="#p-revisa" /></svg>Amarelo: falta conferir</span>
   <span class="selo selo-recusa"><svg aria-hidden="true"><use href="#p-recusa" /></svg>Vermelho: não é, ou o cadastro tem erro</span>
 </span>`;
-const ROTEIRO = "#roteiro > summary";
-const prova = (n: number): Alvo => `#roteiro li:nth-child(${n}) button`;
+const EXEMPLOS = ".exemplos-link";
 const DETALHES = "#resultado .ver-detalhes > summary";
 const DECIDIR = "#resultado .decidir > summary";
 
@@ -74,18 +72,18 @@ export const TOURS: Record<string, Tour> = {
         texto: "Aqui quem conhece a peça confirma ou corrige o sistema. O sistema nunca troca uma peça sozinho.",
       },
       {
-        alvo: ROTEIRO,
-        titulo: "As provas da apresentação",
-        texto: "Cada exemplo roda uma prova da apresentação. Depois de escolher, toque em Explicar para ver a prova passo a passo.",
+        alvo: EXEMPLOS,
+        titulo: "Os exemplos da apresentação",
+        texto: "Cada caso conta uma situação do almoxarifado, com fotos, passo a passo. Um toque roda o caso no protótipo.",
       },
       { alvo: ".rodape-nav", titulo: "Para conferir", texto: "O cadastro inteiro, quanto o protótipo acerta, as decisões e as fontes ficam aqui embaixo." },
       { alvo: "#como-funciona", titulo: "Para ver de novo", texto: "Toque em Como funciona quando quiser rever esta explicação ou outra prova." },
     ],
   },
   duplicado: {
-    titulo: "Prova 1: cadastro duplicado",
+    titulo: "Caso 1: dois cadastros, a mesma peça",
     passos: [
-      { alvo: prova(1), titulo: "Prova 1: cadastro duplicado", texto: "O mesmo rolamento foi cadastrado duas vezes, com códigos diferentes. Vamos procurar o código 311960." },
+      { titulo: "Caso 1: dois cadastros, a mesma peça", texto: "O mesmo rolamento foi cadastrado duas vezes, com códigos diferentes. Vamos procurar o código 311960." },
       {
         alvo: "#resultado .placa-faixa",
         titulo: "Placa verde",
@@ -102,9 +100,9 @@ export const TOURS: Record<string, Tour> = {
     ],
   },
   parece: {
-    titulo: "Prova 2: parece, mas não é",
+    titulo: "Caso 2: parece, mas não é",
     passos: [
-      { alvo: prova(2), titulo: "Prova 2: parece, mas não é", texto: "Textos quase iguais podem ser peças diferentes. Vamos procurar o código 317388." },
+      { titulo: "Caso 2: parece, mas não é", texto: "Textos quase iguais podem ser peças diferentes. Vamos procurar o código 317388." },
       {
         alvo: "#resultado .placa-faixa",
         titulo: "Placa verde",
@@ -113,15 +111,15 @@ export const TOURS: Record<string, Tour> = {
         rotuloAntes: "Procurar",
       },
       { alvo: grupo("parece"), titulo: "Grupo vermelho", texto: "Apareceram 7 cadastros com texto parecido. Eles parecem, mas não são a mesma peça." },
-      { alvo: grupo("parece", ".item .motivos"), titulo: "O detalhe que muda tudo", texto: "Cada item diz o que muda. Aqui mudam a proteção e a folga. Com isso, a peça é outra." },
+      { alvo: grupo("parece", ".item .ficha"), titulo: "O detalhe que muda tudo", texto: "Cada cadastro diz o que muda. Aqui mudam a proteção e a folga. Com isso, a peça é outra." },
       { alvo: grupo("mesma"), titulo: "Só este é igual", texto: "Só 1 é a mesma peça: este outro código tem a mesma especificação." },
       { titulo: "Parecido não é igual", texto: "O sistema nunca chama de igual o que só parece. Ele recusa e diz o motivo." },
     ],
   },
   marca: {
-    titulo: "Prova 3: outra marca",
+    titulo: "Caso 3: outra marca, mesma medida",
     passos: [
-      { alvo: prova(3), titulo: "Prova 3: outra marca", texto: "Um cadastro cita duas marcas para o mesmo rolamento. Vamos procurar o código 624270." },
+      { titulo: "Caso 3: outra marca, mesma medida", texto: "Um cadastro cita duas marcas para o mesmo rolamento. Vamos procurar o código 624270." },
       {
         alvo: "#resultado .placa-faixa",
         titulo: "Placa amarela",
@@ -137,9 +135,9 @@ export const TOURS: Record<string, Tour> = {
     ],
   },
   lote: {
-    titulo: "Prova 4: cadastro inteiro",
+    titulo: "Caso 4: a lista inteira de uma vez",
     passos: [
-      { alvo: prova(4), titulo: "Prova 4: cadastro inteiro", texto: "O sistema lê o cadastro inteiro de uma vez, não só uma peça." },
+      { titulo: "Caso 4: a lista inteira de uma vez", texto: "O sistema lê o cadastro inteiro de uma vez, não só uma peça." },
       {
         alvo: "#rodar-lote",
         titulo: "Ler o cadastro inteiro",
@@ -160,9 +158,9 @@ export const TOURS: Record<string, Tour> = {
     ],
   },
   pessoa: {
-    titulo: "Prova 5: decisão de uma pessoa",
+    titulo: "Caso 5: o cadastro se contradiz",
     passos: [
-      { alvo: prova(5), titulo: "Prova 5: decisão de uma pessoa", texto: "Às vezes o próprio cadastro tem um erro. Vamos procurar o código 472447." },
+      { titulo: "Caso 5: o cadastro se contradiz", texto: "Às vezes o próprio cadastro tem um erro. Vamos procurar o código 472447." },
       {
         alvo: "#resultado .placa-faixa",
         titulo: "Placa vermelha",
@@ -179,9 +177,9 @@ export const TOURS: Record<string, Tour> = {
     ],
   },
   fornecedor: {
-    titulo: "Texto de fornecedor",
+    titulo: "Caso 6: texto curto de fornecedor",
     passos: [
-      { alvo: prova(6), titulo: "Texto de fornecedor", texto: "Fornecedor escreve curto e do seu jeito. Vamos procurar o texto BLK Modelo 6205-2rs." },
+      { titulo: "Caso 6: texto curto de fornecedor", texto: "Fornecedor escreve curto e do seu jeito. Vamos procurar o texto BLK Modelo 6205-2rs." },
       {
         alvo: "#resultado .placa-faixa",
         titulo: "Placa verde",
@@ -196,11 +194,11 @@ export const TOURS: Record<string, Tour> = {
     ],
   },
   foto: {
-    titulo: "Foto da etiqueta",
+    titulo: "Caso 7: a foto serve para ler a etiqueta",
     passos: [
       {
         alvo: '#form-resolver .modos label:has(input[value="ocr"])',
-        titulo: "Foto da etiqueta",
+        titulo: "Caso 7: a foto serve para ler a etiqueta",
         texto: "Também dá para fotografar a etiqueta da peça, sem digitar nada.",
       },
       {

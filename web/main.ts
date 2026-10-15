@@ -6,18 +6,21 @@ import "@fontsource/barlow/latin-600.css";
 import "@fontsource/barlow/latin-700.css";
 import "@fontsource/barlow-semi-condensed/latin-600.css";
 import "@fontsource/barlow-semi-condensed/latin-700.css";
-import type { Decisao, DecisaoHumana, Relacao, Resposta } from "../src/motor/tipos";
+import type { Decisao, DecisaoHumana, EspecificacaoTecnica, Relacao, Resposta } from "../src/motor/tipos";
 import type { Medicao, MedicaoIdentidade, MedicaoTraducao, ResultadoLote } from "../src/motor/lote";
+import { casoPorChave, desenharCaso, desenharIndice, ordemDoCaso, type Caso } from "./casos";
+import { esc, ficha, lista, link, pecaComDesenho, picto, rolamentoDoCadastro, selo } from "./html";
 import {
   agrupar,
-  alvosTexto,
   alvoTexto,
   APLICABILIDADE,
+  comparar,
   descreverPeca,
   estratoTexto,
   explicar,
   frases,
   leituraEmPalavras,
+  motivoDaComparacao,
   origemTexto,
   SELO,
   semelhancaDaRelacao,
@@ -28,15 +31,8 @@ import {
 import { iniciarTours } from "./tour";
 
 const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
-const esc = (v: unknown) =>
-  String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 const pct = (n: number, d: number) => (d ? `${Math.round((100 * n) / d)}%` : "não se aplica");
 const fracao = (n: number, d: number) => `<strong>${n} de ${d}</strong> <span class="pct">${d ? `(${pct(n, d)})` : ""}</span>`;
-const picto = (id: string, classe = "") => `<svg class="${classe}" aria-hidden="true"><use href="#p-${id}" /></svg>`;
-const selo = (d: Decisao, riscado = false) =>
-  `<span class="selo selo-${d}${riscado ? " selo-riscado" : ""}">${picto(d)}${SELO[d]}</span>`;
-const lista = (itens: string[], classe = "motivos") => (itens.length ? `<ul class="${classe}">${itens.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : "");
-const link = (url: string, texto: string) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(texto)}</a>` : esc(texto));
 
 async function api<T>(caminho: string, corpo?: unknown): Promise<T> {
   const r = await fetch(caminho, corpo === undefined ? undefined : { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(corpo) });
@@ -46,24 +42,88 @@ async function api<T>(caminho: string, corpo?: unknown): Promise<T> {
 }
 
 // ---------- Telas ----------
-// Identificar é a tela principal; as outras ficam no rodapé, para quem quer conferir.
-const ABAS = ["resolver", "lote", "medicao", "revisoes", "fontes"];
-function mostrarAba(nome: string) {
+// Identificar é a tela principal. Os exemplos da apresentação ficam a um toque dela, em #casos;
+// as telas de conferência ficam no rodapé, para quem quer conferir.
+const ABAS = ["resolver", "casos", "lote", "medicao", "revisoes", "fontes"];
+const TITULO = document.title;
+function mostrarAba(rota: string, focar = false) {
+  const [nome, sub = ""] = rota.split("/");
   const aba = ABAS.includes(nome) ? nome : "resolver";
   for (const a of ABAS) $(`#aba-${a}`).hidden = a !== aba;
-  if (aba !== "resolver") $<HTMLDetailsElement>("#roteiro").open = false;
   document.querySelectorAll<HTMLAnchorElement>(".rodape-nav a").forEach((l) => {
     if (l.dataset.aba === aba) l.setAttribute("aria-current", "page");
     else l.removeAttribute("aria-current");
   });
+  document.title = TITULO;
+  if (aba === "casos") desenharCasos(sub, focar);
+  if (aba === "lote") ajustarVoltaDoLote();
   if (aba === "medicao") carregarMedicao();
   if (aba === "revisoes") desenharRevisoes();
   if (aba === "fontes") carregarFontes();
 }
 window.addEventListener("hashchange", () => {
-  mostrarAba(location.hash.slice(1));
+  mostrarAba(location.hash.slice(1), true);
   window.scrollTo(0, 0);
 });
+
+// ---------- Exemplos da apresentação ----------
+/** O caso que a pessoa rodou a partir da página de casos; a resposta oferece a volta para ele. */
+let casoAtivo: Caso | null = null;
+
+function desenharCasos(chave: string, focar: boolean) {
+  const caso = casoPorChave(chave);
+  $("#aba-casos").innerHTML = caso ? desenharCaso(caso) : desenharIndice();
+  if (caso) document.title = `${ordemDoCaso(caso)}: ${caso.titulo} · AgroParts`;
+  // Ao trocar de tela pelo link, o leitor de tela começa pelo título da tela nova.
+  if (focar) $("#t-casos").focus({ preventScroll: true });
+}
+$("#aba-casos").addEventListener("click", (ev) => {
+  const b = (ev.target as HTMLElement).closest<HTMLButtonElement>("[data-rodar]");
+  const caso = b && casoPorChave(b.dataset.rodar!);
+  if (caso) rodarCaso(caso);
+});
+
+// "Como funciona" também leva aos exemplos; o menu fecha ao trocar de tela.
+$(".menu-casos").addEventListener("click", () => $("#menu-tours").hidePopover());
+
+const voltarAoCaso = () =>
+  casoAtivo ? `<a class="voltar voltar-caso" href="#casos/${casoAtivo.chave}">${picto("seta")}Voltar ao caso: ${esc(casoAtivo.titulo)}</a>` : "";
+
+/** Um toque roda o caso no protótipo, pelos mesmos caminhos que a pessoa usaria. */
+async function rodarCaso(c: Caso) {
+  const r = c.rodar;
+  // O botão some com a tela do caso; o foco vai para a resposta, e "Voltar ao caso" fica logo acima dela.
+  const focar = (seletor: string) => document.querySelector<HTMLElement>(seletor)?.focus({ preventScroll: true });
+  // A tela nova aparece já, sem esperar o evento de troca de endereço, para poder receber o foco.
+  const ir = (rota: string) => {
+    location.hash = rota;
+    mostrarAba(rota);
+  };
+  if (r.tipo === "lote") {
+    casoAtivo = c;
+    ir("lote");
+    focar("#t-lote");
+    return lerLote();
+  }
+  if (r.tipo === "foto") {
+    casoAtivo = c;
+    ir("resolver");
+    escolherModo("ocr");
+    $("#resultado").innerHTML = voltarAoCaso();
+    focar("#ocr-estado");
+    await lerFotoExemplo(r.url);
+    const texto = $<HTMLTextAreaElement>("#texto-ocr").value.trim();
+    if (texto) await resolver("ocr", texto);
+  } else await rodarExemplo(`${r.tipo}|${r.texto}`, true, c);
+  focar("#placa-titulo");
+}
+
+function ajustarVoltaDoLote() {
+  const voltar = $<HTMLAnchorElement>("#lote-voltar");
+  const doCaso = casoAtivo?.rodar.tipo === "lote";
+  voltar.href = doCaso ? `#casos/${casoAtivo!.chave}` : "#resolver";
+  voltar.lastChild!.textContent = doCaso ? `Voltar ao caso: ${casoAtivo!.titulo}` : "Identificar uma peça";
+}
 
 // ---------- Identificar ----------
 type Tipo = "codigo" | "descricao" | "ocr";
@@ -83,22 +143,28 @@ function ajustarModo() {
 }
 document.querySelectorAll('input[name="tipo"]').forEach((r) => r.addEventListener("change", ajustarModo));
 
-function itemRelacao(r: Relacao): string {
+/**
+ * Um cadastro encontrado. Quando o motor comparou as duas especificações, o desenho e a ficha
+ * mostram de cara se é a mesma peça e, se não é, o que muda.
+ */
+function itemRelacao(r: Relacao, e: EspecificacaoTecnica | null): string {
   const sem = semelhancaDaRelacao(r);
-  const motivos = frases(r.motivos);
+  const comparacao = comparar(e, r);
+  const motivos = frases(comparacao ? r.motivos.filter((m) => !motivoDaComparacao(m)) : r.motivos);
   const condicoes = frases(r.condicoes ?? []).filter((c) => c !== "Cadastro duplicado.");
   const fontes = r.evidencias.map((e) => `<li>${link(e.url, e.fonte)}${e.trecho ? `: <q>${esc(e.trecho)}</q>` : ""}</li>`).join("");
-  return `<li class="item">
+  return `<li class="item${comparacao || r.tipo !== "SAME_AS" ? " com-desenho" : ""}">
+    ${comparacao || r.tipo !== "SAME_AS" ? rolamentoDoCadastro(comparacao) : `<span class="rol-vazio"></span>`}
     <div class="item-alvo">
       <span class="item-codigo">${esc(alvoTexto(r.alvo))}</span>
       ${r.condicoes?.includes("duplicidade exata") ? `<span class="etiqueta">Cadastro duplicado</span>` : sem !== null ? `<span class="etiqueta">${semelhancaEmPalavras(sem)}</span>` : ""}
     </div>
     <div class="item-corpo">
-      ${r.alvo_texto && r.tipo !== "CROSS_REFERENCE" && r.tipo !== "INTERCHANGEABLE_FOR" ? `<p class="item-texto">${esc(r.alvo_texto)}</p>` : ""}
-      ${lista(motivos)}
+      ${comparacao ? ficha(comparacao, motivos, r.decisao === "revisa") : lista(motivos)}
       ${condicoes.length ? lista(condicoes, "condicoes") : ""}
-      <details class="detalhes"><summary>Ver fonte e registro</summary>
+      <details class="detalhes"><summary>${r.alvo_texto && r.tipo !== "CROSS_REFERENCE" && r.tipo !== "INTERCHANGEABLE_FOR" ? "Ver o texto do cadastro e a fonte" : "Ver fonte e registro"}</summary>
         <div class="detalhes-corpo">
+          ${r.alvo_texto && r.tipo !== "CROSS_REFERENCE" && r.tipo !== "INTERCHANGEABLE_FOR" ? `<div><h3>Texto do cadastro, sem alteração</h3><blockquote class="original">${esc(r.alvo_texto)}</blockquote></div>` : ""}
           ${fontes ? `<div><h3>Fonte</h3><ul class="fontes-regra">${fontes}</ul></div>` : ""}
           <div><h3>Como o sistema registrou</h3>${lista([`Relação ${r.tipo}, decisão ${r.decisao}`, ...r.motivos, ...(r.condicoes ?? [])], "registro")}</div>
         </div>
@@ -107,14 +173,16 @@ function itemRelacao(r: Relacao): string {
   </li>`;
 }
 
-function blocoGrupo(g: Grupo): string {
+/** Um grupo por pergunta, com cada cadastro à vista: nada de abrir detalhe para saber se é a mesma peça. */
+function blocoGrupo(g: Grupo, e: EspecificacaoTecnica | null): string {
   return `<section class="grupo grupo-${g.nivel}" aria-labelledby="g-${g.chave}">
     ${picto(g.nivel, "grupo-picto")}
     <div class="grupo-corpo">
-      <h3 id="g-${g.chave}"><span class="grupo-n">${g.relacoes.length}</span> ${esc(g.titulo)}</h3>
-      <p class="grupo-alvos">${esc(alvosTexto(g.relacoes))}</p>
-      <p class="grupo-explica">${esc(g.explicacao)}</p>
-      <details class="detalhes"><summary>Ver por quê</summary><ul class="itens">${g.relacoes.map(itemRelacao).join("")}</ul></details>
+      <div class="grupo-cabeca">
+        <h3 id="g-${g.chave}">${esc(g.titulo)} <span class="grupo-n">${g.relacoes.length} ${g.relacoes.length === 1 ? "cadastro" : "cadastros"}</span></h3>
+        <p class="grupo-explica">${esc(g.explicacao)}</p>
+      </div>
+      <ul class="itens">${g.relacoes.map((r) => itemRelacao(r, e)).join("")}</ul>
     </div>
   </section>`;
 }
@@ -126,20 +194,20 @@ function desenharResposta(r: Resposta) {
   const grupos = agrupar(r.relacoes);
   const origem = o.origem === "CATMAT" ? `Cadastro original, código ${o.codigo}` : o.origem === "OCR" ? "Texto lido na foto" : "Texto digitado";
   const motivos = lista(frases(r.motivos), v.nivel === "resolve" ? "motivos" : "motivos forte");
-  // A resposta vem primeiro: a placa, a peça e o que mais apareceu. O resto fica a um toque.
-  $("#resultado").innerHTML = `
+  // A resposta vem primeiro: a placa, a peça e o que mais apareceu, cadastro por cadastro. O resto fica a um toque.
+  $("#resultado").innerHTML = `${voltarAoCaso()}
   <section class="placa placa-${v.nivel} nova" aria-labelledby="placa-titulo">
     <div class="placa-faixa">
       ${picto(v.nivel, "placa-picto")}
       <div>
-        <h2 class="placa-titulo" id="placa-titulo">${esc(v.titulo)}</h2>
+        <h2 class="placa-titulo" id="placa-titulo" tabindex="-1">${esc(v.titulo)}</h2>
         <p class="placa-frase">${esc(v.frase)}</p>
       </div>
     </div>
     <div class="placa-corpo">
-      ${e ? `<p class="peca">${esc(descreverPeca(e))}</p>` : ""}
+      ${e ? pecaComDesenho(e, descreverPeca(e)) : ""}
       ${v.nivel === "resolve" ? "" : motivos}
-      ${grupos.length ? `<div class="evidencia">${grupos.map(blocoGrupo).join("")}</div>` : ""}
+      ${grupos.length ? `<div class="evidencia">${grupos.map((g) => blocoGrupo(g, e)).join("")}</div>` : ""}
 
       <div class="resposta-mais">
       <details class="detalhes ver-detalhes"><summary>Ver detalhes da resposta</summary>
@@ -213,33 +281,17 @@ function desenharResposta(r: Resposta) {
   $("#form-revisao").addEventListener("submit", registrarRevisao);
 }
 
-/** Marca o exemplo escolhido no roteiro e oferece a explicação passo a passo dele. */
-function marcarRoteiro(valor: string | null) {
-  let atual: HTMLButtonElement | undefined;
-  document.querySelectorAll<HTMLButtonElement>("#roteiro [data-prova]").forEach((b) => {
-    const escolhido = valor !== null && (b.dataset.exemplo ?? b.dataset.exemploFoto) === valor;
-    b.setAttribute("aria-pressed", String(escolhido));
-    if (escolhido) atual = b;
-  });
-  const explicar = $<HTMLButtonElement>("#explicar-prova");
-  explicar.hidden = !atual;
-  if (atual) {
-    explicar.dataset.tour = atual.dataset.prova;
-    explicar.textContent = `Explicar passo a passo: ${atual.lastElementChild!.textContent}`;
-  }
-}
-
 async function resolver(tipo: Tipo, texto: string, rolar = true) {
   const botao = $<HTMLButtonElement>("#form-resolver .primario");
   botao.disabled = true;
-  $("#resultado").innerHTML = `<p class="estado" style="margin-top:2rem">Procurando a peça no cadastro…</p>`;
+  $("#resultado").innerHTML = `${voltarAoCaso()}<p class="estado" style="margin-top:2rem">Procurando a peça no cadastro…</p>`;
   try {
     const resposta = await api<Resposta>("/api/resolver", { tipo, texto });
     ultima = { tipo, texto, resposta };
     desenharResposta(resposta);
     if (rolar) $("#resultado").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   } catch (e) {
-    $("#resultado").innerHTML = `<p class="erro" role="alert">Não foi possível identificar a peça: ${esc((e as Error).message)}. Tente de novo em alguns segundos.</p>`;
+    $("#resultado").innerHTML = `${voltarAoCaso()}<p class="erro" role="alert">Não foi possível identificar a peça: ${esc((e as Error).message)}. Tente de novo em alguns segundos.</p>`;
   } finally {
     botao.disabled = false;
   }
@@ -252,7 +304,7 @@ function identificar(rolar = true): Promise<void> {
     $("#resultado").innerHTML = `<p class="erro" role="alert">${tipo === "ocr" ? "Leia uma foto ou digite o texto da etiqueta." : "Digite um código ou uma descrição."}</p>`;
     return Promise.resolve();
   }
-  marcarRoteiro(null);
+  casoAtivo = null;
   return resolver(tipo, texto, rolar);
 }
 $("#form-resolver").addEventListener("submit", (ev) => {
@@ -271,28 +323,15 @@ function escolherModo(tipo: Tipo) {
   document.querySelector<HTMLInputElement>(`input[name="tipo"][value="${tipo}"]`)!.checked = true;
   ajustarModo();
 }
-function rodarExemplo(valor: string, rolar = true): Promise<void> {
+/** Preenche o campo com um exemplo ("codigo|311960") e identifica, como a pessoa faria. */
+function rodarExemplo(valor: string, rolar = true, caso: Caso | null = null): Promise<void> {
   const [tipo, texto] = valor.split("|") as [Tipo, string];
   if (location.hash && location.hash !== "#resolver") location.hash = "resolver";
-  $<HTMLDetailsElement>("#roteiro").open = false;
   escolherModo(tipo);
   $<HTMLTextAreaElement>("#texto").value = texto;
-  marcarRoteiro(valor);
+  casoAtivo = caso;
   return resolver(tipo, texto, rolar);
 }
-$("#roteiro").addEventListener("click", (ev) => {
-  const b = (ev.target as HTMLElement).closest<HTMLButtonElement>("ol button");
-  if (!b) return;
-  const roteiro = $<HTMLDetailsElement>("#roteiro");
-  roteiro.open = false;
-  roteiro.querySelector("summary")!.focus({ preventScroll: true });
-  if (b.dataset.ir) location.hash = b.dataset.ir;
-  else if (b.dataset.exemploFoto) {
-    escolherModo("ocr");
-    marcarRoteiro(b.dataset.exemploFoto);
-    lerFotoExemplo(b.dataset.exemploFoto);
-  } else rodarExemplo(b.dataset.exemplo!);
-});
 
 // ---------- Leitura da foto no navegador ----------
 let workerOcr: Promise<import("tesseract.js").Worker> | null = null;
@@ -318,7 +357,10 @@ async function lerImagem(imagem: Blob, legenda: string) {
     const worker = await workerOcr;
     const { data } = await worker.recognize(imagem);
     const texto = data.text.replace(/\n{2,}/g, "\n").trim();
-    $<HTMLTextAreaElement>("#texto-ocr").value = texto;
+    const campo = $<HTMLTextAreaElement>("#texto-ocr");
+    campo.value = texto;
+    // O campo cresce com o texto lido, para a pessoa conferir todas as linhas.
+    campo.rows = Math.min(8, Math.max(3, texto.split("\n").length + 1));
     const leitura = leituraEmPalavras(Math.round(data.confidence));
     estado.innerHTML = !texto
       ? `${selo("recusa")} <span>Nenhum texto lido. Digite o código da etiqueta no campo abaixo.</span>`
@@ -447,11 +489,9 @@ function desenharLote(filtro = "todas", busca = "", mostrar = 50) {
 
   <section class="bloco" aria-labelledby="t-dup">
     <div class="tabela-titulo"><h2 id="t-dup">Cadastros duplicados</h2><p>Cada grupo junta códigos diferentes com a mesma especificação. Toque num código para ver a resposta completa.</p></div>
-    <details class="detalhes"><summary>Ver os ${lote.grupos_duplicidade.length} grupos</summary>
-      <ul class="grupos-dup">${lote.grupos_duplicidade
-        .map((g) => `<li><b>${esc(g.designacao)}</b> ${g.codigos.map((c) => `<button type="button" class="link-codigo" data-codigo="${esc(c)}">${esc(c)}</button>`).join(", ")}</li>`)
-        .join("")}</ul>
-    </details>
+    <ul class="grupos-dup">${lote.grupos_duplicidade
+      .map((g) => `<li><b>${esc(g.designacao)}</b> ${g.codigos.map((c) => `<button type="button" class="link-codigo" data-codigo="${esc(c)}">${esc(c)}</button>`).join(", ")}</li>`)
+      .join("")}</ul>
   </section>
 
   <section class="bloco" aria-labelledby="t-mapa">
@@ -491,7 +531,7 @@ $("#lote-resultado").addEventListener("click", (ev) => {
   document.querySelector<HTMLInputElement>('input[name="tipo"][value="codigo"]')!.checked = true;
   ajustarModo();
   $<HTMLTextAreaElement>("#texto").value = b.dataset.codigo!;
-  marcarRoteiro(null);
+  casoAtivo = null;
   resolver("codigo", b.dataset.codigo!);
 });
 async function lerLote() {
@@ -582,7 +622,12 @@ async function carregarFontes() {
         .join("")}</ul></section>
       <section class="bloco" aria-labelledby="t-regras"><h2 id="t-regras">Regras de leitura dos códigos</h2><ul class="lista">${f.regras.map((r) => `<li>${link(r.url, r.fonte)}. ${esc(r.licenca)}.</li>`).join("")}</ul></section>
       <section class="bloco" aria-labelledby="t-imagens"><h2 id="t-imagens">Imagens e programas usados pelo site</h2><ul class="lista">
-        <li>Foto do rolamento 6203 C3: R. Henrik Nilsson, ${link("https://commons.wikimedia.org/wiki/File:Second_half_of_20th_century_ball_bearing_6203_C3_M7_by_RKW.jpg", "Wikimedia Commons")}, CC BY 4.0, reduzida para 800 px.</li>
+        <li>Foto do rolamento 6203 C3, aberto: R. Henrik Nilsson, ${link("https://commons.wikimedia.org/wiki/File:Second_half_of_20th_century_ball_bearing_6203_C3_M7_by_RKW.jpg", "Wikimedia Commons")}, CC BY 4.0, reduzida para 800 px.</li>
+        <li>Foto do rolamento com blindagem metálica (2Z): R. Henrik Nilsson, ${link("https://commons.wikimedia.org/wiki/File:1990s_deep_groove_ball_bearing_with_metal_shields_G007-2Z_by_Slovakian_company_ZVL.jpg", "Wikimedia Commons")}, CC BY 4.0, reduzida para 800 px.</li>
+        <li>Foto da usina perto de Uberaba (MG): Jonathan Wilkins, ${link("https://commons.wikimedia.org/wiki/File:Sugar_Factory_with_clean_vapor_emission.jpg", "Wikimedia Commons")}, CC BY-SA 3.0, reduzida para 1000 px.</li>
+        <li>Foto da colheita em Piracicaba (SP): Mariordo (Mario Roberto Duran Ortiz), ${link("https://commons.wikimedia.org/wiki/File:Sugarcane_harvest_Piracicaba_05_2009_5783.JPG", "Wikimedia Commons")}, CC BY 3.0, reduzida para 1000 px.</li>
+        <li>Foto do depósito de peças: Ikiwaner, ${link("https://commons.wikimedia.org/wiki/File:Spare_parts_shop.jpg", "Wikimedia Commons")}, CC BY-SA 3.0, reduzida para 1000 px.</li>
+        <li>Desenhos dos rolamentos e etiqueta impressa de exemplo: feitos pela equipe.</li>
         <li>Leitura de texto na foto: tesseract.js 7 (Apache 2.0) com o modelo eng de tessdata_fast (Apache 2.0), servidos por este site.</li>
         <li>Letra Barlow, de Jeremy Tribby (SIL Open Font License 1.1), servida por este site.</li>
         <li>Explicação passo a passo do botão "Como funciona": driver.js 1.9, de Kamran Ahmed (MIT), servido por este site.</li>

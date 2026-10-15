@@ -67,6 +67,8 @@ body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
 textarea, input { caret-color: var(--azul); }
 a { color: var(--azul); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
+/* Título que recebe o foco ao trocar de tela: o leitor de tela começa por ele, sem anel na tela. */
+[tabindex="-1"]:focus { outline: none; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .pular { position: absolute; left: -999px; }
 .pular:focus { left: 1rem; top: 1rem; background: var(--papel); padding: 0.5rem 1rem; z-index: 10; }
@@ -112,7 +114,10 @@ p { margin: 0; }
   width: 100%; display: flex; align-items: center; gap: 0.6rem; min-height: 44px; padding: 0.3rem 0.4rem; text-align: left;
   font: inherit; font-weight: 600; font-size: var(--t-ui); color: var(--tinta); background: none; border: 0; border-radius: var(--raio); cursor: pointer;
 }
-.menu-tours button:hover { background: var(--azul-claro); }
+.menu-tours button:hover, .menu-tours a:hover { background: var(--azul-claro); }
+.menu-tours a { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; padding: 0.3rem 0.4rem; font-weight: 600; font-size: var(--t-ui); border-radius: var(--raio); }
+.menu-tours a .num { background: var(--azul); }
+.menu-tours li:first-child { padding-bottom: 0.15rem; margin-bottom: 0.15rem; border-bottom: 1px solid var(--linha); }
 .num {
   display: grid; place-items: center; width: 1.75rem; height: 1.75rem; flex: none; background: var(--tinta); color: #fff; border-radius: 2px;
   font-family: var(--placa); font-weight: 700;
@@ -164,7 +169,7 @@ main { flex: 1; width: min(100% - 2 * var(--margem), var(--coluna)); margin: 0 a
 .aba > h1 + .lead { margin-bottom: var(--respiro); }
 
 /* ---------- Identificar: título, campo e uma ação ---------- */
-.abertura, .entrada, .recorte, .roteiro { max-width: 52rem; }
+.abertura, .entrada, .recorte, .exemplos-link { max-width: 52rem; }
 .entrada { margin-top: clamp(2rem, 6vh, 3.5rem); display: grid; gap: 0.6rem; }
 .modos { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 1.75rem; }
 .modos label {
@@ -180,28 +185,32 @@ main { flex: 1; width: min(100% - 2 * var(--margem), var(--coluna)); margin: 0 a
 #texto { resize: none; min-height: var(--alto-campo); font-size: clamp(1.25rem, 1.8vw, 1.55rem); line-height: 1.35; padding: 0.8rem 1rem; }
 .recorte { margin-top: 0.85rem; font-size: var(--t-small); color: var(--suave); max-width: 62ch; }
 
-.roteiro { margin-top: var(--respiro); display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.75rem; }
-.roteiro details[open] { flex-basis: 100%; }
-.roteiro summary, details.detalhes > summary {
+/* Exemplos da apresentação: um link grande, com as duas fotos de "parecido não é igual". */
+.exemplos-link {
+  margin-top: var(--respiro); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.4rem 1.1rem; align-items: start;
+  color: var(--tinta); text-decoration: none;
+}
+.exemplos-fotos { display: flex; gap: 0.35rem; }
+.exemplos-fotos img { width: 4.25rem; height: 4.25rem; object-fit: cover; border-radius: 2px; background: var(--papel); }
+.exemplos-titulo {
+  display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--placa); font-weight: 700; font-size: var(--t-h2); line-height: 1.1;
+  color: var(--azul); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 2px;
+}
+.exemplos-titulo svg { width: 1.45rem; height: 1.45rem; }
+.exemplos-link:hover .exemplos-titulo { text-decoration-thickness: 3px; }
+.exemplos-frase { display: block; margin-top: 0.2rem; color: var(--tinta-2); text-wrap: pretty; }
+
+details.detalhes > summary {
   display: inline-flex; align-items: center; gap: 0.45rem; min-height: 44px; cursor: pointer; list-style: none;
   font-weight: 600; color: var(--azul);
 }
-.roteiro summary::-webkit-details-marker, details.detalhes > summary::-webkit-details-marker { display: none; }
-.roteiro summary::before, details.detalhes > summary::before {
+details.detalhes > summary::-webkit-details-marker { display: none; }
+details.detalhes > summary::before {
   content: ""; width: 0.55rem; height: 0.55rem; margin: 0 0.15rem; border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor;
   transform: rotate(-45deg); transition: transform 0.2s var(--saida);
 }
-.roteiro details[open] summary::before, details.detalhes[open] > summary::before { transform: rotate(45deg); }
-.roteiro summary:hover, details.detalhes > summary:hover { text-decoration: underline; text-underline-offset: 0.18em; }
-.roteiro ol {
-  list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0 2rem;
-}
-.roteiro ol button {
-  width: 100%; display: flex; align-items: center; gap: 0.7rem; min-height: 52px; padding: 0.4rem 0.3rem; text-align: left;
-  font: inherit; font-weight: 600; color: var(--tinta); background: none; border: 0; border-bottom: 1px solid var(--linha); cursor: pointer;
-}
-.roteiro ol button:hover { background: var(--azul-claro); }
-.roteiro ol button[aria-pressed="true"] { background: var(--papel); }
+details.detalhes[open] > summary::before { transform: rotate(45deg); }
+details.detalhes > summary:hover { text-decoration: underline; text-underline-offset: 0.18em; }
 
 /* ---------- Controles ---------- */
 button, .botao { font: inherit; }
@@ -212,12 +221,12 @@ button, .botao { font: inherit; }
 }
 .botao:hover { background: var(--azul-claro); text-decoration: none; }
 /* Ação secundária: texto azul sublinhado, sem caixa. */
-.explicar, .link {
+.link {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.1rem;
   font: inherit; font-weight: 600; color: var(--azul); background: none; border: 0; cursor: pointer;
   text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px;
 }
-.explicar:hover, .link:hover { text-decoration-thickness: 2px; }
+.link:hover { text-decoration-thickness: 2px; }
 .primario {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; min-height: var(--alto-campo); padding: 0.6rem 1.75rem;
   font-family: var(--placa); font-weight: 700; font-size: clamp(1.3rem, 1.6vw, 1.55rem); letter-spacing: 0.01em; color: #fff; cursor: pointer;
@@ -283,6 +292,24 @@ select { appearance: none; padding-right: 2.4rem; background-image: url("data:im
 .placa-frase { margin-top: 0.6rem; font-size: var(--t-lead); font-weight: 500; max-width: 56ch; text-wrap: pretty; }
 .placa-corpo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--respiro); padding-top: var(--respiro); }
 .peca { font-family: var(--placa); font-weight: 600; font-size: var(--t-peca); line-height: 1.15; max-width: 56ch; text-wrap: balance; }
+.peca-linha { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem 1.25rem; align-items: center; }
+/* Desenho dos dois lados do rolamento (aberto, blindagem de metal, vedação de borracha). */
+.rol, .rol-vazio { width: 6.5rem; height: 3rem; }
+.junto { white-space: nowrap; }
+.rol-figura { margin: 0; display: grid; gap: 0.3rem; justify-items: center; }
+.rol-figura figcaption, .rol-item figcaption { font-size: var(--t-meta); font-weight: 600; color: var(--suave); text-align: center; }
+.rol-item { margin: 0; display: grid; gap: 0.2rem; justify-items: center; align-content: start; }
+.rol-item figcaption { white-space: nowrap; }
+.rol-legenda { margin-top: 0.4rem; font-size: var(--t-small); color: var(--tinta-2); max-width: 62ch; }
+.desenhos-titulo { margin-top: 1.5rem; font-weight: 600; }
+.desenhos { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin-top: 0.6rem; }
+.desenhos figure { margin: 0; display: grid; gap: 0.35rem; justify-items: start; max-width: 15rem; }
+.desenhos .rol { width: 8rem; height: auto; aspect-ratio: 104 / 48; }
+.desenhos figcaption { font-size: var(--t-ui); font-weight: 600; }
+.rol-grande { width: clamp(8rem, 12vw, 10.5rem); height: auto; aspect-ratio: 104 / 48; }
+.voltar-caso { margin: var(--respiro) 0 0; font-size: var(--t-lead); align-items: flex-start; }
+.voltar-caso svg { margin-top: 0.2em; }
+.voltar-caso + .placa { margin-top: 1rem; }
 .motivos { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.4rem; max-width: 75ch; }
 .motivos li { display: flex; gap: 0.6rem; }
 .motivos li::before { content: ""; flex: none; width: 0.55rem; height: 0.55rem; margin-top: 0.55em; background: var(--tinta); }
@@ -297,10 +324,11 @@ select { appearance: none; padding-right: 2.4rem; background-image: url("data:im
 .grupo-recusa .grupo-picto { background: var(--vermelho); }
 .grupo-corpo { min-width: 0; }
 .grupo h3 { font-size: var(--t-grupo); font-weight: 700; display: flex; align-items: baseline; gap: 0.45rem; }
-.grupo-n { font-size: 1.35em; line-height: 0.9; }
-.grupo-alvos { margin-top: 0.4rem; font-size: var(--t-lead); font-weight: 600; overflow-wrap: anywhere; }
-.grupo-explica { margin-top: 0.2rem; color: var(--tinta-2); max-width: 70ch; }
-.grupo details.detalhes { margin-top: 0.35rem; }
+.grupo h3 { flex-wrap: wrap; gap: 0.2rem 0.6rem; }
+.grupo-n { font-family: var(--sans); font-size: var(--t-ui); font-weight: 600; color: var(--suave); }
+.grupo-cabeca { display: grid; gap: 0.25rem; }
+.grupo-explica { color: var(--tinta-2); max-width: 70ch; }
+.grupo .itens { margin-top: 0.6rem; border-top: 1px solid var(--linha); }
 
 /* Detalhes e decisão: duas linhas discretas no fim da resposta. */
 .resposta-mais { border-top: 1px solid var(--linha); }
@@ -327,23 +355,35 @@ select { appearance: none; padding-right: 2.4rem; background-image: url("data:im
 .picto-mini { width: 28px; height: 28px; padding: 4px; background: var(--tinta); color: #fff; border-radius: 2px; }
 
 .itens { list-style: none; margin: 0.25rem 0 0; padding: 0; display: grid; }
+/* Cada cadastro: o desenho dos dois lados, o código e a ficha do que bate e do que muda. */
 .item {
-  display: grid; grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr); gap: 0.4rem 1.5rem;
+  display: grid; grid-template-columns: 6.5rem minmax(8rem, 11rem) minmax(0, 1fr); gap: 0.4rem 1.5rem;
   padding: 0.9rem 0; border-bottom: 1px solid var(--linha);
 }
 .item:last-child { border-bottom: 0; }
+/* O que bate e o que muda em cada cadastro, sem abrir nada. */
+.ficha { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.35rem; max-width: 75ch; }
+.ficha li { display: flex; gap: 0.55rem; align-items: flex-start; }
+/* Só o pictograma, sem quadrado: a ficha diz o que é, não é uma caixa para marcar. */
+.ficha-picto { width: 1.3rem; height: 1.3rem; margin-top: 0.1rem; }
+.ficha-dif .ficha-picto { color: var(--vermelho); }
+.ficha-igual .ficha-picto { color: var(--verde); }
+.ficha-nota .ficha-picto { color: var(--tinta-2); }
+.ficha-atencao .ficha-picto { color: var(--amarelo-escuro); }
+.ficha-dif b { font-weight: 700; }
+.ficha-contra { color: var(--tinta-2); }
+/* Quadrado de motivo e traço de condição alinhados ao texto da ficha, logo acima. */
+.item-corpo .motivos li::before { margin-left: 0.375rem; margin-right: 0.325rem; }
+.item-corpo .condicoes li::before { margin-left: 0.35rem; margin-right: 0.35rem; }
+.ficha-igual { color: var(--tinta-2); }
 .item-alvo { display: grid; gap: 0.3rem; align-content: start; }
 .item-codigo { font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.1; }
-.etiqueta {
-  justify-self: start; display: inline-flex; align-items: center; gap: 0.3rem;
-  font-size: var(--t-meta); font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 2px;
-  background: var(--papel); color: var(--tinta-2); border: 1px solid var(--linha);
-}
+/* Nota sobre o texto do cadastro ("Cadastro duplicado", "Textos quase iguais"): só texto, nada para apertar. */
+.etiqueta { justify-self: start; font-size: var(--t-meta); font-weight: 600; color: var(--suave); }
 .item-corpo { display: grid; gap: 0.45rem; min-width: 0; }
-.item-texto { font-size: var(--t-small); color: var(--suave); overflow-wrap: anywhere; }
 .condicoes { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.3rem; }
 .condicoes li { display: flex; gap: 0.55rem; font-size: var(--t-ui); }
-.condicoes li::before { content: ""; flex: none; width: 0.5rem; height: 0.5rem; margin-top: 0.5rem; border: 2px solid var(--tinta); }
+.condicoes li::before { content: ""; flex: none; width: 0.6rem; height: 2px; margin-top: 0.7rem; background: var(--tinta); }
 .item details.detalhes > summary { font-size: var(--t-small); }
 
 /* ---------- Selos (carimbos de estado) ---------- */
@@ -381,6 +421,99 @@ select { appearance: none; padding-right: 2.4rem; background-image: url("data:im
 .linha label { display: grid; gap: 0.35rem; }
 .revisao .primario { justify-self: start; min-height: 52px; }
 .revisao-estado { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; min-height: 1.5em; }
+
+/* ---------- Exemplos da apresentação: a lista e uma tela por caso ---------- */
+.casos-lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linha); }
+.casos-lista a {
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 0 1rem; align-items: start;
+  padding: 0.85rem 0.5rem; color: var(--tinta); text-decoration: none; border-bottom: 1px solid var(--linha);
+}
+.casos-lista a:hover { background: var(--azul-claro); }
+.casos-lista a > svg { width: 1.6rem; height: 1.6rem; color: var(--azul); align-self: center; }
+.casos-miniatura { display: block; width: 5.5rem; height: 5.5rem; object-fit: cover; border-radius: 2px; background: var(--papel); }
+.casos-miniatura-desenho { display: grid; place-items: center; padding: 0.35rem; border: 1px solid var(--linha); }
+.casos-miniatura-desenho .rol { width: 100%; height: auto; aspect-ratio: 104 / 48; }
+.casos-lista .num { align-self: start; margin-top: 0.15rem; }
+.casos-titulo {
+  display: block; font-family: var(--placa); font-weight: 700; font-size: var(--t-grupo); line-height: 1.1;
+  color: var(--azul); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px;
+}
+.casos-lista a:hover .casos-titulo { text-decoration-thickness: 2px; }
+.casos-resumo { display: block; margin-top: 0.3rem; color: var(--tinta-2); max-width: 62ch; text-wrap: pretty; }
+
+.tres-respostas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.bloco > .tres-respostas, .bloco > .quatro-passos { max-width: none; }
+.tres-respostas .placa-faixa { height: 100%; align-items: start; }
+.tres-respostas .placa-faixa, .resposta-mini .placa-faixa { padding: 1rem 1.2rem; gap: 1rem; }
+.tres-respostas .placa-titulo, .resposta-mini .placa-titulo { font-size: var(--t-h2); }
+.tres-respostas .placa-frase, .resposta-mini .placa-frase { font-size: var(--t-body); margin-top: 0.3rem; }
+.tres-respostas .placa-picto, .resposta-mini .placa-picto { --picto: 3.25rem; }
+.tres-respostas .placa-revisa .placa-picto, .tres-respostas li.placa-revisa .placa-picto, .resposta-mini.placa-revisa .placa-picto { border-width: 3px; }
+.quatro-passos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem 1.5rem; }
+.quatro-passos li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.6rem; align-items: start; }
+
+.caso-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 1.5rem; margin-bottom: 1rem; }
+.caso-topo .voltar { margin-bottom: 0; }
+.casos-nav ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.casos-nav a { display: grid; place-items: center; min-width: 44px; min-height: 44px; text-decoration: none; }
+.casos-nav .num { width: 2.25rem; height: 2.25rem; color: var(--azul); background: var(--papel); border: var(--borda) solid var(--azul); }
+.casos-nav a:hover .num { background: var(--azul-claro); }
+.casos-nav a[aria-current="page"] .num { color: #fff; background: var(--tinta); border-color: var(--tinta); }
+.caso-ordem { font-size: var(--t-ui); font-weight: 600; color: var(--suave); margin-bottom: 0.5rem; }
+
+/* Os três primeiros passos ocupam a coluna; a resposta e o porquê ficam lado a lado. */
+.etapas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2.5rem; }
+.etapa { grid-column: 1 / -1; }
+.etapa:nth-child(4), .etapa:nth-child(5) { grid-column: auto; }
+.etapa { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 1.1rem; padding: var(--respiro) 0; border-top: 1px solid var(--linha); }
+.etapa > .num { width: 2.25rem; height: 2.25rem; font-size: 1.25rem; }
+.etapa h2 { font-size: var(--t-grupo); margin: 0.1rem 0 0.85rem; }
+.etapa-par { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1.25rem 2.5rem; align-items: start; }
+.etapa-par.so-texto, .etapa-par:has(.fotos-2) { grid-template-columns: minmax(0, 1fr); }
+.etapa-texto { display: grid; gap: 0.6rem; font-size: var(--t-lead); min-width: 0; }
+.etapa-texto > p { max-width: 54ch; text-wrap: pretty; }
+.etapa-texto .pequeno { font-size: var(--t-small); }
+
+.foto { margin: 0; min-width: 0; }
+.foto img { display: block; width: 100%; height: auto; max-height: 26rem; object-fit: cover; border-radius: var(--raio); background: var(--papel); }
+.foto.inteira img, .fotos-1 img { object-fit: contain; }
+.foto.inteira img { padding: 0.75rem; border: 1px solid var(--linha); }
+.fotos-1 img { width: auto; max-width: 100%; max-height: 24rem; }
+.fotos-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; max-width: 46rem; }
+.fotos-2 img { aspect-ratio: 4 / 3; }
+.foto figcaption { display: grid; gap: 0.15rem; margin-top: 0.5rem; }
+.foto-legenda { font-weight: 600; text-wrap: pretty; }
+.credito { font-size: var(--t-meta); font-weight: 400; color: var(--suave); }
+
+.cadastros { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; margin-top: 0.4rem; }
+.cadastro { padding: 0.8rem 0.95rem; background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio); min-width: 0; }
+.cadastro-rotulo { font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.1; }
+.cadastro-texto { margin-top: 0.35rem; font-size: var(--t-ui); color: var(--tinta-2); overflow-wrap: anywhere; }
+.cadastro-texto.curto { font-family: var(--placa); font-weight: 600; font-size: var(--t-peca); line-height: 1.1; color: var(--tinta); }
+.cadastro-texto b { font-weight: 700; color: var(--tinta); }
+.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1.25rem 2rem; margin-top: 0.4rem; }
+.numeros strong { display: block; font-family: var(--placa); font-size: var(--t-numero); line-height: 1; }
+.numeros span { color: var(--tinta-2); font-size: var(--t-body); }
+
+.entrada-caso { display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; align-items: center; max-width: 52rem; }
+.entrada-valor { display: grid; gap: 0.3rem; margin: 0; }
+/* O que a pessoa digita, mostrado como texto: aqui não é um campo. */
+.entrada-texto { font-family: var(--placa); font-weight: 700; font-size: var(--t-peca); line-height: 1.15; overflow-wrap: anywhere; }
+.entrada-foto { margin: 0; }
+.entrada-foto img { display: block; width: auto; height: auto; max-width: 100%; max-height: 6.5rem; padding: 0.4rem; background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio); }
+
+.resposta-mini { display: grid; gap: 1rem; max-width: 52rem; }
+.grupos-mini { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+.grupos-mini li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 0.85rem; align-items: start; }
+.grupos-mini .grupo-picto { width: 40px; height: 40px; padding: 6px; }
+.grupo-mini-titulo { font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.15; }
+.grupo-mini-alvos { color: var(--tinta-2); overflow-wrap: anywhere; }
+
+.caso-vizinhos { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; padding-top: var(--respiro); border-top: 1px solid var(--linha); }
+.caso-vizinhos a { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 44px; font-weight: 600; font-size: var(--t-lead); }
+.caso-vizinhos svg { width: 20px; height: 20px; }
+.caso-vizinhos .anterior svg { transform: rotate(180deg); }
+.caso-vizinhos .proximo { margin-left: auto; text-align: right; }
 
 /* ---------- Telas de conferência (rodapé) ---------- */
 .acoes, .filtros { display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem; align-items: center; }
@@ -448,7 +581,12 @@ tfoot th, tfoot td { font-weight: 600; border-top: var(--borda) solid var(--tint
 /* ---------- Telas estreitas ---------- */
 @media (max-width: 860px) {
   .sub { display: none; }
-  .par, .item, .escolhas, .linha { grid-template-columns: 1fr; }
+  .par, .item, .escolhas, .linha, .etapa-par, .etapas { grid-template-columns: 1fr; }
+  .item.com-desenho { grid-template-columns: 6.5rem minmax(0, 1fr); align-items: center; }
+  .item.com-desenho .item-corpo { grid-column: 1 / -1; }
+  .item:not(.com-desenho) .rol-vazio { display: none; }
+  .tres-respostas { grid-template-columns: 1fr; }
+  .quatro-passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   /* A planilha de-para vira uma linha empilhada por cadastro. */
   .mapa thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .mapa, .mapa tbody, .mapa tr, .mapa td { display: block; }
@@ -471,5 +609,17 @@ tfoot th, tfoot td { font-weight: 600; border-top: var(--borda) solid var(--tint
   .grupo { gap: 0 0.8rem; }
   .grupo-picto { width: 40px; height: 40px; padding: 6px; }
   .resumo-lote { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .roteiro ol { grid-template-columns: 1fr; }
+  .exemplos-fotos img { width: 3.5rem; height: 3.5rem; }
+  .rodape-nav > span { flex-basis: 100%; }
+  .peca-linha { grid-template-columns: 1fr; justify-items: start; }
+  .entrada-caso { display: grid; grid-template-columns: 1fr; }
+  .entrada-caso .primario { justify-self: stretch; width: 100%; }
+  .desenhos { gap: 1rem 1.5rem; }
+  .desenhos .rol { width: 6.5rem; }
+  .fotos-2, .quatro-passos { grid-template-columns: 1fr; }
+  .casos-lista a { grid-template-columns: auto auto minmax(0, 1fr); gap: 0 0.7rem; padding: 0.85rem 0.25rem; }
+  .casos-lista a > svg { display: none; }
+  .casos-miniatura { width: 4.25rem; height: 4.25rem; }
+  .etapa { gap: 0 0.75rem; }
+  .etapa > .num { width: 1.9rem; height: 1.9rem; font-size: 1.1rem; }
 }

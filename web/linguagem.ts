@@ -1,6 +1,7 @@
 // Camada de linguagem da interface: traduz a saída do motor para quem cuida de almoxarifado,
 // manutenção e compras. O motor não muda; aqui só se escolhem palavras.
-import type { AtributoTipado, Decisao, EspecificacaoTecnica, Folga, Relacao, Resposta } from "../src/motor/tipos";
+import { ROTULO_PROTECAO } from "../src/motor/designacao";
+import type { AtributoTipado, Decisao, EspecificacaoTecnica, Folga, Protecao, Relacao, Resposta } from "../src/motor/tipos";
 
 /** Nome curto de cada decisão, igual em toda a interface. */
 export const SELO: Record<Decisao, string> = {
@@ -44,25 +45,34 @@ export function descreverPeca(e: EspecificacaoTecnica): string {
   const partes = [
     `Rolamento de esferas ${e.designacao_basica}`,
     medidas(e),
-    e.atributos.find((a) => a.nome === "proteção") ? protecaoTexto(e) : null,
+    e.atributos.find((a) => a.nome === "proteção") ? protecaoEmPalavras(e.protecao) : null,
     FOLGA[e.folga],
     e.inox ? "aço inoxidável" : null,
   ];
   return partes.filter(Boolean).join(" · ");
 }
 
-function protecaoTexto(e: EspecificacaoTecnica): string {
-  const p: Record<EspecificacaoTecnica["protecao"], string> = {
-    aberto: "aberto, sem blindagem nem vedação",
-    blindagem_simples: "blindagem metálica em um lado",
-    blindagem_dupla: "blindagem metálica nos dois lados",
-    vedacao_simples: "vedação de borracha em um lado",
-    vedacao_dupla: "vedação de borracha nos dois lados",
-    vedacao_sem_contato_simples: "vedação sem contato em um lado",
-    vedacao_sem_contato_dupla: "vedação sem contato nos dois lados",
-  };
-  return p[e.protecao];
-}
+const PROTECAO: Record<Protecao, string> = {
+  aberto: "aberto, sem blindagem nem vedação",
+  blindagem_simples: "blindagem metálica em um lado",
+  blindagem_dupla: "blindagem metálica nos dois lados",
+  vedacao_simples: "vedação de borracha em um lado",
+  vedacao_dupla: "vedação de borracha nos dois lados",
+  vedacao_sem_contato_simples: "vedação sem contato em um lado",
+  vedacao_sem_contato_dupla: "vedação sem contato nos dois lados",
+};
+export const protecaoEmPalavras = (p: Protecao) => PROTECAO[p];
+
+/** Como cada lado do rolamento aparece no desenho da peça: aberto, com blindagem de metal ou com vedação de borracha. */
+export const LADOS: Record<Protecao, ["aberto" | "metal" | "borracha", "aberto" | "metal" | "borracha"]> = {
+  aberto: ["aberto", "aberto"],
+  blindagem_simples: ["metal", "aberto"],
+  blindagem_dupla: ["metal", "metal"],
+  vedacao_simples: ["borracha", "aberto"],
+  vedacao_dupla: ["borracha", "borracha"],
+  vedacao_sem_contato_simples: ["borracha", "aberto"],
+  vedacao_sem_contato_dupla: ["borracha", "borracha"],
+};
 
 export interface Veredito {
   nivel: Decisao;
@@ -73,7 +83,7 @@ export interface Veredito {
 /** A resposta principal: o que a placa diz. */
 export function veredito(r: Resposta): Veredito {
   const e = r.especificacao;
-  if (r.decisao === "resolve") return { nivel: "resolve", titulo: "Peça identificada", frase: "O código foi lido inteiro e nada no cadastro o contradiz." };
+  if (r.decisao === "resolve") return { nivel: "resolve", titulo: "Peça identificada", frase: "O código da peça foi lido inteiro, e nada no texto o contradiz." };
   if (r.decisao === "revisa") return { nivel: "revisa", titulo: "Precisa de uma pessoa", frase: "Nada se contradiz, mas falta uma informação para confirmar a peça." };
   if (e) return { nivel: "recusa", titulo: "O cadastro se contradiz", frase: "Dois dados do mesmo cadastro apontam para peças diferentes. O sistema não escolhe um deles." };
   return { nivel: "recusa", titulo: "Não reconhecemos esta peça", frase: "O protótipo só reconhece rolamento rígido de esferas das séries 60, 62 e 63." };
@@ -95,7 +105,7 @@ export function agrupar(relacoes: Relacao[]): Grupo[] {
       chave: "mesma",
       nivel: "resolve",
       titulo: "É a mesma peça",
-      explicacao: "Outro código do cadastro com a mesma especificação. Os dois códigos continuam existindo.",
+      explicacao: "Código do cadastro com a mesma especificação. Nenhum código é apagado.",
       relacoes: de((r) => r.tipo === "SAME_AS" && r.decisao === "resolve"),
     },
     {
@@ -144,15 +154,69 @@ export function agrupar(relacoes: Relacao[]): Grupo[] {
   return grupos.filter((g) => g.relacoes.length);
 }
 
+/** "a, b e c", como se fala. */
+const juntar = (l: string[]) => (l.length > 1 ? `${l.slice(0, -1).join(", ")} e ${l.at(-1)}` : (l[0] ?? ""));
+
+const PROTECAO_DO_MOTOR = Object.fromEntries(Object.entries(ROTULO_PROTECAO).map(([p, rotulo]) => [rotulo, p as Protecao]));
+
+export interface Diferenca {
+  nome: string;
+  outro: string;
+  procurada: string;
+}
+
+/** O que bate e o que muda entre a peça procurada e outro cadastro, nos quatro dados que decidem se é a mesma peça. */
+export interface Comparacao {
+  protecao: Protecao;
+  diferencas: Diferenca[];
+  iguais: string;
+}
+
+/**
+ * Lê os dados do outro cadastro a partir do que o motor comparou. O motor compara tamanho,
+ * proteção, folga e material e anota cada divergência; o que não diverge é igual à peça procurada.
+ * Devolve null quando a relação não compara duas especificações.
+ */
+export function comparar(e: EspecificacaoTecnica | null, r: Relacao): Comparacao | null {
+  if (!e || r.tipo !== "SAME_AS" || r.motivos.some((m) => m.startsWith("um dos itens não tem especificação"))) return null;
+  const outro = { tamanho: e.designacao_basica, protecao: e.protecao, folga: e.folga, inox: e.inox };
+  for (const m of r.motivos) {
+    let g: RegExpExecArray | null;
+    if ((g = /^atributo diverge: designação básica \S+ x (\S+)$/.exec(m))) outro.tamanho = g[1];
+    else if ((g = /^atributo diverge: proteção: .+? x (.+)$/.exec(m))) {
+      const p = PROTECAO_DO_MOTOR[g[1]];
+      if (!p) return null;
+      outro.protecao = p;
+    } else if ((g = /^atributo diverge: folga radial \w+ x (\w+)$/.exec(m))) outro.folga = g[1] as Folga;
+    else if ((g = /^atributo diverge: material: .+ x (.+)$/.exec(m))) outro.inox = g[1] === "inoxidável";
+  }
+  const folga = (f: Folga) => FOLGA[f].replace(/^folga /, "");
+  const material = (inox: boolean) => (inox ? "aço inoxidável" : "sem indicação de inox");
+  const dados = [
+    { nome: "Tamanho", igual: "mesmo tamanho", outro: outro.tamanho, procurada: e.designacao_basica },
+    { nome: "Proteção", igual: "mesma proteção", outro: PROTECAO[outro.protecao], procurada: PROTECAO[e.protecao] },
+    { nome: "Folga", igual: "mesma folga", outro: folga(outro.folga), procurada: folga(e.folga) },
+    { nome: "Material", igual: "mesmo material", outro: material(outro.inox), procurada: material(e.inox) },
+  ];
+  const iguais = dados.filter((d) => d.outro === d.procurada).map((d) => (d.nome === "Tamanho" ? `${d.igual} (${d.outro})` : d.igual));
+  return {
+    protecao: outro.protecao,
+    diferencas: dados.filter((d) => d.outro !== d.procurada).map(({ nome, outro, procurada }) => ({ nome, outro, procurada })),
+    iguais: iguais.length ? maiuscula(`${juntar(iguais)}.`) : "",
+  };
+}
+
+/** Motivos que a comparação já mostra dado a dado; os outros continuam como frase. */
+export const motivoDaComparacao = (m: string) => /^atributo diverge: /.test(m) || /^designação \d+, .+, folga (C2|CN|C3|C4|C5)(, inoxidável)?$/.test(m);
+
 /** "CATMAT 311963" vira "Código 311963"; marcas ficam como estão. */
 export const alvoTexto = (alvo: string) => alvo.replace(/^CATMAT (\d+)$/, "Código $1");
 
 /** Os itens de um grupo em uma linha: "Códigos 290385, 346383 e 472505" ou "NSK 6206 DDU". */
 export function alvosTexto(relacoes: Relacao[]): string {
-  const e = (l: string[]) => (l.length > 1 ? `${l.slice(0, -1).join(", ")} e ${l.at(-1)}` : (l[0] ?? ""));
   const codigos = relacoes.map((r) => /^CATMAT (\d+)$/.exec(r.alvo)?.[1]);
-  if (codigos.every((c) => c !== undefined)) return `${codigos.length > 1 ? "Códigos" : "Código"} ${e(codigos as string[])}`;
-  return e(relacoes.map((r) => alvoTexto(r.alvo)));
+  if (codigos.every((c) => c !== undefined)) return `${codigos.length > 1 ? "Códigos" : "Código"} ${juntar(codigos as string[])}`;
+  return juntar(relacoes.map((r) => alvoTexto(r.alvo)));
 }
 
 /** Semelhança de texto em palavras, nunca em número. */
@@ -185,7 +249,7 @@ const REGRAS: Regra[] = [
     (b) => `A tabela aberta da norma não traz o tamanho ${b}. Por isso o diâmetro externo e a largura não foram conferidos.`,
   ],
   [/^duplicidade exata: mesmas palavras e mesma especificação$/, () => "Cadastro duplicado: as mesmas palavras e a mesma especificação."],
-  [/^mesma especificação com textos diferentes$/, () => "Textos diferentes, mesma especificação."],
+  [/^mesma especificação com textos diferentes$/, () => "Não é o mesmo texto, mas é a mesma especificação."],
   [/^duplicidade exata$/, () => "Cadastro duplicado."],
   [
     /^designação (\d+), (.+), folga (C2|CN|C3|C4|C5)(, inoxidável)?$/,
@@ -260,6 +324,10 @@ function material(m: string): string {
 
 function minuscula(s: string): string {
   return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+function maiuscula(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 /**

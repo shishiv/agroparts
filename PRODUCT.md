@@ -24,7 +24,8 @@ O produto separa cinco respostas que o mercado mistura: é a mesma peça, a marc
 ## Operating Context
 
 - O protótipo público roda em https://agroparts.pages.dev, sobre dados públicos do CATMAT e do Compras.gov.br, no recorte de rolamento rígido de esferas das séries 60, 62 e 63.
-- O pitch segue cinco provas: duplicidade exata (311960), falsa semelhança (317388), referência cruzada (624270), tradução em lote, revisão humana (472447). A leitura de etiqueta por foto complementa.
+- O pitch segue cinco provas: duplicidade exata (311960), falsa semelhança (317388), referência cruzada (624270), tradução em lote, revisão humana (472447). O texto de fornecedor e a leitura de etiqueta por foto complementam.
+- O site conta esses sete casos em "Exemplos da apresentação" (`#casos`), com a profundidade e as fotos do PDF do Rota Inova: a situação, a imagem, a entrada, a resposta e o porquê. Cada caso roda no protótipo com um toque e volta com outro (decisão do capitão, 14/10/2026).
 - O site é projetado em sala a 1920x1080 e aberto no celular a 390-440px.
 
 ## Capabilities and Constraints
@@ -42,7 +43,7 @@ O produto separa cinco respostas que o mercado mistura: é a mesma peça, a marc
 ## Evidence on Hand
 
 - Medição contra o gabarito v1 em `dados/gabarito/v1/` e na rota `/api/medicao`.
-- Imagens de exemplo em `public/exemplos/` com créditos em `CREDITOS.txt`.
+- Imagens de exemplo e as fotos do cenário do PDF em `public/exemplos/`, com créditos em `CREDITOS.txt`.
 - Não existe cliente, piloto, depoimento ou número de economia. A interface não pode sugerir que existam.
 
 ## Product Principles
