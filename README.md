@@ -45,7 +45,7 @@ Ela não tem autenticação porque só lê dados públicos e não grava nada.
 
 O site usa o projeto Cloudflare Pages `agroparts`. O arquivo [`wrangler.toml`](wrangler.toml) aponta o build para `dist/`, e as rotas da API ficam em `functions/`.
 
-O Cloudflare Pages está ligado a este repositório no GitHub. Cada push roda `bun run build` no Cloudflare e publica o resultado. Um push em `main` publica em https://agroparts.pages.dev. Um push em outra branch publica uma prévia, e o check "Cloudflare Pages" do commit mostra o resultado. O comando de build fica nas configurações do projeto no Cloudflare, não neste repositório.
+O Cloudflare Pages está ligado a este repositório no GitHub. Cada push roda `bun run build` no Cloudflare e publica o resultado. Um push em `main` publica em https://agroparts.pages.dev. Um push em outra branch publica uma prévia, e o check "Cloudflare Pages" do commit mostra o resultado. O comando de build e a variável `BUN_VERSION` ficam nas configurações do projeto no Cloudflare, não neste repositório. A `BUN_VERSION` precisa ler o formato do `bun.lock`; o Bun padrão do Cloudflare não lê esse formato.
 
 Para publicar sem o GitHub, siga estes passos:
 
