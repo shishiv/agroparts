@@ -5,25 +5,28 @@ O formulário aceita um arquivo de até 10 MB por envio, e o prazo é 16/10/2026
 
 ## Arquivo para enviar
 
-Envie [`entregas/agroparts-rota-inova.pdf`](entregas/agroparts-rota-inova.pdf).
-É um PDF só, em slides 16:9, no visual do modelo do Canva da equipe.
-Ele junta as quatro entregas nesta ordem: capa, ideação, MVP, prototipagem e pitch.
+Envie [`entregas/agroparts-rota-inova-curto.pdf`](entregas/agroparts-rota-inova-curto.pdf), a versão curta, com 22 páginas.
+A versão completa, com 47 páginas, é [`entregas/agroparts-rota-inova.pdf`](entregas/agroparts-rota-inova.pdf).
+
+Os dois PDFs usam slides 16:9, no visual do modelo do Canva da equipe.
+Os dois juntam as quatro entregas nesta ordem: capa, ideação, MVP, prototipagem e pitch.
 Cada entrega começa com uma divisória.
 
 - A capa e o canvas de ideação são as páginas 1 e 2 do modelo do Canva, sem redesenho.
-- Os outros slides vêm de [`entrega-unica.html`](entrega-unica.html), com o estilo de [`estilo-slides.css`](estilo-slides.css).
+- Os outros slides vêm de [`entrega-unica.html`](entrega-unica.html), com o estilo de [`estilo-slides.css`](estilo-slides.css). A versão curta usa só os slides marcados com `data-curto`.
 - O público não é técnico. Cada slide tem uma ideia, frases curtas e uma foto, captura ou ilustração.
 - As fotos do cenário (usina, colheita, estoque, rolamentos) estão em [`img/cenario/`](img/cenario/), com autor e licença em [`img/cenario/CREDITOS.md`](img/cenario/CREDITOS.md). O último slide repete os créditos.
-- O link do MVP, https://agroparts.pages.dev/, é clicável no PDF.
+- O link do MVP, https://agroparts.pages.dev/, é clicável nos dois PDFs.
 
-O PDF único resume as entregas. Os detalhes técnicos, as tabelas de medição e as fontes completas ficam nas entregas separadas, abaixo.
+A versão completa traz também quem sente o problema, os números das fontes, os cinco casos do protótipo, os 10 slides do pitch e o roteiro.
+Os detalhes técnicos, as tabelas de medição e as fontes completas ficam nas entregas separadas, abaixo.
 
-[`entregas/agroparts-rota-inova-miniaturas.jpg`](entregas/agroparts-rota-inova-miniaturas.jpg) mostra todas as páginas em miniatura.
+[`entregas/agroparts-rota-inova-curto-miniaturas.jpg`](entregas/agroparts-rota-inova-curto-miniaturas.jpg) e [`entregas/agroparts-rota-inova-miniaturas.jpg`](entregas/agroparts-rota-inova-miniaturas.jpg) mostram as páginas em miniatura.
 
-## Como gerar o PDF único
+## Como gerar os PDFs únicos
 
 1. Edite [`entrega-unica.html`](entrega-unica.html).
-2. Rode `./gerar-pdf-unico.sh` nesta pasta. O script precisa de Chromium ou Google Chrome, qpdf, poppler (pdfinfo e pdftocairo) e Python 3.
+2. Rode `./gerar-pdf-unico.sh` nesta pasta. O script gera as duas versões e precisa de Chromium ou Google Chrome, qpdf, poppler (pdfinfo e pdftocairo) e Python 3.
 3. Se o script listar problemas de layout, corrija o slide da página indicada e rode de novo.
 4. Confira o PDF em `entregas/` antes de enviar.
 
