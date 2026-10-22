@@ -8,6 +8,7 @@ import fotoColheita from './assets/fotos/colheita-piracicaba.jpg';
 import fotoEstoque from './assets/fotos/estoque-de-pecas.jpg';
 import fotoRolamento from './assets/fotos/rolamento-com-tampa-6007.jpg';
 import fotoUsina from './assets/fotos/usina-uberaba.jpg';
+import qrAgroparts from './assets/qr-agroparts.svg';
 import fonteBold from './assets/fontes/Montserrat-Bold.ttf';
 import fonteExtraBold from './assets/fontes/Montserrat-ExtraBold.ttf';
 import fonteItalic from './assets/fontes/Montserrat-Italic.ttf';
@@ -166,14 +167,8 @@ const Quadro = ({
 }) => (
   <div style={{ ...fundo, padding: `84px ${foto ? LARGURA_FOTO + 80 : PADDING_X}px 120px ${PADDING_X}px` }}>
     {olho && <Olho>{olho}</Olho>}
-    {aoLado ? (
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 48 }}>
-        <Titulo tamanho={tamanhoTitulo}>{titulo}</Titulo>
-        <div style={{ flex: 'none' }}>{aoLado}</div>
-      </div>
-    ) : (
-      <Titulo tamanho={tamanhoTitulo}>{titulo}</Titulo>
-    )}
+    <Titulo tamanho={tamanhoTitulo}>{titulo}</Titulo>
+    {aoLado && <div style={{ position: 'absolute', top: 84, right: PADDING_X }}>{aoLado}</div>}
     <Regua />
     <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap }}>
       {children}
@@ -346,6 +341,14 @@ const Link = ({ tamanho = 40 }: { tamanho?: number }) => (
   </a>
 );
 
+// QR code que abre https://agroparts.pages.dev/. Gerado localmente; o comando está no README do deck.
+// A moldura branca completa a margem clara que o leitor precisa em volta do código.
+const QrCode = ({ tamanho }: { tamanho: number }) => (
+  <div style={{ flex: 'none', background: branco, padding: 10, width: tamanho, height: tamanho }}>
+    <img src={qrAgroparts} alt="QR code que abre agroparts.pages.dev" style={{ display: 'block', width: '100%', height: '100%' }} />
+  </div>
+);
+
 const Grade = ({ colunas, gap = 28, children, style }: { colunas: number; gap?: number; children: ReactNode; style?: CSSProperties }) => (
   <div style={{ display: 'grid', gridTemplateColumns: `repeat(${colunas}, minmax(0, 1fr))`, gap, ...style }}>{children}</div>
 );
@@ -507,7 +510,16 @@ const Solucao: Page = () => (
 );
 
 const Funcionando: Page = () => (
-  <Quadro olho="Funcionando" titulo="O protótipo já está no ar" aoLado={<Link />}>
+  <Quadro
+    olho="Funcionando"
+    titulo="O protótipo já está no ar"
+    aoLado={
+      <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+        <Link />
+        <QrCode tamanho={170} />
+      </div>
+    }
+  >
     <div style={{ display: 'flex', gap: 64, alignItems: 'center' }}>
       <Captura
         src={telaParecida}
@@ -654,13 +666,21 @@ const Pedido: Page = () => (
       <Item marcador={design.palette.accent}>A lista de um tipo de peça</Item>
       <Item marcador={design.palette.accent}>Uma pessoa do almoxarifado para conferir as respostas</Item>
     </Lista>
-    <div style={{ margin: '40px 0 0', display: 'flex', alignItems: 'center', gap: 32 }}>
-      <Link tamanho={36} />
-      <p style={{ margin: 0, fontSize: 28, lineHeight: 1.4, fontWeight: 700 }}>
-        Equipe AgroParts
-        <br />
-        Sistemas de Informação, UEMG Frutal
-      </p>
+    <div style={{ margin: '40px 0 0', display: 'flex', alignItems: 'center', gap: 36 }}>
+      <QrCode tamanho={200} />
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 14 }}>
+        <Link tamanho={36} />
+        <p style={{ margin: 0, fontSize: 32, lineHeight: 1.35, fontWeight: 700 }}>
+          Contato: myke.matos@gmail.com
+          <br />
+          agroparts.pages.dev/contato
+        </p>
+        <p style={{ margin: 0, fontSize: 28, lineHeight: 1.35, fontWeight: 700, color: tinta }}>
+          Equipe AgroParts
+          <br />
+          Sistemas de Informação, UEMG Frutal
+        </p>
+      </div>
     </div>
     <Ilus nome="aviao" altura={460} style={{ position: 'absolute', right: 110, top: 300, width: 460 }} />
     <Rodape comChave />
@@ -753,7 +773,7 @@ Começamos com dados públicos para não esperar uma empresa. Agora queremos tes
 Vamos medir quanto tempo se leva para achar a peça, antes e depois.
 Não prometa economia: ainda não há teste com usina.`,
   `5:45 · Para isso, procuramos uma usina parceira, que nos mostre a lista de um tipo de peça e indique uma pessoa do almoxarifado para conferir as respostas.
-Obrigado.
+O QR code na tela abre o site, e o contato está logo ao lado. Obrigado.
 (Cerca de 6 minutos em fala calma, dentro do limite de 5 a 7 minutos. Se o tempo apertar, pule o caso 4 da demonstração: fica em pouco mais de 5 minutos.)`,
   `Página de apoio: não precisa falar. Mostre só se perguntarem de onde vêm os números. Nas perguntas, volte à página 13.
 Versão de 30 segundos, se pedirem um resumo:

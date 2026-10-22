@@ -23,3 +23,12 @@ As imagens de `exportado/png/` também ficam fora do Git.
 ## Agentes
 
 As skills do open-slide ficam em [`.agents/skills/`](.agents/skills/): `create-slide`, `slide-authoring` e `apply-comments`, entre outras. Leia [`AGENTS.md`](AGENTS.md) antes de editar o deck.
+
+## QR code
+
+Os slides 7 e 13 têm um QR code que abre https://agroparts.pages.dev/. Ele foi gerado localmente com qrencode e conferido com zbarimg nas imagens de 1920 x 1080:
+
+```sh
+qrencode -t SVG -l M -m 2 --svg-path --foreground=0e073f --background=ffffff -o slides/rota-inova-pitch/assets/qr-agroparts.svg "https://agroparts.pages.dev/"
+zbarimg -q exportado/png/slide-07.png exportado/png/slide-13.png
+```
