@@ -568,7 +568,8 @@ tfoot th, tfoot td { font-weight: 600; border-top: var(--borda) solid var(--tint
 }
 .rodape-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.25rem; }
 .rodape-nav a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
-.rodape-nav a[aria-current="page"] { color: var(--tinta); text-decoration: none; }
+.rodape a[aria-current="page"] { color: var(--tinta); text-decoration: none; }
+.contato-email { margin: var(--respiro) 0 0; font-family: var(--placa); font-weight: 700; font-size: var(--t-grupo); overflow-wrap: anywhere; }
 
 /* ---------- O momento: a placa chega como uma placa batida na chapa ---------- */
 @media (prefers-reduced-motion: no-preference) {
