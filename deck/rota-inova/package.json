@@ -1,0 +1,23 @@
+{
+  "name": "agroparts-deck-rota-inova",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "preparar": "sh preparar.sh",
+    "dev": "sh preparar.sh && open-slide dev",
+    "build": "sh preparar.sh && open-slide build",
+    "preview": "open-slide preview",
+    "exportar": "sh exportar.sh",
+    "sync:skills": "open-slide sync:skills"
+  },
+  "dependencies": {
+    "@open-slide/core": "2.2.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
+  }
+}
