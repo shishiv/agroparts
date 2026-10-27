@@ -310,7 +310,7 @@ select { appearance: none; padding-right: 2.4rem; background-image: url("data:im
 .voltar-caso { margin: var(--respiro) 0 0; font-size: var(--t-lead); align-items: flex-start; }
 .voltar-caso svg { margin-top: 0.2em; }
 /* O que a pessoa procurou, numa linha, liga a placa ao campo que já saiu da tela. */
-.busca { margin-top: var(--respiro); font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.1; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+.busca { margin-top: var(--respiro); font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.1; text-wrap: balance; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .voltar-caso + .busca { margin-top: 1rem; }
 .busca + .placa { margin-top: 0.75rem; }
 .motivos { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.4rem; max-width: 75ch; }
