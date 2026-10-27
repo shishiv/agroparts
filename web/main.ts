@@ -128,6 +128,8 @@ function ajustarVoltaDoLote() {
 // ---------- Identificar ----------
 type Tipo = "codigo" | "descricao" | "ocr";
 let ultima: { tipo: Tipo; texto: string; resposta: Resposta } | null = null;
+/** O exemplo que o campo vazio mostra. Identificar com o campo vazio identifica esse exemplo. */
+const EXEMPLO = { codigo: "311960", descricao: "ROLAMENTO 6205 2RS C3 RIGIDO DE ESFERAS" };
 
 function tipoAtual(): Tipo {
   return (document.querySelector<HTMLInputElement>('input[name="tipo"]:checked')?.value as Tipo) ?? "codigo";
@@ -138,7 +140,7 @@ function ajustarModo() {
   $("#campo-foto").hidden = tipo !== "ocr";
   $("#campo-texto").hidden = tipo === "ocr";
   $("#rotulo-texto").textContent = tipo === "codigo" ? "Código do cadastro ou da peça" : "Descrição, do jeito que está no cadastro";
-  $<HTMLTextAreaElement>("#texto").placeholder = tipo === "codigo" ? "311960 ou 6205-2RS C3" : "ROLAMENTO 6205 2RS C3 RIGIDO DE ESFERAS";
+  $<HTMLTextAreaElement>("#texto").placeholder = tipo === "codigo" ? `${EXEMPLO.codigo} ou 6205-2RS C3` : EXEMPLO.descricao;
   $<HTMLTextAreaElement>("#texto").rows = tipo === "codigo" ? 1 : 3;
 }
 document.querySelectorAll('input[name="tipo"]').forEach((r) => r.addEventListener("change", ajustarModo));
@@ -299,9 +301,11 @@ async function resolver(tipo: Tipo, texto: string, rolar = true) {
 
 function identificar(rolar = true): Promise<void> {
   const tipo = tipoAtual();
-  const texto = (tipo === "ocr" ? $<HTMLTextAreaElement>("#texto-ocr") : $<HTMLTextAreaElement>("#texto")).value.trim();
+  const campo = $<HTMLTextAreaElement>(tipo === "ocr" ? "#texto-ocr" : "#texto");
+  if (tipo !== "ocr" && !campo.value.trim()) campo.value = EXEMPLO[tipo];
+  const texto = campo.value.trim();
   if (!texto) {
-    $("#resultado").innerHTML = `<p class="erro" role="alert">${tipo === "ocr" ? "Leia uma foto ou digite o texto da etiqueta." : "Digite um código ou uma descrição."}</p>`;
+    $("#resultado").innerHTML = `<p class="erro" role="alert">Leia uma foto ou digite o texto da etiqueta.</p>`;
     return Promise.resolve();
   }
   casoAtivo = null;
