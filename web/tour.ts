@@ -229,7 +229,6 @@ export const TOURS: Record<string, Tour> = {
   },
 };
 
-const VISTO = "agroparts.tour.v1";
 let atual: Driver | null = null;
 
 function alvoDe(alvo: Alvo | undefined): DriveStep["element"] {
@@ -322,12 +321,10 @@ export function abrirTour(nome: string, acoes: Acoes) {
     },
   });
   atual = d;
-  // A visão geral abre sozinha uma vez só: depois de aberta, fica lembrada neste navegador.
-  if (nome === "inicio") localStorage.setItem(VISTO, "sim");
   d.drive();
 }
 
-/** Liga os botões de explicação e abre a visão geral na primeira visita. */
+/** Liga os botões de explicação. Nenhuma abre sozinha: a primeira tela é o campo. */
 export function iniciarTours(acoes: Acoes) {
   const menu = document.getElementById("menu-tours");
   document.querySelectorAll<HTMLButtonElement>("[data-tour]").forEach((b) =>
@@ -336,6 +333,4 @@ export function iniciarTours(acoes: Acoes) {
       abrirTour(b.dataset.tour!, acoes);
     }),
   );
-  const naInicial = !location.hash || location.hash === "#resolver";
-  if (naInicial && !localStorage.getItem(VISTO)) abrirTour("inicio", acoes);
 }
