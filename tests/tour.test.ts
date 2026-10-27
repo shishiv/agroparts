@@ -170,6 +170,7 @@ describe.each(Object.keys(TELAS))("tela inicial no %s", (tela) => {
       expect(await page.inputValue("#texto")).toBe(exemplo);
       expect(await page.locator("#placa-titulo").textContent(), `exemplo do modo ${modo}`).toBe("Peça identificada");
       expect(await page.locator("#resultado .busca").textContent()).toBe(modo === "codigo" ? `Código ${exemplo}` : exemplo);
+      expect(await page.$eval("#resultado .busca", (b) => b.scrollWidth <= b.clientWidth + 1 && b.scrollHeight <= b.clientHeight + 1), `${tela}: o exemplo do modo ${modo} cabe inteiro`).toBe(true);
       await page.evaluate(() => (document.querySelector("#resultado")!.innerHTML = ""));
     }
     await ctx.close();
