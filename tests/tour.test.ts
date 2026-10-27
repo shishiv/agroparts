@@ -154,13 +154,13 @@ describe.each(Object.keys(TELAS))("passo a passo no %s", (tela) => {
 });
 
 describe.each(Object.keys(TELAS))("tela inicial no %s", (tela) => {
-  test("Identificar com o campo vazio identifica o exemplo que o campo mostra", async () => {
+  test("Identificar com o campo vazio identifica o exemplo que o campo mostra, e o exemplo é uma peça identificada", async () => {
     const ctx = await browser.newContext(TELAS[tela]);
     const page = await ctx.newPage();
     await page.goto(base);
     for (const [modo, exemplo] of [
       ["codigo", "311960"],
-      ["descricao", "ROLAMENTO 6205 2RS C3 RIGIDO DE ESFERAS"],
+      ["descricao", "ROLAMENTO RIGIDO DE ESFERAS 6205 2RS C3"],
     ]) {
       await page.check(`input[name="tipo"][value="${modo}"]`, { force: true });
       await page.fill("#texto", "");
@@ -168,6 +168,8 @@ describe.each(Object.keys(TELAS))("tela inicial no %s", (tela) => {
       await page.click("#form-resolver .primario");
       await page.waitForSelector("#resultado .placa");
       expect(await page.inputValue("#texto")).toBe(exemplo);
+      expect(await page.locator("#placa-titulo").textContent(), `exemplo do modo ${modo}`).toBe("Peça identificada");
+      expect(await page.locator("#resultado .busca").textContent()).toBe(modo === "codigo" ? `Código ${exemplo}` : exemplo);
       await page.evaluate(() => (document.querySelector("#resultado")!.innerHTML = ""));
     }
     await ctx.close();

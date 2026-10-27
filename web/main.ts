@@ -129,7 +129,7 @@ function ajustarVoltaDoLote() {
 type Tipo = "codigo" | "descricao" | "ocr";
 let ultima: { tipo: Tipo; texto: string; resposta: Resposta } | null = null;
 /** O exemplo que o campo vazio mostra. Identificar com o campo vazio identifica esse exemplo. */
-const EXEMPLO = { codigo: "311960", descricao: "ROLAMENTO 6205 2RS C3 RIGIDO DE ESFERAS" };
+const EXEMPLO = { codigo: "311960", descricao: "ROLAMENTO RIGIDO DE ESFERAS 6205 2RS C3" };
 
 function tipoAtual(): Tipo {
   return (document.querySelector<HTMLInputElement>('input[name="tipo"]:checked')?.value as Tipo) ?? "codigo";
@@ -189,7 +189,7 @@ function blocoGrupo(g: Grupo, e: EspecificacaoTecnica | null): string {
   </section>`;
 }
 
-function desenharResposta(r: Resposta) {
+function desenharResposta(r: Resposta, busca: string) {
   const e = r.especificacao;
   const v = veredito(r);
   const o = r.original;
@@ -198,6 +198,7 @@ function desenharResposta(r: Resposta) {
   const motivos = lista(frases(r.motivos), v.nivel === "resolve" ? "motivos" : "motivos forte");
   // A resposta vem primeiro: a placa, a peça e o que mais apareceu, cadastro por cadastro. O resto fica a um toque.
   $("#resultado").innerHTML = `${voltarAoCaso()}
+  <p class="busca">${esc(busca)}</p>
   <section class="placa placa-${v.nivel} nova" aria-labelledby="placa-titulo">
     <div class="placa-faixa">
       ${picto(v.nivel, "placa-picto")}
@@ -290,7 +291,7 @@ async function resolver(tipo: Tipo, texto: string, rolar = true) {
   try {
     const resposta = await api<Resposta>("/api/resolver", { tipo, texto });
     ultima = { tipo, texto, resposta };
-    desenharResposta(resposta);
+    desenharResposta(resposta, tipo === "codigo" ? `Código ${texto}` : texto);
     if (rolar) $("#resultado").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   } catch (e) {
     $("#resultado").innerHTML = `${voltarAoCaso()}<p class="erro" role="alert">Não foi possível identificar a peça: ${esc((e as Error).message)}. Tente de novo em alguns segundos.</p>`;
