@@ -129,7 +129,7 @@ function ajustarVoltaDoLote() {
 type Tipo = "codigo" | "descricao" | "ocr";
 let ultima: { tipo: Tipo; texto: string; resposta: Resposta } | null = null;
 /** O exemplo que o campo vazio mostra. Identificar com o campo vazio identifica esse exemplo. */
-const EXEMPLO = { codigo: "311960", descricao: "ROLAMENTO 6205 2RS C3 RIGIDO DE ESFERAS" };
+const EXEMPLO = { codigo: "311960", descricao: "ROLAMENTO RIGIDO DE ESFERAS 6205 2RS C3" };
 
 function tipoAtual(): Tipo {
   return (document.querySelector<HTMLInputElement>('input[name="tipo"]:checked')?.value as Tipo) ?? "codigo";
