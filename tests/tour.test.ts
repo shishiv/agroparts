@@ -169,6 +169,7 @@ describe.each(Object.keys(TELAS))("tela inicial no %s", (tela) => {
       await page.waitForSelector("#resultado .placa");
       expect(await page.inputValue("#texto")).toBe(exemplo);
       expect(await page.locator("#placa-titulo").textContent(), `exemplo do modo ${modo}`).toBe("Peça identificada");
+      expect(await page.locator("#resultado .busca").textContent()).toBe(modo === "codigo" ? `Código ${exemplo}` : exemplo);
       await page.evaluate(() => (document.querySelector("#resultado")!.innerHTML = ""));
     }
     await ctx.close();
