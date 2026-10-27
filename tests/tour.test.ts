@@ -110,22 +110,20 @@ async function abrirPeloMenu(page: Page, nome: string) {
 }
 
 describe.each(Object.keys(TELAS))("passo a passo no %s", (tela) => {
-  test("a visão geral abre na primeira visita, vai até o fim e não volta sozinha", async () => {
+  test("a primeira visita abre no campo, e a visão geral abre pelo menu e vai até o fim", async () => {
     const ctx = await browser.newContext(TELAS[tela]);
     const page = await ctx.newPage();
     await page.goto(base);
-    await percorrer(page, "inicio", tela);
-    expect(await page.evaluate(() => localStorage.getItem("agroparts.tour.v1"))).toBe("sim");
-    await page.reload();
     await page.waitForTimeout(500);
     expect(await page.locator(".driver-popover").count()).toBe(0);
+    await abrirPeloMenu(page, "inicio");
+    await percorrer(page, "inicio", tela);
     await ctx.close();
   }, 180_000);
 
   for (const nome of Object.keys(TOURS).filter((n) => n !== "inicio")) {
     test(`tour ${nome} roda o exemplo e destaca cada prova`, async () => {
       const ctx = await browser.newContext(TELAS[tela]);
-      await ctx.addInitScript(() => localStorage.setItem("agroparts.tour.v1", "sim"));
       const page = await ctx.newPage();
       await page.goto(base);
       await abrirPeloMenu(page, nome);
@@ -139,6 +137,7 @@ describe.each(Object.keys(TELAS))("passo a passo no %s", (tela) => {
     const page = await ctx.newPage();
     await page.goto(base);
     const total = TOURS.inicio.passos.length;
+    await abrirPeloMenu(page, "inicio");
     await retrato(page, "");
     await page.keyboard.press("ArrowRight");
     await retrato(page, `1 de ${total}`);
@@ -147,13 +146,9 @@ describe.each(Object.keys(TELAS))("passo a passo no %s", (tela) => {
     await page.keyboard.press("Escape");
     await expect.poll(() => page.locator(".driver-popover").count()).toBe(0);
     expect(await page.evaluate(() => document.activeElement?.id)).toBe("como-funciona");
-    await page.reload();
-    expect(await page.locator(".driver-popover").count()).toBe(0);
-    await page.evaluate(() => localStorage.clear());
-    await page.reload();
+    await abrirPeloMenu(page, "inicio");
     await page.click(".tour-pular");
     await expect.poll(() => page.locator(".driver-popover").count()).toBe(0);
-    expect(await page.evaluate(() => localStorage.getItem("agroparts.tour.v1"))).toBe("sim");
     await ctx.close();
   }, 120_000);
 });
@@ -171,7 +166,6 @@ async function telaInteira(page: Page) {
 describe.each(Object.keys(TELAS))("exemplos da apresentação no %s", (tela) => {
   test("dois toques levam da tela inicial a cada caso; um roda o caso e outro volta", async () => {
     const ctx = await browser.newContext(TELAS[tela]);
-    await ctx.addInitScript(() => localStorage.setItem("agroparts.tour.v1", "sim"));
     const page = await ctx.newPage();
     const erros: string[] = [];
     page.on("pageerror", (e) => erros.push(e.message));
@@ -210,6 +204,7 @@ test("com movimento reduzido, o passo a passo não anima", async () => {
   const ctx = await browser.newContext({ ...TELAS.desktop, reducedMotion: "reduce" });
   const page = await ctx.newPage();
   await page.goto(base);
+  await abrirPeloMenu(page, "inicio");
   await retrato(page, "");
   expect(await page.evaluate(() => [document.body.classList.contains("driver-simple"), document.body.classList.contains("driver-fade")])).toEqual([true, false]);
   await ctx.close();

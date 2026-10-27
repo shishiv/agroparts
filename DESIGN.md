@@ -281,7 +281,7 @@ As fotos vêm do PDF, com o crédito embaixo de cada uma, e aparecem só nos exe
 
 ### Passo a passo (Como funciona)
 
-O botão "Como funciona" fica no topo, em texto azul com o pictograma de informação. Ele abre o link para os exemplos da apresentação e a lista de explicações: a visão geral e uma por caso. A visão geral abre sozinha na primeira visita e fica lembrada no navegador. Quando um passo aponta para algo atrás de "Ver detalhes", o passo abre esse detalhe antes de destacar.
+O botão "Como funciona" fica no topo, em texto azul com o pictograma de informação. Ele abre o link para os exemplos da apresentação e a lista de explicações: a visão geral e uma por caso. Nenhuma explicação abre sozinha: quem chega cai direto no campo. Quando um passo aponta para algo atrás de "Ver detalhes", o passo abre esse detalhe antes de destacar.
 
 - O balão é papel com borda de tinta de 2px e canto de 4px, sem sombra. Título em Semi Condensed 700, texto em Barlow 400 na cor tinta 2, uma ou duas frases curtas.
 - "Avançar" é o botão primário, "Voltar" é o secundário e "Pular explicação" é um link discreto em cor suave.
