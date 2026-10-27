@@ -153,6 +153,27 @@ describe.each(Object.keys(TELAS))("passo a passo no %s", (tela) => {
   }, 120_000);
 });
 
+describe.each(Object.keys(TELAS))("tela inicial no %s", (tela) => {
+  test("Identificar com o campo vazio identifica o exemplo que o campo mostra", async () => {
+    const ctx = await browser.newContext(TELAS[tela]);
+    const page = await ctx.newPage();
+    await page.goto(base);
+    for (const [modo, exemplo] of [
+      ["codigo", "311960"],
+      ["descricao", "ROLAMENTO 6205 2RS C3 RIGIDO DE ESFERAS"],
+    ]) {
+      await page.check(`input[name="tipo"][value="${modo}"]`, { force: true });
+      await page.fill("#texto", "");
+      expect(await page.getAttribute("#texto", "placeholder")).toContain(exemplo);
+      await page.click("#form-resolver .primario");
+      await page.waitForSelector("#resultado .placa");
+      expect(await page.inputValue("#texto")).toBe(exemplo);
+      await page.evaluate(() => (document.querySelector("#resultado")!.innerHTML = ""));
+    }
+    await ctx.close();
+  }, 60_000);
+});
+
 /** A tela não rola na horizontal e toda imagem visível carregou. */
 async function telaInteira(page: Page) {
   await page.evaluate(() => document.querySelectorAll<HTMLImageElement>("img[loading=lazy]").forEach((i) => (i.loading = "eager")));
