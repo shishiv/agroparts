@@ -84,7 +84,7 @@ Três números são capacidade, não moagem, e a moagem real pode ser menor.
 O protótipo foi medido contra o [gabarito v1](../medicao/gabarito-v1.md), registrado em 05/10/2026 antes do motor, no padrão 11797 (rolamento de esfera) do CATMAT.
 O rótulo foi feito pelo agente que escreve o motor; a revisão humana da equipe está pendente.
 
-- 104 pares de cadastros com a mesma designação básica e os dois itens elegíveis: 14 são a mesma peça e 90 são peças parecidas, mas diferentes (outra proteção, folga ou material).
+- 104 pares de cadastros com a mesma designação básica e os dois itens elegíveis: 14 são a mesma peça e 90 são peças parecidas, mas diferentes (outra proteção ou folga).
 - A AgroParts achou 14 de 14 e recusou 90 de 90. Os exemplos do deck são pares reais do gabarito: CATMAT 283529 (6312 ZZ) com 472657 (6312-2Z), a mesma peça, e com 311967 (6312ZZ C3), outra folga.
 - No lote dos 396 cadastros ativos do padrão, 33 repetem outro, em 28 grupos (23 com 2 cadastros e 5 com 3): 33 ÷ 396 = 8,3%, ou 1 em cada 12.
 
