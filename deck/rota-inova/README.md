@@ -1,14 +1,15 @@
 # Deck do pitch do Rota Inova (open-slide)
 
 O pitch final da AgroParts no encerramento do Rota Inova UEMG 2026 (quinta, 29/10/2026, em Ribeirão Preto, 6 minutos), feito com [open-slide](https://open-slide.dev).
-São 16 páginas em três atos (a dor, a solução e os números) e duas páginas de apoio, com as fontes e os créditos.
+São 17 páginas em três atos: a dor, a solução e os números.
 Cada página mostra uma ideia: o título e o número ou a imagem que a prova. O resto é falado.
-Na tela só entra número publicado, com o nome de quem publicou, número que o protótipo mediu ou conta feita com eles. Estimativas e hipóteses ficam na nota de perguntas, e as fontes de todos os números ficam na página de apoio.
+Na tela só entra número publicado, com o nome de quem publicou, número que o protótipo mediu ou conta feita com eles.
+O deck não tem página de fontes nem de créditos: as fontes, os créditos e as estimativas ficam nas notas, entre colchetes.
 
 - O deck é [`slides/rota-inova-pitch/index.tsx`](slides/rota-inova-pitch/index.tsx). Cada página é um componente React numa tela de 1920 x 1080.
-- O roteiro, de cerca de 5 minutos e meio, está no export `notes` do mesmo arquivo. O modo apresentador do open-slide mostra o roteiro ao lado do slide. A nota da página de fontes traz as perguntas mais difíceis da banca, com resposta de uma frase.
+- O roteiro, de 5 minutos e 45 segundos, está no export `notes` do mesmo arquivo. O modo apresentador do open-slide mostra o roteiro ao lado do slide. A nota da última página traz as perguntas mais difíceis da banca, com resposta de uma frase.
 - O PDF para projetar ou enviar à organização é [`exportado/agroparts-rota-inova-pitch.pdf`](exportado/agroparts-rota-inova-pitch.pdf). O link do protótipo é clicável no PDF.
-- As contas e as fontes dos números estão em [`docs/pesquisa/numeros-do-pitch.md`](../../docs/pesquisa/numeros-do-pitch.md). As regras de conteúdo são as de [`docs/rota-inova/README.md`](../../docs/rota-inova/README.md#regras-de-conteúdo).
+- As contas, as fontes e os créditos estão em [`docs/pesquisa/numeros-do-pitch.md`](../../docs/pesquisa/numeros-do-pitch.md). As regras de conteúdo são as de [`docs/rota-inova/README.md`](../../docs/rota-inova/README.md#regras-de-conteúdo).
 
 ## Como usar
 
@@ -21,17 +22,17 @@ Precisa de Bun, Python 3 e poppler (pdftocairo e pdfinfo).
 O `dev` e o `build` rodam antes o [`preparar.sh`](preparar.sh), que recorta as ilustrações do modelo do Canva para `slides/rota-inova-pitch/assets/canva/`, fora do Git. O deck atual não usa nenhuma delas.
 As imagens de `exportado/png/` também ficam fora do Git.
 
-## Demonstração ao vivo e plano B
+## Telas do protótipo
 
-A página 8 pede à plateia que escaneie o QR e toque Identificar.
-Ao lado, o celular roda sozinho, em loop, a gravação de 31 s do protótipo publicado ([`assets/video/demo-celular.mp4`](slides/rota-inova-pitch/assets/video/demo-celular.mp4)). Sem internet, ela é o plano B.
-O vídeo só roda no navegador. No PDF, a página mostra a capa do vídeo, que é o resultado do código 311960.
+As páginas 8 e 9 mostram os seis passos do motor com telas reais do protótipo publicado, para o código 283529 do catálogo do governo.
+[`capturar-telas.sh`](capturar-telas.sh) refaz os recortes em `slides/rota-inova-pitch/assets/telas/` a partir de https://agroparts.pages.dev. Ele precisa de agent-browser, ImageMagick e internet.
+Rode de novo depois de mudar a interface do protótipo.
 
 ## QR code
 
-As páginas 8 e 16 têm um QR code que abre https://agroparts.pages.dev/. Ele foi gerado localmente com qrencode e conferido com zbarimg nas imagens de 1920 x 1080:
+Só a página 17, a do pedido, tem QR code. Ele abre https://agroparts.pages.dev/ e foi gerado localmente com qrencode. Para conferir nas imagens de 1920 x 1080 que ele é lido e que nenhuma outra página tem QR:
 
 ```sh
 qrencode -t SVG -l M -m 2 --svg-path --foreground=0e073f --background=ffffff -o slides/rota-inova-pitch/assets/qr-agroparts.svg "https://agroparts.pages.dev/"
-zbarimg -q -Sdisable -Sqrcode.enable exportado/png/slide-08.png exportado/png/slide-16.png
+zbarimg -q -Sdisable -Sqrcode.enable exportado/png/slide-*.png
 ```
