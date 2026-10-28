@@ -2,7 +2,8 @@
 
 Consulta das fontes: 28/10/2026.
 Este arquivo guarda as contas e as fontes dos números do [deck do pitch final](../../deck/rota-inova/slides/rota-inova-pitch/index.tsx), apresentado em 29/10/2026.
-Cada número é marcado como dado publicado, estimativa ou hipótese, como no deck.
+Na tela do deck só entra número publicado (com o nome de quem publicou), número que o protótipo mediu em dados públicos ou conta feita com eles.
+As estimativas e hipóteses abaixo ficam na nota de perguntas do deck, marcadas como tal.
 Nenhum número foi medido numa usina. O piloto é que mede o valor real ([ADR 0016](../decisoes/adr-0016-fronteira-de-posicionamento.md)).
 
 ## Gasto de manutenção por tonelada
@@ -24,6 +25,7 @@ pdftocairo -png -r 110 -f 15 -l 15 /tmp/sm-3t26.pdf /tmp/sm-capex   # a tabela "
 
 ## Usinas da região de Frutal e do Triângulo Mineiro
 
+Estes números saíram da tela e ficam só para as perguntas.
 Conta de cada usina: R$ 8,46 × as toneladas dela (estimativa).
 
 | Usina | Toneladas | O que é | Fonte | Manutenção de entressafra por safra |
@@ -36,6 +38,33 @@ Conta de cada usina: R$ 8,46 × as toneladas dela (estimativa).
 As usinas da BP Bunge na região (Frutal, Itapagipe, Ituiutaba e Santa Juliana) não entram com número: só há o total da empresa, 11 usinas e 32 mi t de capacidade ([Canal Energia, 22/07/2019](https://www.canalenergia.com.br/noticias/53105913/bp-e-bunge-se-unem-para-investir-em-bioenergia)).
 A Delta Sucroenergia também fica fora, porque o último número público achado é de 2012.
 Três números são capacidade, não moagem, e a moagem real pode ser menor.
+
+## Teste com dados públicos
+
+O protótipo foi medido contra o [gabarito v1](../medicao/gabarito-v1.md), registrado em 05/10/2026 antes do motor, no padrão 11797 (rolamento de esfera) do CATMAT.
+O rótulo foi feito pelo agente que escreve o motor; a revisão humana da equipe está pendente.
+
+- 104 pares de cadastros com a mesma designação básica e os dois itens elegíveis: 14 são a mesma peça e 90 são peças parecidas, mas diferentes (outra proteção, folga ou material).
+- A AgroParts achou 14 de 14 e recusou 90 de 90. Os exemplos do deck são pares reais do gabarito: CATMAT 283529 (6312 ZZ) com 472657 (6312-2Z), a mesma peça, e com 311967 (6312ZZ C3), outra folga.
+- No lote dos 396 cadastros ativos do padrão, 33 repetem outro, em 28 grupos (23 com 2 cadastros e 5 com 3): 33 ÷ 396 = 8,3%, ou 1 em cada 12.
+
+```bash
+bun run medir
+```
+
+## Retorno
+
+Na tela, o retorno é a conta do que basta para a AgroParts se pagar, feita só com dado publicado e o preço proposto:
+
+- A São Martinho tem 4 usinas ([site da empresa](https://www.saomartinho.com.br/show.aspx?idCanal=jVGUPH0WvMeYYUV%20LdgEcQ%3D%3D&linguagem=pt), 28/10/2026).
+- Nos mesmos 9 meses do gasto publicado: 4 usinas × R$ 5 mil × 9 meses = R$ 180 mil.
+- R$ 180 mil ÷ R$ 183,5 mi = **0,098%**, que o deck arredonda para 0,1%.
+
+```bash
+curl -fsSL -A 'Mozilla/5.0' 'https://www.saomartinho.com.br/show.aspx?idCanal=jVGUPH0WvMeYYUV%20LdgEcQ%3D%3D&linguagem=pt' | grep -o '4 USINAS'
+```
+
+A conta do retorno estimado abaixo saiu da tela e fica na nota de perguntas.
 
 ## Retorno estimado
 
@@ -57,3 +86,17 @@ A UNICA contou 250 unidades produtoras operando no Centro-Sul na 2ª quinzena de
 A conta conta compradores, não máquinas, como pede o [ADR 0016](../decisoes/adr-0016-fronteira-de-posicionamento.md).
 
 Para comparação, Minas Gerais moeu 74,7 mi t na safra 2025/26, segundo a SIAMIG ([Itatiaia, 24/04/2026](https://www.itatiaia.com.br/economia/negocios/eloos/safra-mineira-de-cana-pode-ultrapassar-83-milhoes-de-toneladas-diz-siamig/)).
+
+## Lá fora
+
+Números publicados pela própria Verusen, não validação independente ([pesquisa de mercado](mercado.md)):
+
+- Caso de uma fabricante industrial com 29 fábricas: US$ 20,9 mi de economia identificada e **US$ 10,5 mi de economia verificada** em estoque de peças ([caso Verusen](https://verusen.com/use_case/use-case-fortune-500-industrial-equipment-manufacturer/)).
+- A frase da página inicial da Verusen para o problema é "Same part, many names: one bearing, four SKUs, six storerooms" ([verusen.com](https://verusen.com/)).
+- Captação: US$ 8 mi na série A e US$ 25 mi na série B, em 25/01/2022, que somam US$ 33 mi ([comunicado da Verusen](https://verusen.com/news/supply-chain-innovator-verusen-secures-25-million-in-series-b-funding/)).
+
+```bash
+curl -fsSL 'https://r.jina.ai/https://verusen.com/use_case/use-case-fortune-500-industrial-equipment-manufacturer/' | grep -nE '29 Plants|10\.5M'
+curl -fsSL 'https://r.jina.ai/https://verusen.com/' | grep -n 'Same part, many names'
+curl -fsSL 'https://r.jina.ai/https://verusen.com/news/supply-chain-innovator-verusen-secures-25-million-in-series-b-funding/' | grep -nE '\$25 million|\$8 million'
+```
