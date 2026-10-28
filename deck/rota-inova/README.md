@@ -1,12 +1,12 @@
 # Deck do pitch do Rota Inova (open-slide)
 
-O pitch da AgroParts para a apresentação final do Rota Inova UEMG 2026 (sexta, 23/10/2026, de 5 a 7 minutos), feito com [open-slide](https://open-slide.dev).
-São os 13 slides do pitch de [`docs/rota-inova/entrega-unica.html`](../../docs/rota-inova/entrega-unica.html), na mesma ordem, mais uma página de fontes e créditos, no visual do modelo do Canva da equipe.
+O pitch final da AgroParts no encerramento do Rota Inova UEMG 2026 (quinta, 29/10/2026, em Ribeirão Preto, 6 minutos), feito com [open-slide](https://open-slide.dev), no visual do modelo do Canva da equipe.
+São 12 páginas em três atos (a dor, a solução e os números) e duas páginas de apoio, com as fontes e os créditos.
 
 - O deck é [`slides/rota-inova-pitch/index.tsx`](slides/rota-inova-pitch/index.tsx). Cada página é um componente React numa tela de 1920 x 1080.
-- O roteiro de cerca de 6 minutos está no export `notes` do mesmo arquivo. O modo apresentador do open-slide mostra o roteiro ao lado do slide.
+- O roteiro, de cerca de 5 minutos e meio, está no export `notes` do mesmo arquivo. O modo apresentador do open-slide mostra o roteiro ao lado do slide. A nota da página de fontes traz as três perguntas mais difíceis da banca, com resposta.
 - O PDF para projetar ou enviar à organização é [`exportado/agroparts-rota-inova-pitch.pdf`](exportado/agroparts-rota-inova-pitch.pdf). O link do protótipo é clicável no PDF.
-- As regras de conteúdo são as de [`docs/rota-inova/README.md`](../../docs/rota-inova/README.md#regras-de-conteúdo).
+- As contas e as fontes dos números estão em [`docs/pesquisa/numeros-do-pitch.md`](../../docs/pesquisa/numeros-do-pitch.md). As regras de conteúdo são as de [`docs/rota-inova/README.md`](../../docs/rota-inova/README.md#regras-de-conteúdo).
 
 ## Como usar
 
@@ -20,15 +20,17 @@ O `dev` e o `build` rodam antes o [`preparar.sh`](preparar.sh), que recorta as i
 Essa pasta fica fora do Git, como em `docs/rota-inova/`, porque as ilustrações são elementos do Canva.
 As imagens de `exportado/png/` também ficam fora do Git.
 
-## Agentes
+## Demonstração ao vivo e plano B
 
-As skills do open-slide ficam em [`.agents/skills/`](.agents/skills/): `create-slide`, `slide-authoring` e `apply-comments`, entre outras. Leia [`AGENTS.md`](AGENTS.md) antes de editar o deck.
+A página 7 pede à plateia que escaneie o QR e toque Identificar.
+Ao lado, o celular roda sozinho, em loop, a gravação de 31 s do protótipo publicado ([`assets/video/demo-celular.mp4`](slides/rota-inova-pitch/assets/video/demo-celular.mp4)). Sem internet, ela é o plano B.
+O vídeo só roda no navegador. No PDF, a página mostra a capa do vídeo, que é o resultado do código 311960.
 
 ## QR code
 
-Os slides 7 e 13 têm um QR code que abre https://agroparts.pages.dev/. Ele foi gerado localmente com qrencode e conferido com zbarimg nas imagens de 1920 x 1080:
+As páginas 7 e 12 têm um QR code que abre https://agroparts.pages.dev/. Ele foi gerado localmente com qrencode e conferido com zbarimg nas imagens de 1920 x 1080:
 
 ```sh
 qrencode -t SVG -l M -m 2 --svg-path --foreground=0e073f --background=ffffff -o slides/rota-inova-pitch/assets/qr-agroparts.svg "https://agroparts.pages.dev/"
-zbarimg -q exportado/png/slide-07.png exportado/png/slide-13.png
+zbarimg -q exportado/png/slide-07.png exportado/png/slide-12.png
 ```
