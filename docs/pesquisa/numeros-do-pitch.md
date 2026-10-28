@@ -3,8 +3,48 @@
 Consulta das fontes: 28/10/2026.
 Este arquivo guarda as contas e as fontes dos números do [deck do pitch final](../../deck/rota-inova/slides/rota-inova-pitch/index.tsx), apresentado em 29/10/2026.
 Na tela do deck só entra número publicado (com o nome de quem publicou), número que o protótipo mediu em dados públicos ou conta feita com eles.
+O deck não tem página de fontes nem de créditos: a fonte de cada número fica na nota da página, entre colchetes, e aqui.
 As estimativas e hipóteses abaixo ficam na nota de perguntas do deck, marcadas como tal.
 Nenhum número foi medido numa usina. O piloto é que mede o valor real ([ADR 0016](../decisoes/adr-0016-fronteira-de-posicionamento.md)).
+
+## Na tela, página por página
+
+| Página | Na tela | Fonte |
+| --- | --- | --- |
+| 2 e 4 | A cena da safra e os três cadastros | Ilustrativos, criados pela equipe |
+| 3 | R$ 183,5 mi de manutenção de entressafra e outros, em 9 meses | São Martinho, Resultados 3T26, 09/02/2026, p. 15, linha "Manutenção Entressafra/Outros" (abaixo) |
+| 5 | 16% menos peças na prateleira | Departamento de Energia dos EUA, auditoria [DOE-OIG-24-30](https://www.energy.gov/sites/default/files/2024-09/DOE-OIG-24-30.pdf), 24/09/2024 |
+| 8 e 9 | Os seis passos, com telas do protótipo | Código 283529 em https://agroparts.pages.dev, 28/10/2026 (abaixo) |
+| 10 | Catálogo do governo, ISO 8000, SAP, IBM e Verusen; respostas registradas antes; na dúvida, uma pessoa; uma família por vez | [CATMAT](catmat-pncp.md), [identidade e equivalência](aprofundamento-identidade-equivalencia.md), [jornada e integração](aprofundamento-jornada-integracao.md), [mercado](mercado.md), [gabarito v1](../medicao/gabarito-v1.md), [roadmap](../roadmap.md) e [ADR 0020](../decisoes/adr-0020-prova-antes-do-pitch.md) |
+| 11 | 104 pares, 14 de 14 achados, 90 de 90 recusados | Teste com dados públicos (abaixo) |
+| 12 | 1 em 12 cadastros repetia outro | Lote do protótipo (abaixo) |
+| 13 | US$ 10,5 mi de economia verificada | Caso publicado pela Verusen (abaixo) |
+| 14 | Verusen, SAP e IBM | [mercado](mercado.md); learning.sap.com e ibm.com/docs, consultados em 25/08/2026 |
+| 15 | 250 usinas operando no Centro-Sul | UNICA (abaixo) |
+| 16 | As quatro etapas, o resultado de cada uma e o que pedimos | [Roadmap](../roadmap.md); custos em [`01-ideacao.html`](../rota-inova/01-ideacao.html) e [`entrega-unica.html`](../rota-inova/entrega-unica.html) (equipe, licença do catálogo do fabricante e servidor) |
+| 17 | Piloto de 90 dias, sem custo para a usina | Proposta da equipe |
+
+O pedido não tem valor em reais nem data, por decisão da equipe em 28/10/2026: o repositório só registra as categorias de custo, e o piloto é que dimensiona cada etapa.
+
+## Os seis passos (páginas 8 e 9)
+
+As telas são recortes do protótipo publicado, num celular de 360 px, para o código 283529 do CATMAT (`6312 ZZ`).
+O deck não leva texto de apoio, então os recortes escondem a legenda dos desenhos, a frase que explica cada grupo, a semelhança de texto, o link do catálogo e o traço que abre cada lista.
+O motor acha 8 cadastros com a mesma designação básica: 2 são a mesma peça (292852 e 472657), 1 precisa de uma pessoa (357380, `6312 2ZR`, cujo final `R` não está nas regras) e 5 parecem, mas não são (311967, 317412, 346385, 346386 e 472656).
+
+```bash
+sh deck/rota-inova/capturar-telas.sh
+bun -e 'import { resolver } from "./src/motor/resolucao.ts"; for (const x of resolver("codigo", "283529").relacoes) console.log(x.decisao, x.alvo)'
+```
+
+## Créditos
+
+- Rolamento com tampas de metal, na abertura: R. Henrik Nilsson, Wikimedia Commons, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0), foto recortada.
+- Colheita em Piracicaba (SP), na cena da safra: Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0), foto recortada.
+- Telas do protótipo: equipe AgroParts, 28/10/2026.
+- Fonte Montserrat, licença SIL Open Font License ([`OFL.txt`](../../deck/rota-inova/slides/rota-inova-pitch/assets/fontes/OFL.txt)).
+
+O crédito de cada foto também fica sobre a própria foto, como a licença CC BY pede.
 
 ## Gasto de manutenção por tonelada
 
@@ -54,7 +94,8 @@ bun run medir
 
 ## Retorno
 
-Na tela, o retorno é a conta do que basta para a AgroParts se pagar, feita só com dado publicado e o preço proposto:
+O preço saiu da tela em 28/10/2026: o pitch pede investimento, não vende um preço.
+A conta do que basta para a AgroParts se pagar fica na nota de perguntas, feita só com dado publicado e o preço proposto em hipótese:
 
 - A São Martinho tem 4 usinas ([site da empresa](https://www.saomartinho.com.br/show.aspx?idCanal=jVGUPH0WvMeYYUV%20LdgEcQ%3D%3D&linguagem=pt), 28/10/2026).
 - Nos mesmos 9 meses do gasto publicado: 4 usinas × R$ 5 mil × 9 meses = R$ 180 mil.
@@ -82,7 +123,8 @@ bun -e 'import { loteCatmat } from "./src/motor/lote.ts"; const g = loteCatmat()
 ## Mercado
 
 A UNICA contou 250 unidades produtoras operando no Centro-Sul na 2ª quinzena de maio de 2026: 231 de cana, 10 de milho e 9 flex ([UNICA, 22/06/2026](https://unica.com.br/noticias/safra-2026-2027-2a-quinzena-de-maio/)).
-250 × R$ 60 mil = **R$ 15 mi por ano**, só no Centro-Sul (estimativa com o preço em hipótese).
+Na tela fica só esse número.
+Na nota de perguntas: 250 × R$ 60 mil = **R$ 15 mi por ano**, só no Centro-Sul (estimativa com o preço em hipótese).
 A conta conta compradores, não máquinas, como pede o [ADR 0016](../decisoes/adr-0016-fronteira-de-posicionamento.md).
 
 Para comparação, Minas Gerais moeu 74,7 mi t na safra 2025/26, segundo a SIAMIG ([Itatiaia, 24/04/2026](https://www.itatiaia.com.br/economia/negocios/eloos/safra-mineira-de-cana-pode-ultrapassar-83-milhoes-de-toneladas-diz-siamig/)).
