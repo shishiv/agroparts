@@ -662,7 +662,7 @@ Seis: padroniza a descrição sem apagar o original. Cada resposta guarda o porq
 [Fontes, todas em docs/pesquisa/ do repositório: 343.880 itens de material na API do Compras.gov.br em 25/08/2026 (catmat-pncp.md); as partes 110 a 140 da ISO 8000 (aprofundamento-identidade-equivalencia.md); SAP MDG, SAP EAM e IBM Maximo (aprofundamento-jornada-integracao.md); Verusen (mercado.md); termos de uso da SKF e da Timken conferidos em 05/10/2026 (fontes-do-prototipo.md e ADR 0010). As 21 decisões de projeto estão em docs/decisoes/.]`,
   `3:21 · E testamos com rolamentos reais do catálogo, com o gabarito fechado antes.
 Em 14 pares, era a mesma peça com outro nome, como 6312 ZZ e 6312-2Z. A AgroParts achou os 14.
-Em 90 pares, a peça parecia igual, mas tinha outra proteção, folga ou material. A AgroParts recusou os 90.
+Em 90 pares, a peça parecia igual, mas tinha outra proteção ou outra folga. A AgroParts recusou os 90.
 Na dúvida, ela não arrisca: chama uma pessoa.
 [Fonte: teste da equipe no catálogo de materiais do governo federal (CATMAT, padrão 11797, Compras.gov.br): 104 pares, 14 da mesma peça e 90 parecidos, mas diferentes, com o gabarito registrado em 05/10/2026, antes do teste (dados/gabarito/v1/preregistro.json e docs/medicao/gabarito-v1.md). Os exemplos são pares do teste: 283529 (6312 ZZ) com 472657 (6312-2Z) e com 311967 (6312ZZ C3). Não é cadastro de usina.]`,
   `3:49 · E, lendo todos os cadastros de rolamento de esfera de uma vez, um em cada doze repetia outro.
