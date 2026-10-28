@@ -1,7 +1,8 @@
 // Pitch final da AgroParts no Rota Inova UEMG 2026 (desafio AGR08): seis minutos, tom de Shark Tank.
-// Três atos: a dor (a cena da safra e o que a manutenção já custa), a solução (o que ela responde, os seis passos
-// por trás da resposta, o que a equipe estudou e o teste com dados reais) e os números (quem já ganha com isso lá
-// fora, o mercado, o investimento por etapa e o pedido).
+// Três atos, um por pessoa: 1, Gabi, o problema e um case (a cena da safra e o que a manutenção já custa); 2, Myke,
+// a solução (o que ela responde, os seis passos, o que a equipe estudou, como testou com dados reais e o resultado);
+// 3, Alberto, a ideia do negócio (quem já ganha com isso lá fora, quem paga, o mercado, o investimento por etapa e
+// o pedido).
 // Cada página tem uma ideia: o título e o número ou a imagem que a prova. O resto é falado: o roteiro fica no
 // export `notes`, que o modo apresentador mostra. Na tela só entra número publicado (com o nome de quem publicou),
 // número que o protótipo mediu ou conta feita com eles. A fonte de cada número, os créditos e as perguntas da
@@ -199,7 +200,7 @@ const Abertura: Page = () => (
   </div>
 );
 
-// ---------- Ato 1: a dor ----------
+// ---------- Ato 1, Gabi: o problema e um case ----------
 
 const DiaDeSafra: Page = () => (
   <Pagina direita={LARGURA_FOTO + 100}>
@@ -265,7 +266,7 @@ const AuditoriaNosEUA: Page = () => (
   </Pagina>
 );
 
-// ---------- Ato 2: a solução ----------
+// ---------- Ato 2, Myke: a solução ----------
 
 // As três respostas, como sinais: igual, dúvida e diferente. O traço começa na borda esquerda, alinhado ao texto.
 // `estreito` corta a sobra da direita, para o sinal ficar centrado entre dois blocos.
@@ -417,6 +418,37 @@ const Estudo: Page = () => (
   </Pagina>
 );
 
+// Como o teste foi feito, na ordem: os dados reais, o gabarito registrado, o motor depois dele e o conserto da
+// primeira rodada. O traço de cima de cada marco forma a linha do tempo. Horas e contagens: dados/gabarito/v1 e os
+// commits 88985c9 e c0689c5 do PR 4.
+const Marco = ({ numero, titulo, children }: { numero: number; titulo: string; children: ReactNode }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 20, paddingTop: 36, borderTop: '8px solid var(--osd-accent)', minWidth: 0 }}>
+    <span style={{ fontSize: 80, lineHeight: 1, fontWeight: 800, color: 'var(--osd-accent)', fontVariantNumeric: 'tabular-nums' }}>{numero}</span>
+    <span style={{ fontSize: 52, lineHeight: 1.08, fontWeight: 800 }}>{titulo}</span>
+    <span style={{ fontSize: 40, lineHeight: 1.2, fontWeight: 600, textWrap: 'balance' }}>{children}</span>
+  </div>
+);
+
+const ComoTestamos: Page = () => (
+  <Pagina>
+    <Titulo largura={1500}>Testamos com dados reais, não simulados</Titulo>
+    <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', columnGap: 56 }}>
+      <Marco numero={1} titulo="Dados reais">
+        42 cadastros do catálogo do governo
+      </Marco>
+      <Marco numero={2} titulo="Gabarito">
+        registrado em 5/10, às 9h06
+      </Marco>
+      <Marco numero={3} titulo="Motor">
+        entrou às 9h15, sem ver o gabarito
+      </Marco>
+      <Marco numero={4} titulo="1ª rodada">
+        6 erros: consertamos o motor, não o gabarito
+      </Marco>
+    </div>
+  </Pagina>
+);
+
 // Um par do teste: os dois códigos de fabricante, como estão no catálogo, e quantos pares desse tipo a AgroParts acertou.
 // Os exemplos são pares reais do gabarito v1 (CATMAT 283529 com 472657 e com 311967).
 const Codigo = ({ children }: { children: ReactNode }) => (
@@ -453,7 +485,7 @@ const Par = ({ sinal, a, b, placar, verbo, recuo = 0 }: { sinal: ReactNode; a: R
 
 const ParesTestados: Page = () => (
   <Pagina>
-    <Titulo largura={1500}>Testamos 104 pares, com o gabarito fechado antes</Titulo>
+    <Titulo largura={1500}>O resultado, em 104 pares reais</Titulo>
     <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', columnGap: 96 }}>
       <Par sinal={<SinalIgual tamanho={80} estreito />} a="6312 ZZ" b="6312-2Z" placar="14 de 14" verbo="achados" recuo={-14} />
       <Par
@@ -486,7 +518,7 @@ const UmEmDoze: Page = () => (
   </Pagina>
 );
 
-// ---------- Ato 3: os números ----------
+// ---------- Ato 3, Alberto: a ideia do negócio ----------
 
 const LaFora: Page = () => (
   <Pagina>
@@ -523,6 +555,18 @@ const Concorrencia: Page = () => (
       <Lado onde="Usina, em português">
         <Empresa cor="var(--osd-accent)">AgroParts</Empresa>
       </Lado>
+    </div>
+  </Pagina>
+);
+
+// O modelo de negócio sem preço: quem paga, pelo quê e de que orçamento. O preço é hipótese e fica na nota de perguntas.
+const ModeloDeNegocio: Page = () => (
+  <Pagina>
+    <Titulo>Como a AgroParts ganha dinheiro</Titulo>
+    <div style={{ marginTop: 112, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', columnGap: 96 }}>
+      <Ganho setor="Quem paga">A usina</Ganho>
+      <Ganho setor="Como">Assinatura por usina</Ganho>
+      <Ganho setor="Orçamento">Manutenção e compras</Ganho>
     </div>
   </Pagina>
 );
@@ -625,76 +669,88 @@ const Pedido: Page = () => (
 // ---------- Roteiro (modo apresentador) ----------
 // Cada nota começa pelo minuto em que a página entra, numa fala calma de 125 palavras por minuto.
 // A tela só mostra o título e o número; o resto está aqui, para falar.
-// Colchetes são instruções e fontes para quem apresenta: não se fala.
+// Colchetes são instruções e fontes para quem apresenta: não se fala. A primeira nota de cada ato diz quem fala.
 
 export const notes: (string | undefined)[] = [
-  `0:00 · Boa tarde. Somos a AgroParts, cinco estudantes de Sistemas de Informação da UEMG Frutal, no desafio AGR08.
+  `0:00 · [Fala 1, Gabi: o problema e um case, páginas 1 a 5.]
+Boa tarde. Somos a AgroParts, estudantes de Sistemas de Informação da UEMG Frutal, no desafio AGR08.
 Antes de comprar, a usina vai saber se a peça já está na prateleira.
 [Equipe: Allana Eduarda Braga Iquegami, Gabrielle Henrique Arruda Longo, Alberto Gabriel Rodrigues Bispo, Davi de Sousa Almeida e Myke Matos dos Santos.
 Créditos do deck: foto do rolamento com tampas de metal, R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0 (creativecommons.org/licenses/by/4.0), recortada. Fonte Montserrat, SIL Open Font License. As contas e as fontes de todos os números estão em github.com/shishiv/agroparts, docs/pesquisa/numeros-do-pitch.md.]`,
-  `0:14 · Imagine a Márcia, almoxarife numa usina aqui do Triângulo. Ela é uma personagem, mas a cena é comum.
+  `0:14 · Imagine a Márcia, almoxarife numa usina aqui do Triângulo.
 Dia de safra, a colhedora para. O mecânico pede um rolamento 6318.
-A Márcia procura no sistema, e o sistema diz que a peça não existe. Compras faz um pedido urgente, e a colhedora espera.
+A Márcia procura no sistema, e o sistema diz que a peça não existe. Compras faz um pedido urgente.
 No dia seguinte, alguém acha três rolamentos iguais na prateleira, cadastrados com outro nome.
-[A cena é ilustrativa. Foto: colheita em Piracicaba (SP), Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0 (creativecommons.org/licenses/by/3.0), recortada.]`,
-  `0:47 · Quanto custa manter uma usina rodando? A São Martinho publicou: 183 milhões e meio de reais com manutenção de entressafra e outros, em nove meses.
+[A cena é ilustrativa: a Márcia é uma personagem. Foto: colheita em Piracicaba (SP), Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0 (creativecommons.org/licenses/by/3.0), recortada.]`,
+  `0:40 · Quanto custa manter uma usina rodando? A São Martinho publicou: 183 milhões e meio de reais com manutenção de entressafra e outros, em nove meses.
 Cada peça comprada sem precisar sai desse dinheiro.
 [Fonte: São Martinho, Resultados 3T26, 09/02/2026, p. 15: R$ 183,5 mi em "Manutenção Entressafra/Outros", de abril a dezembro de 2025.]`,
-  `1:02 · Por que isso acontece? Hoje o processo é manual, no almoxarifado. Mas o cadastro é feito por cada setor.
+  `0:56 · Por que isso acontece? Hoje o processo é manual, no almoxarifado. Mas o cadastro é feito por cada setor.
 O almoxarifado, a manutenção e compras escrevem a mesma peça de três jeitos, e o sistema enxerga três peças.
 [Os três cadastros são ilustrativos.]`,
-  `1:21 · E não é só aqui: numa auditoria do governo dos Estados Unidos, a prateleira tinha 16% menos peças do que o sistema dizia.
-[Fonte: Departamento de Energia dos EUA, auditoria DOE-OIG-24-30, 24/09/2024.]`,
-  `1:32 · A AgroParts resolve isso. Ela confere a peça e responde uma de três coisas:
+  `1:14 · E não é só aqui: numa auditoria do governo dos Estados Unidos, a prateleira tinha 16% menos peças do que o sistema dizia.
+[Fonte: Departamento de Energia dos EUA, auditoria DOE-OIG-24-30, 24/09/2024. É uma operadora de rede elétrica, não uma usina.
+Gabi passa a palavra ao Myke.]`,
+  `1:25 · [Fala 2, Myke: a solução, páginas 6 a 13.]
+A AgroParts resolve isso. Ela confere a peça e responde uma de três coisas:
 é a mesma peça; precisa de uma pessoa; ou parece, mas não é.`,
-  `1:45 · Cada setor ganha. O almoxarifado acha a peça.
-A manutenção sabe na hora se ela já está na prateleira. E compras vê o cadastro repetido antes de comprar de novo.`,
-  `1:59 · Por trás da resposta, são seis passos, com um rolamento real do catálogo: o 6312 ZZ.
-Um: a pessoa dá o que tem: o código, a descrição ou a foto da etiqueta. Aqui, o código.
-Dois: a AgroParts lê a peça: rolamento 6312, furo de 60 milímetros, blindagem nos dois lados, folga normal.
+  `1:38 · Cada setor ganha: o almoxarifado acha a peça, a manutenção sabe se ela já está na prateleira, e compras não compra de novo.`,
+  `1:49 · São seis passos, com um rolamento real do catálogo do governo: o 6312 ZZ.
+Um: a pessoa dá o código, a descrição ou a foto da etiqueta. Da foto, ela lê o texto da etiqueta.
+Dois: a AgroParts lê tamanho, proteção e folga.
 Três: acha no catálogo os outros oito 6312.
-[Telas reais do protótipo em agroparts.pages.dev, código 283529 (6312 ZZ) do CATMAT, capturadas em 28/10/2026 com capturar-telas.sh. Os oito cadastros achados são 292852, 472657, 357380, 311967, 317412, 346385, 346386 e 472656; a tela mostra três deles.]`,
-  `2:28 · Quatro: compara o que muda a peça: tamanho, proteção e folga. O 472657 é igual em tudo, só o texto muda. O 311967 parece igual, mas tem outra folga.
+[Telas reais do protótipo em agroparts.pages.dev, código 283529 (6312 ZZ) do CATMAT, capturadas em 28/10/2026 com capturar-telas.sh. Os oito cadastros achados são 292852, 472657, 357380, 311967, 317412, 346385, 346386 e 472656; a tela mostra três deles. A foto passa pela leitura de texto do próprio site (tesseract.js): a câmera lê o texto, não a peça.]`,
+  `2:13 · Quatro: compara cada um. O 472657 é igual em tudo, só o texto muda. O 311967 parece igual, mas tem outra folga.
 Cinco: decide. Dois são a mesma peça, um precisa de uma pessoa e cinco parecem, mas não são.
-Seis: padroniza a descrição sem apagar o original. Cada resposta guarda o porquê, como o da folga.
+Seis: padroniza a descrição sem apagar o original.
 [Contagens do protótipo para o código 283529, 28/10/2026: 2 iguais (292852 e 472657), 1 para uma pessoa (357380, "6312 2ZR": o final "R" não está nas regras) e 5 diferentes. Texto parecido nunca decide: só os dados da peça.]`,
-  `2:59 · E não foi no chute. Estudamos o catálogo de materiais do governo, com 343 mil itens, a norma de dados de material, a ISO 8000, como a SAP, a IBM e a Verusen tratam isso, e o que a SKF e a Timken deixam usar.
+  `2:36 · Não foi no chute. Estudamos o catálogo de materiais do governo, com 343 mil itens, a norma ISO 8000, como a SAP, a IBM e a Verusen tratam isso, e o que a SKF e a Timken deixam usar.
 [Fontes, todas em docs/pesquisa/ do repositório: 343.880 itens de material na API do Compras.gov.br em 25/08/2026 (catmat-pncp.md); as partes 110 a 140 da ISO 8000 (aprofundamento-identidade-equivalencia.md); SAP MDG, SAP EAM e IBM Maximo (aprofundamento-jornada-integracao.md); Verusen (mercado.md); termos de uso da SKF e da Timken conferidos em 05/10/2026 (fontes-do-prototipo.md e ADR 0010). As 21 decisões de projeto estão em docs/decisoes/.]`,
-  `3:21 · E testamos com rolamentos reais do catálogo, com o gabarito fechado antes.
-Em 14 pares, era a mesma peça com outro nome, como 6312 ZZ e 6312-2Z. A AgroParts achou os 14.
+  `2:55 · E testamos. Não foi simulado: são 42 cadastros reais e públicos de rolamento, do catálogo de compras do governo federal.
+Primeiro, registramos no GitHub as respostas certas, o gabarito: 5 de outubro, às 9h06. O motor entrou às 9h15, sem ver o gabarito.
+Na primeira rodada, ele errou 6 pares, porque lia o 6206-2Z sem o final. Consertamos o motor. O gabarito não mudou.
+[Fonte: CATMAT, padrão 11797 (ROLAMENTO DE ESFERA), consulta de 05/10/2026: 42 cadastros em seis grupos (6001, 6006, 6211, 6206, 6312 e 6308). Gabarito no commit 88985c9 (09h06) e motor no commit c0689c5 (09h15), em github.com/shishiv/agroparts/pull/4/commits; no main os dois viraram o commit b0a08ec. Os três arquivos de dados/gabarito/v1 são idênticos aos do commit 88985c9. A hora do commit vem do computador de quem commita: a prova é a ordem pública dos commits.
+Quem rotulou foi o agente de IA que escreveu o motor; a revisão da equipe ainda falta. Não diga "sem ajustar nada": houve um conserto, e só um.]`,
+  `3:26 · Em 14 pares, era a mesma peça com outro nome, como 6312 ZZ e 6312-2Z. A AgroParts achou os 14.
 Em 90 pares, a peça parecia igual, mas tinha outra proteção ou outra folga. A AgroParts recusou os 90.
 Na dúvida, ela não arrisca: chama uma pessoa.
-[Fonte: teste da equipe no catálogo de materiais do governo federal (CATMAT, padrão 11797, Compras.gov.br): 104 pares, 14 da mesma peça e 90 parecidos, mas diferentes, com o gabarito registrado em 05/10/2026, antes do teste (dados/gabarito/v1/preregistro.json e docs/medicao/gabarito-v1.md). Os exemplos são pares do teste: 283529 (6312 ZZ) com 472657 (6312-2Z) e com 311967 (6312ZZ C3). Não é cadastro de usina.]`,
-  `3:49 · E, lendo todos os cadastros de rolamento de esfera de uma vez, um em cada doze repetia outro.
-[Medido pelo protótipo no lote de 05/10/2026, com bun run medir: 33 dos 396 cadastros ativos do padrão 11797 (ROLAMENTO DE ESFERA) do CATMAT repetem outro, em 28 grupos (docs/medicao/gabarito-v1.md). Um deles é o 6318 da Márcia: 311960 e 311963.]`,
-  `3:58 · Lá fora, isso já é negócio. Nos Estados Unidos, a Verusen vende exatamente essa promessa: a mesma peça, muitos nomes.
+[Fonte: gabarito v1 de 05/10/2026, dados/gabarito/v1/preregistro.json e docs/medicao/gabarito-v1.md; refaça com bun run medir. 140 pares nos seis grupos, 36 indeterminados fora da conta, sobram 104: 14 iguais e 90 diferentes. Os exemplos são pares do teste: 283529 (6312 ZZ) com 472657 (6312-2Z) e com 311967 (6312ZZ C3). Não diga "100% de acurácia": diga "14 de 14 e 90 de 90". Não é cadastro de usina.]`,
+  `3:48 · E, lendo os 396 cadastros de rolamento de esfera do catálogo, um em cada doze repetia outro.
+[Medido pelo protótipo no lote de 05/10/2026, com bun run medir: 33 dos 396 cadastros ativos do padrão 11797 do CATMAT repetem outro, em 28 grupos (docs/medicao/gabarito-v1.md). Um deles é o 6318 da Márcia: 311960 e 311963.
+Myke passa a palavra ao Alberto.]`,
+  `3:57 · [Fala 3, Alberto: a ideia do negócio, páginas 14 a 19.]
+Isso já é negócio. Nos Estados Unidos, a Verusen vende essa promessa: a mesma peça, muitos nomes.
 Ela publicou o caso de uma fabricante com 29 fábricas: 10 milhões e meio de dólares de economia verificada em estoque de peças.
-E já captou 33 milhões de dólares de investidores.
 [Fonte: Verusen, verusen.com, 28/10/2026: caso de uma fabricante com 29 fábricas, US$ 10,5 mi de economia verificada em estoque de peças, número publicado pela empresa. Captação: US$ 8 mi (série A) e US$ 25 mi (série B, 25/01/2022), segundo o comunicado da Verusen.]`,
-  `4:23 · No Brasil, não encontramos ninguém fazendo isso para usina.
+  `4:16 · No Brasil, não encontramos ninguém fazendo isso para usina.
 A Verusen, a SAP e a IBM atendem qualquer indústria. A AgroParts é feita para usina, em português, e funciona ao lado do sistema que a usina já tem.
 [SAP e IBM: learning.sap.com e ibm.com/docs, consultados em 25/08/2026.]`,
-  `4:41 · E o mercado é grande: só no Centro-Sul, a UNICA conta 250 usinas operando.
+  `4:34 · O modelo é simples. Quem paga é a usina, com uma assinatura, para conferir e padronizar os cadastros.
+E o dinheiro sai do orçamento de manutenção e compras, onde já cai a compra repetida.
+[O valor da assinatura é hipótese e fica só para as perguntas (pergunta 3, na última nota). É a oferta B2B de dados e governança do recon profundo; a comissão sobre venda ficou fora do pitch (ADR 0019).]`,
+  `4:50 · E o mercado é grande: só no Centro-Sul, a UNICA conta 250 usinas operando.
 [Fonte: UNICA, 22/06/2026: 250 unidades produtoras operando no Centro-Sul na 2ª quinzena de maio de 2026.]`,
-  `4:48 · Não viemos vender um preço. Viemos buscar investimento para construir em etapas.
-Cada etapa prova um número antes da próxima e pede dinheiro e uma porta aberta.
-Primeiro, o piloto: uma usina e uma pessoa do almoxarifado, para medir o tempo para achar a peça e as compras repetidas.
-Depois, um fabricante, para licenciar o catálogo. Depois, bombas e vedações. E, por fim, quem conhece o SAP ou o Maximo da usina, para a resposta chegar no sistema dela.
+  `4:57 · Não viemos vender um preço. Viemos buscar investimento para construir em etapas.
+Cada etapa prova um número e pede dinheiro e acesso.
+Primeiro, o piloto numa usina, para medir o tempo e as compras que ela economiza.
+Depois, o catálogo de um fabricante. Depois, bombas e vedações. E, por fim, o SAP ou o Maximo da usina.
 [Etapas: docs/roadmap.md, que só avança uma fase quando a anterior prova o seu número, e os ADRs 0001, 0004, 0010, 0012, 0014 e 0020. Custos: equipe, licença do catálogo do fabricante e servidor (docs/rota-inova/01-ideacao.html e entrega-unica.html). Hoje, a tabela aberta de medidas só cobre os rolamentos 6000 a 6007, 6200 a 6206 e 6300 a 6305 (docs/medicao/gabarito-v1.md). Sem valor e sem data, por decisão da equipe.]`,
-  `5:25 · O nosso pedido: investimento, uma usina parceira e quem abra portas, para um piloto de 90 dias, sem custo para a usina.
-Um tipo de peça e 10 a 50 peças reais. O QR abre o protótipo. Obrigado.
-[Fim por volta de 5:45. Sobram 15 segundos do limite de 6 minutos. Nas perguntas, fique nesta página.
+  `5:24 · O nosso pedido: investimento, uma usina parceira e quem abra portas, para um piloto de 90 dias, sem custo para a usina.
+O QR abre o protótipo. Obrigado.
+[Nas perguntas, fique nesta página.
 
 As perguntas mais difíceis, com resposta de uma frase:
-1. "Quanto vocês já venderam?" Nada ainda: o protótipo está no ar e pronto para o primeiro piloto, e é esse piloto que pedimos hoje.
-2. "Quanto vocês pedem?" O valor de cada etapa ainda não está fechado: os custos são a equipe, a licença do catálogo do fabricante e o servidor, e o piloto é que dimensiona cada etapa. Além do dinheiro, pedimos acesso: a usina, o fabricante e quem conhece o sistema da usina.
+1. "O teste foi simulado?" Não: são cadastros reais e públicos do catálogo de compras do governo federal, e o gabarito foi registrado no GitHub antes do motor. Quem responde é o Myke.
+2. "Os números não são bonitos demais?" O teste é pequeno e mostramos o número absoluto. Na primeira rodada o motor errou 6 pares; consertamos uma leitura do código, não o gabarito. Ele mede se o motor aplica as regras ao texto real, não se acerta a peça física.
 3. "Quanto a usina vai pagar?" A hipótese é 5 mil reais por usina por mês, e o piloto testa esse preço. Na São Martinho, com 4 usinas, seriam 180 mil reais em 9 meses: menos de 0,1% do que ela gastou com manutenção de entressafra no mesmo período (4 usinas: saomartinho.com.br, 28/10/2026).
-4. "Qual é o tamanho do mercado em reais?" A 5 mil reais por mês, as 250 usinas do Centro-Sul somam 15 milhões de reais por ano. É estimativa com o preço em hipótese.
-5. "Por que a Verusen ou a SAP não fazem isso aqui?" A Verusen atende grandes indústrias nos Estados Unidos, e a SAP e a IBM vendem a função dentro do próprio sistema delas; a usina precisa de algo em português, com peça de usina, que funcione com o sistema que ela já tem.
-6. "Por que vocês?" O protótipo já está no ar e acertou os 104 pares do teste com dados públicos. Estudamos em Frutal, perto das usinas do Triângulo. Um de nós já criou soluções assim para clientes de móveis e de automóveis. E a Tractian, que atua aqui, cuida da saúde das máquinas e do estoque, mas não confere se duas peças são a mesma.
-7. "Qual é o retorno?" Se 1% do gasto de manutenção for peça que já estava na prateleira, numa usina como a Coruripe de Limeira do Oeste, com 2,5 milhões de toneladas, são 210 mil reais por safra, três vezes e meia o preço. Essa conta é estimativa nossa: o piloto mede o número real.
-8. "Qual é a prova?" Hoje, a prova é com dados públicos: 14 de 14 pares iguais achados, 90 de 90 parecidos recusados e um em cada doze cadastros repetido, no catálogo do governo federal. As respostas certas foram registradas antes do teste, com as mesmas regras de leitura do motor, e a conferência delas por pessoas da equipe ainda falta. Ainda não testamos numa usina: é isso que o piloto mede.
-9. "Quem paga?" A usina, pelo orçamento de suprimentos e manutenção, que é onde cai a compra repetida.
+4. "Quanto vocês pedem?" O valor de cada etapa ainda não está fechado: os custos são a equipe, a licença do catálogo do fabricante e o servidor, e o piloto é que dimensiona cada etapa. Além do dinheiro, pedimos acesso: a usina, o fabricante e quem conhece o sistema da usina.
+5. "Como funciona a foto?" A câmera lê o texto da etiqueta, não a peça. A pessoa confere o texto lido, e a resposta vem igual à do código digitado.
+6. "Quanto vocês já venderam?" Nada ainda: o protótipo está no ar e pronto para o primeiro piloto, e é esse piloto que pedimos hoje.
+7. "Qual é o tamanho do mercado em reais?" A 5 mil reais por mês, as 250 usinas do Centro-Sul somam 15 milhões de reais por ano. É estimativa com o preço em hipótese.
+8. "Por que a Verusen ou a SAP não fazem isso aqui?" A Verusen atende grandes indústrias nos Estados Unidos, e a SAP e a IBM vendem a função dentro do próprio sistema delas; a usina precisa de algo em português, com peça de usina, que funcione com o sistema que ela já tem.
+9. "Por que vocês?" O protótipo já está no ar e acertou os 104 pares do teste com dados públicos. Estudamos em Frutal, perto das usinas do Triângulo. Um de nós já criou soluções assim para clientes de móveis e de automóveis. E a Tractian, que atua aqui, cuida da saúde das máquinas e do estoque, mas não confere se duas peças são a mesma.
+10. "Qual é o retorno?" Se 1% do gasto de manutenção for peça que já estava na prateleira, numa usina como a Coruripe de Limeira do Oeste, com 2,5 milhões de toneladas, são 210 mil reais por safra, três vezes e meia o preço. Essa conta é estimativa nossa: o piloto mede o número real.
+11. "Vocês testaram numa usina?" Ainda não: testamos no catálogo do governo federal, e o piloto de 90 dias mede o valor numa usina. A conferência das respostas certas por pessoas da equipe ainda falta.
 
 Se perguntarem:
 - "Qual é a meta?" Hipótese, sem base ainda: 10 usinas até 2028, ou 600 mil reais por ano.
@@ -722,10 +778,12 @@ export default [
   PassosLer,
   PassosDecidir,
   Estudo,
+  ComoTestamos,
   ParesTestados,
   UmEmDoze,
   LaFora,
   Concorrencia,
+  ModeloDeNegocio,
   Mercado,
   Investimento,
   Pedido,
