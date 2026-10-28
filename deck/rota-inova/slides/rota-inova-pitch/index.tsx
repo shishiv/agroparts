@@ -1,13 +1,12 @@
-// Pitch da AgroParts no Rota Inova UEMG 2026 (desafio AGR08), no visual do modelo do Canva da equipe.
-// Conteúdo e ordem: os 13 slides do pitch de docs/rota-inova/entrega-unica.html, mais uma página de fontes e créditos.
-// O roteiro, de cerca de 6 minutos (a apresentação final tem de 5 a 7), fica no export `notes`, que o modo apresentador mostra.
-import { type DesignSystem, type Page, type SlideMeta, useSlidePageNumber } from '@open-slide/core';
-import type { CSSProperties, ReactNode } from 'react';
+// Pitch final da AgroParts no Rota Inova UEMG 2026 (desafio AGR08), no visual do modelo do Canva da equipe.
+// Três atos: a dor (uma persona e o custo da manutenção da safra), a solução (o protótipo ao vivo) e os números
+// (o retorno estimado, o modelo de negócio e o mercado). A última página traz as fontes e os créditos.
+// O roteiro, de pouco mais de 5 minutos (o limite é 6), fica no export `notes`, que o modo apresentador mostra.
+import { type DesignSystem, type Page, type SlideMeta, useIsActivePage, useSlidePageNumber } from '@open-slide/core';
+import { type CSSProperties, type ReactNode, useEffect, useRef } from 'react';
 
 import fotoColheita from './assets/fotos/colheita-piracicaba.jpg';
-import fotoEstoque from './assets/fotos/estoque-de-pecas.jpg';
 import fotoRolamento from './assets/fotos/rolamento-com-tampa-6007.jpg';
-import fotoUsina from './assets/fotos/usina-uberaba.jpg';
 import qrAgroparts from './assets/qr-agroparts.svg';
 import fonteBold from './assets/fontes/Montserrat-Bold.ttf';
 import fonteExtraBold from './assets/fontes/Montserrat-ExtraBold.ttf';
@@ -15,8 +14,9 @@ import fonteItalic from './assets/fontes/Montserrat-Italic.ttf';
 import fonteLight from './assets/fontes/Montserrat-Light.ttf';
 import fonteRegular from './assets/fontes/Montserrat-Regular.ttf';
 import fonteSemiBold from './assets/fontes/Montserrat-SemiBold.ttf';
-import telaEtiqueta from './assets/telas/desktop-07-ocr-etiqueta.jpg';
 import telaParecida from './assets/telas/desktop-02-falsa-semelhanca.jpg';
+import demoCapa from './assets/video/demo-celular-capa.jpg';
+import demoCelular from './assets/video/demo-celular.mp4';
 
 // Cores do modelo do Canva (docs/rota-inova/estilo-slides.css).
 export const design: DesignSystem = {
@@ -148,11 +148,13 @@ const fundo: CSSProperties = {
 };
 
 // Página padrão: olho, título, régua e o corpo centrado no espaço que sobra.
+// `margemDireita` reserva a faixa da direita para uma foto ou para o celular da demonstração.
 const Quadro = ({
   olho,
   titulo,
   tamanhoTitulo,
   foto,
+  margemDireita,
   aoLado,
   children,
   gap = 32,
@@ -161,11 +163,12 @@ const Quadro = ({
   titulo: ReactNode;
   tamanhoTitulo?: number;
   foto?: ReactNode;
+  margemDireita?: number;
   aoLado?: ReactNode;
   children: ReactNode;
   gap?: number;
 }) => (
-  <div style={{ ...fundo, padding: `84px ${foto ? LARGURA_FOTO + 80 : PADDING_X}px 120px ${PADDING_X}px` }}>
+  <div style={{ ...fundo, padding: `84px ${margemDireita ?? (foto ? LARGURA_FOTO + 80 : PADDING_X)}px 120px ${PADDING_X}px` }}>
     {olho && <Olho>{olho}</Olho>}
     <Titulo tamanho={tamanhoTitulo}>{titulo}</Titulo>
     {aoLado && <div style={{ position: 'absolute', top: 84, right: PADDING_X }}>{aoLado}</div>}
@@ -202,8 +205,17 @@ const FotoLado = ({ src, alt, credito, posicao = 'center' }: { src: string; alt:
   </div>
 );
 
-// Captura do protótipo com moldura branca e sombra chapada do modelo (um bloco, não box-shadow, para sair no PDF).
-// `recorte` é o trecho da imagem original, em pixels; `escala` amplia o trecho para ser lido na TV.
+// Moldura branca com a sombra chapada do modelo (um bloco, não box-shadow, para sair no PDF).
+const Moldura = ({ largura, altura, children }: { largura: number; altura: number; children: ReactNode }) => (
+  <div data-captura style={{ position: 'relative', flex: 'none', width: largura + 16, height: altura + 16, marginRight: 16, marginBottom: 16 }}>
+    <div style={{ position: 'absolute', left: 16, top: 16, width: largura + 16, height: altura + 16, background: tinta }} />
+    <div style={{ position: 'relative', width: largura + 16, height: altura + 16, border: `8px solid ${branco}`, background: branco, overflow: 'hidden' }}>
+      {children}
+    </div>
+  </div>
+);
+
+// Captura do protótipo. `recorte` é o trecho da imagem original, em pixels; `escala` amplia o trecho para ser lido na TV.
 const Captura = ({
   src,
   alt,
@@ -216,27 +228,53 @@ const Captura = ({
   larguraImagem: number;
   recorte: { x: number; y: number; largura: number; altura: number };
   escala: number;
-}) => {
-  const largura = Math.round(recorte.largura * escala);
-  const altura = Math.round(recorte.altura * escala);
+}) => (
+  <Moldura largura={Math.round(recorte.largura * escala)} altura={Math.round(recorte.altura * escala)}>
+    <img
+      src={src}
+      alt={alt}
+      style={{
+        position: 'absolute',
+        display: 'block',
+        maxWidth: 'none',
+        width: larguraImagem * escala,
+        left: -recorte.x * escala,
+        top: -recorte.y * escala,
+      }}
+    />
+  </Moldura>
+);
+
+// Gravação de 31 s do protótipo publicado, recortada na coluna do celular.
+// Roda sozinha e em loop enquanto a página está na tela; no PDF, fica a capa, que é o resultado do código 311960
+// com o pé esmaecido, para não mostrar uma linha cortada.
+const DemoGravada = ({ altura }: { altura: number }) => {
+  const ativa = useIsActivePage();
+  const video = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = video.current;
+    if (!v) return;
+    if (ativa) {
+      v.currentTime = 0;
+      v.play().catch(() => undefined);
+    } else {
+      v.pause();
+    }
+  }, [ativa]);
   return (
-    <div data-captura style={{ position: 'relative', flex: 'none', width: largura + 16, height: altura + 16, marginRight: 16, marginBottom: 16 }}>
-      <div style={{ position: 'absolute', left: 16, top: 16, width: largura + 16, height: altura + 16, background: tinta }} />
-      <div style={{ position: 'relative', width: largura + 16, height: altura + 16, border: `8px solid ${branco}`, background: branco, overflow: 'hidden' }}>
-        <img
-          src={src}
-          alt={alt}
-          style={{
-            position: 'absolute',
-            display: 'block',
-            maxWidth: 'none',
-            width: larguraImagem * escala,
-            left: -recorte.x * escala,
-            top: -recorte.y * escala,
-          }}
-        />
-      </div>
-    </div>
+    <Moldura largura={altura / 2} altura={altura}>
+      <video
+        ref={video}
+        src={demoCelular}
+        poster={demoCapa}
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-label="Gravação do protótipo: o código 311960 é identificado como rolamento 6318, e o cadastro 311963 aparece como a mesma peça"
+        style={{ display: 'block', width: altura / 2, height: altura }}
+      />
+    </Moldura>
   );
 };
 
@@ -276,6 +314,44 @@ const Fonte = ({ children }: { children: ReactNode }) => (
   <p style={{ margin: 0, fontSize: 24, lineHeight: 1.35, fontWeight: 700 }}>{children}</p>
 );
 
+// Selo que diz de onde vem um número: dado publicado, estimativa ou hipótese.
+const Selo = ({ children, cor, corTexto = tinta }: { children: ReactNode; cor: string; corTexto?: string }) => (
+  <span
+    style={{
+      display: 'inline-block',
+      padding: '4px 14px',
+      fontSize: 24,
+      lineHeight: 1.3,
+      fontWeight: 800,
+      letterSpacing: '0.04em',
+      textTransform: 'uppercase',
+      color: corTexto,
+      background: cor,
+    }}
+  >
+    {children}
+  </span>
+);
+
+const SeloDado = () => <Selo cor={design.palette.accent}>Dado publicado</Selo>;
+const SeloEstimativa = () => <Selo cor={lavanda}>Estimativa</Selo>;
+const SeloHipotese = () => (
+  <Selo cor={roxo} corTexto={branco}>
+    Hipótese
+  </Selo>
+);
+
+// Uma linha de uma conta: selo e valor à esquerda, o que o valor quer dizer à direita.
+const Linha = ({ selo, valor, cor, children }: { selo: ReactNode; valor: ReactNode; cor: string; children: ReactNode }) => (
+  <div data-caixa style={{ display: 'flex', alignItems: 'center', gap: 40, background: branco, color: tinta, padding: '16px 32px', borderLeft: `14px solid ${cor}` }}>
+    <div style={{ flex: 'none', width: 500 }}>
+      {selo}
+      <div style={{ marginTop: 6, fontSize: 60, lineHeight: 1.05, fontWeight: 800, color: azul }}>{valor}</div>
+    </div>
+    <p style={{ margin: 0, minWidth: 0, fontSize: 32, lineHeight: 1.34 }}>{children}</p>
+  </div>
+);
+
 // Passo com ilustração do modelo em cima.
 const Passo = ({
   ilus,
@@ -307,10 +383,19 @@ const Placa = ({ cor, corTitulo, titulo, children }: { cor: string; corTitulo: s
   </div>
 );
 
-// Um cadastro de estoque, como etiqueta. O trecho que se repete fica em roxo.
-const Etiqueta = ({ children }: { children: ReactNode }) => (
-  <div data-caixa style={{ background: branco, color: tinta, padding: '20px 28px', fontSize: 34, fontWeight: 800, letterSpacing: '0.01em' }}>
-    {children}
+// Um momento da cena da persona.
+const Momento = ({ hora, children }: { hora: string; children: ReactNode }) => (
+  <div data-caixa style={{ display: 'flex', alignItems: 'baseline', gap: 24, background: branco, color: tinta, padding: '20px 28px', fontSize: 32, lineHeight: 1.3, fontWeight: 600 }}>
+    <b style={{ flex: 'none', fontWeight: 800, color: violeta }}>{hora}</b>
+    <span style={{ minWidth: 0 }}>{children}</span>
+  </div>
+);
+
+// Como um setor escreve a peça no cadastro. O trecho que se repete fica em roxo.
+const Setor = ({ nome, children }: { nome: string; children: ReactNode }) => (
+  <div data-caixa style={{ background: branco, color: tinta, padding: '24px 30px 28px' }}>
+    <b style={{ display: 'block', marginBottom: 12, fontSize: 32, lineHeight: 1.2, fontWeight: 800, color: violeta }}>{nome}</b>
+    <span style={{ fontSize: 34, lineHeight: 1.3, fontWeight: 800, letterSpacing: '0.01em' }}>{children}</span>
   </div>
 );
 
@@ -364,7 +449,7 @@ const Chaves = ({ children }: { children: ReactNode }) => (
   </>
 );
 
-// ---------- Páginas ----------
+// ---------- Abertura ----------
 
 const Abertura: Page = () => (
   <div style={{ ...fundo, padding: `84px ${640 + 80}px 120px 250px`, justifyContent: 'center' }}>
@@ -401,94 +486,97 @@ const Abertura: Page = () => (
   </div>
 );
 
-const VariosNomes: Page = () => (
-  <Quadro
-    olho="O problema"
-    titulo="A mesma peça tem vários nomes no estoque"
-    tamanhoTitulo={66}
-    gap={22}
-    foto={<FotoLado src={fotoEstoque} alt="Depósito cheio de peças de máquina" credito={<>Foto: Ikiwaner, Wikimedia Commons, <Nome>CC BY-SA 3.0</Nome></>} />}
-  >
-    <Etiqueta>
-      ROL <Marca>6318</Marca> ZZ C3
-    </Etiqueta>
-    <Etiqueta>
-      ROLAMENTO RIG. ESFERAS <Marca>6318</Marca>-2Z/C3
-    </Etiqueta>
-    <Etiqueta>
-      ROLAM <Marca>6318</Marca>ZZC3 P/ BOMBA
-    </Etiqueta>
-    <Frase style={{ marginTop: 16 }}>É a mesma peça? Ninguém tem certeza.</Frase>
-  </Quadro>
-);
+// ---------- Ato 1: a dor ----------
 
-const MuitosJeitos: Page = () => (
-  <Quadro olho="O problema" titulo="E a peça chega de muitos jeitos" gap={26}>
-    <div style={{ display: 'flex', gap: 56, alignItems: 'center' }}>
-      <Grade colunas={2} gap={24} style={{ flex: 1, minWidth: 0 }}>
-        <Painel titulo="Código do fabricante">6318-2Z/C3</Painel>
-        <Painel titulo="Código da usina">Cadastro 100234</Painel>
-        <Painel titulo="Descrição curta">ROL 6318 ZZ C3</Painel>
-        <Painel titulo="Nome do dia a dia" cor={roxo}>
-          “o rolamento da bomba”
-        </Painel>
-        <Painel titulo="Outra marca" cor={roxo}>
-          Parece a mesma. Uma pessoa confere.
-        </Painel>
-        <Painel titulo="Foto da etiqueta" cor={roxo}>
-          Tirada no almoxarifado
-        </Painel>
-      </Grade>
-      <Captura
-        src={telaEtiqueta}
-        alt="Etiqueta de rolamento 6318ZZ C3, como o protótipo mostra"
-        larguraImagem={1102}
-        recorte={{ x: 18, y: 188, largura: 432, altura: 212 }}
-        escala={1.3}
-      />
+const Personagem = () => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
+    <Ilus nome="pessoa-no-computador" altura={110} style={{ width: 140, flex: 'none' }} />
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
+      <p style={{ margin: 0, fontSize: 36, lineHeight: 1.2, fontWeight: 800, color: tinta }}>Márcia, almoxarife numa usina do Triângulo Mineiro</p>
+      <Selo cor={lavanda}>Personagem e cena ilustrativos</Selo>
     </div>
-    <Frase>A AgroParts aceita o código, a descrição ou a foto da etiqueta. Ninguém precisa fotografar peça por peça.</Frase>
-    <Fonte>Exemplo ilustrativo, com etiqueta montada pela equipe. Não vem de uma usina real.</Fonte>
-  </Quadro>
+  </div>
 );
 
-const PorQueImporta: Page = () => (
+const DiaDeSafra: Page = () => (
   <Quadro
-    olho="Por que importa"
-    titulo="Manutenção custa caro e a safra não espera"
+    olho="Ato 1 · A dor"
+    titulo={
+      <>
+        Dia de safra.
+        <br />A colhedora parou.
+      </>
+    }
     tamanhoTitulo={66}
     gap={20}
-    foto={<FotoLado src={fotoUsina} alt="Usina de açúcar e álcool perto de Uberaba" credito={<>Usina perto de Uberaba (MG). Foto: Jonathan Wilkins, Wikimedia Commons, <Nome>CC BY-SA 3.0</Nome></>} />}
+    foto={<FotoLado src={fotoColheita} alt="Colheita mecanizada de cana" credito={<>Colheita em Piracicaba (SP). Foto: Mariordo, Wikimedia Commons, <Nome>CC BY 3.0</Nome></>} />}
   >
-    <Painel titulo="No setor da cana" style={{ padding: '22px 32px' }}>
-      <Numero>R$ 1,25 bi</Numero>
-      investidos em manutenção pela São Martinho em <Nome>9 meses</Nome> da safra 2025/26
-    </Painel>
-    <Painel titulo="Em outro setor" cor={roxo} style={{ padding: '22px 32px' }}>
-      <Numero>16%</Numero>
-      menos peças na prateleira do que o sistema dizia, num órgão de energia dos EUA
-    </Painel>
-    <Fonte>
-      Fontes: São Martinho (02/2026) · <Nome>Departamento de Energia dos EUA (2024).</Nome>
-    </Fonte>
+    <Personagem />
+    <Momento hora="14h05">O mecânico pede um rolamento 6318.</Momento>
+    <Momento hora="14h20">O sistema diz: essa peça não existe.</Momento>
+    <Momento hora="14h40">A colhedora espera a compra urgente.</Momento>
+    <Frase style={{ marginTop: 12, fontWeight: 800 }}>Na prateleira, havia três. Com outro nome.</Frase>
+  </Quadro>
+);
+
+// Uma usina da região, com a estimativa do gasto de manutenção de entressafra por safra.
+const Usina = ({ nome, valor, lugar, toneladas }: { nome: string; valor: string; lugar: string; toneladas: string }) => (
+  <div data-caixa style={{ background: branco, color: tinta, padding: '16px 24px 18px', borderTop: `10px solid ${lavanda}` }}>
+    <b style={{ display: 'block', fontSize: 28, lineHeight: 1.2, fontWeight: 800, color: violeta }}>{nome}</b>
+    <div style={{ margin: '4px 0 4px', fontSize: 56, lineHeight: 1.1, fontWeight: 800, color: azul }}>{valor}</div>
+    <span style={{ display: 'block', fontSize: 24, lineHeight: 1.3, fontWeight: 600 }}>{lugar}</span>
+    <span style={{ display: 'block', fontSize: 24, lineHeight: 1.3, fontWeight: 600 }}>{toneladas}</span>
+  </div>
+);
+
+const QuantoCusta: Page = () => (
+  <Quadro olho="Ato 1 · A dor" titulo="Quanto custa a manutenção da safra" gap={18}>
+    <Linha selo={<SeloDado />} valor="R$ 183,5 mi" cor={design.palette.accent}>
+      em “Manutenção Entressafra/Outros” na São Martinho, <Nome>em 9 meses</Nome>. Dividido pelas 21,7 mi t moídas: <Nome>R$ 8,46 por tonelada</Nome>
+    </Linha>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+      <SeloEstimativa />
+      <span style={{ fontSize: 32, lineHeight: 1.3, fontWeight: 700 }}>Por safra, nas usinas da nossa região, contando só 9 meses de gasto:</span>
+    </div>
+    <Grade colunas={4} gap={24}>
+      <Usina nome="Cerradão" valor="R$ 53 mi" lugar="Frutal" toneladas="6,3 mi t moídas" />
+      <Usina nome="CMAA" valor="R$ 85 mi" lugar="3 usinas no Triângulo" toneladas="10 mi t de capacidade" />
+      <Usina nome="Usina Uberaba" valor="R$ 27 mi" lugar="Uberaba" toneladas="3,2 mi t de capacidade" />
+      <Usina nome="Coruripe" valor="R$ 21 mi" lugar="Limeira do Oeste" toneladas="2,5 mi t de capacidade" />
+    </Grade>
+    <Linha selo={<SeloHipotese />} valor="R$ 530 mil" cor={roxo}>
+      por safra, numa usina como a Cerradão, se 1 real em cada 100 for para peça que já estava na prateleira
+    </Linha>
+    <Fonte>Fontes: São Martinho (02/2026), Rabobank (2025), Globo Rural (04/2025), site da Usina Uberaba (10/2026), Broadcast Agro (03/2024).</Fonte>
   </Quadro>
 );
 
 const ComoEHoje: Page = () => (
-  <Quadro olho="Como é hoje" titulo="Hoje, quem sabe é uma pessoa">
-    <Grade colunas={2} gap={48}>
-      <Passo ilus="pessoa-no-computador" alturaIlus={300} titulo="Perguntar a quem conhece o estoque" tamanhoTitulo={36}>
-        A resposta fica na cabeça de uma pessoa.
-      </Passo>
-      <Passo ilus="livro" alturaIlus={300} titulo="Fazer um mutirão na lista" tamanhoTitulo={36}>
-        Demora, e depois a bagunça volta.
-      </Passo>
+  <Quadro olho="Ato 1 · A dor" titulo="Hoje é manual, no almoxarifado. Mas cada setor cadastra do seu jeito" gap={26}>
+    <Grade colunas={3}>
+      <Setor nome="Manutenção">
+        ROL <Marca>6318</Marca> ZZ C3
+      </Setor>
+      <Setor nome="Compras">
+        ROLAMENTO RIG. ESFERAS <Marca>6318</Marca>-2Z/C3
+      </Setor>
+      <Setor nome="Almoxarifado">
+        ROLAM <Marca>6318</Marca>ZZC3 P/ BOMBA
+      </Setor>
     </Grade>
+    <Frase style={{ fontWeight: 800 }}>É a mesma peça. O sistema enxerga três.</Frase>
+    <Painel cor={roxo} style={{ display: 'flex', alignItems: 'center', gap: 36, padding: '20px 32px' }}>
+      <div style={{ flex: 'none', fontSize: 72, lineHeight: 1.05, fontWeight: 800, color: azul }}>16%</div>
+      <span>menos peças na prateleira do que o sistema dizia, numa auditoria de energia nos EUA</span>
+    </Painel>
+    <Fonte>Fonte: Departamento de Energia dos EUA, auditoria <Nome>DOE-OIG-24-30</Nome> (09/2024).</Fonte>
   </Quadro>
 );
 
+// ---------- Ato 2: a solução ----------
+
 const Solucao: Page = () => (
-  <Quadro olho="A solução" titulo="A AgroParts confere a peça e responde" gap={28}>
+  <Quadro olho="Ato 2 · A solução" titulo="A AgroParts confere a peça e responde" gap={28}>
     <Grade colunas={3}>
       <Passo ilus="celular" alturaIlus={120} titulo="1. Código ou foto" />
       <Passo ilus="busca" alturaIlus={120} titulo="2. Busca no catálogo" />
@@ -509,18 +597,45 @@ const Solucao: Page = () => (
   </Quadro>
 );
 
-const Funcionando: Page = () => (
-  <Quadro
-    olho="Funcionando"
-    titulo="O protótipo já está no ar"
-    aoLado={
-      <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-        <Link />
-        <QrCode tamanho={170} />
-      </div>
-    }
-  >
-    <div style={{ display: 'flex', gap: 64, alignItems: 'center' }}>
+const CadaSetor: Page = () => (
+  <Quadro olho="Ato 2 · A solução" titulo="Um ganho para cada setor" gap={30}>
+    <Grade colunas={3} gap={36}>
+      <Passo ilus="celular" alturaIlus={190} titulo="Almoxarifado" tamanhoTitulo={38}>
+        Acha a peça pelo código, pela descrição ou pela foto da etiqueta.
+      </Passo>
+      <Passo ilus="lampada" alturaIlus={190} titulo="Manutenção" tamanhoTitulo={38}>
+        Sabe na hora se a peça já está na prateleira.
+      </Passo>
+      <Passo ilus="notebook" alturaIlus={190} titulo="Compras" tamanhoTitulo={38}>
+        Vê o cadastro repetido antes de comprar de novo.
+      </Passo>
+    </Grade>
+    <Frase style={{ fontWeight: 800 }}>O sistema da usina continua igual. Nenhum cadastro é apagado.</Frase>
+  </Quadro>
+);
+
+// O celular da demonstração ocupa a faixa da direita, de cima a baixo do corpo da página.
+const ALTURA_CELULAR = 830;
+const MARGEM_CELULAR = PADDING_X + ALTURA_CELULAR / 2 + 32 + 80;
+
+const AoVivo: Page = () => (
+  <Quadro olho="Ato 2 · Ao vivo" titulo="Escaneiem o QR e toquem Identificar" tamanhoTitulo={66} margemDireita={MARGEM_CELULAR} gap={34}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
+      <QrCode tamanho={300} />
+      <Link tamanho={36} />
+    </div>
+    <Frase>
+      O código 311960 é o rolamento 6318 da Márcia. Logo embaixo, o 311963: <b style={{ fontWeight: 800 }}>a mesma peça, com outro código.</b>
+    </Frase>
+    <div style={{ position: 'absolute', top: 84, right: PADDING_X }}>
+      <DemoGravada altura={ALTURA_CELULAR} />
+    </div>
+  </Quadro>
+);
+
+const Prova: Page = () => (
+  <Quadro olho="Ato 2 · A prova" titulo="O que o protótipo já provou">
+    <div style={{ display: 'flex', gap: 64, alignItems: 'flex-start' }}>
       <Captura
         src={telaParecida}
         alt="Protótipo acha a mesma peça e recusa sete parecidas, com a diferença de cada uma"
@@ -531,142 +646,130 @@ const Funcionando: Page = () => (
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 28 }}>
         <Painel>
           <Numero>90 de 90</Numero>
-          peças parecidas, mas diferentes, recusadas no teste da equipe
+          peças parecidas, mas diferentes, recusadas
         </Painel>
         <Painel cor={roxo}>
-          <Numero>396</Numero>
-          cadastros lidos de uma vez, com 28 grupos de repetidos
+          <Numero>28 grupos</Numero>
+          de cadastros repetidos em 396 cadastros, lidos de uma vez
         </Painel>
-        <Fonte>Teste com o catálogo público de materiais do governo federal.</Fonte>
+        <Fonte>Teste da equipe, com gabarito registrado antes, no catálogo público de materiais do governo federal (CATMAT), 10/2026. Não é cadastro de usina.</Fonte>
       </div>
     </div>
   </Quadro>
 );
 
-const PorQueConfiar: Page = () => (
-  <Quadro olho="Por que confiar" titulo="Na dúvida, a AgroParts não arrisca: chama uma pessoa">
-    <Grade colunas={3}>
-      <Passo ilus="livro" titulo="Mostra a prova">
-        Cada resposta diz de onde veio.
-      </Passo>
-      <Passo ilus="janelas" titulo="Não apaga nada">
-        O sistema da usina continua igual.
-      </Passo>
-      <Passo ilus="lampada" titulo="Meta: errar pouco">
-        Menos de 1 erro em 100 respostas automáticas.
-      </Passo>
+// ---------- Ato 3: os números ----------
+
+// Um termo da conta do retorno, em coluna: o valor em cima e o que ele é embaixo.
+const Termo = ({ valor, children, total = false }: { valor: string; children: ReactNode; total?: boolean }) => (
+  <div style={{ flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 6 }}>
+    <span style={{ fontSize: total ? 56 : 48, lineHeight: '64px', fontWeight: 800, color: total ? violeta : azul, whiteSpace: 'nowrap' }}>{valor}</span>
+    <span style={{ fontSize: 24, lineHeight: 1.3, fontWeight: 600, whiteSpace: 'nowrap' }}>{children}</span>
+  </div>
+);
+
+const Operador = ({ children }: { children: string }) => (
+  <span aria-hidden="true" style={{ flex: 'none', alignSelf: 'flex-start', fontSize: 48, lineHeight: '64px', fontWeight: 800, color: violeta }}>
+    {children}
+  </span>
+);
+
+const Retorno: Page = () => (
+  <Quadro olho="Ato 3 · Os números" titulo="Quanto a usina ganha com a AgroParts" gap={26}>
+    <Painel titulo="Cenário conservador: a menor usina da tabela, 2,5 mi t" cor={roxo}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 30, marginTop: 10 }}>
+        <Termo valor="R$ 21 mi">
+          manutenção por
+          <br />
+          safra (estimativa)
+        </Termo>
+        <Operador>×</Operador>
+        <Termo valor="1%">
+          peça repetida
+          <br />
+          (hipótese)
+        </Termo>
+        <Operador>=</Operador>
+        <Termo valor="R$ 210 mil">
+          por ano
+          <br />
+          (uma safra)
+        </Termo>
+        <Operador>÷</Operador>
+        <Termo valor="R$ 60 mil">
+          preço por ano
+          <br />
+          (hipótese)
+        </Termo>
+        <Operador>=</Operador>
+        <Termo valor="3,5 vezes" total>
+          o que a usina
+          <br />
+          paga
+        </Termo>
+      </div>
+    </Painel>
+    <Linha selo={<Selo cor={lavanda}>Exemplo da região, o teto</Selo>} valor="8,8 vezes" cor={design.palette.accent}>
+      numa usina como a Cerradão, de Frutal, com 6,3 mi t <Nome>(Rabobank, 2025)</Nome>: R$ 53 mi × 1% = R$ 530 mil ÷ R$ 60 mil
+    </Linha>
+    <Frase style={{ fontWeight: 800 }}>Mesmo na usina menor, a conta empata com 0,3%: R$ 60 mil ÷ R$ 21 mi.</Frase>
+    <Fonte>Estimativa com premissas, não resultado medido. O gasto base é de 9 meses, então a conta fica por baixo. A usina de 2,5 mi t é a Coruripe, Limeira do Oeste (Broadcast Agro, 03/2024).</Fonte>
+  </Quadro>
+);
+
+const ModeloDeNegocio: Page = () => (
+  <Quadro olho="Ato 3 · Os números" titulo="Quem paga, quanto e por quê" gap={32}>
+    <Grade colunas={3} gap={32} style={{ alignItems: 'stretch' }}>
+      <Painel titulo="Quem paga">A usina, pelo orçamento de suprimentos e manutenção.</Painel>
+      <Painel titulo="Quanto" cor={roxo}>
+        <Numero>R$ 5 mil</Numero>
+        <p style={{ margin: '0 0 16px' }}>por usina, por mês</p>
+        <Selo cor={roxo} corTexto={branco}>
+          Hipótese de preço
+        </Selo>
+      </Painel>
+      <Painel titulo="Por quê" cor={lavanda}>
+        O retorno estimado vai de 3,5 a 8,8 vezes o preço. E o sistema da usina continua igual.
+      </Painel>
     </Grade>
+    <Painel cor={design.palette.accent}>
+      <span style={{ fontSize: 36, lineHeight: 1.3, fontWeight: 800 }}>Para começar: piloto de 90 dias, sem custo, para a primeira usina.</span>
+    </Painel>
   </Quadro>
 );
 
 const Mercado: Page = () => (
-  <Quadro olho="Mercado" titulo="Lá fora, isso já é negócio. No agro, em português, não achamos" gap={30}>
-    <Grade colunas={4}>
-      <Painel titulo="Verusen" cor={lavanda}>
-        Estados Unidos
+  <Quadro olho="Ato 3 · Os números" titulo="O mercado e quem já faz isso" gap={28}>
+    <Grade colunas={2} gap={40} style={{ alignItems: 'stretch' }}>
+      <Painel titulo="Só no Centro-Sul">
+        <div style={{ margin: '4px 0 14px' }}>
+          <SeloEstimativa />
+        </div>
+        <Numero>R$ 15 mi</Numero>
+        por ano: 250 usinas × R$ 60 mil
+        <br />O preço é hipótese.
       </Painel>
-      <Painel titulo="SAP" cor={lavanda}>
-        Alemanha
-      </Painel>
-      <Painel titulo="IBM" cor={lavanda}>
-        Estados Unidos
-      </Painel>
-      <Painel titulo="Agro brasileiro" cor={roxo}>
-        Não achamos uma solução feita para isso. É o espaço da AgroParts.
-      </Painel>
-    </Grade>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 48 }}>
-      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 24 }}>
-        <Frase>Essas empresas já vendem soluções para organizar listas de peças. Nenhuma delas é feita para usinas, em português.</Frase>
-        <Fonte>Fontes: sites das empresas, consultados em 25/08/2026.</Fonte>
-      </div>
-      <Ilus nome="notebook" altura={230} style={{ width: 320, flex: 'none' }} />
-    </div>
-  </Quadro>
-);
-
-const CabecaPainel = ({ ilus, children }: { ilus: string; children: ReactNode }) => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 22, marginBottom: 18, minHeight: 96 }}>
-    <Ilus nome={ilus} altura={96} style={{ width: 120, flex: 'none' }} />
-    <h3 style={{ margin: 0, fontSize: 32, lineHeight: 1.18, fontWeight: 800, color: violeta }}>{children}</h3>
-  </div>
-);
-
-const Visao: Page = () => (
-  <Quadro olho="Visão · Desafio AGR08" titulo="O que já funciona e o que vem depois">
-    <Grade colunas={2} gap={48} style={{ alignItems: 'stretch' }}>
-      <Painel style={{ fontSize: 30 }}>
-        <CabecaPainel ilus="notebook">Já funciona no protótipo, com rolamentos</CabecaPainel>
-        <Lista>
-          <Item>Acha o rolamento pelo código, pela descrição ou pela foto da etiqueta</Item>
-          <Item>Encontra cadastros repetidos numa lista pública</Item>
-          <Item>Recusa o rolamento parecido que não é igual</Item>
-        </Lista>
-      </Painel>
-      <Painel cor={roxo} style={{ fontSize: 30 }}>
-        <CabecaPainel ilus="lampada">Próximos passos: ainda não faz</CabecaPainel>
-        <Lista>
-          <Item>Usar o catálogo do fabricante, com licença</Item>
-          <Item>Passar a resposta ao sistema da usina, que faz o pedido de compra</Item>
-          <Item>Responder a outros sistemas e a assistentes de IA</Item>
-          <Item>Atender outras peças, como bombas e vedações</Item>
-        </Lista>
+      <Painel titulo="Concorrência" cor={roxo}>
+        <p style={{ margin: '0 0 16px', fontSize: 46, lineHeight: 1.16, fontWeight: 800, color: tinta }}>Não encontramos nenhuma solução igual.</p>
+        Lá fora, Verusen (EUA), SAP (Alemanha) e IBM (EUA) organizam listas de peças. Nenhuma é feita para usinas, em português.
       </Painel>
     </Grade>
-  </Quadro>
-);
-
-const Equipe: Page = () => (
-  <Quadro olho="A equipe" titulo="Cinco estudantes de Sistemas de Informação da UEMG Frutal" gap={30}>
-    <Grade colunas={3}>
-      <Passo ilus="notebook-grande" alturaIlus={150} titulo="Já temos experiência">
-        Um de nós já criou soluções assim para clientes de móveis e de automóveis.
-      </Passo>
-      <Passo ilus="livro" alturaIlus={150} titulo="Usamos dados públicos">
-        Assim o protótipo saiu sem esperar o acesso a uma empresa.
-      </Passo>
-      <Passo ilus="tomada" alturaIlus={150} titulo="Queremos o agro">
-        Viemos ao Rota Inova para conhecer usinas e testar com elas.
-      </Passo>
-    </Grade>
-    <p style={{ margin: 0, fontSize: 28, lineHeight: 1.45, fontWeight: 700 }}>
-      <Nome>Allana Eduarda Braga Iquegami</Nome> · <Nome>Gabrielle Henrique Arruda Longo</Nome> · <Nome>Alberto Gabriel Rodrigues Bispo</Nome>
-      <br />
-      <Nome>Davi de Sousa Almeida</Nome> · <Nome>Myke Matos dos Santos</Nome>
-    </p>
-  </Quadro>
-);
-
-const ProximoPasso: Page = () => (
-  <Quadro
-    olho="Próximo passo"
-    titulo="Um teste com uma usina de verdade"
-    tamanhoTitulo={66}
-    gap={28}
-    foto={<FotoLado src={fotoColheita} alt="Colheita mecanizada de cana" credito={<>Colheita em Piracicaba (SP). Foto: Mariordo, Wikimedia Commons, <Nome>CC BY 3.0</Nome></>} />}
-  >
-    <Painel>
-      <Numero>1 usina</Numero>e 1 tipo de peça
-    </Painel>
-    <Painel cor={roxo}>
-      <Numero>10 a 50 peças</Numero>
-      reais, conferidas antes e depois
-    </Painel>
-    <Frase>Vamos medir quanto tempo se leva para achar a peça, antes e depois.</Frase>
+    <Fonte>Fontes: UNICA (22/06/2026), unidades operando no Centro-Sul · sites da Verusen, SAP e IBM (25/08/2026).</Fonte>
   </Quadro>
 );
 
 const Pedido: Page = () => (
   <div style={{ ...fundo, padding: `84px 620px 120px 250px`, justifyContent: 'center' }}>
     <Chave />
-    <Olho>O que pedimos</Olho>
+    <Olho>Ato 3 · O que pedimos</Olho>
     <h2 style={{ margin: 0, fontFamily: 'var(--osd-font-display)', fontSize: 92, lineHeight: 1.08, fontWeight: 800, color: branco }}>Procuramos uma usina parceira</h2>
     <Regua />
-    <Lista style={{ fontSize: 46, lineHeight: 1.3, fontWeight: 700, color: tinta }}>
-      <Item marcador={design.palette.accent}>A lista de um tipo de peça</Item>
-      <Item marcador={design.palette.accent}>Uma pessoa do almoxarifado para conferir as respostas</Item>
+    <Lista style={{ fontSize: 42, lineHeight: 1.3, fontWeight: 700, color: tinta }}>
+      <Item marcador={design.palette.accent}>Piloto de 90 dias, sem custo</Item>
+      <Item marcador={design.palette.accent}>1 tipo de peça, de 10 a 50 peças reais</Item>
+      <Item marcador={design.palette.accent}>Uma pessoa do almoxarifado para conferir</Item>
     </Lista>
-    <div style={{ margin: '40px 0 0', display: 'flex', alignItems: 'center', gap: 36 }}>
+    <div style={{ margin: '36px 0 0', display: 'flex', alignItems: 'center', gap: 36 }}>
       <QrCode tamanho={200} />
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 14 }}>
         <Link tamanho={36} />
@@ -675,17 +778,14 @@ const Pedido: Page = () => (
           <br />
           agroparts.pages.dev/contato
         </p>
-        <p style={{ margin: 0, fontSize: 28, lineHeight: 1.35, fontWeight: 700, color: tinta }}>
-          Equipe AgroParts
-          <br />
-          Sistemas de Informação, UEMG Frutal
-        </p>
       </div>
     </div>
     <Ilus nome="aviao" altura={460} style={{ position: 'absolute', right: 110, top: 300, width: 460 }} />
     <Rodape comChave />
   </div>
 );
+
+// ---------- Fontes ----------
 
 const ItemFonte = ({ children }: { children: ReactNode }) => (
   <Item>
@@ -697,109 +797,134 @@ const CabecaFonte = ({ children }: { children: ReactNode }) => (
   <h3 style={{ margin: '0 0 18px', fontSize: 30, fontWeight: 800, color: violeta }}>{children}</h3>
 );
 
-const FontesECreditos: Page = () => (
-  <Quadro olho="Fontes e créditos" titulo="De onde vêm os números, as fotos e as ilustrações" tamanhoTitulo={52}>
+const FontesDosNumeros: Page = () => (
+  <Quadro olho="Fontes" titulo="De onde vêm os números" tamanhoTitulo={52}>
     <Grade colunas={2} gap={40}>
       <Painel style={{ fontSize: 24 }}>
-        <CabecaFonte>Números</CabecaFonte>
+        <CabecaFonte>Ato 1 · A dor</CabecaFonte>
         <Lista>
-          <ItemFonte>São Martinho, resultados do 3º trimestre da safra 2025/26, 09/02/2026: ri.saomartinho.com.br</ItemFonte>
-          <ItemFonte>Departamento de Energia dos EUA, auditoria <Nome>DOE-OIG-24-30</Nome> da Western Area Power Administration, 24/09/2024: energy.gov</ItemFonte>
-          <ItemFonte>Verusen, SAP e IBM: verusen.com, learning.sap.com, ibm.com/docs, consultados em 25/08/2026</ItemFonte>
-          <ItemFonte>Teste do protótipo: catálogo público de materiais do governo federal (CATMAT) e compras públicas, Compras.gov.br</ItemFonte>
-          <ItemFonte>Detalhes e cálculos: github.com/shishiv/agroparts</ItemFonte>
+          <ItemFonte>
+            São Martinho, Resultados 3T26, 09/02/2026, p. 2 e 15: <Nome>21,7 mi t</Nome> moídas e <Nome>R$ 183,5 mi</Nome> em “Manutenção Entressafra/Outros” em 9 meses.
+          </ItemFonte>
+          <ItemFonte>Conta: <Nome>R$ 183,5 mi</Nome> ÷ <Nome>21,7 mi t</Nome> = <Nome>R$ 8,46</Nome> por tonelada. Cada usina: <Nome>R$ 8,46</Nome> × as toneladas dela.</ItemFonte>
+          <ItemFonte>Cerradão: <Nome>6,3 mi t</Nome> moídas (Rabobank, 2025). CMAA: <Nome>10 mi t</Nome> de capacidade em 3 usinas (Globo Rural, 25/04/2025).</ItemFonte>
+          <ItemFonte>
+            Usina Uberaba: <Nome>3,2 mi t</Nome> de capacidade (site da empresa, 28/10/2026). Coruripe, Limeira do Oeste: <Nome>2,5 mi t</Nome> de capacidade (Broadcast Agro, 20/03/2024).
+          </ItemFonte>
+          <ItemFonte>Departamento de Energia dos EUA, auditoria <Nome>DOE-OIG-24-30</Nome>, 24/09/2024.</ItemFonte>
         </Lista>
       </Painel>
       <Painel cor={roxo} style={{ fontSize: 24 }}>
-        <CabecaFonte>Fotos e ilustrações</CabecaFonte>
+        <CabecaFonte>Atos 2 e 3 · A solução e os números</CabecaFonte>
         <Lista>
-          <ItemFonte>Rolamento com tampas de metal: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0. Foto recortada.</ItemFonte>
-          <ItemFonte>Depósito de peças: Ikiwaner, Wikimedia Commons, <Nome>CC BY-SA 3.0</Nome>. Foto recortada.</ItemFonte>
-          <ItemFonte>Usina perto de Uberaba (MG): Jonathan Wilkins, Wikimedia Commons, <Nome>CC BY-SA 3.0</Nome>. Foto recortada.</ItemFonte>
-          <ItemFonte>Colheita em Piracicaba (SP): Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0. Foto recortada.</ItemFonte>
-          <ItemFonte>Telas do protótipo: equipe AgroParts, 09/10/2026. Ilustrações: modelo do Canva da equipe.</ItemFonte>
-          <ItemFonte>
-            Licenças: <Nome>creativecommons.org/licenses/by/3.0</Nome>, <Nome>/by/4.0</Nome> e <Nome>/by-sa/3.0</Nome>
-          </ItemFonte>
+          <ItemFonte>Teste do protótipo: catálogo de materiais do governo federal (CATMAT), Compras.gov.br, 10/2026.</ItemFonte>
+          <ItemFonte>Hipóteses: 1% de peça repetida e o preço de <Nome>R$ 5 mil</Nome> por usina por mês. O piloto mede o número real.</ItemFonte>
+          <ItemFonte>Mercado: UNICA, 22/06/2026, 250 unidades operando no Centro-Sul. 250 × <Nome>R$ 60 mil</Nome> = <Nome>R$ 15 mi</Nome> por ano.</ItemFonte>
+          <ItemFonte>Verusen, SAP e IBM: verusen.com, learning.sap.com e ibm.com/docs, consultados em 25/08/2026.</ItemFonte>
+          <ItemFonte>Contas e links: github.com/shishiv/agroparts, em docs/pesquisa/numeros-do-pitch.md</ItemFonte>
         </Lista>
       </Painel>
     </Grade>
   </Quadro>
 );
 
+const Creditos: Page = () => (
+  <Quadro olho="Créditos" titulo="Fotos, telas e ilustrações" tamanhoTitulo={52}>
+    <Painel style={{ fontSize: 24 }}>
+      <Lista>
+        <ItemFonte>Rolamento com tampas de metal: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0. Foto recortada.</ItemFonte>
+        <ItemFonte>Colheita em Piracicaba (SP): Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0. Foto recortada.</ItemFonte>
+        <ItemFonte>Telas e gravação do protótipo: equipe AgroParts, 09/10/2026 e 27/10/2026.</ItemFonte>
+        <ItemFonte>Ilustrações: modelo do Canva da equipe. Fonte Montserrat, licença SIL Open Font License.</ItemFonte>
+        <ItemFonte>
+          Licenças: <Nome>creativecommons.org/licenses/by/3.0</Nome> e <Nome>creativecommons.org/licenses/by/4.0</Nome>
+        </ItemFonte>
+      </Lista>
+    </Painel>
+  </Quadro>
+);
+
 // ---------- Roteiro (modo apresentador) ----------
+// Cada nota começa pelo minuto em que a página entra, numa fala calma de 125 palavras por minuto.
+// Colchetes são instruções para quem apresenta: não se fala.
 
 export const notes: (string | undefined)[] = [
-  `0:00 · Boa tarde. Somos a AgroParts, do curso de Sistemas de Informação da UEMG Frutal, no desafio AGR08, Eficiência na Gestão de Peças.
-A nossa ideia é simples: antes de comprar uma peça, saber se ela já está no estoque.
-Nos próximos minutos, vamos mostrar o problema, o protótipo funcionando e o que pedimos a vocês.`,
-  `0:25 · Olhem estes três nomes. São do mesmo rolamento?
-Numa usina, cada pessoa cadastra a peça do seu jeito. Com o tempo, a mesma peça ganha vários nomes, e ninguém tem certeza do que já tem na prateleira.
-Na dúvida, a pessoa compra de novo.`,
-  `0:45 · E não é só o nome. A peça chega como código do fabricante, código da usina, descrição curta, nome do dia a dia, outra marca ou foto da etiqueta.
-Cada fabricante organiza o catálogo do seu jeito.
-A AgroParts aceita o código, a descrição ou a foto da etiqueta. Ninguém precisa fotografar peça por peça.
-A etiqueta da tela foi montada pela equipe: é um exemplo, não uma foto de usina.`,
-  `1:20 · Isso pesa. Só a São Martinho gastou mais de 1,2 bilhão de reais com manutenção em nove meses de safra.
-E uma auditoria nos Estados Unidos, numa empresa de energia, achou 16% menos peças na prateleira do que o sistema dizia.
-Quando a lista não bate, a peça falta na hora errada, e na safra a máquina parada não pode esperar.`,
-  `1:45 · Hoje, quem resolve é a pessoa que conhece o estoque. A resposta fica na cabeça dela.
-Quando a lista cresce demais, a usina faz um mutirão para arrumar o cadastro. Demora, e depois de um tempo a bagunça volta.`,
-  `2:05 · A AgroParts resolve isso. A pessoa digita o código, cola a descrição ou fotografa a etiqueta.
-A AgroParts procura a peça no catálogo, compara as medidas e responde com uma destas três:
-é a mesma peça; precisa de uma pessoa para decidir; ou parece, mas não é.`,
-  `2:35 · Isto não é maquete: o site está no ar, em agroparts.pages.dev.
-[Abra "Exemplos da apresentação" e o caso 2, "Parece, mas não é". Aperte "Rodar no protótipo".]
-O código 317388 é um rolamento 6211 com blindagem nos dois lados. A AgroParts acha a mesma peça com outro código, o 472510.
-E embaixo estão sete cadastros com nome quase igual. A AgroParts recusa todos e mostra a diferença de cada um: muda a proteção, a folga ou as duas.
-No nosso teste, 90 de 90 peças parecidas foram recusadas.
-[Volte aos exemplos e abra o caso 4, "A lista inteira de uma vez".]
-Agora a lista inteira: 396 cadastros de rolamento do catálogo público do governo, lidos em poucos segundos. O protótipo achou 28 grupos de cadastros duplicados.
-A lista é pública. Não vem de uma usina.
-Se o site falhar, fique nesta página: a tela é uma captura do caso 2, e os números da direita são os dos dois casos.`,
-  `4:00 · Por que confiar? Porque, na dúvida, a AgroParts não arrisca: chama uma pessoa.
-Cada resposta mostra de onde veio, e nada é apagado do sistema da usina.
-Quando uma pessoa decide, a decisão fica registrada ao lado da resposta do sistema.
-A meta é errar menos de uma vez em cada cem respostas automáticas.`,
-  `4:25 · Esse mercado existe. Lá fora, empresas como a Verusen, a SAP e a IBM já vendem soluções para organizar listas de peças.
-Para o agro brasileiro, em português, ainda não existe. É esse o espaço da AgroParts.`,
-  `4:45 · O desafio AGR08 pede mais, e sabemos o que falta.
-Hoje, com rolamentos, a AgroParts já acha a peça pelo código, pela descrição ou pela foto, encontra cadastros repetidos e recusa a parecida.
-Depois vêm o catálogo do fabricante, com licença, e outras peças, como bombas e vedações.
-E a resposta vai para o sistema da usina, que faz o pedido de compra.`,
-  `5:15 · Somos cinco estudantes de Sistemas de Informação. Um de nós já criou soluções assim para clientes de móveis e de automóveis.
-Começamos com dados públicos para não esperar uma empresa. Agora queremos testar no agro.`,
-  `5:30 · O próximo passo é um teste com uma usina de verdade: um tipo de peça, de 10 a 50 peças reais.
-Vamos medir quanto tempo se leva para achar a peça, antes e depois.
-Não prometa economia: ainda não há teste com usina.`,
-  `5:45 · Para isso, procuramos uma usina parceira, que nos mostre a lista de um tipo de peça e indique uma pessoa do almoxarifado para conferir as respostas.
-O QR code na tela abre o site, e o contato está logo ao lado. Obrigado.
-(Cerca de 6 minutos em fala calma, dentro do limite de 5 a 7 minutos. Se o tempo apertar, pule o caso 4 da demonstração: fica em pouco mais de 5 minutos.)`,
-  `Página de apoio: não precisa falar. Mostre só se perguntarem de onde vêm os números. Nas perguntas, volte à página 13.
+  `0:00 · Boa tarde. Somos a AgroParts, cinco estudantes de Sistemas de Informação da UEMG Frutal, no desafio AGR08.
+Em seis minutos: a dor, a solução e os números.`,
+  `0:12 · Esta é a Márcia, almoxarife numa usina aqui do Triângulo Mineiro. Ela é uma personagem, mas a cena é comum.
+Duas da tarde, dia de safra: a colhedora para. O mecânico pede um rolamento 6318.
+A Márcia procura no sistema, e o sistema diz que a peça não existe. Compras faz um pedido urgente, e a colhedora espera.
+No dia seguinte, alguém acha três rolamentos iguais na prateleira, cadastrados com outro nome.`,
+  `0:47 · Quanto isso custa? A São Martinho publicou: gastou 183 milhões e meio com manutenção de entressafra em nove meses. Dá oito reais e quarenta e seis por tonelada de cana.
+Nas usinas da nossa região, isso dá de 21 a 85 milhões por safra. Só a Cerradão, aqui em Frutal, são cerca de 53 milhões.
+Se um real em cada cem for para peça que já estava na prateleira, são 530 mil reais por safra.
+Esse um por cento é hipótese nossa. O piloto mede o número real.`,
+  `1:29 · Por que isso acontece? Hoje o processo é manual, no almoxarifado. Mas o cadastro é feito por cada setor.
+A manutenção, compras e o almoxarifado escrevem a mesma peça de três jeitos, e o sistema enxerga três peças.
+E não é só aqui: numa auditoria de energia nos Estados Unidos, a prateleira tinha 16% menos peças do que o sistema dizia.`,
+  `1:59 · A AgroParts resolve isso. A pessoa digita o código, cola a descrição ou fotografa a etiqueta.
+A AgroParts procura a peça no catálogo, compara as medidas e responde uma de três coisas:
+é a mesma peça; precisa de uma pessoa; ou parece, mas não é.`,
+  `2:20 · Cada setor ganha. O almoxarifado acha a peça pelo código, pela descrição ou pela foto da etiqueta.
+A manutenção sabe na hora se a peça já está na prateleira. E compras vê o cadastro repetido antes de comprar de novo.
+O sistema da usina continua igual, e nenhum cadastro é apagado.`,
+  `2:45 · E isto não é maquete. Escaneiem o QR e toquem Identificar.
+[Pausa de 10 segundos enquanto escaneiam.]
+O código 311960 é o rolamento 6318 da Márcia. A AgroParts identifica a peça e, logo embaixo, mostra o 311963: o mesmo rolamento, com outro código.
+É a peça que estava na prateleira.
+[O vídeo do celular, à direita, roda sozinho e mostra o mesmo caminho: é o plano B sem internet. No PDF, a tela é a capa do vídeo. O vídeo inteiro, de 31 s, também está em demo.mp4.]`,
+  `3:16 · Testamos o protótipo com o catálogo público de materiais do governo federal.
+A AgroParts recusou 90 de 90 peças parecidas, mas diferentes. E leu 396 cadastros de rolamento de uma vez: achou 28 grupos de cadastros repetidos.
+Na dúvida, ela não arrisca: chama uma pessoa.`,
+  `3:37 · Agora, os números, no cenário conservador: a menor usina da nossa tabela, com 2,5 milhões de toneladas.
+Um por cento de 21 milhões são 210 mil reais por safra. A AgroParts custaria 60 mil por ano: o retorno estimado é de três vezes e meia o preço, e a conta empata com 0,3%.
+Numa usina como a Cerradão, o teto da região, chega a quase nove vezes.
+É estimativa, com as premissas na tela. O piloto mede o número real.`,
+  `4:16 · Quem paga é a usina, pelo orçamento de suprimentos e manutenção, que é onde cai a compra repetida.
+O preço que vamos testar é de 5 mil reais por usina, por mês.
+E a primeira usina começa com um piloto de 90 dias, sem custo.`,
+  `4:37 · O mercado: são 250 usinas operando no Centro-Sul, segundo a UNICA. A 60 mil reais por ano, são 15 milhões de reais por ano, só no Centro-Sul.
+Lá fora, a Verusen, a SAP e a IBM já organizam listas de peças. No Brasil, não encontramos nenhuma solução igual, feita para usinas, em português.`,
+  `5:03 · Por isso, o nosso pedido: uma usina parceira para um piloto de 90 dias, sem custo.
+Um tipo de peça, de 10 a 50 peças reais, e uma pessoa do almoxarifado para conferir as respostas.
+Vamos medir o tempo para achar a peça e as compras repetidas, antes e depois. O QR está na tela. Obrigado.
+[Fim por volta de 5:30. Sobram cerca de 30 segundos do limite de 6 minutos.]`,
+  `Página de apoio: não precisa falar. Mostre só se perguntarem de onde vêm os números. Nas perguntas, volte à página 12.
+
+As três perguntas mais difíceis:
+1. "Quem paga?" A usina, pelo orçamento de suprimentos e manutenção, que é onde cai a compra repetida. O preço em teste é de 5 mil reais por usina por mês, e a primeira usina faz o piloto de 90 dias sem custo.
+2. "Por que vocês?" O protótipo já está no ar e recusou 90 de 90 peças parecidas em dados públicos. Estudamos em Frutal, perto das usinas do Triângulo. Um de nós já criou soluções assim para clientes de móveis e de automóveis. E não achamos no Brasil uma solução igual: a Tractian, que atua aqui, cuida da saúde das máquinas e do estoque, mas não confere se duas peças são a mesma.
+3. "Qual é a prova?" Hoje, a prova é com dados públicos: 90 de 90 peças parecidas recusadas e 28 grupos de repetidos em 396 cadastros do governo federal. Ainda não testamos numa usina, por isso o retorno é estimativa. O piloto de 90 dias mede o tempo para achar a peça e as compras repetidas, antes e depois.
+
+Se perguntarem:
+- "De onde vem o 1%?" É hipótese. No catálogo público, 33 de 396 cadastros (8%) repetiam outro. Para pagar a AgroParts, basta 0,3% na menor usina da tabela.
+- "Qual é a meta?" Hipótese, sem base ainda: 10 usinas até 2028, ou 600 mil reais por ano.
+
 Versão de 30 segundos, se pedirem um resumo:
-Numa usina, a mesma peça aparece com vários nomes no estoque. Ninguém sabe se ela já está na prateleira.
+Numa usina, a mesma peça tem um nome em cada setor, e o sistema não acha o que está na prateleira.
 A AgroParts confere o código e as medidas e responde: é a mesma peça, não é, ou precisa de uma pessoa.
-O protótipo já está no ar em agroparts.pages.dev. Agora procuramos uma usina parceira para testar.`,
+Mesmo no cenário conservador, o retorno estimado é de três vezes e meia o preço. Procuramos uma usina parceira para um piloto de 90 dias.`,
+  `Página de apoio: não precisa falar.`,
 ];
 
 export const meta: SlideMeta = {
-  title: 'AgroParts · Pitch Rota Inova UEMG 2026',
+  title: 'AgroParts · Pitch final do Rota Inova UEMG 2026',
   createdAt: '2026-10-22T18:50:00.123Z',
 };
 
 export default [
   Abertura,
-  VariosNomes,
-  MuitosJeitos,
-  PorQueImporta,
+  DiaDeSafra,
+  QuantoCusta,
   ComoEHoje,
   Solucao,
-  Funcionando,
-  PorQueConfiar,
+  CadaSetor,
+  AoVivo,
+  Prova,
+  Retorno,
+  ModeloDeNegocio,
   Mercado,
-  Visao,
-  Equipe,
-  ProximoPasso,
   Pedido,
-  FontesECreditos,
+  FontesDosNumeros,
+  Creditos,
 ] satisfies Page[];
