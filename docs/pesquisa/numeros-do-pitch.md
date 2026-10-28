@@ -16,13 +16,15 @@ Nenhum número foi medido numa usina. O piloto é que mede o valor real ([ADR 00
 | 5 | 16% menos peças na prateleira | Departamento de Energia dos EUA, auditoria [DOE-OIG-24-30](https://www.energy.gov/sites/default/files/2024-09/DOE-OIG-24-30.pdf), 24/09/2024 |
 | 8 e 9 | Os seis passos, com telas do protótipo | Código 283529 em https://agroparts.pages.dev, 28/10/2026 (abaixo) |
 | 10 | Catálogo do governo, ISO 8000, SAP, IBM e Verusen; respostas registradas antes; na dúvida, uma pessoa; uma família por vez | [CATMAT](catmat-pncp.md), [identidade e equivalência](aprofundamento-identidade-equivalencia.md), [jornada e integração](aprofundamento-jornada-integracao.md), [mercado](mercado.md), [gabarito v1](../medicao/gabarito-v1.md), [roadmap](../roadmap.md) e [ADR 0020](../decisoes/adr-0020-prova-antes-do-pitch.md) |
-| 11 | 104 pares, 14 de 14 achados, 90 de 90 recusados | Teste com dados públicos (abaixo) |
-| 12 | 1 em 12 cadastros repetia outro | Lote do protótipo (abaixo) |
-| 13 | US$ 10,5 mi de economia verificada | Caso publicado pela Verusen (abaixo) |
-| 14 | Verusen, SAP e IBM | [mercado](mercado.md); learning.sap.com e ibm.com/docs, consultados em 25/08/2026 |
-| 15 | 250 usinas operando no Centro-Sul | UNICA (abaixo) |
-| 16 | As quatro etapas, o resultado de cada uma e o que pedimos | [Roadmap](../roadmap.md); custos em [`01-ideacao.html`](../rota-inova/01-ideacao.html) e [`entrega-unica.html`](../rota-inova/entrega-unica.html) (equipe, licença do catálogo do fabricante e servidor) |
-| 17 | Piloto de 90 dias, sem custo para a usina | Proposta da equipe |
+| 11 | 42 cadastros reais; gabarito registrado em 5/10 às 9h06; motor às 9h15; 6 erros na 1ª rodada, consertados no motor | Teste com dados públicos (abaixo); commits 88985c9 e c0689c5 no [PR 4](https://github.com/shishiv/agroparts/pull/4/commits) |
+| 12 | 104 pares, 14 de 14 achados, 90 de 90 recusados | Teste com dados públicos (abaixo) |
+| 13 | 1 em 12 cadastros repetia outro | Lote do protótipo (abaixo) |
+| 14 | US$ 10,5 mi de economia verificada | Caso publicado pela Verusen (abaixo) |
+| 15 | Verusen, SAP e IBM | [mercado](mercado.md); learning.sap.com e ibm.com/docs, consultados em 25/08/2026 |
+| 16 | Quem paga (a usina), como (assinatura por usina) e de que orçamento (manutenção e compras) | Oferta B2B de dados e governança do [recon profundo](recon-profundo-2026-08-25.md) e [ADR 0019](../decisoes/adr-0019-comissao-fora-do-caminho-critico.md); o valor da assinatura é hipótese e fica na nota de perguntas |
+| 17 | 250 usinas operando no Centro-Sul | UNICA (abaixo) |
+| 18 | As quatro etapas, o resultado de cada uma e o que pedimos | [Roadmap](../roadmap.md); custos em [`01-ideacao.html`](../rota-inova/01-ideacao.html) e [`entrega-unica.html`](../rota-inova/entrega-unica.html) (equipe, licença do catálogo do fabricante e servidor) |
+| 19 | Piloto de 90 dias, sem custo para a usina | Proposta da equipe |
 
 O pedido não tem valor em reais nem data, por decisão da equipe em 28/10/2026: o repositório só registra as categorias de custo, e o piloto é que dimensiona cada etapa.
 
