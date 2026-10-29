@@ -5,18 +5,19 @@
 # Antes de imprimir, confere o layout de cada página com checar-layout.js e para se houver problema.
 # Precisa de agent-browser, Node, poppler (pdfinfo e pdftocairo) e do editor rodando:
 #   bun run dev --host 127.0.0.1 --port 5181
-# Uso: sh exportar.sh [url-do-editor]   (padrão: http://127.0.0.1:5181)
+# Uso: sh exportar.sh [url-do-editor] [id-do-slide]   (padrão: http://127.0.0.1:5181 e rota-inova-pitch)
+# Para outro deck, o PDF e as imagens levam o id: exportado/<id>.pdf e exportado/png-<id>/.
 set -eu
 aqui=$(cd "$(dirname "$0")" && pwd)
 base=${1:-http://127.0.0.1:5181}
-slide=rota-inova-pitch
+slide=${2:-rota-inova-pitch}
 url="$base/s/$slide"
 saida="$aqui/exportado"
-pdf="$saida/agroparts-rota-inova-pitch.pdf"
+if [ "$slide" = rota-inova-pitch ]; then pdf="$saida/agroparts-rota-inova-pitch.pdf"; png="$saida/png"; else pdf="$saida/$slide.pdf"; png="$saida/png-$slide"; fi
 nav="agent-browser --session ${AGENT_BROWSER_SESSION:-agroparts-deck-open-slide}"
 
 curl -fsS -o /dev/null "$base/" || { echo "exportar.sh: o editor não responde em $base" >&2; exit 1; }
-mkdir -p "$saida/png"
+mkdir -p "$png"
 
 $nav set viewport 1920 1080 >/dev/null
 $nav open "$url" >/dev/null
@@ -47,7 +48,7 @@ $nav eval "window.dispatchEvent(new Event('afterprint')); 'ok'" >/dev/null
 
 paginas=$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')
 tamanho=$(pdfinfo "$pdf" | awk -F': *' '/^Page size:/ {print $2}')
-rm -f "$saida/png"/slide-*.png
-pdftocairo -png -scale-to-x 1920 -scale-to-y 1080 "$pdf" "$saida/png/slide"
+rm -f "$png"/slide-*.png
+pdftocairo -png -scale-to-x 1920 -scale-to-y 1080 "$pdf" "$png/slide"
 echo "$pdf: $paginas páginas, $tamanho"
-echo "$saida/png: $(ls "$saida/png" | wc -l) imagens"
+echo "$png: $(ls "$png" | wc -l) imagens"
