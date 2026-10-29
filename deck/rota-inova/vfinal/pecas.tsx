@@ -370,7 +370,11 @@ export const OTeste: Page = () => (
       <Rodada quando="1ª rodada" erros="6 erros" />
       <Rodada quando="Depois de um ajuste" erros="0 erros" />
     </div>
-    <Medida style={{ marginTop: 72, color: suave }}>Qualquer pessoa pode refazer o teste.</Medida>
+    <Medida style={{ marginTop: 72, textWrap: 'wrap' }}>
+      Em 104 comparações.
+      <br />
+      <span style={{ color: suave }}>Qualquer pessoa pode refazer o teste.</span>
+    </Medida>
   </Pagina>
 );
 
@@ -437,8 +441,10 @@ export const LaFora: Page = () => (
 export const QuemPaga: Page = () => (
   <Pagina>
     <Titulo>A usina paga uma assinatura</Titulo>
-    <Valor style={{ marginTop: 64 }}>250</Valor>
-    <Medida style={{ marginTop: 28 }}>usinas operando no Centro-Sul, segundo a UNICA</Medida>
+    <Valor sufixo="usinas" style={{ marginTop: 64 }}>
+      250
+    </Valor>
+    <Medida style={{ marginTop: 28 }}>operando no Centro-Sul, segundo a UNICA</Medida>
   </Pagina>
 );
 

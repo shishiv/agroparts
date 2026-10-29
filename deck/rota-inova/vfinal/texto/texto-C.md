@@ -42,53 +42,53 @@ Quem fala: Gabi o problema (1 a 4), Myke a solução e o teste (5 a 7), Alberto 
 **Na tela:** Hoje é manual. Cada setor cadastra do seu jeito. · Almoxarifado: ROLAM 6318ZZC3 P/ BOMBA · Manutenção: ROL 6318 ZZ C3 · Compras: ROLAMENTO RIG. ESFERAS 6318-2Z/C3 · O sistema vê três peças, que na verdade são uma só.
 
 **Fala:**
-- Gabi: E por que isso acontece? Hoje é manual. Cada setor cadastra do seu jeito: o almoxarifado de um jeito, a manutenção de outro, compras de outro. O sistema vê três peças, que na verdade são uma só.
+- Gabi: Isso acontece porque hoje é manual. Cada setor cadastra do seu jeito: o almoxarifado de um jeito, a manutenção de outro, compras de outro. O sistema vê três peças, que na verdade são uma só.
 
-**Tempo:** 0:45 a 1:02 (18 s, 37 palavras)
+**Tempo:** 0:45 a 1:01 (17 s, 35 palavras)
 
 ## 5 · A resposta e o ganho
 
 **Na tela:** A AgroParts confere a peça e responde · = É a mesma peça · ? Precisa de uma pessoa · Almoxarifado: acha a peça · Manutenção: sabe se já tem · Compras: não compra de novo
 
 **Fala:**
-- Myke: É aqui que entra a AgroParts. Ela confere a peça e responde: é a mesma peça, ou precisa de uma pessoa. Com isso, o almoxarifado acha a peça, a manutenção sabe se já tem, e compras não compra de novo.
+- Myke: A AgroParts confere a peça e responde: é a mesma peça, ou precisa de uma pessoa. Com isso, o almoxarifado acha a peça, a manutenção sabe se já tem, e compras não compra de novo.
 
-**Tempo:** 1:02 a 1:22 (19 s, 40 palavras)
+**Tempo:** 1:01 a 1:18 (17 s, 35 palavras)
 
 ## 6 · Como funciona
 
 **Na tela:** Cinco passos, em segundos · 1 Recebe o código, o nome ou a foto · 2 Lê as medidas e o tipo da peça · 3 Procura as parecidas no catálogo · 4 Compara uma a uma · 5 Junta os cadastros, sem apagar o original
 
 **Fala:**
-- Myke: E tudo leva segundos, em cinco passos. Recebe o código, o nome ou a foto da etiqueta. Lê as medidas e o tipo da peça. Procura as parecidas no catálogo. Compara uma a uma. E junta os cadastros da mesma peça, sem apagar o original.
+- Myke: São cinco passos, e tudo leva segundos. Recebe o código, o nome ou a foto da etiqueta. Lê as medidas e o tipo da peça. Procura as parecidas no catálogo. Compara uma a uma. E junta os cadastros da mesma peça, sem apagar o original.
 
-**Tempo:** 1:22 a 1:43 (22 s, 45 palavras)
+**Tempo:** 1:18 a 1:40 (22 s, 45 palavras)
 
 ## 7 · O teste
 
-**Na tela:** Testamos com cadastros reais e públicos do governo · 1ª rodada: 6 erros · Depois de um ajuste: 0 erros · Qualquer pessoa pode refazer o teste.
+**Na tela:** Testamos com cadastros reais e públicos do governo · 1ª rodada: 6 erros · Depois de um ajuste: 0 erros · Em 104 comparações. Qualquer pessoa pode refazer o teste.
 
 **Fala:**
-- Myke: E nós testamos com 42 cadastros reais e públicos de rolamento, do catálogo de compras do governo federal. A AgroParts comparou esses cadastros de dois em dois, 104 vezes. Na primeira rodada, errou 6. Depois de um ajuste, errou 0. E qualquer pessoa pode refazer esse teste, porque o código e os dados são públicos.
+- Myke: E nós testamos com 42 cadastros reais e públicos de rolamento, do catálogo de compras do governo federal. A AgroParts comparou esses cadastros dois a dois, em 104 comparações. Na primeira rodada, errou 6. Depois de um ajuste, errou 0. E qualquer pessoa pode refazer esse teste, porque o código e os dados são públicos.
 
-**Tempo:** 1:43 a 2:10 (26 s, 55 palavras)
+**Tempo:** 1:40 a 2:06 (26 s, 55 palavras)
 
 ## 8 · O pedido
 
 **Na tela:** Queremos investimento para construir a AgroParts · Dinheiro · Conhecimento · Acesso a uma usina e a quem conhece o sistema dela · QR · agroparts.pages.dev
 
 **Fala:**
-- Alberto: Quem paga é a usina, com uma assinatura. E só no Centro-Sul, a UNICA conta 250 usinas operando. Para construir a AgroParts a fundo, queremos investimento. Em dinheiro, em conhecimento e em acesso: a uma usina e às pessoas que conhecem o sistema dela. O QR abre o protótipo. Obrigado.
+- Alberto: Quem paga é a usina, com uma assinatura. E só no Centro-Sul, a UNICA conta 250 usinas operando. Para construir a AgroParts a fundo, queremos investimento em dinheiro e em conhecimento, e acesso a uma usina e às pessoas que conhecem o sistema dela. O QR abre o protótipo. Obrigado.
 
-**Tempo:** 2:10 a 2:34 (24 s, 50 palavras)
+**Tempo:** 2:06 a 2:30 (24 s, 50 palavras)
 
 ## Tempo
 
 | Quem | Palavras | Tempo |
 | --- | ---: | ---: |
-| Gabi | 123 | 0:59 |
-| Myke | 144 | 1:09 |
+| Gabi | 121 | 0:58 |
+| Myke | 139 | 1:06 |
 | Alberto | 54 | 0:25 |
-| **Total** | **321** | **2:34** |
+| **Total** | **314** | **2:30** |
 
-O limite é 6:00; sobram 3:25 para pausas, troca de slide e perguntas.
+O limite é 6:00; sobram 3:29 para pausas, troca de slide e perguntas.

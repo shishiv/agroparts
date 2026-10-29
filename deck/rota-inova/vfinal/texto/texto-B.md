@@ -42,9 +42,9 @@ Quem fala: Gabi o problema (1 a 5), Myke a solução e o teste (6 a 10), Alberto
 **Na tela:** Hoje é manual. Cada setor cadastra do seu jeito. · Almoxarifado: ROLAM 6318ZZC3 P/ BOMBA · Manutenção: ROL 6318 ZZ C3 · Compras: ROLAMENTO RIG. ESFERAS 6318-2Z/C3 · O sistema vê três peças, que na verdade são uma só.
 
 **Fala:**
-- Gabi: E por que isso acontece? Hoje é manual. Cada setor cadastra do seu jeito: o almoxarifado de um jeito, a manutenção de outro, compras de outro. O sistema vê três peças, que na verdade são uma só. E cada fornecedor ainda escreve a peça de outro jeito na nota fiscal.
+- Gabi: Isso acontece porque hoje é manual. Cada setor cadastra do seu jeito: o almoxarifado de um jeito, a manutenção de outro, compras de outro. O sistema vê três peças, que na verdade são uma só. E cada fornecedor ainda escreve a peça de outro jeito na nota fiscal.
 
-**Tempo:** 0:45 a 1:09 (24 s, 50 palavras)
+**Tempo:** 0:45 a 1:08 (23 s, 48 palavras)
 
 ## 5 · Não é caso raro
 
@@ -53,16 +53,16 @@ Quem fala: Gabi o problema (1 a 5), Myke a solução e o teste (6 a 10), Alberto
 **Fala:**
 - Gabi: E isso não é caso raro. Nós lemos os 396 cadastros de rolamento do catálogo do governo: um em cada doze, ou 8%, está repetido.
 
-**Tempo:** 1:09 a 1:21 (12 s, 25 palavras)
+**Tempo:** 1:08 a 1:20 (12 s, 25 palavras)
 
 ## 6 · A resposta
 
 **Na tela:** A AgroParts confere a peça e responde · = É a mesma peça · ? Precisa de uma pessoa
 
 **Fala:**
-- Myke: É aqui que entra a AgroParts. Ela confere a peça e responde: é a mesma peça, ou precisa de uma pessoa. Quando não tem certeza, ela não junta nada e chama uma pessoa.
+- Myke: A AgroParts confere a peça e responde: é a mesma peça, ou precisa de uma pessoa. Quando não tem certeza, ela não junta nada e chama uma pessoa.
 
-**Tempo:** 1:21 a 1:36 (16 s, 33 palavras)
+**Tempo:** 1:20 a 1:33 (13 s, 28 palavras)
 
 ## 7 · O ganho
 
@@ -71,34 +71,34 @@ Quem fala: Gabi o problema (1 a 5), Myke a solução e o teste (6 a 10), Alberto
 **Fala:**
 - Myke: Com isso, cada setor ganha: o almoxarifado acha a peça, a manutenção sabe se já tem, e compras não compra de novo.
 
-**Tempo:** 1:36 a 1:47 (11 s, 22 palavras)
+**Tempo:** 1:33 a 1:44 (11 s, 22 palavras)
 
 ## 8 · Como funciona
 
 **Na tela:** Cinco passos, em segundos · 1 Recebe o código, o nome ou a foto · 2 Lê as medidas e o tipo da peça · 3 Procura as parecidas no catálogo · 4 Compara uma a uma · 5 Junta os cadastros, sem apagar o original
 
 **Fala:**
-- Myke: E tudo leva segundos, em cinco passos. Um: a pessoa digita o código que já está no sistema, ou o que vem escrito na peça e na caixa. Também pode escrever o nome da peça, ou tirar uma foto da etiqueta, e a AgroParts lê o texto da foto ali mesmo, no navegador. Dois: lê as medidas e o tipo da peça. Três: procura no catálogo as peças parecidas. Quatro: compara uma a uma. Cinco: junta os cadastros da mesma peça, sem apagar o original. Assim, quem vai comprar sabe o que a usina já tem.
+- Myke: São cinco passos, e tudo leva segundos. Um: a pessoa digita o código do sistema ou da caixa da peça, escreve o nome, ou tira uma foto da etiqueta, e a AgroParts lê o texto da foto. Dois: lê as medidas e o tipo da peça. Três: procura no catálogo as peças parecidas. Quatro: compara uma a uma. Cinco: junta os cadastros da mesma peça, sem apagar o original. Assim, quem vai comprar sabe o que a usina já tem.
 
-**Tempo:** 1:47 a 2:33 (46 s, 96 palavras)
+**Tempo:** 1:44 a 2:22 (38 s, 80 palavras)
 
 ## 9 · O teste
 
-**Na tela:** Testamos com cadastros reais e públicos do governo · 1ª rodada: 6 erros · Depois de um ajuste: 0 erros · Qualquer pessoa pode refazer o teste.
+**Na tela:** Testamos com cadastros reais e públicos do governo · 1ª rodada: 6 erros · Depois de um ajuste: 0 erros · Em 104 comparações. Qualquer pessoa pode refazer o teste.
 
 **Fala:**
-- Myke: E nós testamos com cadastros reais e públicos: 42 cadastros de rolamento do catálogo de compras do governo federal. A AgroParts comparou esses cadastros de dois em dois, 104 vezes, e em cada comparação disse se era a mesma peça. Na primeira rodada, errou 6. Depois de um ajuste, errou 0. E qualquer pessoa pode refazer esse teste, porque o código e os dados são públicos.
+- Myke: E nós testamos com cadastros reais e públicos: 42 cadastros de rolamento do catálogo de compras do governo federal. A AgroParts comparou esses cadastros dois a dois, em 104 comparações, e disse se era a mesma peça. Na primeira rodada, errou 6. Depois de um ajuste, errou 0. O ajuste foi numa regra de leitura do código, e as respostas certas não mudaram. E qualquer pessoa pode refazer esse teste, porque o código e os dados são públicos.
 
-**Tempo:** 2:33 a 3:05 (32 s, 66 palavras)
+**Tempo:** 2:22 a 3:00 (37 s, 78 palavras)
 
 ## 10 · O resultado
 
 **Na tela:** Em 104 comparações · A mesma peça, escrita de outro jeito: 6312 ZZ = 6312-2Z · 14 de 14 achadas · Parecidas, mas diferentes: 6312 ZZ ≠ 6312ZZ C3 · 0 de 90 juntadas
 
 **Fala:**
-- Myke: Em 14 comparações, era a mesma peça escrita de outro jeito, como 6312 ZZ e 6312-2Z. A AgroParts achou as 14. Em 90, as peças eram parecidas, mas diferentes, como 6312 ZZ e 6312 ZZ C3. A AgroParts não juntou nenhuma das 90.
+- Myke: Em 14 comparações, era a mesma peça escrita de outro jeito, como na tela. A AgroParts achou as 14. Em 90, as peças eram parecidas, mas diferentes: uma letra a mais no código já muda a peça. A AgroParts não juntou nenhuma das 90.
 
-**Tempo:** 3:05 a 3:25 (21 s, 43 palavras)
+**Tempo:** 3:00 a 3:21 (21 s, 44 palavras)
 
 ## 11 · Lá fora
 
@@ -107,33 +107,33 @@ Quem fala: Gabi o problema (1 a 5), Myke a solução e o teste (6 a 10), Alberto
 **Fala:**
 - Alberto: E isso já é negócio lá fora. A Verusen, uma empresa americana, publicou o caso de uma fabricante que economizou 10 milhões e meio de dólares em estoque de peças. No Brasil, para usina, não achamos ninguém. A AgroParts é feita para usina e funciona ao lado do sistema que ela já tem.
 
-**Tempo:** 3:25 a 3:51 (25 s, 53 palavras)
+**Tempo:** 3:21 a 3:46 (25 s, 53 palavras)
 
 ## 12 · Quem paga
 
-**Na tela:** A usina paga uma assinatura · 250 · usinas operando no Centro-Sul, segundo a UNICA
+**Na tela:** A usina paga uma assinatura · 250 usinas · operando no Centro-Sul, segundo a UNICA
 
 **Fala:**
 - Alberto: Quem paga é a usina, com uma assinatura. O dinheiro sai de manutenção e compras, onde já cai a compra repetida. E só no Centro-Sul, a UNICA conta 250 usinas operando.
 
-**Tempo:** 3:51 a 4:06 (15 s, 31 palavras)
+**Tempo:** 3:46 a 4:01 (15 s, 31 palavras)
 
 ## 13 · O pedido
 
 **Na tela:** Queremos investimento para construir a AgroParts · Dinheiro · Conhecimento · Acesso a uma usina e a quem conhece o sistema dela · QR · agroparts.pages.dev
 
 **Fala:**
-- Alberto: Para construir a AgroParts a fundo, queremos investimento. Em dinheiro, em conhecimento e em acesso: a uma usina e às pessoas que conhecem o sistema dela. O QR abre o protótipo. Obrigado.
+- Alberto: Para construir a AgroParts a fundo, queremos investimento em dinheiro e em conhecimento, e acesso a uma usina e às pessoas que conhecem o sistema dela. O QR abre o protótipo. Obrigado.
 
-**Tempo:** 4:06 a 4:21 (15 s, 32 palavras)
+**Tempo:** 4:01 a 4:16 (15 s, 32 palavras)
 
 ## Tempo
 
 | Quem | Palavras | Tempo |
 | --- | ---: | ---: |
-| Gabi | 161 | 1:17 |
-| Myke | 264 | 2:06 |
+| Gabi | 159 | 1:16 |
+| Myke | 256 | 2:02 |
 | Alberto | 120 | 0:57 |
-| **Total** | **545** | **4:21** |
+| **Total** | **535** | **4:16** |
 
-O limite é 6:00; sobram 1:38 para pausas, troca de slide e perguntas.
+O limite é 6:00; sobram 1:43 para pausas, troca de slide e perguntas.
