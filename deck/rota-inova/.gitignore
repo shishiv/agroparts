@@ -7,3 +7,4 @@ slides/rota-inova-pitch/assets/canva/
 
 # Uma imagem por slide, gerada pelo exportar.sh. Só o PDF vai para o Git.
 exportado/png/
+exportado/png-*/
