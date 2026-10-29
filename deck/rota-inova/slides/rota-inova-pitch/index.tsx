@@ -1,12 +1,13 @@
-// Pitch final da AgroParts no Rota Inova UEMG 2026 (desafio AGR08): seis minutos, tom de Shark Tank.
-// Três atos, um por pessoa: 1, Gabi, o problema e um case (a cena da safra e o que a manutenção já custa); 2, Myke,
-// a solução (o que ela responde, os seis passos, o que a equipe estudou, como testou com dados reais e o resultado);
-// 3, Alberto, a ideia do negócio (quem já ganha com isso lá fora, quem paga, o mercado, o investimento por etapa e
-// o pedido).
-// Cada página tem uma ideia: o título e o número ou a imagem que a prova. O resto é falado: o roteiro fica no
-// export `notes`, que o modo apresentador mostra. Na tela só entra número publicado (com o nome de quem publicou),
-// número que o protótipo mediu ou conta feita com eles. A fonte de cada número, os créditos e as perguntas da
-// banca ficam nas notas, entre colchetes, e as contas em docs/pesquisa/numeros-do-pitch.md.
+// Pitch final da AgroParts no Rota Inova UEMG 2026 (desafio AGR08): seis minutos, para quem não é técnico.
+// Três atos, um por pessoa: 1, Gabi, o problema (a cena da safra, quanto custa a manutenção, cada setor cadastra do
+// seu jeito e quanto o catálogo do governo repete); 2, Myke, a solução (as duas respostas, o ganho de cada setor, os
+// cinco passos e como testou); 3, Alberto, a ideia do negócio (lá fora já é negócio, quem paga, o mercado, as etapas
+// e o pedido).
+// Cada página tem uma ideia, que se entende de relance: o título e o número ou a frase que a prova, em palavras
+// simples. O roteiro fica no export `notes`, que o modo apresentador mostra, e diz o que a tela diz. Na tela só entra
+// número publicado (com o nome de quem publicou), número que o protótipo mediu ou conta feita com eles. A fonte de
+// cada número, os créditos e as perguntas da banca ficam nas notas, entre colchetes, e as contas em
+// docs/pesquisa/numeros-do-pitch.md.
 import type { DesignSystem, Page, SlideMeta } from '@open-slide/core';
 import { useSlidePageNumber } from '@open-slide/core';
 import type { CSSProperties, ReactNode } from 'react';
@@ -19,17 +20,6 @@ import fonteExtraBold from './assets/fontes/Montserrat-ExtraBold.ttf';
 import fonteLight from './assets/fontes/Montserrat-Light.ttf';
 import fonteRegular from './assets/fontes/Montserrat-Regular.ttf';
 import fonteSemiBold from './assets/fontes/Montserrat-SemiBold.ttf';
-import telaRecebe from './assets/telas/passo-1-recebe.png';
-import telaLe from './assets/telas/passo-2-le.png';
-import telaBuscaMesma from './assets/telas/passo-3-busca-472657.png';
-import telaBuscaPessoa from './assets/telas/passo-3-busca-357380.png';
-import telaBuscaNaoE from './assets/telas/passo-3-busca-311967.png';
-import telaComparaMesma from './assets/telas/passo-4-compara-472657.png';
-import telaComparaNaoE from './assets/telas/passo-4-compara-311967.png';
-import telaMesma from './assets/telas/passo-5-resolve.png';
-import telaPessoa from './assets/telas/passo-5-revisa.png';
-import telaNaoE from './assets/telas/passo-5-recusa.png';
-import telaRegistra from './assets/telas/passo-6-registra.png';
 
 // Fundo e tinta do modelo do Canva da equipe, com o menta como a única cor de destaque.
 export const design: DesignSystem = {
@@ -190,17 +180,14 @@ const Abertura: Page = () => (
     <h1 style={{ margin: 0, fontFamily: 'var(--osd-font-display)', fontSize: 150, lineHeight: 1, fontWeight: 800, letterSpacing: '-0.03em', whiteSpace: 'nowrap' }}>
       <Chave>{'{ '}</Chave>AgroParts<Chave>{' }'}</Chave>
     </h1>
-    <p style={{ margin: '72px 0 0', fontSize: 52, lineHeight: 1.2, fontWeight: 700 }}>
-      Antes de comprar,
-      <br />a usina vai saber se a peça
-      <br />
-      já está na prateleira.
+    <p style={{ margin: '72px 0 0', fontSize: 60, lineHeight: 1.15, fontWeight: 700, textWrap: 'balance' }}>
+      Para a usina não comprar a peça que ela já tem.
     </p>
     <FotoLado src={fotoRolamento} alt="Rolamento de esferas com tampas de metal" credito="Foto recortada: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0" />
   </div>
 );
 
-// ---------- Ato 1, Gabi: o problema e um case ----------
+// ---------- Ato 1, Gabi: o problema ----------
 
 const DiaDeSafra: Page = () => (
   <Pagina direita={LARGURA_FOTO + 100}>
@@ -210,24 +197,21 @@ const DiaDeSafra: Page = () => (
   </Pagina>
 );
 
-const ManutencaoSaoMartinho: Page = () => (
-  <Pagina>
-    <Titulo>
-      Manutenção de entressafra
-      <br />
-      e outros na São Martinho,
-      <br />
-      em 9 meses
-    </Titulo>
-    <Valor prefixo="R$" sufixo="mi" style={{ marginTop: 72 }}>
+// A pergunta e o valor por extenso, em duas linhas, para o "milhões" ocupar a página.
+const QuantoCusta: Page = () => (
+  <Pagina style={{ paddingTop: 96, paddingBottom: 96 }}>
+    <Titulo tamanho={72}>Quanto custa manter uma usina rodando?</Titulo>
+    <Valor prefixo="R$" tamanho={250} style={{ marginTop: 48 }}>
       183,5
     </Valor>
+    <Valor tamanho={250}>milhões</Valor>
+    <Medida style={{ marginTop: 40, fontSize: 44, color: suave }}>São Martinho, manutenção de entressafra, em 9 meses</Medida>
   </Pagina>
 );
 
 // Como um setor escreve a peça no cadastro. O código que se repete fica em menta.
 const Cadastro = ({ setor, children }: { setor: string; children: ReactNode }) => (
-  <div data-caixa style={{ display: 'grid', gridTemplateColumns: '300px 1fr', alignItems: 'baseline', columnGap: 40, padding: '28px 44px', background: placa }}>
+  <div data-caixa style={{ display: 'grid', gridTemplateColumns: '300px 1fr', alignItems: 'baseline', columnGap: 40, padding: '24px 44px', background: placa }}>
     <span style={{ fontSize: 34, fontWeight: 600, color: suave }}>{setor}</span>
     <span style={{ fontSize: 50, lineHeight: 1.2, fontWeight: 800, letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>{children}</span>
   </div>
@@ -235,8 +219,10 @@ const Cadastro = ({ setor, children }: { setor: string; children: ReactNode }) =
 
 const CadaSetorCadastra: Page = () => (
   <Pagina>
-    <Titulo largura={1400}>Hoje é manual. Cada setor cadastra do seu jeito.</Titulo>
-    <div style={{ marginTop: 80, display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <Titulo tamanho={80} largura={1400}>
+      Hoje é manual. Cada setor cadastra do seu jeito.
+    </Titulo>
+    <div style={{ marginTop: 64, display: 'flex', flexDirection: 'column', gap: 16 }}>
       <Cadastro setor="Almoxarifado">
         ROLAM <Destaque>6318</Destaque>ZZC3 P/ BOMBA
       </Cadastro>
@@ -247,28 +233,28 @@ const CadaSetorCadastra: Page = () => (
         ROLAMENTO RIG. ESFERAS <Destaque>6318</Destaque>-2Z/C3
       </Cadastro>
     </div>
+    <Medida style={{ marginTop: 56, fontSize: 60, fontWeight: 800, color: 'var(--osd-accent)' }}>O sistema vê três peças, que na verdade são uma só.</Medida>
   </Pagina>
 );
 
-const AuditoriaNosEUA: Page = () => (
+// 33 dos 396 cadastros ativos do padrão 11797 repetem outro, em 28 grupos: 1 em cada 12.
+const UmEmDoze: Page = () => (
   <Pagina>
     {/* O "1" da Montserrat tem folga à esquerda; o recuo alinha o algarismo à margem do texto. */}
-    <Valor tamanho={320} style={{ marginLeft: -36 }}>
-      16%
+    <Valor tamanho={260} style={{ marginLeft: -30 }}>
+      1 em 12
     </Valor>
-    <Titulo tamanho={72} largura={1400} style={{ marginTop: 40 }}>
-      menos peças na prateleira
+    <Titulo tamanho={72} largura={1400} style={{ marginTop: 48 }}>
+      dos cadastros de rolamento
       <br />
-      do que o sistema dizia,
-      <br />
-      numa auditoria do governo dos EUA
+      do catálogo do governo está repetido
     </Titulo>
   </Pagina>
 );
 
 // ---------- Ato 2, Myke: a solução ----------
 
-// As três respostas, como sinais: igual, dúvida e diferente. O traço começa na borda esquerda, alinhado ao texto.
+// As respostas, como sinais: igual e dúvida. O traço começa na borda esquerda, alinhado ao texto.
 // `estreito` corta a sobra da direita, para o sinal ficar centrado entre dois blocos.
 const Sinal = ({ children, tamanho = 150, estreito = false }: { children: ReactNode; tamanho?: number; estreito?: boolean }) => (
   <svg
@@ -309,17 +295,17 @@ const SinalDiferente = ({ tamanho, estreito }: { tamanho?: number; estreito?: bo
 const Resposta = ({ sinal, children }: { sinal: ReactNode; children: ReactNode }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
     {sinal}
-    <span style={{ fontSize: 56, lineHeight: 1.12, fontWeight: 800, textWrap: 'balance' }}>{children}</span>
+    <span style={{ fontSize: 72, lineHeight: 1.08, fontWeight: 800, textWrap: 'balance' }}>{children}</span>
   </div>
 );
 
+// Duas respostas: a AgroParts só junta quando é a mesma peça; o resto fica com uma pessoa.
 const Solucao: Page = () => (
   <Pagina>
     <Titulo largura={1300}>A AgroParts confere a peça e responde</Titulo>
-    <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', columnGap: 96 }}>
+    <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', columnGap: 120 }}>
       <Resposta sinal={<SinalIgual />}>É a mesma peça</Resposta>
       <Resposta sinal={<SinalDuvida />}>Precisa de uma pessoa</Resposta>
-      <Resposta sinal={<SinalDiferente />}>Parece, mas não é</Resposta>
     </div>
   </Pagina>
 );
@@ -342,108 +328,54 @@ const CadaSetorGanha: Page = () => (
   </Pagina>
 );
 
-// Os seis passos por trás da resposta, num caso só: o código 283529 (6312 ZZ) do catálogo do governo, o mesmo
-// rolamento do teste. Cada passo traz o recorte da tela real do protótipo que o mostra. As telas vêm de
-// capturar-telas.sh: um celular de 360 px, capturado a 3 px por px. Cada tela ocupa a largura da coluna.
-const Tela = ({ src, alt }: { src: string; alt: string }) => <img src={src} alt={alt} style={{ display: 'block', width: '100%', height: 'auto' }} />;
-
-// O título de cada passo reserva as linhas do título mais longo da página, para as telas das três colunas
-// começarem na mesma altura.
-const ALTURA_LINHA_PASSO = 45;
-const Passo = ({ numero, titulo, linhas, children }: { numero: number; titulo: ReactNode; linhas: number; children: ReactNode }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, minHeight: 34 + linhas * ALTURA_LINHA_PASSO }}>
-      <span style={{ flex: 'none', fontSize: 80, lineHeight: 1, fontWeight: 800, color: 'var(--osd-accent)', fontVariantNumeric: 'tabular-nums' }}>{numero}</span>
-      <span style={{ fontSize: 40, lineHeight: `${ALTURA_LINHA_PASSO}px`, fontWeight: 800, textWrap: 'balance' }}>{titulo}</span>
-    </div>
-    <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>{children}</div>
+// Uma etapa de uma sequência: o número em menta e o texto ao lado, numa linha da lista.
+const Passo = ({ numero, children }: { numero: number; children: ReactNode }) => (
+  <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', alignItems: 'baseline', columnGap: 32 }}>
+    <span style={{ fontSize: 76, lineHeight: 1, fontWeight: 800, color: 'var(--osd-accent)', fontVariantNumeric: 'tabular-nums' }}>{numero}</span>
+    <span style={{ fontSize: 60, lineHeight: 1.1, fontWeight: 800 }}>{children}</span>
   </div>
 );
 
-const Passos = ({ titulo, children }: { titulo: string; children: ReactNode }) => (
-  <Pagina style={{ justifyContent: 'flex-start', paddingTop: 88 }}>
-    <Titulo tamanho={64}>{titulo}</Titulo>
-    <div style={{ marginTop: 44, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', columnGap: 80 }}>{children}</div>
-  </Pagina>
+const Lista = ({ children }: { children: ReactNode }) => (
+  <div style={{ marginTop: 72, display: 'flex', flexDirection: 'column', gap: 36 }}>{children}</div>
 );
 
-const PassosLer: Page = () => (
-  <Passos titulo="Primeiro, lê a peça e busca no catálogo">
-    <Passo numero={1} linhas={3} titulo="Recebe o código, a descrição ou a foto">
-      <Tela src={telaRecebe} alt="Protótipo: Código escolhido entre Código, Descrição e Foto da etiqueta, com o código 283529 no campo" />
-    </Passo>
-    <Passo numero={2} linhas={3} titulo="Lê tamanho, proteção e folga">
-      <Tela src={telaLe} alt="Protótipo: rolamento de esferas 6312, furo de 60 mm, blindagem metálica nos dois lados, folga normal" />
-    </Passo>
-    <Passo numero={3} linhas={3} titulo="Acha os outros 6312 do catálogo">
-      <Tela src={telaBuscaMesma} alt="Protótipo: cadastro 472657 achado no catálogo" />
-      <Tela src={telaBuscaPessoa} alt="Protótipo: cadastro 357380 achado no catálogo" />
-      <Tela src={telaBuscaNaoE} alt="Protótipo: cadastro 311967 achado no catálogo" />
-    </Passo>
-  </Passos>
-);
-
-const PassosDecidir: Page = () => (
-  <Passos titulo="Depois, compara e decide">
-    <Passo numero={4} linhas={2} titulo="Compara cada um">
-      <Tela src={telaComparaMesma} alt="Protótipo: o cadastro 472657 tem o mesmo tamanho, a mesma proteção, a mesma folga e o mesmo material" />
-      <Tela src={telaComparaNaoE} alt="Protótipo: o cadastro 311967 tem folga C3; a peça procurada tem folga normal" />
-    </Passo>
-    <Passo numero={5} linhas={2} titulo="Decide">
-      <Tela src={telaMesma} alt="Protótipo: É a mesma peça, 2 cadastros" />
-      <Tela src={telaPessoa} alt="Protótipo: Pode ser a mesma peça, precisa de uma pessoa, 1 cadastro" />
-      <Tela src={telaNaoE} alt="Protótipo: Parece, mas não é, 5 cadastros" />
-    </Passo>
-    <Passo numero={6} linhas={2} titulo="Padroniza sem apagar o original">
-      <Tela src={telaRegistra} alt="Protótipo: o cadastro original 283529 sem alteração, ao lado da descrição padronizada" />
-    </Passo>
-  </Passos>
-);
-
-// O que a equipe estudou antes de construir. A fonte de cada linha está na nota da página; como testou está na
-// página seguinte, e as etapas, na do investimento.
-const Linha = ({ children }: { children: ReactNode }) => (
-  <span style={{ fontSize: 60, lineHeight: 1.1, fontWeight: 800, textWrap: 'balance' }}>{children}</span>
-);
-
-const Estudo: Page = () => (
+const CincoPassos: Page = () => (
   <Pagina>
-    <Titulo>Estudamos antes de construir</Titulo>
-    <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', columnGap: 120, rowGap: 64 }}>
-      <Linha>O catálogo do governo</Linha>
-      <Linha>A norma ISO 8000</Linha>
-      <Linha>SAP, IBM e Verusen</Linha>
-      <Linha>O que a SKF e a Timken deixam usar</Linha>
-    </div>
+    <Titulo>Cinco passos, em segundos</Titulo>
+    <Lista>
+      <Passo numero={1}>Recebe o código, o nome ou a foto</Passo>
+      <Passo numero={2}>Lê as medidas e o tipo da peça</Passo>
+      <Passo numero={3}>Procura as parecidas no catálogo</Passo>
+      <Passo numero={4}>Compara uma a uma</Passo>
+      <Passo numero={5}>Junta os cadastros, sem apagar o original</Passo>
+    </Lista>
   </Pagina>
 );
 
-// Como o teste foi feito, na ordem: os dados reais, o gabarito registrado, o motor depois dele e o conserto da
-// primeira rodada. O traço de cima de cada marco forma a linha do tempo. Horas e contagens: dados/gabarito/v1 e os
-// commits 88985c9 e c0689c5 do PR 4.
+// Como o teste foi feito, na ordem: os dados reais, as respostas certas registradas antes e o conserto da primeira
+// rodada. O traço de cima de cada marco forma a linha do tempo. Contagens: dados/gabarito/v1 e os commits 88985c9 e
+// c0689c5 do PR 4.
 const Marco = ({ numero, titulo, children }: { numero: number; titulo: string; children: ReactNode }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 20, paddingTop: 36, borderTop: '8px solid var(--osd-accent)', minWidth: 0 }}>
     <span style={{ fontSize: 80, lineHeight: 1, fontWeight: 800, color: 'var(--osd-accent)', fontVariantNumeric: 'tabular-nums' }}>{numero}</span>
-    <span style={{ fontSize: 52, lineHeight: 1.08, fontWeight: 800 }}>{titulo}</span>
-    <span style={{ fontSize: 40, lineHeight: 1.2, fontWeight: 600, textWrap: 'balance' }}>{children}</span>
+    <span style={{ fontSize: 52, lineHeight: 1.08, fontWeight: 800, whiteSpace: 'nowrap' }}>{titulo}</span>
+    <span style={{ fontSize: 42, lineHeight: 1.2, fontWeight: 600, textWrap: 'balance' }}>{children}</span>
   </div>
 );
 
 const ComoTestamos: Page = () => (
   <Pagina>
-    <Titulo largura={1500}>Testamos com dados reais, não simulados</Titulo>
-    <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', columnGap: 56 }}>
+    <Titulo largura={1500}>Testamos com dados reais e públicos</Titulo>
+    <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', columnGap: 64 }}>
       <Marco numero={1} titulo="Dados reais">
-        42 cadastros do catálogo do governo
+        42 cadastros de rolamento do catálogo do governo
       </Marco>
-      <Marco numero={2} titulo="Gabarito">
-        registrado em 5/10, às 9h06
+      <Marco numero={2} titulo="Antes do teste">
+        guardamos as respostas certas
       </Marco>
-      <Marco numero={3} titulo="Motor">
-        entrou às 9h15, sem ver o gabarito
-      </Marco>
-      <Marco numero={4} titulo="1ª rodada">
-        6 erros: consertamos o motor, não o gabarito
+      <Marco numero={3} titulo="1ª rodada">
+        6 erros: consertamos a AgroParts, não as respostas
       </Marco>
     </div>
   </Pagina>
@@ -485,9 +417,9 @@ const Par = ({ sinal, a, b, placar, verbo, recuo = 0 }: { sinal: ReactNode; a: R
 
 const ParesTestados: Page = () => (
   <Pagina>
-    <Titulo largura={1500}>O resultado, em 104 pares reais</Titulo>
+    <Titulo largura={1500}>O resultado, em 104 pares de peças</Titulo>
     <div style={{ marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', columnGap: 96 }}>
-      <Par sinal={<SinalIgual tamanho={80} estreito />} a="6312 ZZ" b="6312-2Z" placar="14 de 14" verbo="achados" recuo={-14} />
+      <Par sinal={<SinalIgual tamanho={80} estreito />} a="6312 ZZ" b="6312-2Z" placar="14 de 14" verbo="iguais, achadas" recuo={-14} />
       <Par
         sinal={<SinalDiferente tamanho={80} estreito />}
         a="6312 ZZ"
@@ -497,65 +429,23 @@ const ParesTestados: Page = () => (
           </>
         }
         placar="90 de 90"
-        verbo="recusados"
+        verbo="diferentes, mantidas separadas"
       />
     </div>
   </Pagina>
 );
 
-// 33 dos 396 cadastros ativos do padrão 11797 repetem outro, em 28 grupos: 1 em cada 12.
-const UmEmDoze: Page = () => (
-  <Pagina>
-    {/* O "1" da Montserrat tem folga à esquerda; o recuo alinha o algarismo à margem do texto. */}
-    <Valor tamanho={260} style={{ marginLeft: -30 }}>
-      1 em 12
-    </Valor>
-    <Titulo tamanho={72} largura={1400} style={{ marginTop: 48 }}>
-      cadastros de rolamento de esfera
-      <br />
-      do catálogo do governo repetia outro
-    </Titulo>
-  </Pagina>
-);
-
 // ---------- Ato 3, Alberto: a ideia do negócio ----------
 
+// Lá fora já se paga por isso; aqui, ninguém faz para usina. Os nomes das outras empresas ficam na fala e nas perguntas.
 const LaFora: Page = () => (
   <Pagina>
-    <Titulo>Nos EUA, isso já é negócio</Titulo>
-    <Valor prefixo="US$" sufixo="mi" style={{ marginTop: 64 }}>
+    <Titulo>Lá fora, isso já é negócio</Titulo>
+    <Valor prefixo="US$" sufixo="mi" style={{ marginTop: 56 }}>
       10,5
     </Valor>
-    <Medida style={{ marginTop: 28 }}>de economia verificada numa fabricante, segundo a Verusen</Medida>
-  </Pagina>
-);
-
-// Quem atende qualquer indústria e quem atende usina, em português, lado a lado: quem faz algo parecido fica em tom
-// apagado, e a AgroParts em menta. O título de cada lado cabe numa linha, para os nomes começarem na mesma altura.
-const Lado = ({ onde, children }: { onde: string; children: ReactNode }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
-    <span style={{ fontSize: 60, lineHeight: 1.08, fontWeight: 800, letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>{onde}</span>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>{children}</div>
-  </div>
-);
-
-const Empresa = ({ children, cor = suave }: { children: ReactNode; cor?: string }) => (
-  <span style={{ fontSize: 88, lineHeight: 1, fontWeight: 800, letterSpacing: '-0.02em', color: cor }}>{children}</span>
-);
-
-const Concorrencia: Page = () => (
-  <Pagina>
-    <Titulo>Quem faz isso e para quem</Titulo>
-    <div style={{ marginTop: 88, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', columnGap: 120 }}>
-      <Lado onde="Qualquer indústria">
-        <Empresa>Verusen</Empresa>
-        <Empresa>SAP</Empresa>
-        <Empresa>IBM</Empresa>
-      </Lado>
-      <Lado onde="Usina, em português">
-        <Empresa cor="var(--osd-accent)">AgroParts</Empresa>
-      </Lado>
-    </div>
+    <Medida style={{ marginTop: 28 }}>de economia numa fabricante, segundo a Verusen</Medida>
+    <Medida style={{ marginTop: 64, fontSize: 60, fontWeight: 800, color: 'var(--osd-accent)' }}>No Brasil, para usina, não achamos ninguém.</Medida>
   </Pagina>
 );
 
@@ -566,7 +456,7 @@ const ModeloDeNegocio: Page = () => (
     <div style={{ marginTop: 112, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', columnGap: 96 }}>
       <Ganho setor="Quem paga">A usina</Ganho>
       <Ganho setor="Como">Assinatura por usina</Ganho>
-      <Ganho setor="Orçamento">Manutenção e compras</Ganho>
+      <Ganho setor="De onde sai">Manutenção e compras</Ganho>
     </div>
   </Pagina>
 );
@@ -579,49 +469,16 @@ const Mercado: Page = () => (
   </Pagina>
 );
 
-// O investimento por etapa, como numa campanha de financiamento coletivo: cada etapa prova um número e pede dois
-// tipos de apoio, dinheiro e acesso. A ordem e os números vêm do roadmap (docs/roadmap.md); os custos, das
-// categorias de docs/rota-inova (equipe, licença do catálogo do fabricante e servidor). Sem valor e sem data.
-const COLUNAS_ETAPA = '56px 300px 440px 250px 1fr';
-const VAO_ETAPA = 44;
-
-const Cabecalho = ({ children }: { children?: ReactNode }) => (
-  <span style={{ fontSize: 34, lineHeight: 1.2, fontWeight: 800, color: 'var(--osd-accent)' }}>{children}</span>
-);
-
-const Celula = ({ children }: { children: ReactNode }) => (
-  <span style={{ fontSize: 34, lineHeight: 1.2, fontWeight: 600, textWrap: 'balance' }}>{children}</span>
-);
-
-const Etapa = ({ numero, nome, prova, dinheiro, acesso }: { numero: number; nome: string; prova: string; dinheiro: string; acesso: string }) => (
-  <div
-    data-caixa
-    style={{ display: 'grid', gridTemplateColumns: COLUNAS_ETAPA, alignItems: 'start', columnGap: VAO_ETAPA, padding: '24px 36px', background: placa }}
-  >
-    <span style={{ fontSize: 56, lineHeight: 0.9, fontWeight: 800, color: 'var(--osd-accent)', fontVariantNumeric: 'tabular-nums' }}>{numero}</span>
-    <span style={{ fontSize: 40, lineHeight: 1.05, fontWeight: 800, textWrap: 'balance' }}>{nome}</span>
-    <Celula>{prova}</Celula>
-    <Celula>{dinheiro}</Celula>
-    <Celula>{acesso}</Celula>
-  </div>
-);
-
-const Investimento: Page = () => (
+// As quatro etapas do roadmap (docs/roadmap.md), cada uma só depois de a anterior provar o seu número.
+const Etapas: Page = () => (
   <Pagina>
-    <Titulo>O que pedimos, etapa por etapa</Titulo>
-    <div style={{ marginTop: 64, display: 'grid', gridTemplateColumns: COLUNAS_ETAPA, columnGap: VAO_ETAPA, padding: '0 36px 16px' }}>
-      <Cabecalho />
-      <Cabecalho />
-      <Cabecalho>Prova</Cabecalho>
-      <Cabecalho>Dinheiro</Cabecalho>
-      <Cabecalho>Acesso</Cabecalho>
-    </div>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <Etapa numero={1} nome="Piloto numa usina" prova="quanto tempo e quantas compras a usina economiza" dinheiro="equipe e servidor" acesso="uma usina e uma pessoa do almoxarifado" />
-      <Etapa numero={2} nome="Catálogo do fabricante" prova="que as medidas batem na família inteira" dinheiro="licença do catálogo" acesso="um fabricante" />
-      <Etapa numero={3} nome="Bombas e vedações" prova="quanto acerta em cada família nova" dinheiro="equipe" acesso="os cadastros da usina" />
-      <Etapa numero={4} nome="Sistema da usina" prova="que a resposta chega sem mudar cadastro" dinheiro="equipe" acesso="quem conhece o SAP ou o Maximo da usina" />
-    </div>
+    <Titulo>O investimento, em quatro etapas</Titulo>
+    <Lista>
+      <Passo numero={1}>Piloto numa usina</Passo>
+      <Passo numero={2}>Catálogo de um fabricante</Passo>
+      <Passo numero={3}>Bombas e vedações</Passo>
+      <Passo numero={4}>Ligar no sistema da usina</Passo>
+    </Lista>
   </Pagina>
 );
 
@@ -639,28 +496,21 @@ const Link = ({ tamanho = 40 }: { tamanho?: number }) => (
   </a>
 );
 
-// O pedido e, à direita, o QR e o contato, com o topo do QR na altura do título.
+// O pedido e, à direita, o QR que abre o protótipo, com o topo do QR na altura do título.
 const Pedido: Page = () => (
   <Pagina>
     <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 120 }}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Titulo tamanho={80} largura={1000}>
-          Procuramos
-          <br />
-          investimento,
-          <br />
-          uma usina parceira
-          <br />e quem abra portas
-        </Titulo>
-        <Valor sufixo="dias" tamanho={200} style={{ marginTop: 64 }}>
-          90
-        </Valor>
-        <Medida style={{ marginTop: 24 }}>de piloto, sem custo para a usina</Medida>
-      </div>
+      <Titulo tamanho={92} largura={1000}>
+        Procuramos
+        <br />
+        investimento,
+        <br />
+        uma usina parceira
+        <br />e quem abra portas
+      </Titulo>
       <div style={{ flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 28, paddingTop: 14 }}>
-        <QrCode tamanho={400} />
-        <Link tamanho={36} />
-        <span style={{ fontSize: 30, fontWeight: 600, color: suave }}>myke.matos@gmail.com</span>
+        <QrCode tamanho={440} />
+        <Link tamanho={40} />
       </div>
     </div>
   </Pagina>
@@ -668,98 +518,99 @@ const Pedido: Page = () => (
 
 // ---------- Roteiro (modo apresentador) ----------
 // Cada nota começa pelo minuto em que a página entra, numa fala calma de 125 palavras por minuto.
-// A tela só mostra o título e o número; o resto está aqui, para falar.
+// A fala diz o que a tela diz, com as mesmas palavras simples; o resto da nota é apoio.
 // Colchetes são instruções e fontes para quem apresenta: não se fala. A primeira nota de cada ato diz quem fala.
 
 export const notes: (string | undefined)[] = [
-  `0:00 · [Fala 1, Gabi: o problema e um case, páginas 1 a 5.]
-Boa tarde. Somos a AgroParts, estudantes de Sistemas de Informação da UEMG Frutal, no desafio AGR08.
-Antes de comprar, a usina vai saber se a peça já está na prateleira.
-[Equipe: Allana Eduarda Braga Iquegami, Gabrielle Henrique Arruda Longo, Alberto Gabriel Rodrigues Bispo, Davi de Sousa Almeida e Myke Matos dos Santos.
+  `0:00 · [Fala 1, Gabi: o problema, páginas 1 a 5.]
+Boa tarde. Eu sou a Gabi, e nós somos a AgroParts.
+Queremos que a usina não compre a peça que ela já tem.
+[Equipe: Allana Eduarda Braga Iquegami, Gabrielle Henrique Arruda Longo, Alberto Gabriel Rodrigues Bispo, Davi de Sousa Almeida e Myke Matos dos Santos, estudantes de Sistemas de Informação da UEMG Frutal, no desafio AGR08.
 Créditos do deck: foto do rolamento com tampas de metal, R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0 (creativecommons.org/licenses/by/4.0), recortada. Fonte Montserrat, SIL Open Font License. As contas e as fontes de todos os números estão em github.com/shishiv/agroparts, docs/pesquisa/numeros-do-pitch.md.]`,
-  `0:14 · Imagine a Márcia, almoxarife numa usina aqui do Triângulo.
-Dia de safra, a colhedora para. O mecânico pede um rolamento 6318.
-A Márcia procura no sistema, e o sistema diz que a peça não existe. Compras faz um pedido urgente.
-No dia seguinte, alguém acha três rolamentos iguais na prateleira, cadastrados com outro nome.
-[A cena é ilustrativa: a Márcia é uma personagem. Foto: colheita em Piracicaba (SP), Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0 (creativecommons.org/licenses/by/3.0), recortada.]`,
-  `0:40 · Quanto custa manter uma usina rodando? A São Martinho publicou: 183 milhões e meio de reais com manutenção de entressafra e outros, em nove meses.
+  `0:11 · Dia de safra, a colhedora para e precisa de uma peça.
+O sistema diz que a peça não existe, e compras faz um pedido urgente.
+Mas, na prateleira, havia três.
+[A cena é ilustrativa. Foto: colheita em Piracicaba (SP), Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0 (creativecommons.org/licenses/by/3.0), recortada.]`,
+  `0:25 · Quanto custa manter uma usina rodando? Milhões.
+A São Martinho publicou: 183 milhões e meio de reais com manutenção de entressafra, em nove meses.
 Cada peça comprada sem precisar sai desse dinheiro.
-[Fonte: São Martinho, Resultados 3T26, 09/02/2026, p. 15: R$ 183,5 mi em "Manutenção Entressafra/Outros", de abril a dezembro de 2025.]`,
-  `0:56 · Por que isso acontece? Hoje o processo é manual, no almoxarifado. Mas o cadastro é feito por cada setor.
-O almoxarifado, a manutenção e compras escrevem a mesma peça de três jeitos, e o sistema enxerga três peças.
+[Fonte: São Martinho, Resultados 3T26, 09/02/2026, p. 15: R$ 183,5 mi em "Manutenção Entressafra/Outros", de abril a dezembro de 2025. É a linha de manutenção de máquinas e da indústria; plantio e tratos culturais são outras linhas. A empresa não separa quanto é peça.]`,
+  `0:40 · Por que isso acontece? Hoje é manual. Cada setor cadastra do seu jeito: o almoxarifado de um jeito, a manutenção de outro, compras de outro.
+O sistema vê três peças, que na verdade são uma só.
+E cada fornecedor escreve a peça de outro jeito na nota fiscal.
 [Os três cadastros são ilustrativos.]`,
-  `1:14 · E não é só aqui: numa auditoria do governo dos Estados Unidos, a prateleira tinha 16% menos peças do que o sistema dizia.
-[Fonte: Departamento de Energia dos EUA, auditoria DOE-OIG-24-30, 24/09/2024. É uma operadora de rede elétrica, não uma usina.
-Gabi passa a palavra ao Myke.]`,
-  `1:25 · [Fala 2, Myke: a solução, páginas 6 a 13.]
-A AgroParts resolve isso. Ela confere a peça e responde uma de três coisas:
-é a mesma peça; precisa de uma pessoa; ou parece, mas não é.`,
-  `1:38 · Cada setor ganha: o almoxarifado acha a peça, a manutenção sabe se ela já está na prateleira, e compras não compra de novo.`,
-  `1:49 · São seis passos, com um rolamento real do catálogo do governo: o 6312 ZZ.
-Um: a pessoa dá o código, a descrição ou a foto da etiqueta. Da foto, ela lê o texto da etiqueta.
-Dois: a AgroParts lê tamanho, proteção e folga.
-Três: acha no catálogo os outros oito 6312.
-[Telas reais do protótipo em agroparts.pages.dev, código 283529 (6312 ZZ) do CATMAT, capturadas em 28/10/2026 com capturar-telas.sh. Os oito cadastros achados são 292852, 472657, 357380, 311967, 317412, 346385, 346386 e 472656; a tela mostra três deles. A foto passa pela leitura de texto do próprio site (tesseract.js): a câmera lê o texto, não a peça.]`,
-  `2:13 · Quatro: compara cada um. O 472657 é igual em tudo, só o texto muda. O 311967 parece igual, mas tem outra folga.
-Cinco: decide. Dois são a mesma peça, um precisa de uma pessoa e cinco parecem, mas não são.
-Seis: padroniza a descrição sem apagar o original.
-[Contagens do protótipo para o código 283529, 28/10/2026: 2 iguais (292852 e 472657), 1 para uma pessoa (357380, "6312 2ZR": o final "R" não está nas regras) e 5 diferentes. Texto parecido nunca decide: só os dados da peça.]`,
-  `2:36 · Não foi no chute. Estudamos o catálogo de materiais do governo, com 343 mil itens, a norma ISO 8000, como a SAP, a IBM e a Verusen tratam isso, e o que a SKF e a Timken deixam usar.
-[Fontes, todas em docs/pesquisa/ do repositório: 343.880 itens de material na API do Compras.gov.br em 25/08/2026 (catmat-pncp.md); as partes 110 a 140 da ISO 8000 (aprofundamento-identidade-equivalencia.md); SAP MDG, SAP EAM e IBM Maximo (aprofundamento-jornada-integracao.md); Verusen (mercado.md); termos de uso da SKF e da Timken conferidos em 05/10/2026 (fontes-do-prototipo.md e ADR 0010). As 21 decisões de projeto estão em docs/decisoes/.]`,
-  `2:55 · E testamos. Não foi simulado: são 42 cadastros reais e públicos de rolamento, do catálogo de compras do governo federal.
-Primeiro, registramos no GitHub as respostas certas, o gabarito: 5 de outubro, às 9h06. O motor entrou às 9h15, sem ver o gabarito.
-Na primeira rodada, ele errou 6 pares, porque lia o 6206-2Z sem o final. Consertamos o motor. O gabarito não mudou.
-[Fonte: CATMAT, padrão 11797 (ROLAMENTO DE ESFERA), consulta de 05/10/2026: 42 cadastros em seis grupos (6001, 6006, 6211, 6206, 6312 e 6308). Gabarito no commit 88985c9 (09h06) e motor no commit c0689c5 (09h15), em github.com/shishiv/agroparts/pull/4/commits; no main os dois viraram o commit b0a08ec. Os três arquivos de dados/gabarito/v1 são idênticos aos do commit 88985c9. A hora do commit vem do computador de quem commita: a prova é a ordem pública dos commits.
-Quem rotulou foi o agente de IA que escreveu o motor; a revisão da equipe ainda falta. Não diga "sem ajustar nada": houve um conserto, e só um.]`,
-  `3:26 · Em 14 pares, era a mesma peça com outro nome, como 6312 ZZ e 6312-2Z. A AgroParts achou os 14.
-Em 90 pares, a peça parecia igual, mas tinha outra proteção ou outra folga. A AgroParts recusou os 90.
-Na dúvida, ela não arrisca: chama uma pessoa.
-[Fonte: gabarito v1 de 05/10/2026, dados/gabarito/v1/preregistro.json e docs/medicao/gabarito-v1.md; refaça com bun run medir. 140 pares nos seis grupos, 36 indeterminados fora da conta, sobram 104: 14 iguais e 90 diferentes. Os exemplos são pares do teste: 283529 (6312 ZZ) com 472657 (6312-2Z) e com 311967 (6312ZZ C3). Não diga "100% de acurácia": diga "14 de 14 e 90 de 90". Não é cadastro de usina.]`,
-  `3:48 · E, lendo os 396 cadastros de rolamento de esfera do catálogo, um em cada doze repetia outro.
-[Medido pelo protótipo no lote de 05/10/2026, com bun run medir: 33 dos 396 cadastros ativos do padrão 11797 do CATMAT repetem outro, em 28 grupos (docs/medicao/gabarito-v1.md). Um deles é o 6318 da Márcia: 311960 e 311963.
-Myke passa a palavra ao Alberto.]`,
-  `3:57 · [Fala 3, Alberto: a ideia do negócio, páginas 14 a 19.]
-Isso já é negócio. Nos Estados Unidos, a Verusen vende essa promessa: a mesma peça, muitos nomes.
-Ela publicou o caso de uma fabricante com 29 fábricas: 10 milhões e meio de dólares de economia verificada em estoque de peças.
-[Fonte: Verusen, verusen.com, 28/10/2026: caso de uma fabricante com 29 fábricas, US$ 10,5 mi de economia verificada em estoque de peças, número publicado pela empresa. Captação: US$ 8 mi (série A) e US$ 25 mi (série B, 25/01/2022), segundo o comunicado da Verusen.]`,
-  `4:16 · No Brasil, não encontramos ninguém fazendo isso para usina.
-A Verusen, a SAP e a IBM atendem qualquer indústria. A AgroParts é feita para usina, em português, e funciona ao lado do sistema que a usina já tem.
-[SAP e IBM: learning.sap.com e ibm.com/docs, consultados em 25/08/2026.]`,
-  `4:34 · O modelo é simples. Quem paga é a usina, com uma assinatura, para conferir e padronizar os cadastros.
-E o dinheiro sai do orçamento de manutenção e compras, onde já cai a compra repetida.
+  `1:03 · E não é caso raro. Lemos os 396 cadastros de rolamento do catálogo do governo: um em cada doze, ou 8%, está repetido.
+[Medido pelo protótipo no lote de 05/10/2026, com bun run medir: 33 dos 396 cadastros ativos do padrão 11797 (ROLAMENTO DE ESFERA) do CATMAT repetem outro, em 28 grupos; 33 ÷ 396 = 8,3% (docs/medicao/gabarito-v1.md). Se alguém contar os 61 cadastros dentro dos grupos, vai achar 15%: o original de cada grupo não conta como repetido. É catálogo do governo federal, não de usina.
+Gabi termina e para. O Myke entra se apresentando.]`,
+  `1:14 · [Fala 2, Myke: a solução e o teste, páginas 6 a 10.]
+Eu sou o Myke. A AgroParts confere a peça e responde:
+é a mesma peça, ou precisa de uma pessoa.
+Quando não tem certeza, ela não junta nada: chama uma pessoa.
+[O protótipo separa "precisa de uma pessoa" de "parece, mas não é" (a recusa). Na tela, as duas viram uma: nos dois casos, a AgroParts não junta os cadastros.]`,
+  `1:29 · Cada setor ganha: o almoxarifado acha a peça, a manutenção sabe se já tem, e compras não compra de novo.`,
+  `1:39 · Tudo isso leva segundos, em cinco passos.
+Um: a pessoa digita o código que já está no sistema, ou o que vem escrito na peça e na caixa. Também pode escrever o nome da peça, ou tirar uma foto da etiqueta. Da foto, a AgroParts lê o texto da etiqueta, no próprio navegador, com software livre.
+Dois: lê as medidas e o tipo da peça.
+Três: procura no catálogo as peças parecidas.
+Quatro: compara uma a uma.
+Cinco: junta os cadastros da mesma peça, sem apagar o original. Assim, quem vai comprar sabe o que a usina já tem.
+[Os cinco passos são os seis do protótipo, com "compara" e "decide" num só. O código pode ser o do cadastro (no protótipo, o código do catálogo do governo, como 283529) ou o do fabricante (como 6312 ZZ). A foto passa pela leitura de texto do próprio site (tesseract.js, Apache 2.0, ADR 0021): a câmera lê o texto, não a peça, e a pessoa confere o texto antes da resposta. O protótipo não tem etiqueta NFC nem QR na máquina. O lote dos 396 cadastros roda em milissegundos; a leitura da foto leva alguns segundos.]`,
+  `2:26 · Não foi no chute. Antes de construir, estudamos o catálogo do governo e quem já faz isso lá fora.
+E testamos com dados reais e públicos: 42 cadastros de rolamento do catálogo de compras do governo federal, não de usina.
+Antes do teste, guardamos as respostas certas no GitHub.
+Na primeira rodada, a AgroParts errou 6 vezes. Consertamos a AgroParts, não as respostas.
+[Fonte: CATMAT, padrão 11797 (ROLAMENTO DE ESFERA), consulta de 05/10/2026: 42 cadastros em seis grupos (6001, 6006, 6211, 6206, 6312 e 6308). Respostas certas (o gabarito) no commit 88985c9 (09h06) e motor no commit c0689c5 (09h15), em github.com/shishiv/agroparts/pull/4/commits; no main os dois viraram o commit b0a08ec. A hora do commit vem do computador de quem commita: a prova é a ordem pública dos commits. O conserto: uma leitura do código "6206-2Z" sem o final.
+Quem rotulou foi o agente de IA que escreveu o motor; a revisão da equipe ainda falta. Não diga "sem ajustar nada": houve um conserto, e só um.
+Estudo: 343.880 itens de material na API do Compras.gov.br em 25/08/2026; a norma ISO 8000; SAP MDG, IBM Maximo e Verusen; os termos de uso da SKF e da Timken (docs/pesquisa/ e ADR 0010).]`,
+  `2:57 · Em 14 pares, era a mesma peça com outro nome, como 6312 ZZ e 6312-2Z. A AgroParts achou todas as 14.
+Em 90 pares, a peça parecia igual, mas era outra. A AgroParts não juntou nenhuma das 90.
+[Fonte: gabarito v1 de 05/10/2026, dados/gabarito/v1/preregistro.json e docs/medicao/gabarito-v1.md; refaça com bun run medir. 140 pares nos seis grupos, 36 indeterminados fora da conta, sobram 104: 14 iguais e 90 diferentes. Nos 90, muda a proteção, a folga ou as duas; nunca o material. Os exemplos são pares do teste: 283529 (6312 ZZ) com 472657 (6312-2Z) e com 311967 (6312ZZ C3). Não diga "100% de acurácia": diga "todas as 14" e "nenhuma das 90". Não é cadastro de usina.
+Myke termina e para. O Alberto entra se apresentando.]`,
+  `3:15 · [Fala 3, Alberto: a ideia do negócio, páginas 11 a 15.]
+Eu sou o Alberto. Lá fora, isso já é negócio.
+A Verusen, uma empresa americana, publicou o caso de uma fabricante: 10 milhões e meio de dólares de economia em estoque de peças.
+No Brasil, para usina, não achamos ninguém. A AgroParts é feita para usina e funciona ao lado do sistema que ela já tem.
+[Fonte: Verusen, verusen.com, 28/10/2026: caso de uma fabricante com 29 fábricas, US$ 20,9 mi identificados e US$ 10,5 mi de economia verificada em estoque de peças, número publicado pela empresa. Captação: US$ 8 mi (série A) e US$ 25 mi (série B, 25/01/2022). SAP e IBM vendem a função dentro do próprio sistema (learning.sap.com e ibm.com/docs, 25/08/2026).]`,
+  `3:42 · O modelo é simples. Quem paga é a usina, com uma assinatura.
+E o dinheiro sai de manutenção e compras, onde já cai a compra repetida.
 [O valor da assinatura é hipótese e fica só para as perguntas (pergunta 3, na última nota). É a oferta B2B de dados e governança do recon profundo; a comissão sobre venda ficou fora do pitch (ADR 0019).]`,
-  `4:50 · E o mercado é grande: só no Centro-Sul, a UNICA conta 250 usinas operando.
+  `3:54 · E o mercado é grande: só no Centro-Sul, a UNICA conta 250 usinas operando.
 [Fonte: UNICA, 22/06/2026: 250 unidades produtoras operando no Centro-Sul na 2ª quinzena de maio de 2026.]`,
-  `4:57 · Não viemos vender um preço. Viemos buscar investimento para construir em etapas.
-Cada etapa prova um número e pede dinheiro e acesso.
+  `4:01 · Não viemos vender um preço. Viemos buscar investimento, em quatro etapas.
 Primeiro, o piloto numa usina, para medir o tempo e as compras que ela economiza.
-Depois, o catálogo de um fabricante. Depois, bombas e vedações. E, por fim, o SAP ou o Maximo da usina.
-[Etapas: docs/roadmap.md, que só avança uma fase quando a anterior prova o seu número, e os ADRs 0001, 0004, 0010, 0012, 0014 e 0020. Custos: equipe, licença do catálogo do fabricante e servidor (docs/rota-inova/01-ideacao.html e entrega-unica.html). Hoje, a tabela aberta de medidas só cobre os rolamentos 6000 a 6007, 6200 a 6206 e 6300 a 6305 (docs/medicao/gabarito-v1.md). Sem valor e sem data, por decisão da equipe.]`,
-  `5:24 · O nosso pedido: investimento, uma usina parceira e quem abra portas, para um piloto de 90 dias, sem custo para a usina.
+Depois, o catálogo de um fabricante. Depois, bombas e vedações. E, por fim, ligar no sistema da usina.
+Cada etapa só começa quando a anterior prova o seu número.
+[Etapas: docs/roadmap.md e os ADRs 0001, 0004, 0010, 0012, 0014 e 0020. Custos: equipe, licença do catálogo do fabricante e servidor (docs/rota-inova/01-ideacao.html e entrega-unica.html). O sistema da usina é o SAP ou o Maximo. Sem valor e sem data, por decisão da equipe.]`,
+  `4:27 · O nosso pedido: investimento, uma usina parceira e quem abra portas.
 O QR abre o protótipo. Obrigado.
-[Nas perguntas, fique nesta página.
+[Nas perguntas, fique nesta página. Cada um responde a sua parte: Gabi, o problema; Myke, a solução e o teste; Alberto, o negócio e os números de mercado.
 
 As perguntas mais difíceis, com resposta de uma frase:
-1. "O teste foi simulado?" Não: são cadastros reais e públicos do catálogo de compras do governo federal, e o gabarito foi registrado no GitHub antes do motor. Quem responde é o Myke.
-2. "Os números não são bonitos demais?" O teste é pequeno e mostramos o número absoluto. Na primeira rodada o motor errou 6 pares; consertamos uma leitura do código, não o gabarito. Ele mede se o motor aplica as regras ao texto real, não se acerta a peça física.
+1. "O teste foi simulado?" Não: são cadastros reais e públicos do catálogo de compras do governo federal, e as respostas certas foram guardadas no GitHub antes do motor. Quem responde é o Myke.
+2. "Os números não são bonitos demais?" O teste é pequeno e mostramos o número absoluto. Na primeira rodada errou 6 pares; consertamos uma leitura do código, não as respostas. Ele mede se a AgroParts aplica as regras ao texto real, não se acerta a peça física.
 3. "Quanto a usina vai pagar?" A hipótese é 5 mil reais por usina por mês, e o piloto testa esse preço. Na São Martinho, com 4 usinas, seriam 180 mil reais em 9 meses: menos de 0,1% do que ela gastou com manutenção de entressafra no mesmo período (4 usinas: saomartinho.com.br, 28/10/2026).
 4. "Quanto vocês pedem?" O valor de cada etapa ainda não está fechado: os custos são a equipe, a licença do catálogo do fabricante e o servidor, e o piloto é que dimensiona cada etapa. Além do dinheiro, pedimos acesso: a usina, o fabricante e quem conhece o sistema da usina.
-5. "Como funciona a foto?" A câmera lê o texto da etiqueta, não a peça. A pessoa confere o texto lido, e a resposta vem igual à do código digitado.
+5. "Como funciona a foto? Não dá falso positivo e gasta token?" A câmera lê o texto da etiqueta no navegador, com software livre; a foto não vai para um modelo pago. A pessoa confere o texto lido, e a resposta vem igual à do código digitado. Na dúvida, o caso vai para uma pessoa.
 6. "Quanto vocês já venderam?" Nada ainda: o protótipo está no ar e pronto para o primeiro piloto, e é esse piloto que pedimos hoje.
 7. "Qual é o tamanho do mercado em reais?" A 5 mil reais por mês, as 250 usinas do Centro-Sul somam 15 milhões de reais por ano. É estimativa com o preço em hipótese.
 8. "Por que a Verusen ou a SAP não fazem isso aqui?" A Verusen atende grandes indústrias nos Estados Unidos, e a SAP e a IBM vendem a função dentro do próprio sistema delas; a usina precisa de algo em português, com peça de usina, que funcione com o sistema que ela já tem.
-9. "Por que vocês?" O protótipo já está no ar e acertou os 104 pares do teste com dados públicos. Estudamos em Frutal, perto das usinas do Triângulo. Um de nós já criou soluções assim para clientes de móveis e de automóveis. E a Tractian, que atua aqui, cuida da saúde das máquinas e do estoque, mas não confere se duas peças são a mesma.
+9. "Por que vocês?" O protótipo já está no ar e acertou os 104 pares do teste com dados públicos. Estudamos em Frutal, perto das usinas do Triângulo. E a Tractian, que atua aqui, cuida da saúde das máquinas e do estoque, mas não confere se duas peças são a mesma.
 10. "Qual é o retorno?" Se 1% do gasto de manutenção for peça que já estava na prateleira, numa usina como a Coruripe de Limeira do Oeste, com 2,5 milhões de toneladas, são 210 mil reais por safra, três vezes e meia o preço. Essa conta é estimativa nossa: o piloto mede o número real.
-11. "Vocês testaram numa usina?" Ainda não: testamos no catálogo do governo federal, e o piloto de 90 dias mede o valor numa usina. A conferência das respostas certas por pessoas da equipe ainda falta.
+11. "Vocês testaram numa usina?" Ainda não: testamos no catálogo do governo federal, e o piloto mede o valor numa usina. A conferência das respostas certas por pessoas da equipe ainda falta.
+12. "E uma etiqueta NFC ou QR na máquina?" Não está no protótipo. O histórico de peças de cada máquina já está no sistema da usina, pela entrada da nota. A AgroParts não refaz esse sistema: confere se os nomes são a mesma peça.
+13. "E a nota fiscal? Vão ler o XML?" Não agora. O protótipo é a primeira fase: diz se o nome que cada fornecedor escreve é a mesma peça. No teste, traduziu 29 de 29 textos livres de fornecedores, como foram digitados em compras públicas. Ligar no sistema de cada usina é a etapa 4 e pede acesso.
+14. "E quando parece, mas não é?" A AgroParts não junta: os cadastros ficam separados. No teste, não juntou nenhum dos 90 pares diferentes. Quem quiser conferir chama uma pessoa.
+15. "Isso já não existe dentro das usinas?" O SAP e o Maximo checam duplicidade, cada um dentro do próprio sistema. A AgroParts compara as medidas e o tipo da peça de usina, em português, ao lado do sistema que a usina já tem. Mesmo no catálogo do governo, 1 em cada 12 cadastros de rolamento está repetido.
 
 Se perguntarem:
 - "Qual é a meta?" Hipótese, sem base ainda: 10 usinas até 2028, ou 600 mil reais por ano.
 - "A Verusen é concorrente?" Hoje, é a prova de que o mercado paga por isso: ela captou 33 milhões de dólares nos Estados Unidos.
+- "Vocês fazem piloto de graça?" Não: o piloto tem custo de equipe e servidor, e o valor se combina com a usina.
 
 Versão de 30 segundos, se pedirem um resumo:
 Numa usina, a mesma peça tem um nome em cada setor, e o sistema não acha o que está na prateleira.
-A AgroParts lê a peça, compara o que importa e responde: é a mesma peça, não é, ou precisa de uma pessoa.
-Nos Estados Unidos, a Verusen já vende isso. Buscamos investimento, uma usina parceira e quem abra portas, a começar por um piloto de 90 dias.]`,
+A AgroParts lê a peça, compara e responde: é a mesma peça, ou precisa de uma pessoa.
+Lá fora, isso já é negócio. Buscamos investimento, uma usina parceira e quem abra portas, a começar por um piloto numa usina.]`,
 ];
 
 export const meta: SlideMeta = {
@@ -770,21 +621,17 @@ export const meta: SlideMeta = {
 export default [
   Abertura,
   DiaDeSafra,
-  ManutencaoSaoMartinho,
+  QuantoCusta,
   CadaSetorCadastra,
-  AuditoriaNosEUA,
+  UmEmDoze,
   Solucao,
   CadaSetorGanha,
-  PassosLer,
-  PassosDecidir,
-  Estudo,
+  CincoPassos,
   ComoTestamos,
   ParesTestados,
-  UmEmDoze,
   LaFora,
-  Concorrencia,
   ModeloDeNegocio,
   Mercado,
-  Investimento,
+  Etapas,
   Pedido,
 ] satisfies Page[];
