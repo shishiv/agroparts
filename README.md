@@ -65,5 +65,6 @@ Se a internet falhar no dia do pitch, rode `bun run demo` num notebook com o rep
 [Recon profundo](docs/pesquisa/recon-profundo-2026-08-25.md) fundamenta a reconciliação atual.
 [Pesquisa](docs/pesquisa/) preserva fontes e medições reconferidas.
 [Wayfinder](docs/wayfinder/partsgraph/map.md) mantém decisões, névoa e tickets locais.
+[Specs](specs/README.md) descrevem cada fase de F2 a F7 antes de virar código, com o esboço de tipos de cada uma.
 [Visão geral](docs/visao-geral.html) explica o problema, as relações tipadas e o que ainda não está provado.
 [Entregas do Rota Inova](docs/rota-inova/) guardam as quatro entregas do formulário em HTML e PDF.

@@ -28,3 +28,10 @@ A opção falha se não houver autorização registrada, dicionário de campos, 
 ## Artefato de fechamento
 
 O ticket fecha com empresa e responsável autorizadores registrados de forma privada, finalidade acordada, dicionário e esquema mínimo, campos excluídos, retenção e eliminação acordadas e arquivo recebido no canal aprovado.
+
+## Estado depois do diagnóstico no navegador
+
+O `/diagnostico` roda o motor no navegador da usina, e o arquivo não sai dele ([ADR 0022](../../../decisoes/adr-0022-diagnostico-no-navegador.md)), então a primeira rodada sobre cadastro real não precisa que a equipe receba o arquivo.
+A fase F2 pede, além da exportação, o agrupamento que a usina já tem, no ticket [`obter-agrupamento-da-usina`](obter-agrupamento-da-usina.md).
+O pedido segue as escolhas D1 e D8 do [mapa](../map.md): primeiro a demonstração sobre dado público, depois as perguntas e o pedido.
+O ticket continua aberto, porque a fatia vertical ainda precisa de uma amostra recebida com autorização, retenção e eliminação acordadas.
