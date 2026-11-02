@@ -7,11 +7,12 @@ export default defineConfig({
   build: {
     outDir: "../dist",
     emptyOutDir: true,
-    // Duas páginas: o protótipo em / e o contato em /contato.
+    // Três páginas: o protótipo em /, o contato em /contato e o diagnóstico em /diagnostico (só por link).
     rolldownOptions: {
       input: {
         index: fileURLToPath(new URL("web/index.html", import.meta.url)),
         contato: fileURLToPath(new URL("web/contato.html", import.meta.url)),
+        diagnostico: fileURLToPath(new URL("web/diagnostico.html", import.meta.url)),
       },
     },
   },

@@ -627,3 +627,36 @@ tfoot th, tfoot td { font-weight: 600; border-top: var(--borda) solid var(--tint
   .etapa { gap: 0 0.75rem; }
   .etapa > .num { width: 1.9rem; height: 1.9rem; font-size: 1.1rem; }
 }
+
+/* ---------- Diagnóstico de cadastro (/diagnostico) ---------- */
+.dx-garantias { margin: var(--respiro) 0 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; max-width: 46rem; }
+.dx-garantias li { padding: 0.75rem 1rem; background: var(--papel); border: var(--borda) solid var(--tinta); border-left-width: 8px; border-radius: var(--raio); font-size: var(--t-body); color: var(--tinta-2); }
+.dx-garantias strong { display: block; color: var(--tinta); font-family: var(--placa); font-size: var(--t-h3); line-height: 1.15; }
+.dx-escolha { margin-top: var(--respiro); }
+.dx-formato { margin-top: 0.6rem; max-width: 62ch; }
+.dx-colunas { display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem; margin-top: var(--respiro); }
+.dx-colunas label { display: grid; gap: 0.3rem; font-weight: 600; font-size: var(--t-ui); }
+.dx-colunas select { font-size: var(--t-body); min-height: 48px; min-width: 14rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.dx-baixar { margin-top: var(--respiro); }
+.dx-grupos { margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
+.dx-grupo { padding: 1rem 1.1rem; background: var(--papel); border: var(--borda) solid var(--tinta); border-left: 8px solid var(--verde); border-radius: var(--raio); display: grid; gap: 0.6rem; }
+.dx-grupo h3 { margin: 0; font-family: var(--placa); font-size: var(--t-h3); line-height: 1.1; }
+.dx-quantos { margin-left: 0.5rem; font-family: var(--sans); font-size: var(--t-small); font-weight: 600; color: var(--suave); }
+.dx-motivo { margin: 0; font-size: var(--t-small); color: var(--tinta-2); overflow-wrap: anywhere; }
+.dx-itens { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.6rem; }
+.dx-item { display: grid; gap: 0.2rem; align-content: start; padding: 0.6rem 0.75rem; background: var(--chapa); border: 1px solid var(--linha); border-radius: var(--raio); }
+.dx-codigo { font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.1; overflow-wrap: anywhere; }
+.dx-texto { font-size: var(--t-small); color: var(--tinta-2); overflow-wrap: anywhere; }
+.dx-lista .txt { font-size: var(--t-small); max-width: 34rem; overflow-wrap: anywhere; color: var(--tinta-2); }
+@media (max-width: 760px) {
+  .dx-lista thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .dx-lista, .dx-lista tbody, .dx-lista tr, .dx-lista td { display: block; }
+  .dx-lista tr { display: grid; gap: 0.25rem; padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--linha); }
+  .dx-lista td { padding: 0; border: 0; }
+  .dx-lista td:first-child { font-weight: 700; }
+  .dx-lista td:nth-child(3) { color: var(--tinta); }
+}
+@media (max-width: 560px) {
+  .dx-colunas select { min-width: 0; width: 100%; }
+  .dx-colunas label { flex: 1 1 100%; }
+}
