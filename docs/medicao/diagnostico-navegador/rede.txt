@@ -1,0 +1,12 @@
+Registro de rede (HAR) da jornada: abrir /diagnostico, escolher o CSV de 629 linhas, ler o resultado e baixar o CSV.
+GET http://127.0.0.1:8790/diagnostico corpo:não 200
+GET http://127.0.0.1:8790/assets/diagnostico-BIqO-bKY.js corpo:não 200
+GET http://127.0.0.1:8790/assets/latin-700-C9bPQA-R.js corpo:não 200
+GET http://127.0.0.1:8790/assets/html-Dnsx1fgO.js corpo:não 200
+GET http://127.0.0.1:8790/assets/latin-700-DTI9isWi.css corpo:não 200
+GET http://127.0.0.1:8790/assets/html-C3UGRyIw.css corpo:não 200
+GET http://127.0.0.1:8790/assets/barlow-latin-400-normal-qiz4-Cze.woff2 corpo:não 200
+GET http://127.0.0.1:8790/assets/barlow-semi-condensed-latin-700-normal-BpqDG8I9.woff2 corpo:não 200
+GET data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath corpo:não 200
+GET http://127.0.0.1:8790/assets/barlow-latin-600-normal-DILqtrty.woff2 corpo:não 200
+GET http://127.0.0.1:8790/assets/barlow-semi-condensed-latin-600-normal-BkLiAYu4.woff2 corpo:não 200
