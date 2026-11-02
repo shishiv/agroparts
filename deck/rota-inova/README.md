@@ -1,13 +1,13 @@
 # Deck do pitch do Rota Inova (open-slide)
 
 O pitch final da AgroParts no encerramento do Rota Inova UEMG 2026 (quinta, 29/10/2026, em Ribeirão Preto, 6 minutos), feito com [open-slide](https://open-slide.dev).
-São 19 páginas em três atos, um por pessoa: o problema e um case (Gabi), a solução (Myke) e a ideia do negócio (Alberto).
-Cada página mostra uma ideia: o título e o número ou a imagem que a prova. O resto é falado.
+São 15 páginas em três atos, um por pessoa: o problema (Gabi, páginas 1 a 5), a solução e o teste (Myke, 6 a 10) e a ideia do negócio (Alberto, 11 a 15).
+Cada página mostra uma ideia, que quem não é técnico entende de relance: o título e o número ou a frase que a prova, em palavras simples. A fala diz o que a tela diz.
 Na tela só entra número publicado, com o nome de quem publicou, número que o protótipo mediu ou conta feita com eles.
 O deck não tem página de fontes nem de créditos: as fontes, os créditos e as estimativas ficam nas notas, entre colchetes.
 
 - O deck é [`slides/rota-inova-pitch/index.tsx`](slides/rota-inova-pitch/index.tsx). Cada página é um componente React numa tela de 1920 x 1080.
-- O roteiro, de 5 minutos e 38 segundos, está no export `notes` do mesmo arquivo. O modo apresentador do open-slide mostra o roteiro ao lado do slide. A nota da última página traz as perguntas mais difíceis da banca, com resposta de uma frase.
+- O roteiro, de 4 minutos e 36 segundos, está no export `notes` do mesmo arquivo. O modo apresentador do open-slide mostra o roteiro ao lado do slide. A nota da última página traz as perguntas mais difíceis da banca, com resposta de uma frase.
 - O PDF para projetar ou enviar à organização é [`exportado/agroparts-rota-inova-pitch.pdf`](exportado/agroparts-rota-inova-pitch.pdf). O link do protótipo é clicável no PDF.
 - As contas, as fontes e os créditos estão em [`docs/pesquisa/numeros-do-pitch.md`](../../docs/pesquisa/numeros-do-pitch.md). As regras de conteúdo são as de [`docs/rota-inova/README.md`](../../docs/rota-inova/README.md#regras-de-conteúdo).
 
@@ -24,13 +24,14 @@ As imagens de `exportado/png/` também ficam fora do Git.
 
 ## Telas do protótipo
 
-As páginas 8 e 9 mostram os seis passos do motor com telas reais do protótipo publicado, para o código 283529 do catálogo do governo.
+O deck não mostra telas do protótipo: a página 8 diz os cinco passos em texto.
+Os recortes de telas reais, para o código 283529 do catálogo do governo, ficam para as perguntas ou para outro material.
 [`capturar-telas.sh`](capturar-telas.sh) refaz os recortes em `slides/rota-inova-pitch/assets/telas/` a partir de https://agroparts.pages.dev. Ele precisa de agent-browser, ImageMagick e internet.
 Rode de novo depois de mudar a interface do protótipo.
 
 ## QR code
 
-Só a página 19, a do pedido, tem QR code. Ele abre https://agroparts.pages.dev/ e foi gerado localmente com qrencode. Para conferir nas imagens de 1920 x 1080 que ele é lido e que nenhuma outra página tem QR:
+Só a última página, a do pedido, tem QR code. Ele abre https://agroparts.pages.dev/ e foi gerado localmente com qrencode. Para conferir nas imagens de 1920 x 1080 que ele é lido e que nenhuma outra página tem QR:
 
 ```sh
 qrencode -t SVG -l M -m 2 --svg-path --foreground=0e073f --background=ffffff -o slides/rota-inova-pitch/assets/qr-agroparts.svg "https://agroparts.pages.dev/"

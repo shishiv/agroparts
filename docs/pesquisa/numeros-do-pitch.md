@@ -12,30 +12,24 @@ Nenhum número foi medido numa usina. O piloto é que mede o valor real ([ADR 00
 | Página | Na tela | Fonte |
 | --- | --- | --- |
 | 2 e 4 | A cena da safra e os três cadastros | Ilustrativos, criados pela equipe |
-| 3 | R$ 183,5 mi de manutenção de entressafra e outros, em 9 meses | São Martinho, Resultados 3T26, 09/02/2026, p. 15, linha "Manutenção Entressafra/Outros" (abaixo) |
-| 5 | 16% menos peças na prateleira | Departamento de Energia dos EUA, auditoria [DOE-OIG-24-30](https://www.energy.gov/sites/default/files/2024-09/DOE-OIG-24-30.pdf), 24/09/2024 |
-| 8 e 9 | Os seis passos, com telas do protótipo | Código 283529 em https://agroparts.pages.dev, 28/10/2026 (abaixo) |
-| 10 | Catálogo do governo, ISO 8000, SAP, IBM e Verusen; respostas registradas antes; na dúvida, uma pessoa; uma família por vez | [CATMAT](catmat-pncp.md), [identidade e equivalência](aprofundamento-identidade-equivalencia.md), [jornada e integração](aprofundamento-jornada-integracao.md), [mercado](mercado.md), [gabarito v1](../medicao/gabarito-v1.md), [roadmap](../roadmap.md) e [ADR 0020](../decisoes/adr-0020-prova-antes-do-pitch.md) |
-| 11 | 42 cadastros reais; gabarito registrado em 5/10 às 9h06; motor às 9h15; 6 erros na 1ª rodada, consertados no motor | Teste com dados públicos (abaixo); commits 88985c9 e c0689c5 no [PR 4](https://github.com/shishiv/agroparts/pull/4/commits) |
-| 12 | 104 pares, 14 de 14 achados, 90 de 90 recusados | Teste com dados públicos (abaixo) |
-| 13 | 1 em 12 cadastros repetia outro | Lote do protótipo (abaixo) |
-| 14 | US$ 10,5 mi de economia verificada | Caso publicado pela Verusen (abaixo) |
-| 15 | Verusen, SAP e IBM | [mercado](mercado.md); learning.sap.com e ibm.com/docs, consultados em 25/08/2026 |
-| 16 | Quem paga (a usina), como (assinatura por usina) e de que orçamento (manutenção e compras) | Oferta B2B de dados e governança do [recon profundo](recon-profundo-2026-08-25.md) e [ADR 0019](../decisoes/adr-0019-comissao-fora-do-caminho-critico.md); o valor da assinatura é hipótese e fica na nota de perguntas |
-| 17 | 250 usinas operando no Centro-Sul | UNICA (abaixo) |
-| 18 | As quatro etapas, o resultado de cada uma e o que pedimos | [Roadmap](../roadmap.md); custos em [`01-ideacao.html`](../rota-inova/01-ideacao.html) e [`entrega-unica.html`](../rota-inova/entrega-unica.html) (equipe, licença do catálogo do fabricante e servidor) |
-| 19 | Piloto de 90 dias, sem custo para a usina | Proposta da equipe |
+| 3 | R$ 183,5 milhões de manutenção de entressafra, em 9 meses | São Martinho, Resultados 3T26, 09/02/2026, p. 15, linha "Manutenção Entressafra/Outros" (abaixo) |
+| 5 | 1 em 12 cadastros de rolamento do catálogo do governo está repetido | Lote do protótipo (abaixo) |
+| 9 | 42 cadastros reais; respostas certas guardadas antes do teste; 6 erros na 1ª rodada, consertados na AgroParts | Teste com dados públicos (abaixo); commits 88985c9 e c0689c5 no [PR 4](https://github.com/shishiv/agroparts/pull/4/commits) |
+| 10 | 104 pares, 14 de 14 iguais achadas, 90 de 90 diferentes mantidas separadas | Teste com dados públicos (abaixo) |
+| 11 | US$ 10,5 mi de economia numa fabricante | Caso publicado pela Verusen (abaixo) |
+| 12 | Quem paga (a usina), como (assinatura por usina) e de onde sai (manutenção e compras) | Oferta B2B de dados e governança do [recon profundo](recon-profundo-2026-08-25.md) e [ADR 0019](../decisoes/adr-0019-comissao-fora-do-caminho-critico.md); o valor da assinatura é hipótese e fica na nota de perguntas |
+| 13 | 250 usinas operando no Centro-Sul | UNICA (abaixo) |
+| 14 | As quatro etapas do investimento | [Roadmap](../roadmap.md); custos em [`01-ideacao.html`](../rota-inova/01-ideacao.html) e [`entrega-unica.html`](../rota-inova/entrega-unica.html) (equipe, licença do catálogo do fabricante e servidor) |
 
+A página 8 mostra os cinco passos em texto, sem número. O que a equipe estudou (catálogo do governo, ISO 8000, SAP, IBM, Verusen, SKF e Timken) saiu da tela e fica na nota da página 9.
 O pedido não tem valor em reais nem data, por decisão da equipe em 28/10/2026: o repositório só registra as categorias de custo, e o piloto é que dimensiona cada etapa.
 
-## Os seis passos (páginas 8 e 9)
+## Os cinco passos (página 8)
 
-As telas são recortes do protótipo publicado, num celular de 360 px, para o código 283529 do CATMAT (`6312 ZZ`).
-O deck não leva texto de apoio, então os recortes escondem a legenda dos desenhos, a frase que explica cada grupo, a semelhança de texto, o link do catálogo e o traço que abre cada lista.
-O motor acha 8 cadastros com a mesma designação básica: 2 são a mesma peça (292852 e 472657), 1 precisa de uma pessoa (357380, `6312 2ZR`, cujo final `R` não está nas regras) e 5 parecem, mas não são (311967, 317412, 346385, 346386 e 472656).
+São os seis passos do protótipo, com "compara" e "decide" num só: recebe o código, o nome ou a foto; lê as medidas e o tipo; procura as parecidas no catálogo; compara uma a uma; junta os cadastros sem apagar o original.
+No exemplo do protótipo, o código 283529 do CATMAT (`6312 ZZ`), o motor acha 8 cadastros com a mesma designação básica: 2 são a mesma peça (292852 e 472657), 1 precisa de uma pessoa (357380, `6312 2ZR`, cujo final `R` não está nas regras) e 5 parecem, mas não são (311967, 317412, 346385, 346386 e 472656).
 
 ```bash
-sh deck/rota-inova/capturar-telas.sh
 bun -e 'import { resolver } from "./src/motor/resolucao.ts"; for (const x of resolver("codigo", "283529").relacoes) console.log(x.decisao, x.alvo)'
 ```
 
@@ -43,7 +37,6 @@ bun -e 'import { resolver } from "./src/motor/resolucao.ts"; for (const x of res
 
 - Rolamento com tampas de metal, na abertura: R. Henrik Nilsson, Wikimedia Commons, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0), foto recortada.
 - Colheita em Piracicaba (SP), na cena da safra: Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0), foto recortada.
-- Telas do protótipo: equipe AgroParts, 28/10/2026.
 - Fonte Montserrat, licença SIL Open Font License ([`OFL.txt`](../../deck/rota-inova/slides/rota-inova-pitch/assets/fontes/OFL.txt)).
 
 O crédito de cada foto também fica sobre a própria foto, como a licença CC BY pede.
