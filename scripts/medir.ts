@@ -1,6 +1,7 @@
 // Mede o motor contra o gabarito v1 e o lote do CATMAT e grava docs/medicao/gabarito-v1.md.
 // Uso: bun run medir
 import { mkdir, writeFile } from "node:fs/promises";
+import { visaoPorTipo } from "../src/motor/agrupamento";
 import { FONTE_CATMAT } from "../src/motor/corpus";
 import { loteCatmat, medir, type MedicaoTraducao } from "../src/motor/lote";
 
@@ -9,6 +10,8 @@ const m = medir();
 const inicio = performance.now();
 const lote = loteCatmat();
 const msLote = Math.round(performance.now() - inicio);
+const porTipo = visaoPorTipo(lote);
+const porTipoEProtecao = visaoPorTipo(lote, ["folga", "inox"]);
 
 function traducao(linhas: MedicaoTraducao[]): string {
   const cab = "| Estrato | Itens | Elegíveis | Resolve | Revisa | Recusa | Precisão automática | Cobertura automática |\n|---|---:|---:|---:|---:|---:|---:|---:|";
@@ -73,6 +76,16 @@ ${Object.entries(lote.por_estrato)
   .join("\n")}
 
 Estas contagens não medem precisão: só o gabarito tem rótulo.
+
+### SKUs por visão
+
+Itens resolvidos do lote: ${porTipo.itens}. A visão por tipo é uma contagem, não SAME_AS nem INTERCHANGEABLE_FOR.
+
+| Visão | SKUs |
+|---|---:|
+| Só a designação básica (SKU por tipo) | ${porTipo.skus_por_tipo} |
+| Designação básica e proteção | ${porTipoEProtecao.skus_por_tipo} |
+| Chave de identidade | ${porTipo.skus_por_identidade} |
 
 ## Limites
 

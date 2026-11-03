@@ -1,9 +1,8 @@
 # Esboço de F2: o agrupamento da usina contra a chave de identidade
 
 Sessão de `architect` com arena, porque o modelo de SKU é porta sem volta.
-A [fatia 1](slices/01-identidade-em-lista.md) já entrou no código: a lista de identidade, `divergencias`, `descreverDivergencia`, o campo `identidade` de `LinhaLote` e o `celulaCsv` exportado. Os diffs dela saíram deste esboço.
-O bloco `ts` que começa com `// <caminho>` é o arquivo inteiro nesse caminho e compila contra o motor de hoje (`tsc` da raiz e de `web/`).
-Os corpos são `throw new Error("not implemented")` com pseudocódigo onde a lógica é sutil.
+As fatias 1 e 2 já entraram no código. A [fatia 1](slices/01-identidade-em-lista.md) trouxe a lista de identidade, `divergencias`, `descreverDivergencia`, o campo `identidade` de `LinhaLote` e o `celulaCsv` exportado. A [fatia 2](slices/02-agrupamento-no-motor.md) trouxe `src/motor/agrupamento.ts`. Os diffs e o módulo saíram deste esboço, e o código é a fonte dos tipos.
+O bloco `ts` do uso, abaixo, é a ilustração que a [fatia 3](slices/03-agrupamento-no-diagnostico.md) segue na página.
 
 ## Problema
 
@@ -67,149 +66,20 @@ O texto de `chaveIdentidade` é o de antes: as 183 chaves do CATMAT e os 28 grup
 `LinhaLote` leva `identidade` com os tipos reais, `chave` deriva dela, e o campo aparece no JSON de `/api/lote`.
 `celulaCsv`, em `src/motor/lote.ts`, é o escape de célula que `loteParaCsv` já usava, exportado para a amostra de F2 e para o arquivo de chaves de F4.
 
-### O módulo novo
+### O módulo novo (fatia 2, no código)
 
-```ts
-// src/motor/agrupamento.ts
-// F2: o agrupamento que a usina já tem, comparado com a chave de identidade, e a visão por tipo.
-// Funções puras. Nada aqui guarda estado, emite código de SKU ou cria relação:
-// um grupo da usina que mistura chaves é evidência para uma pessoa, e a visão por tipo nunca é SAME_AS.
-import { ATRIBUTOS_IDENTIDADE, type AtributoIdentidade, type Divergencia, type Identidade } from "./especificacao";
-import { traduzirLote, type LinhaLote, type ResultadoLote } from "./lote";
-import type { MaterialOriginal } from "./tipos";
+`src/motor/agrupamento.ts` entrou como o esboço o desenhou, e o código passou a ser a fonte dos tipos. O que a tela e a fatia 4 chamam:
 
-type DuasOuMais<T> = [T, T, ...T[]];
-type UmaOuMais<T> = [T, ...T[]];
+- `compararAgrupamento(entradas)` devolve `{ lote, grupos, contagem }`. `grupos` traz os grupos da usina com dois cadastros ou mais, como união discriminada (`mistura`, `coerente`, `inconclusivo`), e `contagem` traz os números absolutos, com os grupos de um cadastro só à parte.
+- `visaoPorTipo(lote, junta?)` devolve `skus_por_tipo`, `skus_por_identidade` e os `grupos` que juntam chaves. `junta` não aceita a designação básica nem a lista vazia.
+- `amostrar(comparacao, semente, n = 20)` ordena as misturas por `fnv1a32(semente + "\u0000" + id)`, desempata por id e pega `n`. `fnv1a32` é exportada porque o pré-registro da fatia 4 cita essa função de hash.
+- `amostraParaCsv(amostra)` escreve uma linha por cadastro, com as colunas de `COLUNAS_AMOSTRA` e `distincao_real` por último, usando `celulaCsv`.
 
-/** Uma chave de identidade presente num grupo, com as linhas que a provam. */
-export interface ChaveNoGrupo {
-  chave: string;
-  identidade: Identidade;
-  /** Designação canônica, para a tela. */
-  designacao: string;
-  linhas: LinhaLote[];
-}
+O que o código decidiu além do esboço:
 
-// ---------- (1) O agrupamento da usina ----------
-
-/** Um material como veio do cadastro, com o id do grupo que a usina deu a ele na mesma linha do arquivo. */
-export interface EntradaAgrupada {
-  original: MaterialOriginal;
-  /** Id opaco do grupo na usina ("SKU unificado"). Copiado como veio (ADR 0001). Ausente ou em branco = sem grupo. */
-  grupo_usina?: string;
-}
-
-/**
- * Um grupo da usina com dois ou mais cadastros, examinado por regra, nunca por semelhança:
- *   mistura:      duas ou mais chaves resolvidas diferentes, e `divergencias` diz quais atributos diferem;
- *   coerente:     todas as linhas resolveram e têm a mesma chave;
- *   inconclusivo: alguma linha não resolveu e as resolvidas não bastam para afirmar mistura.
- */
-export type GrupoDaUsina =
-  | { situacao: "mistura"; id: string; chaves: DuasOuMais<ChaveNoGrupo>; divergencias: UmaOuMais<Divergencia>; sem_chave: LinhaLote[] }
-  | { situacao: "coerente"; id: string; chaves: [ChaveNoGrupo]; divergencias: []; sem_chave: [] }
-  | { situacao: "inconclusivo"; id: string; chaves: [] | [ChaveNoGrupo]; divergencias: []; sem_chave: UmaOuMais<LinhaLote> };
-
-export type SituacaoGrupo = GrupoDaUsina["situacao"];
-export type GrupoEmMistura = Extract<GrupoDaUsina, { situacao: "mistura" }>;
-
-export interface ComparacaoAgrupamento {
-  /** O mesmo lote que `traduzirLote(entradas.map(e => e.original))` devolveria: a página não traduz duas vezes. */
-  lote: ResultadoLote;
-  /** Grupos com dois ou mais cadastros: mistura primeiro, depois inconclusivo, depois coerente; empate por id. */
-  grupos: GrupoDaUsina[];
-  /** Números absolutos (ADR 0014), derivados de `grupos` e das entradas na construção. */
-  contagem: Record<SituacaoGrupo, number> & { grupos_unitarios: number; cadastros_com_grupo: number; cadastros_sem_grupo: number };
-}
-
-/**
- * Traduz as entradas e examina cada grupo da usina contra a chave de identidade do motor.
- * O grupo vem da mesma linha do material, então não há junção por código do ERP.
- * Não decide SAME_AS nem desfaz o grupo: diz onde o grupo junta chaves diferentes e por quê.
- * Sem nenhum `grupo_usina`, devolve o lote e `grupos` vazio: um só caminho para a página.
- */
-export function compararAgrupamento(entradas: readonly EntradaAgrupada[]): ComparacaoAgrupamento {
-  // TODO lote = traduzirLote(entradas.map(e => e.original))
-  //   invariante: lote.linhas[i] corresponde a entradas[i] (traduzirLote preserva ordem e tamanho; um teste trava isso)
-  //   porGrupo = Map<id, LinhaLote[]>, id = grupo_usina?.trim(); vazio = sem grupo
-  //   grupos com 1 cadastro -> contagem.grupos_unitarios
-  //   para os outros: resolvidas = linhas com identidade; sem_chave = as demais
-  //     chaves = agruparPorChave(resolvidas)
-  //     chaves.length >= 2  -> mistura, divergencias(chaves.map(c => c.identidade))
-  //     sem_chave.length    -> inconclusivo
-  //     senão               -> coerente
-  throw new Error("not implemented");
-}
-
-/**
- * Amostra pré-registrada dos grupos em mistura que a pessoa da usina vai julgar.
- * Determinística: depende só da semente e dos ids, não da ordem do arquivo.
- * A semente fica no pré-registro, em commit anterior à leitura do arquivo da usina. Com menos misturas que `n`, devolve todas.
- */
-export function amostrar(c: ComparacaoAgrupamento, semente: string, n = 20): GrupoEmMistura[] {
-  // TODO ordenar as misturas por fnv1a(semente + "\u0000" + id) e pegar n.
-  // Hash síncrono e puro: crypto.subtle é assíncrono, e o sorteio não é segredo.
-  throw new Error("not implemented");
-}
-
-/**
- * CSV para a pessoa da usina julgar a amostra: uma linha por cadastro dos grupos sorteados, com o id do grupo da usina,
- * a chave, a designação, os atributos que diferem, o texto original intacto e a coluna `distincao_real` em branco.
- * Sai do navegador só como download, com o escape `celulaCsv` de lote.ts. A equipe recebe de volta só as contagens.
- */
-export function amostraParaCsv(amostra: readonly GrupoEmMistura[]): string {
-  throw new Error("not implemented");
-}
-
-// ---------- (2) A visão por tipo ----------
-
-/** Atributos que uma visão por tipo pode juntar. A designação básica define o tipo e nunca se junta. */
-export type AtributoJuntavel = Exclude<AtributoIdentidade, "designacao_basica">;
-
-/** Juntar todos os atributos juntáveis: o tipo é só a designação básica. */
-export const JUNTA_TUDO_MENOS_A_BASICA = ATRIBUTOS_IDENTIDADE.filter(
-  (a): a is AtributoJuntavel => a !== "designacao_basica",
-) as UmaOuMais<AtributoJuntavel>;
-
-/**
- * Um grupo da visão por tipo que junta duas ou mais chaves de identidade.
- * Não é SAME_AS nem INTERCHANGEABLE_FOR (ADR 0013) e não tem código: `rotulo` é texto de tela, e nada o devolve ao ERP.
- */
-export interface GrupoPorTipo {
-  rotulo: string;
-  chaves: DuasOuMais<ChaveNoGrupo>;
-  /** Os atributos que este grupo juntou de fato, sempre contidos em `VisaoPorTipo.junta`. */
-  divergencias: UmaOuMais<Divergencia>;
-}
-
-export interface VisaoPorTipo {
-  /** O que a visão declara juntar. Não vazio: uma visão que não junta nada seria a identidade, que já é `lote.grupos_duplicidade`. */
-  junta: UmaOuMais<AtributoJuntavel>;
-  /** Linhas resolvidas consideradas (183 no CATMAT de hoje). */
-  itens: number;
-  skus_por_tipo: number;
-  skus_por_identidade: number;
-  /** Só os grupos que juntam chaves. `skus_por_identidade - skus_por_tipo` distinções somem nesta visão. */
-  grupos: GrupoPorTipo[];
-}
-
-/**
- * Agrupa as linhas resolvidas por todos os atributos de identidade menos os de `junta`.
- * CATMAT de hoje: junta tudo -> 59 SKUs; junta folga e inox -> 133; a identidade dá 150.
- */
-export function visaoPorTipo(lote: ResultadoLote, junta: UmaOuMais<AtributoJuntavel> = JUNTA_TUDO_MENOS_A_BASICA): VisaoPorTipo {
-  // TODO mantidos = ATRIBUTOS_IDENTIDADE sem os de junta
-  //   chaveDoTipo(i) = mantidos.map(a => String(i[a])).join("|"), interna, nunca sai do módulo
-  //   porTipo = Map<chaveDoTipo, LinhaLote[]> sobre as linhas com identidade
-  //   grupos = entradas com agruparPorChave(...).length >= 2
-  throw new Error("not implemented");
-}
-
-/** Interna às duas visões: linhas resolvidas -> uma ChaveNoGrupo por chave, na ordem de aparição. */
-function agruparPorChave(linhas: readonly LinhaLote[]): ChaveNoGrupo[] {
-  throw new Error("not implemented");
-}
-```
+- Os tipos de lista não vazia vêm de guardas de tipo (`duasOuMais`, `umaOuMais`), sem cast. Resta o cast de `JUNTA_TUDO_MENOS_A_BASICA`, que o esboço já tinha.
+- Um grupo com uma mistura e linhas pendentes continua `mistura`, e as pendentes ficam em `sem_chave`. O CSV da amostra leva essas linhas com `chave` e `designacao` em branco.
+- `GrupoPorTipo.rotulo` junta os atributos mantidos, com `junta` igual a folga e material, `6205 · vedação de contato nos dois lados`.
 
 ### O que os tipos garantem
 
@@ -288,4 +158,4 @@ Do candidato 1 ficou de fora o `lerAgrupamento` com junção por código e marca
 
 ## Próximo passo
 
-Implementar `src/motor/agrupamento.ts`: `compararAgrupamento`, `amostrar`, `amostraParaCsv` e `visaoPorTipo`, com os números da linha de base (59, 133 e 150 SKUs) em teste ([fatia 2](slices/02-agrupamento-no-motor.md)).
+Ligar `/diagnostico` a `compararAgrupamento` e `visaoPorTipo`, com a coluna opcional do agrupamento da usina, a prova de rede e as capturas ([fatia 3](slices/03-agrupamento-no-diagnostico.md)).
