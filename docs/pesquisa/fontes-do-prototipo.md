@@ -19,6 +19,28 @@ Uma busca por padrões de CPF, CNPJ, telefone e e-mail nos campos gravados retor
 O texto livre do campo `marca` é o que o fornecedor digitou ao cotar.
 Ele serve como cadastro sujo real, por exemplo `BLK Modelo 6205-2rs`, `6206 ZZC3` e `KE/6311H52MRE5C4E01P`.
 
+## Benchmark de família de F3, fora do site
+
+Refeito com `bun run dados familia`, pelas regras de [`dados/preregistro/f3-familia.json`](../../dados/preregistro/f3-familia.json).
+Os dois arquivos ficam congelados depois da primeira gravação: uma nova consulta só registra se o sha256 bateu, e a medição em [`docs/medicao/familia-v1.md`](../medicao/familia-v1.md) fica INCONCLUSIVE quando não bate.
+
+| Arquivo | Fonte | Conteúdo | Licença |
+|---|---|---|---|
+| `catmat-arvore-manutencao.json` | Mesma API, `modulo-material/3_consultarPdmMaterial?codigoGrupo=<grupo>&statusPdm=true` | Grupo, classe e PDM ativo dos grupos 25, 28, 29, 30, 31, 43, 47 e 53 | Decreto 8.777/2016, art. 4, na redação do Decreto 9.903/2019 |
+| `compras-familia.json` | Mesma API, `modulo-pesquisa-preco/1_consultarMaterial?tipo=codigoPdm&codigo=<pdm>`, compras de 01/01/2025 a 31/12/2025 | Cada texto distinto do campo `marca` por PDM, com o número de linhas e a linha de menor `idCompraItem` | Decreto 8.777/2016, art. 4, na redação do Decreto 9.903/2019 |
+
+A licença foi conferida em 03/11/2026 em duas fontes.
+O [Decreto 9.903/2019](https://www2.camara.leg.br/legin/fed/decret/2019/decreto-9903-8-julho-2019-788792-publicacaooriginal-158693-pe.html) deu ao art. 4 do Decreto 8.777/2016 a redação de que os dados do Poder Executivo federal são de livre utilização pelos Poderes Públicos e pela sociedade, e o § 1º autoriza a utilização gratuita das bases cujo detentor de direitos é a União.
+O [Portal de Dados Abertos do Compras.gov.br](https://www.gov.br/compras/pt-br/cidadao/portal-de-dados-abertos) diz que os dados dele podem ser acessados, usados, reusados e redistribuídos por qualquer pessoa.
+A licença Creative Commons BY-ND 3.0 do rodapé do gov.br cobre o texto das páginas do portal, não os dados da API.
+O arquivo de compras não grava fornecedor, CNPJ, órgão nem preço.
+Nos textos do campo `marca`, uma busca por padrões achou um texto que é só um CNPJ formatado, publicado assim pela API, e nenhum CPF formatado, e-mail ou telefone.
+Os 7 textos com 11 dígitos seguidos parecem números de série ou de registro de produto (inferido pelo formato, por exemplo `RMS: 8005741…`).
+O campo parece cortado em 20 caracteres na origem: 4.615 dos 36.538 textos gravados têm exatamente 20 caracteres, contra 1.204 com 19 e 640 com mais de 20.
+
+A rota IPv6 da API não respondeu na máquina de trabalho em 03/11/2026, e quatro pedidos simultâneos deram HTTP 429.
+O script usa timeout por pedido, espera mais depois de um 429 e faz dois pedidos de cada vez.
+
 ## Regras de designação
 
 | Regra | Fonte | Uso |

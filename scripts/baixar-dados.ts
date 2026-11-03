@@ -1,21 +1,54 @@
 // Baixa os corpora públicos usados pelo protótipo e grava snapshots versionados em dados/publico/.
-// Uso: bun run dados
+// Uso: bun run dados            (todos)
+//      bun run dados v1         (só os snapshots do protótipo)
+//      bun run dados familia    (só o benchmark de família de F3)
 // Fontes e licenças: docs/pesquisa/fontes-do-prototipo.md.
+import { existsSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
+import preregistroFamilia from "../dados/preregistro/f3-familia.json";
 
 const SAIDA = new URL("../dados/publico/", import.meta.url);
-const CATMAT = "https://dadosabertos.compras.gov.br/modulo-material/4_consultarItemMaterial";
+const LOCAL = new URL("../dados/local/", import.meta.url);
+const MATERIAL = "https://dadosabertos.compras.gov.br/modulo-material";
+const CATMAT = `${MATERIAL}/4_consultarItemMaterial`;
 const PRECOS = "https://dadosabertos.compras.gov.br/modulo-pesquisa-preco/1_consultarMaterial";
 const BOLTS = "https://raw.githubusercontent.com/boltsparts/BOLTS_archive/master/data/bearings.blt";
 const LICENCA_FEDERAL =
   "Decreto 8.777/2016, art. 4: dados do Poder Executivo federal são de livre utilização pela sociedade";
+const LICENCA_FAMILIA = {
+  licenca:
+    "Decreto 8.777/2016, art. 4, na redação do Decreto 9.903/2019: os dados disponibilizados pelo Poder Executivo federal são de livre utilização pelos Poderes Públicos e pela sociedade; o § 1º autoriza a utilização gratuita das bases cujo detentor de direitos é a União",
+  licenca_conferida_em: "2026-11-03",
+  licenca_fontes: [
+    "https://www2.camara.leg.br/legin/fed/decret/2019/decreto-9903-8-julho-2019-788792-publicacaooriginal-158693-pe.html",
+    "https://www.gov.br/compras/pt-br/cidadao/portal-de-dados-abertos",
+  ],
+};
 
+// Sem timeout, um pedido que pende (a rota IPv6 da API às vezes não responde) para o download inteiro.
 async function json(url: string): Promise<any> {
   for (let tentativa = 1; ; tentativa++) {
-    const r = await fetch(url);
-    if (r.ok) return r.json();
-    if (tentativa >= 3) throw new Error(`${r.status} em ${url}`);
-    await new Promise((ok) => setTimeout(ok, 2000 * tentativa));
+    let falha: string;
+    let espera = 2000 * tentativa;
+    try {
+      const r = await fetch(url, { signal: AbortSignal.timeout(60_000) });
+      if (r.ok) return r.json();
+      falha = String(r.status);
+      if (r.status === 429) espera = Math.max(Number(r.headers.get("retry-after")) * 1000 || 0, 30_000 * tentativa);
+    } catch (e) {
+      falha = (e as Error).message;
+    }
+    if (tentativa >= 8) throw new Error(`${falha} em ${url}`);
+    await new Promise((ok) => setTimeout(ok, espera));
+  }
+}
+
+async function paginas(url: string): Promise<any[]> {
+  const todas: any[] = [];
+  for (let pagina = 1; ; pagina++) {
+    const d = await json(`${url}&pagina=${pagina}`);
+    todas.push(...d.resultado);
+    if (pagina >= d.totalPaginas) return todas;
   }
 }
 
@@ -103,7 +136,114 @@ async function bolts() {
   });
 }
 
+/**
+ * Grava um snapshot do benchmark de F3, que fica congelado depois da primeira gravação.
+ * Uma nova consulta com o mesmo sha256 só registra a conferência. Com outro sha256, o arquivo congelado
+ * continua igual, a conferência que falhou fica registrada e a consulta nova vai para dados/local/.
+ */
+async function gravarCongelado(nome: string, fonte: Record<string, unknown>, corpo: Record<string, unknown>) {
+  const sha = await sha256(JSON.stringify(corpo));
+  const agora = new Date().toISOString();
+  const caminho = new URL(nome, SAIDA);
+  if (!existsSync(caminho)) {
+    await gravar(nome, { fonte: { ...fonte, consultado_em: agora, ...LICENCA_FAMILIA, sha256: sha, conferencias: [] }, ...corpo });
+    return;
+  }
+  const congelado = JSON.parse(readFileSync(caminho, "utf8"));
+  const bate = congelado.fonte.sha256 === sha;
+  congelado.fonte.conferencias.push({ em: agora, sha256: sha, bate });
+  await gravar(nome, congelado);
+  if (!bate) {
+    await mkdir(LOCAL, { recursive: true });
+    await writeFile(new URL(nome, LOCAL), JSON.stringify({ fonte: { ...fonte, consultado_em: agora, sha256: sha }, ...corpo }, null, 1) + "\n");
+    console.log(`${nome}: a consulta de hoje deu outro sha256 (${sha}); o benchmark congelado não muda e a medição fica INCONCLUSIVE. Consulta nova em dados/local/${nome}`);
+  }
+}
+
+type PdmDaApi = { codigoGrupo: number; nomeGrupo: string; codigoClasse: number; nomeClasse: string; codigoPdm: number; nomePdm: string };
+
+/** Árvore do CATMAT nos grupos do pré-registro de F3: grupo, classe e PDM ativo. */
+async function arvoreFamilia(): Promise<PdmDaApi[]> {
+  const pdms: PdmDaApi[] = [];
+  for (const g of preregistroFamilia.selecao.grupos) {
+    pdms.push(...(await paginas(`${MATERIAL}/3_consultarPdmMaterial?codigoGrupo=${g}&statusPdm=true&tamanhoPagina=500`)));
+  }
+  // A paginação da API pode repetir um registro entre páginas.
+  const unicos = [...new Map(pdms.map((p) => [p.codigoPdm, p])).values()].sort((a, b) => a.codigoPdm - b.codigoPdm);
+  const grupos = new Map<number, { codigo: number; nome: string; classes: Map<number, { codigo: number; nome: string; pdms: { codigo: number; nome: string }[] }> }>();
+  for (const p of unicos) {
+    const g = grupos.get(p.codigoGrupo) ?? { codigo: p.codigoGrupo, nome: p.nomeGrupo, classes: new Map() };
+    grupos.set(p.codigoGrupo, g);
+    const c = g.classes.get(p.codigoClasse) ?? { codigo: p.codigoClasse, nome: p.nomeClasse, pdms: [] };
+    g.classes.set(p.codigoClasse, c);
+    c.pdms.push({ codigo: p.codigoPdm, nome: p.nomePdm });
+  }
+  const ordem = <T extends { codigo: number }>(xs: Iterable<T>) => [...xs].sort((a, b) => a.codigo - b.codigo);
+  await gravarCongelado(
+    "catmat-arvore-manutencao.json",
+    {
+      nome: `CATMAT, PDMs ativos dos grupos ${preregistroFamilia.selecao.grupos.join(", ")}, para o benchmark de família de F3`,
+      url: preregistroFamilia.fonte.arvore,
+      preregistro: "dados/preregistro/f3-familia.json",
+    },
+    { grupos: ordem(grupos.values()).map((g) => ({ codigo: g.codigo, nome: g.nome, classes: ordem(g.classes.values()) })) },
+  );
+  return unicos;
+}
+
+/**
+ * Textos do campo marca das compras de cada PDM da árvore, na janela do pré-registro.
+ * Cada trio (PDM consultado, PDM da linha, marca) vira uma entrada com o número de linhas e a linha de menor idCompraItem.
+ */
+async function comprasFamilia(pdms: PdmDaApi[]) {
+  const { inicio, fim } = preregistroFamilia.selecao.janela_de_compras;
+  const textos = new Map<string, { pdm_consultado: number; codigoPdm: string; marca: string; linhas: number; idCompraItem: string; codigoItemCatalogo: number }>();
+  let linhas = 0;
+  let feitos = 0;
+  const fila = [...pdms];
+  // Dois pedidos de cada vez: com quatro, a API devolveu 429.
+  await Promise.all(
+    Array.from({ length: 2 }, async () => {
+      for (let p = fila.shift(); p; p = fila.shift()) {
+        const resultado = [...new Map((await paginas(`${PRECOS}?tipo=codigoPdm&codigo=${p.codigoPdm}&dataCompraInicio=${inicio}&dataCompraFim=${fim}&tamanhoPagina=500`)).map((l) => [String(l.idCompraItem), l])).values()];
+        linhas += resultado.length;
+        if (++feitos % 100 === 0) console.log(`compras: ${feitos} de ${pdms.length} PDMs`);
+        for (const l of resultado) {
+          const marca = String(l.marca ?? "");
+          const chave = JSON.stringify([p.codigoPdm, l.codigoPdm, marca]);
+          const atual = textos.get(chave);
+          const id = String(l.idCompraItem);
+          if (!atual) textos.set(chave, { pdm_consultado: p.codigoPdm, codigoPdm: l.codigoPdm, marca, linhas: 1, idCompraItem: id, codigoItemCatalogo: l.codigoItemCatalogo });
+          else {
+            atual.linhas++;
+            if (id < atual.idCompraItem) Object.assign(atual, { idCompraItem: id, codigoItemCatalogo: l.codigoItemCatalogo });
+          }
+        }
+      }
+    }),
+  );
+  // Comparação por código de caractere, não por locale, para o sha256 ser o mesmo em qualquer máquina.
+  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+  const ordenados = [...textos.values()].sort(
+    (a, b) => a.pdm_consultado - b.pdm_consultado || cmp(a.idCompraItem, b.idCompraItem) || Number(a.codigoPdm) - Number(b.codigoPdm) || cmp(a.marca, b.marca),
+  );
+  await gravarCongelado(
+    "compras-familia.json",
+    {
+      nome: `Compras.gov.br, pesquisa de preço de material, PDMs da árvore de F3, compras de ${inicio} a ${fim}`,
+      url: preregistroFamilia.fonte.compras,
+      preregistro: "dados/preregistro/f3-familia.json",
+      campos_omitidos: "niFornecedor, nomeFornecedor, precoUnitario e demais campos de fornecedor, órgão e preço",
+    },
+    { linhas_lidas: linhas, textos: ordenados },
+  );
+}
+
+const pedidos = new Set(process.argv.slice(2));
 await mkdir(SAIDA, { recursive: true });
-await catmat();
-await precos();
-await bolts();
+if (!pedidos.size || pedidos.has("v1")) {
+  await catmat();
+  await precos();
+  await bolts();
+}
+if (!pedidos.size || pedidos.has("familia")) await comprasFamilia(await arvoreFamilia());

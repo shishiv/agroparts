@@ -1,0 +1,4719 @@
+{
+ "fonte": {
+  "nome": "CATMAT, PDMs ativos dos grupos 25, 28, 29, 30, 31, 43, 47, 53, para o benchmark de família de F3",
+  "url": "https://dadosabertos.compras.gov.br/modulo-material/3_consultarPdmMaterial?codigoGrupo=<grupo>&statusPdm=true, para cada grupo da seleção",
+  "preregistro": "dados/preregistro/f3-familia.json",
+  "consultado_em": "2026-11-03T08:34:18.666Z",
+  "licenca": "Decreto 8.777/2016, art. 4, na redação do Decreto 9.903/2019: os dados disponibilizados pelo Poder Executivo federal são de livre utilização pelos Poderes Públicos e pela sociedade; o § 1º autoriza a utilização gratuita das bases cujo detentor de direitos é a União",
+  "licenca_conferida_em": "2026-11-03",
+  "licenca_fontes": [
+   "https://www2.camara.leg.br/legin/fed/decret/2019/decreto-9903-8-julho-2019-788792-publicacaooriginal-158693-pe.html",
+   "https://www.gov.br/compras/pt-br/cidadao/portal-de-dados-abertos"
+  ],
+  "sha256": "7f5db1e8d26434bb215049ad5122b75c1c668d5290337613096bde87db9e8ab7",
+  "conferencias": [
+   {
+    "em": "2026-11-03T08:43:39.055Z",
+    "sha256": "7f5db1e8d26434bb215049ad5122b75c1c668d5290337613096bde87db9e8ab7",
+    "bate": true
+   },
+   {
+    "em": "2026-11-03T09:14:54.044Z",
+    "sha256": "7f5db1e8d26434bb215049ad5122b75c1c668d5290337613096bde87db9e8ab7",
+    "bate": true
+   }
+  ]
+ },
+ "grupos": [
+  {
+   "codigo": 25,
+   "nome": "COMPONENTES DE VEÍCULOS",
+   "classes": [
+    {
+     "codigo": 2510,
+     "nome": "COMPONENTES DE CABINE, CARROCERIA E CHASSIS DE VEÍCULOS",
+     "pdms": [
+      {
+       "codigo": 806,
+       "nome": "AMORTECEDOR SUSPENSÃO"
+      },
+      {
+       "codigo": 2286,
+       "nome": "ALGEMA DE VEICULO"
+      },
+      {
+       "codigo": 3100,
+       "nome": "ASSOALHO - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 3275,
+       "nome": "BANCO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 3460,
+       "nome": "BATENTE DE VEÍCULO"
+      },
+      {
+       "codigo": 3996,
+       "nome": "CABINE COMPLETA DE TRATOR DE ESTEIRA"
+      },
+      {
+       "codigo": 3997,
+       "nome": "CABINE COMPLETA DE TRATOR DE RODA"
+      },
+      {
+       "codigo": 4140,
+       "nome": "CAIXA MARCHA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 4490,
+       "nome": "CAPOTA AUTOMOTIVA"
+      },
+      {
+       "codigo": 4631,
+       "nome": "CARROCERIA BASCULANTE"
+      },
+      {
+       "codigo": 4632,
+       "nome": "CARROCERIA FIBRA DE VIDRO"
+      },
+      {
+       "codigo": 4633,
+       "nome": "CARROCERIA MADEIRA CAMINHÃO"
+      },
+      {
+       "codigo": 4634,
+       "nome": "CARROCERIA"
+      },
+      {
+       "codigo": 4635,
+       "nome": "CARROCERIA PARA TRATOR DE ESTEIRA COMPLETA"
+      },
+      {
+       "codigo": 4636,
+       "nome": "CARROCERIA PARA TRATOR DE RODA"
+      },
+      {
+       "codigo": 4637,
+       "nome": "CARROCERIA TIPO FRIGORIFICO"
+      },
+      {
+       "codigo": 5469,
+       "nome": "COMPONENTE TRATOR ESTEIRA"
+      },
+      {
+       "codigo": 5470,
+       "nome": "Equipamentos e Componentes para Trator / Escavadeira"
+      },
+      {
+       "codigo": 5835,
+       "nome": "CONVERSOR DE TORCAO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 8732,
+       "nome": "LATARIA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 9144,
+       "nome": "MÁQUINA ACIONAMENTO VIDRO"
+      },
+      {
+       "codigo": 9856,
+       "nome": "MOLA DE SUSPENSAO"
+      },
+      {
+       "codigo": 9857,
+       "nome": "MOLA DE TRATOR DE COLOCACAO DE TRILHO"
+      },
+      {
+       "codigo": 9933,
+       "nome": "MOTOCICLETA - CARCACA PAINEL"
+      },
+      {
+       "codigo": 9934,
+       "nome": "MOTOCICLETA - CAVALETE LATERAL"
+      },
+      {
+       "codigo": 9935,
+       "nome": "MOTOCICLETA - CILINDRO GARFO"
+      },
+      {
+       "codigo": 10151,
+       "nome": "ODOMETRO"
+      },
+      {
+       "codigo": 11058,
+       "nome": "PORTA-VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11359,
+       "nome": "QUADRO CHASSI"
+      },
+      {
+       "codigo": 11776,
+       "nome": "RODA BORRACHA MACIÇA"
+      },
+      {
+       "codigo": 12407,
+       "nome": "MOLA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 12440,
+       "nome": "BALANÇA SUSPENSÃO VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 12442,
+       "nome": "SUSPENSAO VEICULO AUTOMOTIVO - BATENTE"
+      },
+      {
+       "codigo": 12443,
+       "nome": "BUCHA SUSPENSÃO AUTOMOTIVA"
+      },
+      {
+       "codigo": 13429,
+       "nome": "VIDRO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 14060,
+       "nome": "MARCADOR COMBUSTÍVEL"
+      },
+      {
+       "codigo": 14065,
+       "nome": "EIXO TRASEIRO COMPLETO"
+      },
+      {
+       "codigo": 14068,
+       "nome": "GUIA DA JANELA PORTA"
+      },
+      {
+       "codigo": 14312,
+       "nome": "REVESTIMENTO CAÇAMBA AUTOMOTIVA"
+      },
+      {
+       "codigo": 14382,
+       "nome": "PESTANA PORTA AUTOMÓVEL"
+      },
+      {
+       "codigo": 14674,
+       "nome": "BORRACHA ESTABILIZADOR"
+      },
+      {
+       "codigo": 14675,
+       "nome": "BORRACHA PORTA"
+      },
+      {
+       "codigo": 14766,
+       "nome": "TETO TRATOR"
+      },
+      {
+       "codigo": 15310,
+       "nome": "BORRACHA JANELA"
+      },
+      {
+       "codigo": 15317,
+       "nome": "CANALETA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15579,
+       "nome": "TRAVESSA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15581,
+       "nome": "BORRACHA AMORTECEDOR"
+      },
+      {
+       "codigo": 15583,
+       "nome": "TETO VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15584,
+       "nome": "CAPÔ VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15585,
+       "nome": "LATERAL CARROCERIA"
+      },
+      {
+       "codigo": 15590,
+       "nome": "SUPORTE PÁRA-CHOQUE"
+      },
+      {
+       "codigo": 15591,
+       "nome": "BORRACHA CANALETA"
+      },
+      {
+       "codigo": 15592,
+       "nome": "BORRACHA PÁRA-BRISA"
+      },
+      {
+       "codigo": 15709,
+       "nome": "BRAÇO OSCILANTE"
+      },
+      {
+       "codigo": 15817,
+       "nome": "APOIO VARETA"
+      },
+      {
+       "codigo": 15818,
+       "nome": "TAMPÃO CAIXA AR"
+      },
+      {
+       "codigo": 15850,
+       "nome": "TAMPA PORTA-MALA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15888,
+       "nome": "BIELETA"
+      },
+      {
+       "codigo": 16237,
+       "nome": "VÁLVULA CONTROLE PORTA"
+      },
+      {
+       "codigo": 16247,
+       "nome": "HASTE GUIA"
+      },
+      {
+       "codigo": 16568,
+       "nome": "FEIXE MOLAS"
+      },
+      {
+       "codigo": 16570,
+       "nome": "PIVÔ BALANÇA SUSPENSÃO"
+      },
+      {
+       "codigo": 16582,
+       "nome": "PIVÔ BRAÇO VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 16583,
+       "nome": "DESCARGA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 17597,
+       "nome": "BUCHA FEIXE DE MOLA"
+      }
+     ]
+    },
+    {
+     "codigo": 2520,
+     "nome": "COMPONENTES DE TRANSMISSÃO DE VEÍCULOS",
+     "pdms": [
+      {
+       "codigo": 2233,
+       "nome": "ALAVANCA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 5744,
+       "nome": "CONJUNTO EMBREAGEM VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 5992,
+       "nome": "CRUZETA TRANSMISSÃO VEÍCULO"
+      },
+      {
+       "codigo": 6259,
+       "nome": "DISCO EMBREAGEM"
+      },
+      {
+       "codigo": 6440,
+       "nome": "EIXO TRANSMISSAO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 8575,
+       "nome": "JUNTA CAIXA TRANSMISSÃO"
+      },
+      {
+       "codigo": 9926,
+       "nome": "CABO VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 9937,
+       "nome": "MOTOCICLETA - CORRENTE"
+      },
+      {
+       "codigo": 9938,
+       "nome": "MOTOCICLETA - GUIA DA CORRENTE"
+      },
+      {
+       "codigo": 9944,
+       "nome": "MOTOCICLETA - PECA SISTEMA CAMBIO"
+      },
+      {
+       "codigo": 9945,
+       "nome": "MOTOCICLETA - PEDAL * PARTIDA / PEDALEIRA / CAMBIO"
+      },
+      {
+       "codigo": 10569,
+       "nome": "LIMITADOR DIREÇÃO"
+      },
+      {
+       "codigo": 12086,
+       "nome": "SINCRONIZADOR"
+      },
+      {
+       "codigo": 14069,
+       "nome": "HASTE TRAMBULADOR"
+      },
+      {
+       "codigo": 14071,
+       "nome": "GARFO ACIONAMENTO EMBREAGEM"
+      },
+      {
+       "codigo": 14255,
+       "nome": "ENGRENAGEM AUTOMOTIVA"
+      },
+      {
+       "codigo": 14345,
+       "nome": "JOGO COROA PINHAO"
+      },
+      {
+       "codigo": 14350,
+       "nome": "PROTETOR CABO EMBREAGEM"
+      },
+      {
+       "codigo": 14354,
+       "nome": "COIFA TRANSMISSÃO AUTOMOTIVA"
+      },
+      {
+       "codigo": 14357,
+       "nome": "PARAFUSO ACELERADOR AUTOMOTIVO"
+      },
+      {
+       "codigo": 15655,
+       "nome": "COLAR EMBREAGEM AUTOMOTIVA"
+      },
+      {
+       "codigo": 15656,
+       "nome": "PLATÔ EMBREAGEM AUTOMOTIVA"
+      },
+      {
+       "codigo": 15705,
+       "nome": "CILINDRO EMBREAGEM"
+      },
+      {
+       "codigo": 15718,
+       "nome": "CONJUNTO EMBREAGEM AUTOMOTIVA"
+      },
+      {
+       "codigo": 15731,
+       "nome": "CRUZETA EIXO CARDÃ"
+      },
+      {
+       "codigo": 15864,
+       "nome": "TRAVA SEMI-EIXO"
+      },
+      {
+       "codigo": 15865,
+       "nome": "PINO CÂMBIO TRATOR"
+      },
+      {
+       "codigo": 15886,
+       "nome": "GUARNIÇÃO SISTEMA CÂMBIO"
+      },
+      {
+       "codigo": 15908,
+       "nome": "COROA TRANSMISSÃO"
+      },
+      {
+       "codigo": 15920,
+       "nome": "DISCO EMBREAGEM - MOTOCICLETA"
+      },
+      {
+       "codigo": 15922,
+       "nome": "PINHÃO DE TRANSMISSÃO"
+      },
+      {
+       "codigo": 15937,
+       "nome": "ARTICULAÇÃO BARRA SELETORA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15938,
+       "nome": "ANEL CÂMBIO"
+      },
+      {
+       "codigo": 15952,
+       "nome": "BARRA SELETORA CÂMBIO"
+      },
+      {
+       "codigo": 15953,
+       "nome": "PORCA CÂMBIO"
+      },
+      {
+       "codigo": 16297,
+       "nome": "TUBO SISTEMA EMBREAGEM"
+      },
+      {
+       "codigo": 16595,
+       "nome": "ESTICADOR CORREIA DENTADA"
+      },
+      {
+       "codigo": 17598,
+       "nome": "BOMBA EMBREAGEM VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 17600,
+       "nome": "ATUADOR EMBREAGEM VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 17626,
+       "nome": "GARFO JUNTA UNIVERSAL"
+      },
+      {
+       "codigo": 17627,
+       "nome": "TAMPA CARCAÇA"
+      }
+     ]
+    },
+    {
+     "codigo": 2530,
+     "nome": "COMPONENTES DE FREIO, DIREÇÃO, EIXO, RODA E LAGARTA  DE  VEÍCULOS",
+     "pdms": [
+      {
+       "codigo": 652,
+       "nome": "PINÇA FREIO - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 2508,
+       "nome": "RETENTOR VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 3026,
+       "nome": "ARO BICICLETA"
+      },
+      {
+       "codigo": 3363,
+       "nome": "BARRA DIREÇÃO"
+      },
+      {
+       "codigo": 3387,
+       "nome": "PONTEIRA PÁRA-CHOQUE"
+      },
+      {
+       "codigo": 4305,
+       "nome": "CALOTA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 5750,
+       "nome": "CONJUNTO FREIO AUTOMOTIVO"
+      },
+      {
+       "codigo": 6004,
+       "nome": "RODA LIVRE"
+      },
+      {
+       "codigo": 6005,
+       "nome": "Cubo Roda"
+      },
+      {
+       "codigo": 6264,
+       "nome": "DISCO FREIO"
+      },
+      {
+       "codigo": 7830,
+       "nome": "VÁLVULA EQUALIZADORA FREIO"
+      },
+      {
+       "codigo": 8915,
+       "nome": "LONA FREIO"
+      },
+      {
+       "codigo": 9098,
+       "nome": "MANGUEIRA FLEXIVEL DE FREIO"
+      },
+      {
+       "codigo": 9927,
+       "nome": "MOTOCICLETA - CAIXA DIRECAO"
+      },
+      {
+       "codigo": 9939,
+       "nome": "GUIDÃO BICICLETA"
+      },
+      {
+       "codigo": 9942,
+       "nome": "MOTOCICLETA - MANETE"
+      },
+      {
+       "codigo": 9946,
+       "nome": "GARFO BICICLETA"
+      },
+      {
+       "codigo": 10502,
+       "nome": "PASTILHA FREIO"
+      },
+      {
+       "codigo": 10685,
+       "nome": "PESO BALANCEAR RODA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11710,
+       "nome": "RETENTOR RODA - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11769,
+       "nome": "RODA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11770,
+       "nome": "RODA BORRACHA MACIÇA - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11814,
+       "nome": "ROLETE DE ESTEIRA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 12421,
+       "nome": "SUPORTE PINÇA"
+      },
+      {
+       "codigo": 12504,
+       "nome": "TAMBOR FREIO"
+      },
+      {
+       "codigo": 12654,
+       "nome": "TERMINAL DIREÇÃO"
+      },
+      {
+       "codigo": 12942,
+       "nome": "TRAVA ANTIFURTO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 13478,
+       "nome": "VOLANTE DIREÇÃO"
+      },
+      {
+       "codigo": 13605,
+       "nome": "MOTOCICLETA - PEÇA SISTEMA FREIO"
+      },
+      {
+       "codigo": 14062,
+       "nome": "ESTOJO RODA"
+      },
+      {
+       "codigo": 14067,
+       "nome": "CILINDRO PRINCIPAL FREIO"
+      },
+      {
+       "codigo": 14070,
+       "nome": "COIFA GARFO ACIONAMENTO EMBREAGEM"
+      },
+      {
+       "codigo": 14252,
+       "nome": "BRAÇO PITMAN"
+      },
+      {
+       "codigo": 14346,
+       "nome": "CILINDRO FREIO"
+      },
+      {
+       "codigo": 14731,
+       "nome": "BRAÇO AUXILIAR DIREÇÃO"
+      },
+      {
+       "codigo": 15851,
+       "nome": "SERVOFREIO"
+      },
+      {
+       "codigo": 15856,
+       "nome": "JUNTA HOMOCINÉTICA"
+      },
+      {
+       "codigo": 15877,
+       "nome": "JOGO REPARO"
+      },
+      {
+       "codigo": 15878,
+       "nome": "TUBO SISTEMA FREIO"
+      },
+      {
+       "codigo": 15880,
+       "nome": "BUCHA AMORTECEDOR"
+      },
+      {
+       "codigo": 15881,
+       "nome": "UNIDADE ATUADORA"
+      },
+      {
+       "codigo": 15885,
+       "nome": "GARFO"
+      },
+      {
+       "codigo": 15902,
+       "nome": "TAMPA TIPO FOLE"
+      },
+      {
+       "codigo": 15905,
+       "nome": "RETENTOR CUBO RODA"
+      },
+      {
+       "codigo": 16165,
+       "nome": "EIXO BICICLETA"
+      },
+      {
+       "codigo": 16166,
+       "nome": "CORRENTE BICICLETA"
+      },
+      {
+       "codigo": 16167,
+       "nome": "CATRACA BICICLETA"
+      },
+      {
+       "codigo": 16168,
+       "nome": "PEDAL BICICLETA"
+      },
+      {
+       "codigo": 16238,
+       "nome": "VÁLVULA FREIO ESTACIONAMENTO"
+      },
+      {
+       "codigo": 16239,
+       "nome": "VÁLVULA RETENÇÃO MOLA ESTACIONAMENTO"
+      },
+      {
+       "codigo": 16256,
+       "nome": "TRAVA ROLAMENTO"
+      },
+      {
+       "codigo": 16279,
+       "nome": "COROA ENGRENAGEM BICICLETA"
+      },
+      {
+       "codigo": 16296,
+       "nome": "ESTOJO PRISIONEIRO CUBO RODA"
+      },
+      {
+       "codigo": 16493,
+       "nome": "COIFA HOMOCINÉTICA"
+      },
+      {
+       "codigo": 16503,
+       "nome": "CILINDRO RODA"
+      },
+      {
+       "codigo": 16581,
+       "nome": "SAPATA LONA FREIO"
+      },
+      {
+       "codigo": 16597,
+       "nome": "HIDROVÁCUO"
+      },
+      {
+       "codigo": 17367,
+       "nome": "REPARO PINÇA FREIO"
+      },
+      {
+       "codigo": 17492,
+       "nome": "SAPATA FREIO BICICLETA"
+      },
+      {
+       "codigo": 17585,
+       "nome": "REPARO CILINDRO FREIO"
+      },
+      {
+       "codigo": 18343,
+       "nome": "TRAVA FREIO ESTACIONAMENTO"
+      },
+      {
+       "codigo": 18344,
+       "nome": "PORCA FREIO ESTACIONAMENTO"
+      },
+      {
+       "codigo": 18345,
+       "nome": "PARAFUSO FREIO ESTACIONAMENTO"
+      },
+      {
+       "codigo": 18346,
+       "nome": "PRISIONEIRO FREIO ESTACIONAMENTO"
+      },
+      {
+       "codigo": 18360,
+       "nome": "RAIO RODA"
+      },
+      {
+       "codigo": 18403,
+       "nome": "TRAVA ARANHA"
+      },
+      {
+       "codigo": 18405,
+       "nome": "CANO COMBUSTÍVEL"
+      },
+      {
+       "codigo": 18406,
+       "nome": "DIAFRAGMA DA CUICA"
+      }
+     ]
+    },
+    {
+     "codigo": 2540,
+     "nome": "EQUIPAMENTO E ACESSÓRIOS PARA VEÍCULOS",
+     "pdms": [
+      {
+       "codigo": 655,
+       "nome": "PALHETA LIMPADOR PÁRA-BRISA"
+      },
+      {
+       "codigo": 1641,
+       "nome": "ACENDEDOR CIGARRO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 1654,
+       "nome": "PEÇAS / ACESSÓRIOS CAMINHÃO"
+      },
+      {
+       "codigo": 1655,
+       "nome": "PEÇAS / ACESSÓRIOS ÔNIBUS"
+      },
+      {
+       "codigo": 2341,
+       "nome": "ALMOFADA ASSENTO - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 2535,
+       "nome": "ANTENA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 2929,
+       "nome": "AQUECEDOR DE VEÍCULO"
+      },
+      {
+       "codigo": 3025,
+       "nome": "ARO FAROL - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 3200,
+       "nome": "BAGAGEIRO VEÍCULO"
+      },
+      {
+       "codigo": 3838,
+       "nome": "PEÇAS / ACESSÓRIOS BICICLETA"
+      },
+      {
+       "codigo": 4440,
+       "nome": "CAPA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 4441,
+       "nome": "CAPA BANCO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 6516,
+       "nome": "EMBLEMA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 6566,
+       "nome": "ENGATE REBOQUE - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 7014,
+       "nome": "ESPELHO RETROVISOR VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 7777,
+       "nome": "FORRO PORTA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 8388,
+       "nome": "INDICADOR COMBUSTÍVEL VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 9810,
+       "nome": "MOBILIÁRIO - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 9922,
+       "nome": "MOTOCICLETA - PEÇAS E COMPONENTES"
+      },
+      {
+       "codigo": 9923,
+       "nome": "MOTOCICLETA - AMORTECEDOR"
+      },
+      {
+       "codigo": 9929,
+       "nome": "MOTOCICLETA - CAPA DE BANCO"
+      },
+      {
+       "codigo": 9943,
+       "nome": "MOTOCICLETA - PARA-LAMA"
+      },
+      {
+       "codigo": 10309,
+       "nome": "PAINEL INSTRUMENTO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 10414,
+       "nome": "SAIA DE PÁRA-CHOQUE"
+      },
+      {
+       "codigo": 11987,
+       "nome": "SELIM"
+      },
+      {
+       "codigo": 12798,
+       "nome": "TOCA-FITAS - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 12964,
+       "nome": "TRIANGULO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 13615,
+       "nome": "BRAÇO LIMPADOR PÁRA-BRISA"
+      },
+      {
+       "codigo": 14061,
+       "nome": "FAROL APROXIMAÇÃO"
+      },
+      {
+       "codigo": 14063,
+       "nome": "ESPAÇADOR ACIONADOR LIMPADOR PÁRA-BRISA"
+      },
+      {
+       "codigo": 14066,
+       "nome": "DOBRADIÇA PÁRA-BRISA REBATÍVEL"
+      },
+      {
+       "codigo": 14243,
+       "nome": "MANIVELA ACIONAMENTO VIDRO"
+      },
+      {
+       "codigo": 14244,
+       "nome": "AMORTECEDOR DIREÇÃO"
+      },
+      {
+       "codigo": 14246,
+       "nome": "MAÇANETA AUTOMOTIVA"
+      },
+      {
+       "codigo": 14308,
+       "nome": "ESTRIBO AUTOMOTIVO"
+      },
+      {
+       "codigo": 14309,
+       "nome": "PROTETOR AUTOMOTIVO"
+      },
+      {
+       "codigo": 14393,
+       "nome": "PÁRA-BRISA"
+      },
+      {
+       "codigo": 15288,
+       "nome": "FECHADURA PORTA"
+      },
+      {
+       "codigo": 15582,
+       "nome": "PÁRA-SOL VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15586,
+       "nome": "ARO GRADE"
+      },
+      {
+       "codigo": 15588,
+       "nome": "FORRO VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15589,
+       "nome": "GRAMPO REVESTIMENTO VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15854,
+       "nome": "PÁRA-CHOQUE"
+      },
+      {
+       "codigo": 15958,
+       "nome": "MOTOR LIMPADOR DO PARA-BRISA"
+      },
+      {
+       "codigo": 16246,
+       "nome": "PRESILHA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 16354,
+       "nome": "GUARNIÇÃO ESTRIBO"
+      },
+      {
+       "codigo": 16529,
+       "nome": "TAPETE VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 16804,
+       "nome": "PÉ VELA"
+      },
+      {
+       "codigo": 18396,
+       "nome": "CINTA FILTRO AR"
+      }
+     ]
+    },
+    {
+     "codigo": 2590,
+     "nome": "COMPONENTES DIVERSOS PARA VEÍCULOS",
+     "pdms": [
+      {
+       "codigo": 684,
+       "nome": "BRAÇADEIRA"
+      },
+      {
+       "codigo": 1665,
+       "nome": "ACESSÓRIO CARRO BLINDADO"
+      },
+      {
+       "codigo": 3737,
+       "nome": "BOMBA D'AGUA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 8160,
+       "nome": "GUINDASTE PARA CARRO SOCORRO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 9931,
+       "nome": "MOTOCICLETA - CARCACA DE BANCO"
+      },
+      {
+       "codigo": 10419,
+       "nome": "PÁRA-LAMA"
+      },
+      {
+       "codigo": 10806,
+       "nome": "PLACA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11517,
+       "nome": "REDUTOR DE VELOCIDADE"
+      },
+      {
+       "codigo": 11783,
+       "nome": "RODOAR"
+      },
+      {
+       "codigo": 13798,
+       "nome": "PEÇA MECÂNICA/ELÉTRICA - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 14064,
+       "nome": "ENGRENAGEM ACIONAMENTO BOMBA INJETORA"
+      },
+      {
+       "codigo": 15814,
+       "nome": "HÉLICE VENTILADOR VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 16226,
+       "nome": "CALÇO ESCAPAMENTO VEÍCULO"
+      },
+      {
+       "codigo": 16245,
+       "nome": "CHAVE SELETORA"
+      },
+      {
+       "codigo": 16491,
+       "nome": "MANGUEIRA AVANÇO DO DISTRIBUIDOR"
+      },
+      {
+       "codigo": 16608,
+       "nome": "MANGUEIRA SUSPIRO ÓLEO"
+      },
+      {
+       "codigo": 16805,
+       "nome": "COMPONENTES DIVERSOS PARA VEÍCULOS"
+      },
+      {
+       "codigo": 18053,
+       "nome": "MONITOR PARA AUTOMÓVEL"
+      },
+      {
+       "codigo": 30174,
+       "nome": "PEÇA MECÂNICA / ELÉTRICA - VEÍCULO AUTOMOTIVO"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "codigo": 28,
+   "nome": "MOTORES, TURBINAS E SEUS COMPONENTES",
+   "classes": [
+    {
+     "codigo": 2805,
+     "nome": "MOTORES A GASOLINA E COMPONENTES, EXCETO  OS DE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 3611,
+       "nome": "BLOCO DE MOTOR A GASOLINA"
+      },
+      {
+       "codigo": 3954,
+       "nome": "BUJÃO ÓLEO ABASTECIMENTO"
+      },
+      {
+       "codigo": 3986,
+       "nome": "CABEÇOTE MOTO-COMPRESSOR"
+      },
+      {
+       "codigo": 4139,
+       "nome": "CAIXA DIREÇÃO"
+      },
+      {
+       "codigo": 4534,
+       "nome": "CARCAÇA BOMBA ÓLEO DE MOTOR"
+      },
+      {
+       "codigo": 4537,
+       "nome": "CARCAÇA VENTOINHA SISTEMA RESFRIAMENTO"
+      },
+      {
+       "codigo": 4664,
+       "nome": "CARTER DE MOTOR A COMBUSTAO"
+      },
+      {
+       "codigo": 4691,
+       "nome": "CASQUILHO BIELA MOTOR"
+      },
+      {
+       "codigo": 4692,
+       "nome": "CASQUILHO ÁRVORE MANIVELA"
+      },
+      {
+       "codigo": 5893,
+       "nome": "CORREIA DENTADA TRANSMISSÃO"
+      },
+      {
+       "codigo": 6430,
+       "nome": "EIXO COMANDO VÁLVULA"
+      },
+      {
+       "codigo": 9936,
+       "nome": "MOTOCICLETA - COLETOR ADMISSAO"
+      },
+      {
+       "codigo": 9951,
+       "nome": "MOTOR - AEROMODELO"
+      },
+      {
+       "codigo": 9958,
+       "nome": "MOTOR DE EXPLOSAO A ALCOOL"
+      },
+      {
+       "codigo": 9959,
+       "nome": "MOTOR DE EXPLOSAO A GAS EXCETO DE AERONAVE"
+      },
+      {
+       "codigo": 9960,
+       "nome": "MOTOR DE EXPLOSAO A GASOLINA EXCETO DE AERONAVE"
+      },
+      {
+       "codigo": 9984,
+       "nome": "MOTOR ESTACIONARIO"
+      },
+      {
+       "codigo": 10788,
+       "nome": "PISTÃO"
+      },
+      {
+       "codigo": 12510,
+       "nome": "TAMPA CABECOTE DE MOTOR - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 12523,
+       "nome": "TAMPA PROTETORA CORREIA DENTADA"
+      },
+      {
+       "codigo": 13124,
+       "nome": "TUCHO COMANDO VALVULA"
+      },
+      {
+       "codigo": 15381,
+       "nome": "CARCAÇA VENTILADOR MOTOR SERRA"
+      },
+      {
+       "codigo": 15395,
+       "nome": "TUBO NÍVEL ÓLEO"
+      },
+      {
+       "codigo": 16609,
+       "nome": "MOTOR POPA"
+      },
+      {
+       "codigo": 17370,
+       "nome": "RETENTOR EIXO HÉLICE"
+      },
+      {
+       "codigo": 17371,
+       "nome": "ROTOR BOMBA D'ÁGUA"
+      },
+      {
+       "codigo": 17726,
+       "nome": "ROLETE DE BIELA"
+      }
+     ]
+    },
+    {
+     "codigo": 2810,
+     "nome": "MOTORES A GASOLINA PARA AERONAVES E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 9985,
+       "nome": "MOTOR PRIMARIO DE AERONAVE"
+      }
+     ]
+    },
+    {
+     "codigo": 2815,
+     "nome": "MOTORES DIESEL E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 2500,
+       "nome": "ANEL DE SEGMENTO"
+      },
+      {
+       "codigo": 3536,
+       "nome": "BICO INJETOR MOTOR DE EMBARCAÇÃO"
+      },
+      {
+       "codigo": 3543,
+       "nome": "BIELA MOTOR A DIESEL"
+      },
+      {
+       "codigo": 3547,
+       "nome": "BIELA MOTOR DE EMBARCACAO"
+      },
+      {
+       "codigo": 3610,
+       "nome": "BLOCO DE MOTOR A DIESEL"
+      },
+      {
+       "codigo": 3990,
+       "nome": "COMPRESSOR CONDICIONADOR AR"
+      },
+      {
+       "codigo": 4372,
+       "nome": "CAMISA CILINDRO MOTOR DE EMBARCAÇÃO"
+      },
+      {
+       "codigo": 4528,
+       "nome": "CARBURADOR MOTOR EMBARCAÇÃO"
+      },
+      {
+       "codigo": 4535,
+       "nome": "CARCAÇA MOTOR DE EMBARCAÇÃO"
+      },
+      {
+       "codigo": 4665,
+       "nome": "CARTER DE MOTOR DE EMBARCACAO"
+      },
+      {
+       "codigo": 9964,
+       "nome": "MOTOR DE POPA"
+      },
+      {
+       "codigo": 10787,
+       "nome": "PISTÃO DE MOTOR A DIESEL"
+      },
+      {
+       "codigo": 13026,
+       "nome": "TUBO ADMISSAO E ESCAPE -  MOTOR DE EMBARCACAO"
+      },
+      {
+       "codigo": 13034,
+       "nome": "TUBO DE ABASTECIMENTO DE OLEO DE MOTOR DIESEL"
+      },
+      {
+       "codigo": 13264,
+       "nome": "VALVULA DE MOTOR DE EMBARCACAO"
+      },
+      {
+       "codigo": 13477,
+       "nome": "VOLANTE MOTOR"
+      },
+      {
+       "codigo": 16812,
+       "nome": "TURBINA MOTOR"
+      },
+      {
+       "codigo": 17889,
+       "nome": "MOTOR DIESEL"
+      }
+     ]
+    },
+    {
+     "codigo": 2820,
+     "nome": "MÁQUINAS ALTERNATIVAS A VAPOR E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 3546,
+       "nome": "BIELA MOTOR A VAPOR"
+      },
+      {
+       "codigo": 5990,
+       "nome": "CRUZETA MÁQUINA À VAPOR"
+      },
+      {
+       "codigo": 6429,
+       "nome": "EIXO DE COMANDO"
+      },
+      {
+       "codigo": 6431,
+       "nome": "EIXO DE MANIVELA ( VIRABREQUIM ) - MAQUINA A VAPOR"
+      },
+      {
+       "codigo": 6439,
+       "nome": "EIXO MOTRIZ - MAQUINA A VAPOR"
+      },
+      {
+       "codigo": 6517,
+       "nome": "EMBOLO"
+      },
+      {
+       "codigo": 8173,
+       "nome": "HASTE DE EMBOLO EXCENTRICO - MAQUINA A VAPOR"
+      },
+      {
+       "codigo": 10786,
+       "nome": "PISTAO DE MAQUINA A VAPOR"
+      }
+     ]
+    },
+    {
+     "codigo": 2825,
+     "nome": "TURBINAS A VAPOR E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 2492,
+       "nome": "ANEL DE DEFLATOR DE TURBINA A VAPOR"
+      },
+      {
+       "codigo": 2493,
+       "nome": "ANEL DE FREAMENTO DE TURBINA A VAPOR"
+      },
+      {
+       "codigo": 5808,
+       "nome": "CONTROLADOR DE PARADA AUTOMATICA - TURBINA A VAPOR"
+      },
+      {
+       "codigo": 10321,
+       "nome": "PALHETA FIXA DE TURBINA A VAPOR"
+      },
+      {
+       "codigo": 10323,
+       "nome": "LÂMINA TURBINA DE VAPOR"
+      },
+      {
+       "codigo": 10846,
+       "nome": "PLACA EXPANSORA DE TURBINA A VAPOR"
+      },
+      {
+       "codigo": 11841,
+       "nome": "ROTOR DE TURBINA A VAPOR"
+      }
+     ]
+    },
+    {
+     "codigo": 2830,
+     "nome": "TURBINAS E RODAS D'ÁGUA E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 11590,
+       "nome": "REGULADOR DE VELOCIDADE DE TURBINA HIDRAULICA"
+      },
+      {
+       "codigo": 11842,
+       "nome": "ROTOR DE TURBINA HIDRÁULICA"
+      },
+      {
+       "codigo": 16815,
+       "nome": "TURBINAS E RODAS D'ÁGUA E COMPONENTES"
+      }
+     ]
+    },
+    {
+     "codigo": 2835,
+     "nome": "TURBINAS A GÁS E MOTORES A JATO E COMPONENTES, EXCETO OS  DEAERONAVE",
+     "pdms": [
+      {
+       "codigo": 9952,
+       "nome": "MOTOR A JATO EXCETO DE AERONAVE"
+      },
+      {
+       "codigo": 9953,
+       "nome": "MOTOR A JATO EXCETO O DE MISSIL GUIADO"
+      },
+      {
+       "codigo": 13135,
+       "nome": "TURBINA A GAS EXCETO A DE MISSIL GUIADO"
+      },
+      {
+       "codigo": 13136,
+       "nome": "TURBINA A GAS EXCETO DE AERONAVE"
+      }
+     ]
+    },
+    {
+     "codigo": 2840,
+     "nome": "TURBINAS A GÁS E MOTORES A JATO DE AERONAVES E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 9986,
+       "nome": "MOTOR PRIMARIO DE AERONAVE"
+      },
+      {
+       "codigo": 9988,
+       "nome": "MOTOR PRIMARIO DE TURBO - JATO DE AERONAVE"
+      },
+      {
+       "codigo": 9989,
+       "nome": "MOTOR PRIMARIO DE TURBO - PROPULSOR DE AERONAVE"
+      },
+      {
+       "codigo": 11666,
+       "nome": "RESERVATORIO COMBUSTIVEL PARA MOTOR A JATO -  AERONAVE"
+      },
+      {
+       "codigo": 11667,
+       "nome": "RESERVATORIO COMBUSTIVEL PARA TURBINA A GAS - AERONAVE"
+      }
+     ]
+    },
+    {
+     "codigo": 2845,
+     "nome": "MOTORES DE FOGUETES E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 1690,
+       "nome": "ACESSORIO DE MOTOR PRIMARIO DE MISSIL GUIADO"
+      },
+      {
+       "codigo": 7683,
+       "nome": "FOGUETE - MOTOR / COMPONENTES"
+      },
+      {
+       "codigo": 8279,
+       "nome": "IGNITOR PARA MOTOR FOGUETE"
+      },
+      {
+       "codigo": 9987,
+       "nome": "MOTOR PRIMARIO DE MISSIL GUIADO"
+      },
+      {
+       "codigo": 9990,
+       "nome": "MOTOR PRIMARIO DO TIPO FOGUETE A COMBUSTIVEL DE AERONAVE"
+      },
+      {
+       "codigo": 9991,
+       "nome": "MOTOR PRIMARIO DO TIPO FOGUETE A COMBUSTIVEL PARA FOGUETE"
+      },
+      {
+       "codigo": 9992,
+       "nome": "MOTOR PRIMARIO DO TIPO FOGUETE A COMBUSTIVEL PARA MISSIL GUIADO"
+      },
+      {
+       "codigo": 11268,
+       "nome": "PROPELENTE LIQUIDO ACONDICIONADO EM EMBALAGEM CONSUMIVEL PARA MISSIL"
+      }
+     ]
+    },
+    {
+     "codigo": 2895,
+     "nome": "MOTORES DIVERSOS E COMPONENTES",
+     "pdms": [
+      {
+       "codigo": 4696,
+       "nome": "CATA - VENTO"
+      },
+      {
+       "codigo": 9956,
+       "nome": "MOTOR DE AR COMPRIMIDO"
+      },
+      {
+       "codigo": 15855,
+       "nome": "MOTOR ARTICULAÇÃO PORTA"
+      },
+      {
+       "codigo": 30453,
+       "nome": "Motoredutor (motor com redutor de engrenagens)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "codigo": 29,
+   "nome": "ACESSÓRIOS DE MOTORES",
+   "classes": [
+    {
+     "codigo": 2910,
+     "nome": "COMPONENTES DO SISTEMA DE COMBUSTÍVEL DE  MOTORES, EXCETO OSDE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 3525,
+       "nome": "BICO BOMBA INJETORA COMBUSTÍVEL"
+      },
+      {
+       "codigo": 3661,
+       "nome": "BÓIA TANQUE COMBUSTÍVEL"
+      },
+      {
+       "codigo": 3774,
+       "nome": "BOMBA DIREÇÃO VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 3780,
+       "nome": "BOMBA INJETORA COMBUSTÍVEL"
+      },
+      {
+       "codigo": 3953,
+       "nome": "BUJÃO DE SUPORTE DE CALIBRE DE PULVERIZADOR PRINCI"
+      },
+      {
+       "codigo": 3984,
+       "nome": "CABEÇOTE BOMBA INJETORA DE COMBUSTÍVEL - MOTOR DIE"
+      },
+      {
+       "codigo": 4273,
+       "nome": "CALIBRE MARCHA LENTA DE CARBURADOR"
+      },
+      {
+       "codigo": 4523,
+       "nome": "CARBURADOR"
+      },
+      {
+       "codigo": 4698,
+       "nome": "CATALISADOR VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 6449,
+       "nome": "ELEMENTO FILTRANTE COMBUSTÍVEL -  VEÍCULO AUTOMOTI"
+      },
+      {
+       "codigo": 9094,
+       "nome": "MANGUEIRA COMBUSTÍVEL"
+      },
+      {
+       "codigo": 9930,
+       "nome": "MOTOCICLETA - CARBURADOR"
+      },
+      {
+       "codigo": 10561,
+       "nome": "PECA/COMPONENTE ALIMENTACAO COMBUSTIVEL - TRATOR"
+      },
+      {
+       "codigo": 11644,
+       "nome": "CONJUNTO REPARO CARBURADOR"
+      },
+      {
+       "codigo": 11647,
+       "nome": "REPARO BOMBA INJETORA COMBUSTÍVEL"
+      },
+      {
+       "codigo": 12524,
+       "nome": "TAMPA RESERVATÓRIO COMBUSTÍVEL"
+      },
+      {
+       "codigo": 12539,
+       "nome": "CONJUNTO CONVERSÃO VEÍCULO"
+      },
+      {
+       "codigo": 13059,
+       "nome": "TUBO BOMBA INJETORA"
+      },
+      {
+       "codigo": 13122,
+       "nome": "TUBO FILTRO COMBUSTÍVEL"
+      },
+      {
+       "codigo": 13265,
+       "nome": "VALVULA COMBUSTÍVEL"
+      },
+      {
+       "codigo": 13603,
+       "nome": "MOTOCICLETA - PEÇA MOTOR"
+      },
+      {
+       "codigo": 14233,
+       "nome": "JUNTA BASE BOMBA COMBUSTÍVEL"
+      },
+      {
+       "codigo": 14234,
+       "nome": "JUNTA CARBURADOR"
+      },
+      {
+       "codigo": 14266,
+       "nome": "VÁLVULA AUTOMOTIVA"
+      },
+      {
+       "codigo": 14271,
+       "nome": "BOMBA AUTOMOTIVA"
+      },
+      {
+       "codigo": 14304,
+       "nome": "CONEXÃO SISTEMA PARTIDA"
+      },
+      {
+       "codigo": 14344,
+       "nome": "VEDADOR ANTICORROSIVO"
+      },
+      {
+       "codigo": 14383,
+       "nome": "COPO FILTRO COMBUSTÍVEL"
+      },
+      {
+       "codigo": 14622,
+       "nome": "SENSOR BÓIA DE TANQUE DE COMBUSTÍVEL"
+      },
+      {
+       "codigo": 14677,
+       "nome": "JOGO JUNTAS"
+      },
+      {
+       "codigo": 15282,
+       "nome": "TANQUE COMBUSTÍVEL VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15602,
+       "nome": "AFOGADOR MOTOR POPA"
+      },
+      {
+       "codigo": 15726,
+       "nome": "PALHETA BOMBA INJETORA"
+      },
+      {
+       "codigo": 15816,
+       "nome": "BAQUELITE BOMBA COMBUSTÍVEL"
+      },
+      {
+       "codigo": 15907,
+       "nome": "CABO ACELERADOR"
+      },
+      {
+       "codigo": 15909,
+       "nome": "CABO AFOGADOR"
+      },
+      {
+       "codigo": 15921,
+       "nome": "REPARO DO CARBURADOR - MOTOCICLETA"
+      },
+      {
+       "codigo": 16024,
+       "nome": "REPARO CARBURADOR"
+      },
+      {
+       "codigo": 16269,
+       "nome": "TANQUE COMBUSTÍVEL"
+      },
+      {
+       "codigo": 16299,
+       "nome": "PEÇA / COMPONENTE BOMBA INJETORA"
+      },
+      {
+       "codigo": 16492,
+       "nome": "MOLA RETORNO EIXO CARBURADOR"
+      },
+      {
+       "codigo": 16585,
+       "nome": "INJETOR COMBUSTÍVEL VEÍCULO"
+      },
+      {
+       "codigo": 19060,
+       "nome": "MÓDULO COMBUSTÍVEIS"
+      },
+      {
+       "codigo": 30186,
+       "nome": "RESERVATÓRIO MÓVEL RÍGIDO - 100 LITROS (TIPO BOMBONA)"
+      }
+     ]
+    },
+    {
+     "codigo": 2915,
+     "nome": "COMPONENTES DO SISTEMA DE COMBUSTÍVEL DE MOTORES  DE  AERONAVES",
+     "pdms": [
+      {
+       "codigo": 2065,
+       "nome": "ACUMULADOR DE CILINDRO HIDRAULICO DE AERONAVE"
+      },
+      {
+       "codigo": 3750,
+       "nome": "BOMBA COMBUSTÍVEL DE AERONAVE"
+      },
+      {
+       "codigo": 4527,
+       "nome": "CARBURADOR DE MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 5822,
+       "nome": "CONTROLE DE COMBUSTIVEL PARA MOTOR A JATO"
+      },
+      {
+       "codigo": 5823,
+       "nome": "CONTROLE DE INJECAO D' AGUA DE SISTEMA DE COMBUSTIVEL DE AERONAVE"
+      },
+      {
+       "codigo": 6924,
+       "nome": "ESCOADOR DE COMBUSTIVEL"
+      },
+      {
+       "codigo": 6931,
+       "nome": "ESCORVADOR DE COMBUSTIVEL DE SISTEMA DE AERONAVE"
+      },
+      {
+       "codigo": 7481,
+       "nome": "FILTRO DO SISTEMA DE COMBUSTÍVEL DE AERONAVE"
+      },
+      {
+       "codigo": 11587,
+       "nome": "REGULADOR DE FLUXO SISTEMA DE COMBUSTIVEL - AERONAVE"
+      },
+      {
+       "codigo": 12114,
+       "nome": "SISTEMA DE CONTROLE DE FUMACA DE SISTEMA DE COMBUSTIVEL DE AERONAVE"
+      },
+      {
+       "codigo": 13272,
+       "nome": "VALVULA DO SISTEMA DE COMBUSTIVEL DE AERONAVE"
+      },
+      {
+       "codigo": 13276,
+       "nome": "VALVULA INJECAO D' AGUA SISTEMA DE COMBUSTIVEL  - AERONAVE"
+      },
+      {
+       "codigo": 15998,
+       "nome": "CONJUNTO REPARO CARBURADOR"
+      },
+      {
+       "codigo": 16012,
+       "nome": "BOMBA GASOLINA"
+      },
+      {
+       "codigo": 16019,
+       "nome": "ENGRENAGEM BOMBA GASOLINA"
+      },
+      {
+       "codigo": 16029,
+       "nome": "PARAFUSO BOMBA GASOLINA"
+      },
+      {
+       "codigo": 16030,
+       "nome": "PARAFUSO ENGRENAGEM BOMBA GASOLINA"
+      },
+      {
+       "codigo": 30184,
+       "nome": "KIT TANQUE DE COMBUSTÍVEL AÉREO 5.000 LITROS"
+      },
+      {
+       "codigo": 30185,
+       "nome": "RESERVATÓRIO MÓVEL FLEXÍVEL DE COMBUSTÍVEL PARA  AVIAÇÃO - 200 LITROS"
+      }
+     ]
+    },
+    {
+     "codigo": 2920,
+     "nome": "COMPONENTES DO SISTEMA ELÉTRICO DE MOTORES, EXCETO OS DE AE-RONAVES",
+     "pdms": [
+      {
+       "codigo": 1350,
+       "nome": "VELA IGNIÇÃO"
+      },
+      {
+       "codigo": 2367,
+       "nome": "ALTERNADOR VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 3770,
+       "nome": "BOMBA ELÉTRICA INJEÇÃO COMBUSTÍVEL"
+      },
+      {
+       "codigo": 3973,
+       "nome": "BUZINA - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 4037,
+       "nome": "CABO DE VELA"
+      },
+      {
+       "codigo": 4892,
+       "nome": "CHAVE CONTATO"
+      },
+      {
+       "codigo": 4956,
+       "nome": "CONJUNTO CILINDRO E PISTÃO"
+      },
+      {
+       "codigo": 5001,
+       "nome": "CILINDRO IGNIÇÃO"
+      },
+      {
+       "codigo": 5523,
+       "nome": "COMUTADOR IGNIÇÃO"
+      },
+      {
+       "codigo": 5539,
+       "nome": "CONDENSADOR IGNIÇÃO - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 7967,
+       "nome": "GERADOR"
+      },
+      {
+       "codigo": 9961,
+       "nome": "MOTOR DE PARTIDA - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 10907,
+       "nome": "PLATINADO DISTRIBUIDOR DE ENERGIA ELETRICA - VEICU"
+      },
+      {
+       "codigo": 11602,
+       "nome": "CAIXA REGULADORA VOLTAGEM"
+      },
+      {
+       "codigo": 11610,
+       "nome": "RELÉ VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11843,
+       "nome": "ROTOR DISTRIBUIDOR ENERGIA ELETRICA - VEICULO AUTO"
+      },
+      {
+       "codigo": 12515,
+       "nome": "TAMPA DISTRIBUIDOR ENERGIA ELETRICA - VEICULO AUTO"
+      },
+      {
+       "codigo": 13604,
+       "nome": "MOTOCICLETA - PECA SISTEMA ELETRICO"
+      },
+      {
+       "codigo": 14245,
+       "nome": "CHAVE COMANDO FAROL"
+      },
+      {
+       "codigo": 14353,
+       "nome": "BENDIX VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 14355,
+       "nome": "SUPORTE DIODO AUTOMOTIVO"
+      },
+      {
+       "codigo": 14358,
+       "nome": "BOBINA IGNIÇÃO"
+      },
+      {
+       "codigo": 14732,
+       "nome": "JOGO CABOS VELA"
+      },
+      {
+       "codigo": 15702,
+       "nome": "CENTRAL ELETRÔNICA"
+      },
+      {
+       "codigo": 15703,
+       "nome": "IGNIÇÃO ELETRÔNICA AUTOMOTIVA"
+      },
+      {
+       "codigo": 15704,
+       "nome": "CONVERSOR CATALÍTICO"
+      },
+      {
+       "codigo": 15717,
+       "nome": "VELA AUTOMOTIVA"
+      },
+      {
+       "codigo": 15849,
+       "nome": "PORTA-ESCOVA VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 15906,
+       "nome": "CACHIMBO VELA IGNIÇÃO"
+      },
+      {
+       "codigo": 16295,
+       "nome": "CORREIA ALTERNADOR"
+      },
+      {
+       "codigo": 16596,
+       "nome": "ESTICADOR CORREIA"
+      },
+      {
+       "codigo": 18039,
+       "nome": "RELÉ DO ALTERNADOR"
+      },
+      {
+       "codigo": 19088,
+       "nome": "CARTÃO CHAVE"
+      }
+     ]
+    },
+    {
+     "codigo": 2925,
+     "nome": "COMPONENTES DO SISTEMA ELÉTRICO DE MOTORES DE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 1679,
+       "nome": "ACESSORIO DE GERADOR ELETRICO DE MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 3005,
+       "nome": "ARMADURA PARA MOTOR"
+      },
+      {
+       "codigo": 3637,
+       "nome": "BOBINA IGNIÇÃO MAGNETO"
+      },
+      {
+       "codigo": 4044,
+       "nome": "CABO ELETRICO FONTE EXTERNA - AERONAVE"
+      },
+      {
+       "codigo": 4955,
+       "nome": "CHICOTE DE VELA DE IGNICAO DE MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 6353,
+       "nome": "DISTRIBUIDOR IGNIÇÃO MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 9023,
+       "nome": "MAGNETO DE AERONAVE"
+      },
+      {
+       "codigo": 10271,
+       "nome": "PA - HELICE AERONAVE"
+      },
+      {
+       "codigo": 10914,
+       "nome": "PLUG UNIVERSAL - AERONAVE"
+      },
+      {
+       "codigo": 11593,
+       "nome": "REGULADOR DE VOLTAGEM DE MOTOR AERONAVE"
+      },
+      {
+       "codigo": 13362,
+       "nome": "VELA DE IGNICAO DE AERONAVE"
+      },
+      {
+       "codigo": 15991,
+       "nome": "BORRACHA ENGRENAGEM MAGNETO"
+      },
+      {
+       "codigo": 15997,
+       "nome": "PLATINADO IGNIÇÃO MAGNETO"
+      },
+      {
+       "codigo": 15999,
+       "nome": "PLUG VENTILAÇÃO MAGNETO"
+      },
+      {
+       "codigo": 16003,
+       "nome": "TRAVA EIXO MAGNETO"
+      },
+      {
+       "codigo": 16005,
+       "nome": "ARRUELA BUCHA EIXO MAGNETO"
+      },
+      {
+       "codigo": 16007,
+       "nome": "BASE ROLAMENTO EIXO MAGNETO"
+      },
+      {
+       "codigo": 16016,
+       "nome": "CABLAGEM IGNIÇÃO"
+      },
+      {
+       "codigo": 16017,
+       "nome": "ENGRENAGEM MAGNETO"
+      },
+      {
+       "codigo": 16022,
+       "nome": "BLOCO DISTRIBUIDOR MAGNETO"
+      },
+      {
+       "codigo": 16043,
+       "nome": "FELTRO BLOCO MAGNETO"
+      },
+      {
+       "codigo": 16044,
+       "nome": "CONDENSADOR MAGNETO"
+      },
+      {
+       "codigo": 16046,
+       "nome": "CARVÃO ENGRENAGEM MAGNETO"
+      },
+      {
+       "codigo": 16047,
+       "nome": "CUNHA BOBINA MAGNETO"
+      },
+      {
+       "codigo": 16049,
+       "nome": "CONTRAPINO EIXO MAGNETO"
+      },
+      {
+       "codigo": 16050,
+       "nome": "CARTÃO BOBINA MAGNETO"
+      },
+      {
+       "codigo": 16051,
+       "nome": "CATRACA MAGNETO"
+      },
+      {
+       "codigo": 16157,
+       "nome": "TRAVA FELTRO BLOCO MAGNETO"
+      }
+     ]
+    },
+    {
+     "codigo": 2930,
+     "nome": "COMPONENTES DO SISTEMA DE  RESFRIAMENTO  (ARREFECIMENTO)  DEMOTORES, EXCETO DE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 5421,
+       "nome": "COMPONENTE DE TODO O TIPO DE MOTOR DE RESFRIAMENTO EXCETO MOTOR PRIMARIO DE AERONAVE"
+      },
+      {
+       "codigo": 8051,
+       "nome": "GRADE PROTETORA DO RADIADOR"
+      },
+      {
+       "codigo": 9103,
+       "nome": "MANGUEIRA RADIADOR VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 11643,
+       "nome": "REPARO BOMBA D'AGUA"
+      },
+      {
+       "codigo": 12525,
+       "nome": "TAMPA RADIADOR"
+      },
+      {
+       "codigo": 13374,
+       "nome": "VENTILADOR DE REFRIGERACAO DE MOTOR AUTOMOTIVO"
+      },
+      {
+       "codigo": 14247,
+       "nome": "RADIADOR ÓLEO"
+      },
+      {
+       "codigo": 14254,
+       "nome": "SENSOR AUTOMOTIVO"
+      },
+      {
+       "codigo": 15580,
+       "nome": "GUIA AR RADIADOR"
+      },
+      {
+       "codigo": 15713,
+       "nome": "RADIADOR - VEÍCULO"
+      },
+      {
+       "codigo": 16949,
+       "nome": "TROCADORA LÍQUIDO SISTEMA ARREFECIMENTO"
+      }
+     ]
+    },
+    {
+     "codigo": 2935,
+     "nome": "COMPONENTES DO SISTEMA DE  RESFRIAMENTO  (ARREFECIMENTO)  DEMOTORES DE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 3123,
+       "nome": "ATUADOR ELÉTRICO / MECÂNICO"
+      },
+      {
+       "codigo": 3768,
+       "nome": "BOMBA DO SISTEMA DE REFRIGERACAO DE MOTOR AERONAVE"
+      },
+      {
+       "codigo": 5762,
+       "nome": "CONJUNTO MANGUEIRA ÁGUA SISTEMA DE RESFRIAMENTO"
+      },
+      {
+       "codigo": 11391,
+       "nome": "RADIADOR DE AERONAVE"
+      },
+      {
+       "codigo": 11599,
+       "nome": "REGULADOR TEMPERATURA DE OLEO - SISTEMA DE RESFRIAMENTO MOTOR AERONAVE"
+      },
+      {
+       "codigo": 13255,
+       "nome": "VALVULA DE CONTROLE SISTEMA RESFRIAMENTO MOTOR  - AERONAVE"
+      }
+     ]
+    },
+    {
+     "codigo": 2940,
+     "nome": "FILTROS DE AR E DE ÓLEO, ELEMENTOS FILTRANTES E PURIFICADO- RES DE MOTORES, EXCETO DE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 1359,
+       "nome": "FILTRO AR"
+      },
+      {
+       "codigo": 6450,
+       "nome": "ELEMENTO FILTRANTE SISTEMA ADMISSAO"
+      },
+      {
+       "codigo": 6451,
+       "nome": "ELEMENTO FILTRO AR - VEÍCULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 7466,
+       "nome": "FILTRO COMBUSTÍVEL"
+      },
+      {
+       "codigo": 7471,
+       "nome": "FILTRO ÓLEO HIDRÁULICO"
+      },
+      {
+       "codigo": 17637,
+       "nome": "FILTRO ÓLEO LUBRIFICANTE"
+      }
+     ]
+    },
+    {
+     "codigo": 2945,
+     "nome": "FILTROS DE AR E DE ÓLEO; ELEMENTOS FILTRANTES PURIFICADORES DE MOTORES DE AERONAVES.",
+     "pdms": [
+      {
+       "codigo": 15224,
+       "nome": "FILTRO ÓLEO"
+      },
+      {
+       "codigo": 15226,
+       "nome": "FILTRO AR"
+      }
+     ]
+    },
+    {
+     "codigo": 2950,
+     "nome": "TURBO- SUPERCOMPRESSORES",
+     "pdms": [
+      {
+       "codigo": 11600,
+       "nome": "REGULADOR TURBOSUPERCOMPRESSOR DE MOTOR  -  COMBUSTAO INTERNA"
+      },
+      {
+       "codigo": 13137,
+       "nome": "TURBOCOMPRESSOR DE MOTOR DE COMBUSTAO INTERNA"
+      }
+     ]
+    },
+    {
+     "codigo": 2990,
+     "nome": "ACESSÓRIOS DIVERSOS DE MOTORES, EXCETO OS DE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 2499,
+       "nome": "ANEL CIRCULAÇÃO ÓLEO"
+      },
+      {
+       "codigo": 5703,
+       "nome": "ÁRVORE DE COMANDO"
+      },
+      {
+       "codigo": 5862,
+       "nome": "CORDÃO DE PARTIDA"
+      },
+      {
+       "codigo": 5895,
+       "nome": "TENSOR CORREIA DENTADA"
+      },
+      {
+       "codigo": 9928,
+       "nome": "MOTOCICLETA - CANO DESCARGA"
+      },
+      {
+       "codigo": 10568,
+       "nome": "PEÇA/COMPONENTE MOTOR DE EMBARCAÇÃO"
+      },
+      {
+       "codigo": 10789,
+       "nome": "PISTÃO MOTOR"
+      },
+      {
+       "codigo": 11143,
+       "nome": "PRATO ASSENTO VALVULA"
+      },
+      {
+       "codigo": 11732,
+       "nome": "REVERSOR HIDRAULICO"
+      },
+      {
+       "codigo": 12059,
+       "nome": "SILENCIADOR ESCAPAMENTO DESCARGA"
+      },
+      {
+       "codigo": 13123,
+       "nome": "TUBULACAO ESCAPAMENTO - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 14265,
+       "nome": "JUNTA AUTOMOTIVA"
+      },
+      {
+       "codigo": 14356,
+       "nome": "ARGOLA AUTOMOTIVA"
+      },
+      {
+       "codigo": 14387,
+       "nome": "SELO VÁLVULA"
+      },
+      {
+       "codigo": 14390,
+       "nome": "CASQUILHO"
+      },
+      {
+       "codigo": 14392,
+       "nome": "RETENTOR MOTOR"
+      },
+      {
+       "codigo": 15732,
+       "nome": "BRONZINA"
+      },
+      {
+       "codigo": 15733,
+       "nome": "BUCHA MOTOR"
+      },
+      {
+       "codigo": 15734,
+       "nome": "ANEL EXCÊNTRICO"
+      },
+      {
+       "codigo": 15735,
+       "nome": "ADAPTADOR CONTAGIROS"
+      },
+      {
+       "codigo": 15764,
+       "nome": "SEDE VÁLVULA CABEÇOTE"
+      },
+      {
+       "codigo": 15765,
+       "nome": "VÁLVULA ESCAPE ADMISSÃO MOTOR"
+      },
+      {
+       "codigo": 15808,
+       "nome": "GUIA VÁLVULA CABEÇOTE"
+      },
+      {
+       "codigo": 15815,
+       "nome": "SONDA LAMBDA"
+      },
+      {
+       "codigo": 15819,
+       "nome": "BASE MOTOR"
+      },
+      {
+       "codigo": 16255,
+       "nome": "VÁLVULA QUATRO VIAS"
+      },
+      {
+       "codigo": 16394,
+       "nome": "ROSCA POSTIÇA"
+      },
+      {
+       "codigo": 16571,
+       "nome": "BALANCIM VEÍCULO"
+      },
+      {
+       "codigo": 16577,
+       "nome": "SENSOR DO CONTAGIROS"
+      },
+      {
+       "codigo": 16635,
+       "nome": "ANEL SEGMENTO PISTÃO"
+      },
+      {
+       "codigo": 17621,
+       "nome": "CORREIA MOTOR"
+      },
+      {
+       "codigo": 18273,
+       "nome": "ARRUELA AUTOMOTIVA"
+      }
+     ]
+    },
+    {
+     "codigo": 2995,
+     "nome": "ACESSÓRIOS DIVERSOS DE MOTORES DE AERONAVES",
+     "pdms": [
+      {
+       "codigo": 3040,
+       "nome": "ARRANQUE PNEUMATICO DE MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 5707,
+       "nome": "CONJUNTO DE CILINDROS"
+      },
+      {
+       "codigo": 9086,
+       "nome": "MANETE DE MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 10571,
+       "nome": "PECAS E COMPONENTES - AERONAVE/VEICULO ESPACIAL/SATELITE"
+      },
+      {
+       "codigo": 11355,
+       "nome": "QUADRANTE DA MANETA DO MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 11596,
+       "nome": "REGULADOR HIDRAULICO DE AR DE MOTOR A JATO DE AERONAVE"
+      },
+      {
+       "codigo": 11598,
+       "nome": "REGULADOR HIDRAULICO PARA OLEO - MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 12380,
+       "nome": "SUPORTE DE CARENAGEM DE MOTOR DE AERONAVE"
+      },
+      {
+       "codigo": 15223,
+       "nome": "PLUG PISTÃO"
+      },
+      {
+       "codigo": 15225,
+       "nome": "CALÇO MOTOR"
+      },
+      {
+       "codigo": 15227,
+       "nome": "MANGOTE RETORNO"
+      },
+      {
+       "codigo": 15228,
+       "nome": "VÁLVULA TERMOSTÁTICA MOTOR"
+      },
+      {
+       "codigo": 15229,
+       "nome": "MANGOTE ADMISSÃO"
+      },
+      {
+       "codigo": 15230,
+       "nome": "TRAVA CONTRAPESO MOTOR"
+      },
+      {
+       "codigo": 15231,
+       "nome": "PLACA CONTRAPESO"
+      },
+      {
+       "codigo": 15232,
+       "nome": "PORCA BIELA"
+      },
+      {
+       "codigo": 15234,
+       "nome": "CALÇO ACOPLAMENTO COXIM MAGNETO"
+      },
+      {
+       "codigo": 15235,
+       "nome": "CONJUNTO ANEL"
+      },
+      {
+       "codigo": 15238,
+       "nome": "TRAVA PARAFUSO"
+      },
+      {
+       "codigo": 15245,
+       "nome": "PARAFUSO BIELA"
+      },
+      {
+       "codigo": 15246,
+       "nome": "JOGO JUNTAS - AERONAVE"
+      },
+      {
+       "codigo": 15473,
+       "nome": "ARRUELA LISA"
+      },
+      {
+       "codigo": 15474,
+       "nome": "BRONZINA AERONAVE"
+      },
+      {
+       "codigo": 15477,
+       "nome": "EIXO COMANDO VÁLVULAS"
+      },
+      {
+       "codigo": 15479,
+       "nome": "ARRUELA BICO INJETOR"
+      },
+      {
+       "codigo": 15480,
+       "nome": "ARRUELA TUBO ENVELOPE"
+      },
+      {
+       "codigo": 15481,
+       "nome": "TRAVA PINO BALANCIM"
+      },
+      {
+       "codigo": 15482,
+       "nome": "ARRUELA PRESSÃO"
+      },
+      {
+       "codigo": 15483,
+       "nome": "ARRUELA ENCOSTO BUCHA BALANCIM"
+      },
+      {
+       "codigo": 15484,
+       "nome": "ADAPTADOR SISTEMA RPM"
+      },
+      {
+       "codigo": 15485,
+       "nome": "RETENTOR VENTILAÇÃO BICO INJETOR"
+      },
+      {
+       "codigo": 15486,
+       "nome": "ANEL BORRACHA BICO INJETOR"
+      },
+      {
+       "codigo": 15487,
+       "nome": "BRAÇADEIRA TUBAGEM VENTILAÇÃO"
+      },
+      {
+       "codigo": 15488,
+       "nome": "BUCHA CONTRAPESO EIXO MANIVELA"
+      },
+      {
+       "codigo": 15489,
+       "nome": "BUCHA BIELA"
+      },
+      {
+       "codigo": 15491,
+       "nome": "BUCHA BALANCIM"
+      },
+      {
+       "codigo": 15492,
+       "nome": "TAMPA BOCAL ABASTECIMENTO ÓLEO"
+      },
+      {
+       "codigo": 15493,
+       "nome": "CONTRAPINO PARAFUSO BIELA"
+      },
+      {
+       "codigo": 15494,
+       "nome": "DEFLETOR VENTILAÇÃO"
+      },
+      {
+       "codigo": 15495,
+       "nome": "EIXO TACÔMETRO"
+      },
+      {
+       "codigo": 15496,
+       "nome": "EIXO BALANCIM"
+      },
+      {
+       "codigo": 15497,
+       "nome": "ENGRENAGEM BOMBA ÓLEO"
+      },
+      {
+       "codigo": 15498,
+       "nome": "TELA FILTRO ÓLEO"
+      },
+      {
+       "codigo": 15500,
+       "nome": "ROSCA POSTIÇA HELICÓIDE"
+      },
+      {
+       "codigo": 15501,
+       "nome": "JUNTA MOTOR"
+      },
+      {
+       "codigo": 15502,
+       "nome": "JUNTA TAMPA BALANCIM"
+      },
+      {
+       "codigo": 15503,
+       "nome": "JUNTA TAMPA BOCAL ÓLEO"
+      },
+      {
+       "codigo": 15504,
+       "nome": "MOLA CONJUNTO PARTIDA MOTOR"
+      },
+      {
+       "codigo": 15505,
+       "nome": "MANGOTE TUBO ADMISSÃO"
+      },
+      {
+       "codigo": 15506,
+       "nome": "MANGOTE BOCA TURBO"
+      },
+      {
+       "codigo": 15507,
+       "nome": "MOLA PARTIDA MOTOR"
+      },
+      {
+       "codigo": 15508,
+       "nome": "MOLA COMPRESSÃO HASTE DEFLETOR"
+      },
+      {
+       "codigo": 15509,
+       "nome": "DEFLETOR"
+      },
+      {
+       "codigo": 15510,
+       "nome": "MOLA PRESSÃO ÓLEO"
+      },
+      {
+       "codigo": 15511,
+       "nome": "HASTE DEFLETOR"
+      },
+      {
+       "codigo": 15512,
+       "nome": "PARAFUSO DEFLETOR"
+      },
+      {
+       "codigo": 15513,
+       "nome": "PARAFUSO ENGRENAGEM EIXO COMANDO"
+      },
+      {
+       "codigo": 15514,
+       "nome": "PARAFUSO ENGRENAGEM EIXO MANIVELA"
+      },
+      {
+       "codigo": 15515,
+       "nome": "ROLETE CONTRAPINO"
+      },
+      {
+       "codigo": 15516,
+       "nome": "ROLETE CONTRAPESO"
+      },
+      {
+       "codigo": 15517,
+       "nome": "PINO PISTÃO"
+      },
+      {
+       "codigo": 15518,
+       "nome": "PORCA PARAFUSO BIELA"
+      },
+      {
+       "codigo": 15519,
+       "nome": "PORCA ESCAPAMENTO"
+      },
+      {
+       "codigo": 15520,
+       "nome": "PLUG PRESSÃO ÓLEO"
+      },
+      {
+       "codigo": 15521,
+       "nome": "RETENTOR EIXO MANIVELAS"
+      },
+      {
+       "codigo": 15522,
+       "nome": "RETENTOR TUBO VENTILAÇÃO"
+      },
+      {
+       "codigo": 15523,
+       "nome": "RETENTOR PLUG VENTILAÇÃO"
+      },
+      {
+       "codigo": 15524,
+       "nome": "RETENTOR TACÔMETRO"
+      },
+      {
+       "codigo": 15525,
+       "nome": "ROLAMENTO CONJUNTO PARTIDA"
+      },
+      {
+       "codigo": 15526,
+       "nome": "SUPORTE TUBO VENTILAÇÃO"
+      },
+      {
+       "codigo": 15527,
+       "nome": "TRAVA CONTRAPESO"
+      },
+      {
+       "codigo": 15528,
+       "nome": "CHAVETA EIXO COMANDO"
+      },
+      {
+       "codigo": 15529,
+       "nome": "TRAVA BALANCIM"
+      },
+      {
+       "codigo": 15530,
+       "nome": "TUCHO HIDRÁULICO"
+      },
+      {
+       "codigo": 15531,
+       "nome": "VELA IGNIÇÃO"
+      },
+      {
+       "codigo": 15533,
+       "nome": "JUNTA BALANCIM"
+      },
+      {
+       "codigo": 15966,
+       "nome": "ABRAÇADEIRA TUBO ADMISSÃO"
+      },
+      {
+       "codigo": 15993,
+       "nome": "TRAVA CONTRAPESO EIXO MANIVELA"
+      },
+      {
+       "codigo": 15995,
+       "nome": "TRAVA EIXO TACÔMETRO"
+      },
+      {
+       "codigo": 15996,
+       "nome": "CONJUNTO ENGRENAGEM BOMBA ÓLEO"
+      },
+      {
+       "codigo": 16002,
+       "nome": "CONJUNTO COMANDO VÁLVULA"
+      },
+      {
+       "codigo": 16004,
+       "nome": "BOMBA VÁCUO MOTOR"
+      },
+      {
+       "codigo": 16008,
+       "nome": "ARRUELA PARAFUSO MOTOR"
+      },
+      {
+       "codigo": 16009,
+       "nome": "BASE ACOPLAMENTO FILTRO ÓLEO"
+      },
+      {
+       "codigo": 16010,
+       "nome": "BORRACHA VEDAÇÃO FILTRO ÓLEO"
+      },
+      {
+       "codigo": 16014,
+       "nome": "TUBO VARETA MOTOR"
+      },
+      {
+       "codigo": 16015,
+       "nome": "CONJUNTO CILINDRO"
+      },
+      {
+       "codigo": 16018,
+       "nome": "ENGRENAGEM EIXO MANIVELA"
+      },
+      {
+       "codigo": 16021,
+       "nome": "MANGOTE ÓLEO CILINDRO"
+      },
+      {
+       "codigo": 16023,
+       "nome": "ABRAÇADEIRA MANGOTE"
+      },
+      {
+       "codigo": 16027,
+       "nome": "PARAFUSO TAMPA BALANCIM"
+      },
+      {
+       "codigo": 16031,
+       "nome": "PARAFUSO BLOCO MOTOR"
+      },
+      {
+       "codigo": 16032,
+       "nome": "PARAFUSO BASE FILTRO ÓLEO"
+      },
+      {
+       "codigo": 16041,
+       "nome": "ESFERA PRESSÃO ÓLEO"
+      },
+      {
+       "codigo": 16042,
+       "nome": "CARCAÇA BOMBA ÓLEO"
+      },
+      {
+       "codigo": 16057,
+       "nome": "SUPORTE FIXAÇÃO ALTERNADOR"
+      },
+      {
+       "codigo": 16058,
+       "nome": "TIRA DE FELTRO"
+      },
+      {
+       "codigo": 16176,
+       "nome": "PORCA PARAFUSO CARTER"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "codigo": 30,
+   "nome": "EQUIPAMENTOS DE TRANSMISSÃO DE FORÇA MECÂNICA",
+   "classes": [
+    {
+     "codigo": 3010,
+     "nome": "CONVERSORES DE TORQUE E CÂMBIOS DE VELOCIDADE",
+     "pdms": [
+      {
+       "codigo": 2452,
+       "nome": "AMPLIFICADOR DE TORQUE"
+      },
+      {
+       "codigo": 5712,
+       "nome": "CONJUNTO ENGRENAGEM REDUÇÃO"
+      },
+      {
+       "codigo": 5713,
+       "nome": "CONJUNTO ENGRENAGEM TRANSMISSÃO HORIZONTAL"
+      },
+      {
+       "codigo": 5836,
+       "nome": "CONVERSOR DE TORQUE"
+      },
+      {
+       "codigo": 5883,
+       "nome": "COROA ENGRENAGEM"
+      },
+      {
+       "codigo": 6576,
+       "nome": "ENGRENAGEM REDUÇÃO"
+      }
+     ]
+    },
+    {
+     "codigo": 3020,
+     "nome": "ENGRENAGENS, POLIAS, COROAS DENTADAS E  CORRENTES  DE  TRANSMISSÃO",
+     "pdms": [
+      {
+       "codigo": 5711,
+       "nome": "COROA BICICLETA"
+      },
+      {
+       "codigo": 5906,
+       "nome": "CORRENTE TRANSMISSÃO"
+      },
+      {
+       "codigo": 6489,
+       "nome": "ELO DE CORRENTE DE TRANSMISSAO"
+      },
+      {
+       "codigo": 10954,
+       "nome": "POLIA"
+      }
+     ]
+    },
+    {
+     "codigo": 3030,
+     "nome": "CORREAME, CORREIAS DE TRANSMISSÃO, CORREIAS DOS VENTILADORESE ACESSÓRIOS",
+     "pdms": [
+      {
+       "codigo": 5887,
+       "nome": "CORREAME"
+      },
+      {
+       "codigo": 5892,
+       "nome": "CORREIA TRANSMISSÃO"
+      },
+      {
+       "codigo": 6523,
+       "nome": "EMENDA DE CORREIA DE TRANSMISSAO"
+      },
+      {
+       "codigo": 8066,
+       "nome": "GRAMPO DE EMENDA DE CORREIA"
+      },
+      {
+       "codigo": 10743,
+       "nome": "PINO DE EMENDA DE CORREIA"
+      }
+     ]
+    },
+    {
+     "codigo": 3040,
+     "nome": "EQUIPAMENTOS DIVERSOS DE TRANSMISSÃO DE FORÇA",
+     "pdms": [
+      {
+       "codigo": 2052,
+       "nome": "ACOPLAMENTO FLEXIVEL"
+      },
+      {
+       "codigo": 2053,
+       "nome": "ACOPLAMENTO HIDRODINAMICO"
+      },
+      {
+       "codigo": 2054,
+       "nome": "ACOPLAMENTO MECANICO RIGIDO"
+      },
+      {
+       "codigo": 2066,
+       "nome": "ACUMULADOR DE PRESSAO"
+      },
+      {
+       "codigo": 4997,
+       "nome": "CILINDRO DUPLA AÇÃO"
+      },
+      {
+       "codigo": 4998,
+       "nome": "CILINDRO HIDRÁULICO"
+      },
+      {
+       "codigo": 5000,
+       "nome": "CILINDRO HIDRAULICO DE TREM DE POUSO"
+      },
+      {
+       "codigo": 5004,
+       "nome": "CILINDRO PNEUMÁTICO"
+      },
+      {
+       "codigo": 5377,
+       "nome": "COMANDO HIDRAULICO"
+      },
+      {
+       "codigo": 6427,
+       "nome": "EIXO CARDAN"
+      },
+      {
+       "codigo": 6428,
+       "nome": "EIXO COLAR DE TRANSMISSÃO FORÇA"
+      },
+      {
+       "codigo": 7388,
+       "nome": "FERRAMENTA HIDRAULICA PARA TORQUE"
+      },
+      {
+       "codigo": 12902,
+       "nome": "TRANSMISSAO HIDROSTATICA"
+      },
+      {
+       "codigo": 16835,
+       "nome": "EQUIPAMENTOS DIVERSOS DE TRANSMISSÃO DE FORÇA"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "codigo": 31,
+   "nome": "ROLAMENTOS E MANCAIS",
+   "classes": [
+    {
+     "codigo": 3110,
+     "nome": "ROLAMENTOS ANTIFRICÇÃO NÃO MONTADOS",
+     "pdms": [
+      {
+       "codigo": 2502,
+       "nome": "ANEL EXTERNO DE PISTA DE ROLAMENTO"
+      },
+      {
+       "codigo": 2505,
+       "nome": "ANEL INTERNO DE PISTA DE ROLAMENTO"
+      },
+      {
+       "codigo": 3937,
+       "nome": "BUCHA DE ROLAMENTO"
+      },
+      {
+       "codigo": 4173,
+       "nome": "CAIXA ROLAMENTO BIPARTIDA"
+      },
+      {
+       "codigo": 4174,
+       "nome": "CAIXA ROLAMENTO INTEIRIÇA"
+      },
+      {
+       "codigo": 4218,
+       "nome": "CALÇO ROLAMENTO"
+      },
+      {
+       "codigo": 4446,
+       "nome": "CAPA DE ROLAMENTO"
+      },
+      {
+       "codigo": 4536,
+       "nome": "CARCAÇA DE ROLAMENTO"
+      },
+      {
+       "codigo": 5564,
+       "nome": "CONE DE ROLAMENTO"
+      },
+      {
+       "codigo": 6310,
+       "nome": "DISPOSITIVO FIXAÇÃO ROLAMENTO"
+      },
+      {
+       "codigo": 6956,
+       "nome": "ESFERA"
+      },
+      {
+       "codigo": 6958,
+       "nome": "ESFERA DE ROLAMENTO"
+      },
+      {
+       "codigo": 9720,
+       "nome": "MICRO - ROLAMENTO"
+      },
+      {
+       "codigo": 9772,
+       "nome": "MINI - ROLAMENTO"
+      },
+      {
+       "codigo": 11029,
+       "nome": "PORCA PARA ROLAMENTO"
+      },
+      {
+       "codigo": 11073,
+       "nome": "PORTA ESFERA COM OU SEM REBITE PARA ROLAMENTO"
+      },
+      {
+       "codigo": 11074,
+       "nome": "PORTA ESFERA DE ACO PRE - REBITADO PARA ROLAMENTO"
+      },
+      {
+       "codigo": 11075,
+       "nome": "PORTA ESFERA DE NYLON PARA ROLAMENTO"
+      },
+      {
+       "codigo": 11085,
+       "nome": "PORTA ROLO DE ACO PARA ROLAMENTO CONICO"
+      },
+      {
+       "codigo": 11786,
+       "nome": "ROLAMENTO ALOJADO"
+      },
+      {
+       "codigo": 11787,
+       "nome": "ROLAMENTO AUTOCOMPENSADOR ESFERA"
+      },
+      {
+       "codigo": 11788,
+       "nome": "ROLAMENTO AXIAL AGULHA"
+      },
+      {
+       "codigo": 11789,
+       "nome": "ROLAMENTO AXIAL AUTOCOMPENSADOR ROLO"
+      },
+      {
+       "codigo": 11790,
+       "nome": "ROLAMENTO AXIAL ESFERA"
+      },
+      {
+       "codigo": 11791,
+       "nome": "ROLAMENTO AXIAL ROLO CILINDRICO"
+      },
+      {
+       "codigo": 11795,
+       "nome": "ROLAMENTO RADIAL AGULHA"
+      },
+      {
+       "codigo": 11797,
+       "nome": "ROLAMENTO DE ESFERA"
+      },
+      {
+       "codigo": 11800,
+       "nome": "ROLAMENTO ESFERA CONTATO ANGULAR"
+      },
+      {
+       "codigo": 11801,
+       "nome": "ROLAMENTO"
+      },
+      {
+       "codigo": 11802,
+       "nome": "ROLAMENTO GAIOLA AGULHA"
+      },
+      {
+       "codigo": 11803,
+       "nome": "ROLAMENTO RIGIDO ESFERA"
+      },
+      {
+       "codigo": 11804,
+       "nome": "ROLAMENTO ROLO"
+      },
+      {
+       "codigo": 11813,
+       "nome": "ROLETE CILINDRICO"
+      },
+      {
+       "codigo": 11816,
+       "nome": "ROLETE DE ROLAMENTO"
+      },
+      {
+       "codigo": 12447,
+       "nome": "SUSPENSÃO VEÍCULO AUTOMOTIVO - ROLAMENTO"
+      },
+      {
+       "codigo": 15745,
+       "nome": "ROLAMENTO PARA COPIADORA"
+      }
+     ]
+    },
+    {
+     "codigo": 3120,
+     "nome": "MANCAIS NÃO MONTADOS",
+     "pdms": [
+      {
+       "codigo": 3935,
+       "nome": "BUCHA ( MANCAL NÃO MONTADO )"
+      },
+      {
+       "codigo": 9059,
+       "nome": "MANCAL ACO ESTAMPADO"
+      },
+      {
+       "codigo": 9060,
+       "nome": "MANCAL ANTI - FRICCAO"
+      },
+      {
+       "codigo": 9065,
+       "nome": "MANCAL ESPECIAL SOB ENCOMENDA"
+      },
+      {
+       "codigo": 9066,
+       "nome": "MANCAL EXPANSAO AXIAL"
+      },
+      {
+       "codigo": 9067,
+       "nome": "MANCAL FLANGE ROLAMENTO FURO CONICO"
+      },
+      {
+       "codigo": 9068,
+       "nome": "MANCAL FRICCAO"
+      },
+      {
+       "codigo": 9069,
+       "nome": "MANCAL MONTADO METAL PATENTE"
+      },
+      {
+       "codigo": 9074,
+       "nome": "MANCAL SOB PRESSAO"
+      },
+      {
+       "codigo": 9075,
+       "nome": "MANCAL TIPO ARRUELA"
+      },
+      {
+       "codigo": 9076,
+       "nome": "MANCAL TIPO BIPARTIDO"
+      },
+      {
+       "codigo": 9077,
+       "nome": "MANCAL TIPO LUVA"
+      },
+      {
+       "codigo": 9078,
+       "nome": "MANCAL TIPO MONOBLOCO"
+      },
+      {
+       "codigo": 9079,
+       "nome": "MANCAL TIPO TERMINAL"
+      },
+      {
+       "codigo": 16274,
+       "nome": "MANCAL LINEAR FECHADO"
+      }
+     ]
+    },
+    {
+     "codigo": 3130,
+     "nome": "ROLAMENTOS E MANCAIS MONTADOS",
+     "pdms": [
+      {
+       "codigo": 3060,
+       "nome": "ARRUELA SEGURANÇA ROLAMENTO"
+      },
+      {
+       "codigo": 3938,
+       "nome": "BUCHA DE ROLAMENTO"
+      },
+      {
+       "codigo": 9061,
+       "nome": "MANCAL COMPLETO COM CARCACA DE TIPO ESPECIAL"
+      },
+      {
+       "codigo": 9062,
+       "nome": "MANCAL COMPLETO COM FLANGE"
+      },
+      {
+       "codigo": 9071,
+       "nome": "MANCAL PENDENTE HORIZONTAL"
+      },
+      {
+       "codigo": 9072,
+       "nome": "MANCAL PENDENTE VERTICAL"
+      },
+      {
+       "codigo": 11794,
+       "nome": "ROLAMENTO COMPLETO COM FLANGE"
+      },
+      {
+       "codigo": 13155,
+       "nome": "UNIDADE BLINDADA DE ROLAMENTO"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "codigo": 43,
+   "nome": "BOMBAS E COMPRESSORES",
+   "classes": [
+    {
+     "codigo": 4310,
+     "nome": "BOMBAS E COMPRESSORES A VÁCUO",
+     "pdms": [
+      {
+       "codigo": 528,
+       "nome": "BOMBA VÁCUO"
+      },
+      {
+       "codigo": 3763,
+       "nome": "BOMBA DE VÁCUO - PEÇAS / ACESSÓRIOS"
+      },
+      {
+       "codigo": 3767,
+       "nome": "BOMBA DE VÁCUO"
+      },
+      {
+       "codigo": 4420,
+       "nome": "CANHÃO DE ÁGUA"
+      },
+      {
+       "codigo": 5502,
+       "nome": "COMPRESSOR DE AR"
+      },
+      {
+       "codigo": 5503,
+       "nome": "COMPRESSOR HERMÉTICO ALTERNATIVO"
+      },
+      {
+       "codigo": 5508,
+       "nome": "COMPRESSOR GÁS ALTERNATIVO"
+      },
+      {
+       "codigo": 5513,
+       "nome": "COMPRESSOR GÁS ROTATIVO"
+      },
+      {
+       "codigo": 5514,
+       "nome": "COMPRESSOR MONTADO EM CAMINHAO"
+      },
+      {
+       "codigo": 5515,
+       "nome": "COMPRESSOR MONTADO REBOQUE"
+      },
+      {
+       "codigo": 5518,
+       "nome": "COMPRESSOR PORTÁTIL DIAFRAGMA"
+      },
+      {
+       "codigo": 5519,
+       "nome": "COMPRESSOR PORTÁTIL PISTÃO"
+      },
+      {
+       "codigo": 10556,
+       "nome": "PEÇA/COMPONENTE COMPRESSOR"
+      },
+      {
+       "codigo": 11512,
+       "nome": "BOMBA"
+      },
+      {
+       "codigo": 17923,
+       "nome": "COMPRESSOR HERMÉTICO SCROLL"
+      },
+      {
+       "codigo": 17924,
+       "nome": "VÁLVULA SERVIÇO COMPRESSOR"
+      },
+      {
+       "codigo": 18717,
+       "nome": "PINO COMPRESSOR"
+      }
+     ]
+    },
+    {
+     "codigo": 4320,
+     "nome": "BOMBAS MANUAIS E MECÂNICAS",
+     "pdms": [
+      {
+       "codigo": 3719,
+       "nome": "BOMBA DIAFRAGMA"
+      },
+      {
+       "codigo": 3720,
+       "nome": "BOMBA ALTERNATIVA HASTE"
+      },
+      {
+       "codigo": 3721,
+       "nome": "BOMBA D'ÁGUA - PEÇA/COMPONENTE"
+      },
+      {
+       "codigo": 3722,
+       "nome": "BOMBA ALTERNATIVA PARA ÓLEO"
+      },
+      {
+       "codigo": 3726,
+       "nome": "BOMBA CENTRÍFUGA - PEÇA / COMPONENTE"
+      },
+      {
+       "codigo": 3727,
+       "nome": "BOMBA CENTRÍFUGA AXIAL"
+      },
+      {
+       "codigo": 3733,
+       "nome": "BOMBA CENTRÍFUGA"
+      },
+      {
+       "codigo": 3745,
+       "nome": "BOMBA DE AR PEÇAS E ACESSÓRIOS"
+      },
+      {
+       "codigo": 3755,
+       "nome": "Bomba de Ar para Inflaveis"
+      },
+      {
+       "codigo": 3756,
+       "nome": "BOMBA ENCHER PNEU DE BICICLETA"
+      },
+      {
+       "codigo": 3769,
+       "nome": "PEÇAS/ACESSÓRIOS BOMBA DOSADORA / HIDRÁULICA"
+      },
+      {
+       "codigo": 3771,
+       "nome": "BOMBA ENGRENAGEM"
+      },
+      {
+       "codigo": 3772,
+       "nome": "BOMBA ESPECIAL JATO DE AR"
+      },
+      {
+       "codigo": 3776,
+       "nome": "BOMBA HIDRÁULICA"
+      },
+      {
+       "codigo": 3782,
+       "nome": "BOMBA LAMA"
+      },
+      {
+       "codigo": 3785,
+       "nome": "BOMBA MAGNETICA"
+      },
+      {
+       "codigo": 3787,
+       "nome": "BOMBA MANUAL DE ENCHER PNEU - VEICULO AUTOMOTIVO"
+      },
+      {
+       "codigo": 3792,
+       "nome": "BOMBA PERISTÁLTICA / PEÇAS E ACESSÓRIOS"
+      },
+      {
+       "codigo": 3795,
+       "nome": "BOMBA SUBMERSA PEÇAS E ACESSÓRIOS"
+      },
+      {
+       "codigo": 4561,
+       "nome": "CARNEIRO HIDRÁULICO"
+      },
+      {
+       "codigo": 5765,
+       "nome": "CONJUNTO MOTOR BOMBA"
+      },
+      {
+       "codigo": 6456,
+       "nome": "ELETROBOMBA"
+      },
+      {
+       "codigo": 13770,
+       "nome": "REGULADOR PRESSÃO"
+      },
+      {
+       "codigo": 14376,
+       "nome": "BOMBA AMOSTRAGEM AR"
+      },
+      {
+       "codigo": 14377,
+       "nome": "FILTRO BOMBA AMOSTRAGEM AR"
+      },
+      {
+       "codigo": 14379,
+       "nome": "CICLONE"
+      },
+      {
+       "codigo": 15162,
+       "nome": "BOMBA CENTRÍFUGA ÁGUA"
+      },
+      {
+       "codigo": 15250,
+       "nome": "REGULADOR BOTIJÃO GÁS"
+      },
+      {
+       "codigo": 15340,
+       "nome": "REGULADOR GÁS"
+      },
+      {
+       "codigo": 16218,
+       "nome": "ESTATOR"
+      },
+      {
+       "codigo": 16946,
+       "nome": "CONJUNTO CILINDRO / BOMBA"
+      }
+     ]
+    },
+    {
+     "codigo": 4330,
+     "nome": "CENTRIFUGADORES, SEPARADORES E FILTROS DE PRESSÃO E A VÁCUO",
+     "pdms": [
+      {
+       "codigo": 4756,
+       "nome": "CENTRÍFUGA INDUSTRIAL / PEÇAS E ACESSÓRIOS"
+      },
+      {
+       "codigo": 6446,
+       "nome": "ELEMENTO FILTRANTE"
+      },
+      {
+       "codigo": 7448,
+       "nome": "FILTRO  \" Y \""
+      },
+      {
+       "codigo": 7452,
+       "nome": "FILTRO SEPARADOR AR"
+      },
+      {
+       "codigo": 7453,
+       "nome": "FILTRO A VACUO"
+      },
+      {
+       "codigo": 7457,
+       "nome": "FILTRO CARTUCHO"
+      },
+      {
+       "codigo": 7458,
+       "nome": "FILTRO CESTO"
+      },
+      {
+       "codigo": 7459,
+       "nome": "FILTRO CESTO DUPLO"
+      },
+      {
+       "codigo": 7460,
+       "nome": "FILTRO COLETOR DE PÓ"
+      },
+      {
+       "codigo": 7462,
+       "nome": "FILTRO CONICO"
+      },
+      {
+       "codigo": 7470,
+       "nome": "FILTRO DE FIBRA DE VIDRO"
+      },
+      {
+       "codigo": 7482,
+       "nome": "FILTRO GAVETA"
+      },
+      {
+       "codigo": 7486,
+       "nome": "FILTRO PARA AR COMPRIMIDO"
+      },
+      {
+       "codigo": 7487,
+       "nome": "FILTRO PARA LINHA DE GAS"
+      },
+      {
+       "codigo": 7488,
+       "nome": "FILTRO LINHA"
+      },
+      {
+       "codigo": 7491,
+       "nome": "FILTRO PLANO"
+      },
+      {
+       "codigo": 7493,
+       "nome": "FILTRO REGULADOR DE PRESSAO"
+      },
+      {
+       "codigo": 8741,
+       "nome": "LAVADOR DE GAS"
+      },
+      {
+       "codigo": 11308,
+       "nome": "PROTETOR DE BOMBA - SUBMERSA / IRRIGACAO"
+      },
+      {
+       "codigo": 11343,
+       "nome": "PURGADOR"
+      },
+      {
+       "codigo": 11996,
+       "nome": "SEMEADOR CENTRIFUGO PARA LIQUIDO"
+      },
+      {
+       "codigo": 11997,
+       "nome": "SEMEADOR CENTRIFUGO PARA SOLIDOS"
+      },
+      {
+       "codigo": 12024,
+       "nome": "SEPARADOR INDUSTRIAL"
+      },
+      {
+       "codigo": 12579,
+       "nome": "TECIDO PARA FILTRO"
+      },
+      {
+       "codigo": 13176,
+       "nome": "UNIDADE DE TRATAMENTO DE GAS SF6"
+      },
+      {
+       "codigo": 13177,
+       "nome": "UNIDADE DE TRATAMENTO DE OLEO ISOLANTE"
+      },
+      {
+       "codigo": 13186,
+       "nome": "UNIDADE MOVEL PARA TRATAMENTO DE OLEO"
+      },
+      {
+       "codigo": 15277,
+       "nome": "FILTRO  ORDENHADEIRA"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "codigo": 47,
+   "nome": "CANOS, TUBOS, MANGUEIRAS E ACESSÓRIOS",
+   "classes": [
+    {
+     "codigo": 4710,
+     "nome": "CANOS E TUBOS",
+     "pdms": [
+      {
+       "codigo": 656,
+       "nome": "TUBO AÇO CARBONO COM COSTURA"
+      },
+      {
+       "codigo": 657,
+       "nome": "TUBO AÇO CARBONO SEM COSTURA"
+      },
+      {
+       "codigo": 659,
+       "nome": "TUBO PVC SOLDÁVEL"
+      },
+      {
+       "codigo": 660,
+       "nome": "TUBO PVC ROSCÁVEL"
+      },
+      {
+       "codigo": 808,
+       "nome": "TUBO COBRE"
+      },
+      {
+       "codigo": 1064,
+       "nome": "TUBO NÁILON SEMI-RÍGIDO"
+      },
+      {
+       "codigo": 6416,
+       "nome": "DUTO DE PVC"
+      },
+      {
+       "codigo": 13035,
+       "nome": "TUBO DE ACO INOXIDAVEL DE CONSTRUCAO MECANICA"
+      },
+      {
+       "codigo": 13036,
+       "nome": "TUBO DE ACO LIGA DE CONSTRUCAO MECANICA"
+      },
+      {
+       "codigo": 13037,
+       "nome": "TUBO DE ALUMINIO DE CONSTRUCAO MECANICA"
+      },
+      {
+       "codigo": 13051,
+       "nome": "TUBO DE CONDUÇÃO"
+      },
+      {
+       "codigo": 13057,
+       "nome": "TUBO FERRO FUNDIDO"
+      },
+      {
+       "codigo": 13058,
+       "nome": "TUBO FERRO GALVANIZADO"
+      },
+      {
+       "codigo": 13066,
+       "nome": "TUBO DE METAL"
+      },
+      {
+       "codigo": 13071,
+       "nome": "TUBO PLÁSTICO"
+      },
+      {
+       "codigo": 13075,
+       "nome": "TUBO DE POLIPROPILENO"
+      },
+      {
+       "codigo": 13076,
+       "nome": "TUBULAÇÃO AÇO"
+      },
+      {
+       "codigo": 13098,
+       "nome": "TUBO ALUMÍNIO"
+      },
+      {
+       "codigo": 13115,
+       "nome": "TUBO HIDRÁULICO"
+      },
+      {
+       "codigo": 13642,
+       "nome": "TUBO AÇO"
+      },
+      {
+       "codigo": 14495,
+       "nome": "TUBO METALON"
+      },
+      {
+       "codigo": 15330,
+       "nome": "TUBO DESCARGA"
+      }
+     ]
+    },
+    {
+     "codigo": 4720,
+     "nome": "MANGUEIRAS E TUBULAÇÕES FLEXÍVEIS",
+     "pdms": [
+      {
+       "codigo": 594,
+       "nome": "MANGOTE"
+      },
+      {
+       "codigo": 595,
+       "nome": "MANGUEIRA AR"
+      },
+      {
+       "codigo": 615,
+       "nome": "MANGUEIRA HIDRÁULICA"
+      },
+      {
+       "codigo": 616,
+       "nome": "MANGUEIRA JARDIM"
+      },
+      {
+       "codigo": 617,
+       "nome": "MANGUEIRA SUCÇÃO - SERVIÇOS LEVES"
+      },
+      {
+       "codigo": 618,
+       "nome": "MANGUEIRA SUCÇÃO - SERVIÇOS PESADOS"
+      },
+      {
+       "codigo": 619,
+       "nome": "MANGUEIRA SUCÇÃO - SERVIÇOS SUPER PESADOS"
+      },
+      {
+       "codigo": 620,
+       "nome": "TUBO FLEXÍVEL"
+      },
+      {
+       "codigo": 658,
+       "nome": "TUBO FLEXÍVEL POLIETILENO"
+      },
+      {
+       "codigo": 661,
+       "nome": "MANGUEIRA HIDRANTE"
+      },
+      {
+       "codigo": 662,
+       "nome": "TUBO METÁLICO FLEXÍVEL"
+      },
+      {
+       "codigo": 1063,
+       "nome": "TUBO NÁILON FLEXÍVEL"
+      },
+      {
+       "codigo": 9090,
+       "nome": "MANGUEIRA  VAPOR"
+      },
+      {
+       "codigo": 9092,
+       "nome": "MANGUEIRA COMBUSTIVEL - ALCOOL"
+      },
+      {
+       "codigo": 9093,
+       "nome": "MANGUEIRA COMBUSTIVEL - GASOLINA"
+      },
+      {
+       "codigo": 9095,
+       "nome": "MANGUEIRA COMPLETA PARA CONDUTO DE OLEO"
+      },
+      {
+       "codigo": 9097,
+       "nome": "MANGUEIRA DIRECAO HIDRAULICA"
+      },
+      {
+       "codigo": 9099,
+       "nome": "MANGUEIRA FLUIDO DE PERFURACAO"
+      },
+      {
+       "codigo": 9102,
+       "nome": "MANGUEIRA PRODUTO QUIMICO"
+      },
+      {
+       "codigo": 9105,
+       "nome": "MANGUEIRA SISTEMA REFRIGERACAO"
+      },
+      {
+       "codigo": 9106,
+       "nome": "MANGUEIRA SUCÇÃO"
+      },
+      {
+       "codigo": 9889,
+       "nome": "MONOBOIA"
+      },
+      {
+       "codigo": 13821,
+       "nome": "MANGUEIRA"
+      },
+      {
+       "codigo": 13971,
+       "nome": "MANGUEIRA ALTA PRESSÃO"
+      },
+      {
+       "codigo": 13994,
+       "nome": "MANGUEIRA SISTEMA EXAUSTÃO"
+      },
+      {
+       "codigo": 14273,
+       "nome": "BULBO AFOGADOR"
+      },
+      {
+       "codigo": 14684,
+       "nome": "MANGUEIRA GÁS"
+      },
+      {
+       "codigo": 16313,
+       "nome": "MANGUEIRA ASPIRAÇÃO"
+      }
+     ]
+    },
+    {
+     "codigo": 4730,
+     "nome": "ACESSÓRIOS E FERRAGENS ESPECIAIS PARA  MANGUEIRAS, CANOS  E TUBOS",
+     "pdms": [
+      {
+       "codigo": 621,
+       "nome": "ANEL BORRACHA"
+      },
+      {
+       "codigo": 622,
+       "nome": "NIPLE PARA TUBOS CANOS - ROSCÁVEL"
+      },
+      {
+       "codigo": 623,
+       "nome": "TÊ - CONEXÃO PARA TUBOS CANOS - ROSCÁVEL"
+      },
+      {
+       "codigo": 625,
+       "nome": "UNIÃO SOLDÁVEL"
+      },
+      {
+       "codigo": 626,
+       "nome": "UNIÃO ROSCÁVEL"
+      },
+      {
+       "codigo": 664,
+       "nome": "ADAPTADOR TUBO PRECISÃO"
+      },
+      {
+       "codigo": 665,
+       "nome": "BUCHA INSTALAÇÃO PREDIAL ÁGUA FRIA"
+      },
+      {
+       "codigo": 666,
+       "nome": "COTOVELO TUBO CONDUÇÃO METÁLICO"
+      },
+      {
+       "codigo": 667,
+       "nome": "NIPLE TUBO CONDUÇÃO METÁLICA"
+      },
+      {
+       "codigo": 668,
+       "nome": "UNIÃO TUBO CONDUÇÃO METÁLICA"
+      },
+      {
+       "codigo": 669,
+       "nome": "UNIÃO TUBO PRECISÃO"
+      },
+      {
+       "codigo": 689,
+       "nome": "TERMINAL TUBO FLEXÍVEL"
+      },
+      {
+       "codigo": 2432,
+       "nome": "AMORTECEDOR DE VIBRACAO DE TUBO E CANO"
+      },
+      {
+       "codigo": 2433,
+       "nome": "AMORTECEDOR TIPO STOCKBRIDGE PARA LTS"
+      },
+      {
+       "codigo": 3007,
+       "nome": "ARMÁRIO DISTRIBUIÇÃO TELEFONIA"
+      },
+      {
+       "codigo": 3531,
+       "nome": "BICO MANGUEIRA"
+      },
+      {
+       "codigo": 3657,
+       "nome": "BOIA DE OLEODUTO"
+      },
+      {
+       "codigo": 4147,
+       "nome": "CAIXA SIFONADA"
+      },
+      {
+       "codigo": 5019,
+       "nome": "CINTA TÉRMICA / ACESSÓRIOS"
+      },
+      {
+       "codigo": 5598,
+       "nome": "CONEXÃO METÁLICA"
+      },
+      {
+       "codigo": 5616,
+       "nome": "JUNTA FLANGEADA"
+      },
+      {
+       "codigo": 6424,
+       "nome": "EDUTOR BOMBA DE SUCÇÃO / ENGATE RÁPIDO"
+      },
+      {
+       "codigo": 6966,
+       "nome": "ESGUICHO"
+      },
+      {
+       "codigo": 6967,
+       "nome": "ESGUICHO NEBULIZADOR / ASPERSOR"
+      },
+      {
+       "codigo": 8569,
+       "nome": "JUNTA EXPANSÃO"
+      },
+      {
+       "codigo": 8571,
+       "nome": "JUNTA ESPIRALADA"
+      },
+      {
+       "codigo": 10913,
+       "nome": "PLUG TUBO"
+      },
+      {
+       "codigo": 11349,
+       "nome": "GOTEJADOR"
+      },
+      {
+       "codigo": 12123,
+       "nome": "ASPERSOR"
+      },
+      {
+       "codigo": 12519,
+       "nome": "GRELHA RALO"
+      },
+      {
+       "codigo": 13149,
+       "nome": "CONEXÃO TUBO CONDUÇÃO"
+      },
+      {
+       "codigo": 13546,
+       "nome": "CONEXÃO HIDRÁULICA"
+      },
+      {
+       "codigo": 14211,
+       "nome": "COTOVELO"
+      },
+      {
+       "codigo": 14416,
+       "nome": "TAMPA DE SUCÇÃO BOMBA D'ÁGUA"
+      },
+      {
+       "codigo": 14482,
+       "nome": "CONJUNTO REPARO REGISTRO"
+      },
+      {
+       "codigo": 14778,
+       "nome": "BRAÇADEIRA ASPERSOR"
+      },
+      {
+       "codigo": 14792,
+       "nome": "FLANGE"
+      },
+      {
+       "codigo": 14799,
+       "nome": "REDUÇÃO CONCÊNTRICA"
+      },
+      {
+       "codigo": 14812,
+       "nome": "CONJUNTO DISTRIBUIÇÃO GÁS"
+      },
+      {
+       "codigo": 15397,
+       "nome": "TUBO NÍVEL ÁGUA"
+      },
+      {
+       "codigo": 16196,
+       "nome": "PONTA IRRIGAÇÃO"
+      },
+      {
+       "codigo": 16964,
+       "nome": "ACESSÓRIOS E FERRAGENS ESPECIAIS PARA  MANGUEIRAS,  CANOS  ETUBOS"
+      },
+      {
+       "codigo": 17625,
+       "nome": "TAMPA CEGA"
+      },
+      {
+       "codigo": 17800,
+       "nome": "SILENCIADOR DE ESCAPE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "codigo": 53,
+   "nome": "FERRAGENS E ABRASIVOS",
+   "classes": [
+    {
+     "codigo": 5305,
+     "nome": "PARAFUSOS SEM PORCA",
+     "pdms": [
+      {
+       "codigo": 550,
+       "nome": "PARAFUSO AUTO-ATARRAXANTE"
+      },
+      {
+       "codigo": 10435,
+       "nome": "PARAFUSO FIXAÇÃO TELHADO"
+      },
+      {
+       "codigo": 10439,
+       "nome": "PARAFUSO METÁLICO"
+      },
+      {
+       "codigo": 10453,
+       "nome": "PARAFUSO CABEÇA CHATA"
+      },
+      {
+       "codigo": 14522,
+       "nome": "PARAFUSO"
+      },
+      {
+       "codigo": 16194,
+       "nome": "PROLONGADOR PARAFUSO"
+      }
+     ]
+    },
+    {
+     "codigo": 5306,
+     "nome": "PARAFUSOS COM PORCA",
+     "pdms": [
+      {
+       "codigo": 536,
+       "nome": "PARAFUSO CABEÇA QUADRADA"
+      },
+      {
+       "codigo": 551,
+       "nome": "PARAFUSO ROSCA MADEIRA"
+      },
+      {
+       "codigo": 10429,
+       "nome": "PARAFUSO COM PORCA"
+      },
+      {
+       "codigo": 10437,
+       "nome": "PARAFUSO MAQUINA - FERROSO"
+      },
+      {
+       "codigo": 10438,
+       "nome": "PARAFUSO MÁQUINA"
+      },
+      {
+       "codigo": 10442,
+       "nome": "PARAFUSO OLHAL DE USO GERAL"
+      },
+      {
+       "codigo": 10444,
+       "nome": "PARAFUSO PLÁSTICO"
+      },
+      {
+       "codigo": 10445,
+       "nome": "PARAFUSO PORCA AUTO - ROSCANTE DE AUTOMOVEL"
+      },
+      {
+       "codigo": 10446,
+       "nome": "PARAFUSO PORCA AUTO - ROSCANTE DE CARROCERIA TIPO PITAO"
+      },
+      {
+       "codigo": 10447,
+       "nome": "PARAFUSO PORCA AUTO - ROSCANTE DE RODA"
+      },
+      {
+       "codigo": 10448,
+       "nome": "PARAFUSO PORCA AUTO - ROSCANTE PARA CARROCERIA  TIPO FRANCES"
+      },
+      {
+       "codigo": 10449,
+       "nome": "PARAFUSO PRESSAO DE MADEIRA COM PORCA  AUTO -  ROSCANTE"
+      },
+      {
+       "codigo": 15217,
+       "nome": "PARAFUSO COM BUCHA E PORCA"
+      }
+     ]
+    },
+    {
+     "codigo": 5307,
+     "nome": "PRISIONEIROS",
+     "pdms": [
+      {
+       "codigo": 831,
+       "nome": "PARAFUSO PRISIONEIRO"
+      },
+      {
+       "codigo": 11214,
+       "nome": "PRISIONEIRO DE ROSCA DUPLA"
+      }
+     ]
+    },
+    {
+     "codigo": 5310,
+     "nome": "PORCAS E ARRUELAS",
+     "pdms": [
+      {
+       "codigo": 642,
+       "nome": "ARRUELA"
+      },
+      {
+       "codigo": 982,
+       "nome": "PORCA PLANA"
+      },
+      {
+       "codigo": 3044,
+       "nome": "ARRUELA ABAULADA"
+      },
+      {
+       "codigo": 3045,
+       "nome": "ARRUELA ABERTA ( MEIA ARGOLA )"
+      },
+      {
+       "codigo": 3046,
+       "nome": "ARRUELA ALUMINIO"
+      },
+      {
+       "codigo": 3047,
+       "nome": "ARRUELA CÔNICA"
+      },
+      {
+       "codigo": 3048,
+       "nome": "ARRUELA DE AJUSTE"
+      },
+      {
+       "codigo": 3050,
+       "nome": "ARRUELA PRESSÃO ( ARRUELA - TRAVA )"
+      },
+      {
+       "codigo": 3051,
+       "nome": "ARRUELA DE ROLAMENTO"
+      },
+      {
+       "codigo": 3052,
+       "nome": "ARRUELA DENTEADA"
+      },
+      {
+       "codigo": 3053,
+       "nome": "ARRUELA DUPLA PRESSÃO"
+      },
+      {
+       "codigo": 3054,
+       "nome": "ARRUELA ENCOSTO"
+      },
+      {
+       "codigo": 3055,
+       "nome": "ARRUELA ESTRELADA"
+      },
+      {
+       "codigo": 11024,
+       "nome": "PORCA BORBOLETA"
+      },
+      {
+       "codigo": 11025,
+       "nome": "PORCA CASTELO"
+      },
+      {
+       "codigo": 11026,
+       "nome": "PORCA"
+      },
+      {
+       "codigo": 11027,
+       "nome": "PORCA DE PRESSAO ( CONTRAPORCA )"
+      },
+      {
+       "codigo": 14082,
+       "nome": "ARRUELA CÔNCAVA"
+      }
+     ]
+    },
+    {
+     "codigo": 5315,
+     "nome": "PREGOS, CHAVETAS E PINOS",
+     "pdms": [
+      {
+       "codigo": 631,
+       "nome": "PREGO ANELADO"
+      },
+      {
+       "codigo": 632,
+       "nome": "PREGO ARDOX COM CABEÇA"
+      },
+      {
+       "codigo": 633,
+       "nome": "PREGO ARDOX SEM CABEÇA"
+      },
+      {
+       "codigo": 635,
+       "nome": "PREGO COM CABEÇA"
+      },
+      {
+       "codigo": 636,
+       "nome": "PREGO COM CABEÇA DUPLA"
+      },
+      {
+       "codigo": 637,
+       "nome": "PREGO PARA TACO"
+      },
+      {
+       "codigo": 638,
+       "nome": "PREGO QUADRADO"
+      },
+      {
+       "codigo": 639,
+       "nome": "PREGO SEM CABEÇA"
+      },
+      {
+       "codigo": 640,
+       "nome": "PREGO PARA TELHA"
+      },
+      {
+       "codigo": 641,
+       "nome": "PREGO VIDRACEIRO"
+      },
+      {
+       "codigo": 2984,
+       "nome": "ARESTA PARA CALÇADO"
+      },
+      {
+       "codigo": 4715,
+       "nome": "CAVILHA"
+      },
+      {
+       "codigo": 4945,
+       "nome": "CHAVE VELA"
+      },
+      {
+       "codigo": 4947,
+       "nome": "CHAVETA PARA EIXO"
+      },
+      {
+       "codigo": 5801,
+       "nome": "CONTRAPINO"
+      },
+      {
+       "codigo": 5954,
+       "nome": "CRAVO"
+      },
+      {
+       "codigo": 6013,
+       "nome": "CUPILHA"
+      },
+      {
+       "codigo": 6912,
+       "nome": "ESCÁPULA"
+      },
+      {
+       "codigo": 8568,
+       "nome": "JUNTA CORRUGADA PARA UNIAO DE TABUAS"
+      },
+      {
+       "codigo": 8868,
+       "nome": "LINHOL DE SAPATEIRO"
+      },
+      {
+       "codigo": 10739,
+       "nome": "PINO - MACHO / FEMEA"
+      },
+      {
+       "codigo": 10741,
+       "nome": "PINO CILÍNDRICO"
+      },
+      {
+       "codigo": 10742,
+       "nome": "PINO CONICO"
+      },
+      {
+       "codigo": 10746,
+       "nome": "PINO ELÁSTICO"
+      },
+      {
+       "codigo": 10747,
+       "nome": "PINO LISO"
+      },
+      {
+       "codigo": 10749,
+       "nome": "PINO PARA TRANSMISSÃO"
+      },
+      {
+       "codigo": 12470,
+       "nome": "TACHA"
+      },
+      {
+       "codigo": 13621,
+       "nome": "PREGO"
+      },
+      {
+       "codigo": 15324,
+       "nome": "GRAMPO"
+      },
+      {
+       "codigo": 16519,
+       "nome": "LETRA METÁLICA"
+      },
+      {
+       "codigo": 17530,
+       "nome": "PITÃO"
+      },
+      {
+       "codigo": 18502,
+       "nome": "DISTANCIADOR CERCA"
+      },
+      {
+       "codigo": 18720,
+       "nome": "CAPACETE PINO"
+      }
+     ]
+    },
+    {
+     "codigo": 5320,
+     "nome": "REBITES",
+     "pdms": [
+      {
+       "codigo": 610,
+       "nome": "REBITE POP"
+      }
+     ]
+    },
+    {
+     "codigo": 5325,
+     "nome": "DISPOSITIVOS PARA FIXAÇÃO",
+     "pdms": [
+      {
+       "codigo": 578,
+       "nome": "ABRAÇADEIRA"
+      },
+      {
+       "codigo": 612,
+       "nome": "ABRAÇADEIRA PARA MANGOTE"
+      },
+      {
+       "codigo": 2908,
+       "nome": "APOIO E SUPORTE PARA TUBO E TUBULACAO"
+      },
+      {
+       "codigo": 4966,
+       "nome": "CHUMBADOR ESPECIAL"
+      },
+      {
+       "codigo": 4968,
+       "nome": "CHUMBADOR PADRONIZADO"
+      },
+      {
+       "codigo": 6305,
+       "nome": "Dispositivo De Alarme Antifurto"
+      },
+      {
+       "codigo": 7333,
+       "nome": "FECHO"
+      },
+      {
+       "codigo": 7619,
+       "nome": "FIXADOR DE CAPOTA DE VEICULO"
+      },
+      {
+       "codigo": 7623,
+       "nome": "FIXADOR PARA TEXTIL"
+      },
+      {
+       "codigo": 8283,
+       "nome": "ILHOS FIXADOR DE CARENAGEM DE AERONAVE"
+      },
+      {
+       "codigo": 11202,
+       "nome": "PRESILHA DE ARAME PARA FIXACAO DE FAROL"
+      },
+      {
+       "codigo": 13980,
+       "nome": "GAIOLA PARA ESPUMANTE"
+      },
+      {
+       "codigo": 19070,
+       "nome": "FIXA FIO"
+      },
+      {
+       "codigo": 30369,
+       "nome": "ESTRIBO FIXAÇÃO TELHADO"
+      }
+     ]
+    },
+    {
+     "codigo": 5330,
+     "nome": "GAXETAS E OUTROS MATERIAIS PARA VEDAÇÃO",
+     "pdms": [
+      {
+       "codigo": 552,
+       "nome": "ANEL VEDAÇÃO"
+      },
+      {
+       "codigo": 553,
+       "nome": "ARRUELA VEDAÇÃO"
+      },
+      {
+       "codigo": 555,
+       "nome": "CORDÃO VEDAÇÃO"
+      },
+      {
+       "codigo": 579,
+       "nome": "GAXETA"
+      },
+      {
+       "codigo": 602,
+       "nome": "JUNTA FITA VEDAÇÃO"
+      },
+      {
+       "codigo": 603,
+       "nome": "JUNTA VEDAÇÃO PLANA"
+      },
+      {
+       "codigo": 2489,
+       "nome": "ANEL"
+      },
+      {
+       "codigo": 3817,
+       "nome": "BORRACHA VEDAÇÃO"
+      },
+      {
+       "codigo": 7175,
+       "nome": "ESTOPA DE VEDACAO"
+      },
+      {
+       "codigo": 7288,
+       "nome": "FAIXA PARA VEDACAO"
+      },
+      {
+       "codigo": 7612,
+       "nome": "FITA VEDA ROSCA"
+      },
+      {
+       "codigo": 7948,
+       "nome": "GAXETA - FIBRA TRANCADA"
+      },
+      {
+       "codigo": 8572,
+       "nome": "JUNTA VEDAÇÃO"
+      },
+      {
+       "codigo": 9416,
+       "nome": "MASSA DE FIXAR VIDRO"
+      },
+      {
+       "codigo": 9424,
+       "nome": "MASSA CALAFETAR"
+      },
+      {
+       "codigo": 9494,
+       "nome": "JUNTA UNIVERSAL"
+      },
+      {
+       "codigo": 11707,
+       "nome": "RETENTOR"
+      },
+      {
+       "codigo": 11708,
+       "nome": "RETENTOR DE ÓLEO"
+      },
+      {
+       "codigo": 11990,
+       "nome": "SELO VEDAÇÃO"
+      },
+      {
+       "codigo": 11992,
+       "nome": "SELO MECÂNICO"
+      },
+      {
+       "codigo": 12778,
+       "nome": "TALA FIXAÇÃO"
+      },
+      {
+       "codigo": 13333,
+       "nome": "VEDANTE TORNEIRA"
+      },
+      {
+       "codigo": 14644,
+       "nome": "VEDA ROSCA"
+      },
+      {
+       "codigo": 16227,
+       "nome": "GUARNIÇÃO"
+      },
+      {
+       "codigo": 17531,
+       "nome": "JUNTA DE BOCA VISITA"
+      },
+      {
+       "codigo": 17584,
+       "nome": "CASTELO"
+      }
+     ]
+    },
+    {
+     "codigo": 5335,
+     "nome": "TELAS METÁLICAS",
+     "pdms": [
+      {
+       "codigo": 580,
+       "nome": "TELA METÁLICA"
+      },
+      {
+       "codigo": 3004,
+       "nome": "ARMADURA METÁLICA PARA CONCRETO"
+      },
+      {
+       "codigo": 8043,
+       "nome": "GRADE METÁLICA"
+      },
+      {
+       "codigo": 9048,
+       "nome": "MALHA METÁLICA"
+      },
+      {
+       "codigo": 12576,
+       "nome": "TECIDO INDUSTRIAL METALICO"
+      },
+      {
+       "codigo": 12589,
+       "nome": "TELA CHAPA DE AÇO CORRUGADA"
+      }
+     ]
+    },
+    {
+     "codigo": 5340,
+     "nome": "FERRAGENS DIVERSAS",
+     "pdms": [
+      {
+       "codigo": 554,
+       "nome": "CADEADO"
+      },
+      {
+       "codigo": 557,
+       "nome": "DOBRADIÇA PORTA"
+      },
+      {
+       "codigo": 558,
+       "nome": "DOBRADIÇA PORTEIRA"
+      },
+      {
+       "codigo": 562,
+       "nome": "GANCHO REDE"
+      },
+      {
+       "codigo": 563,
+       "nome": "PORTA-CADEADO"
+      },
+      {
+       "codigo": 564,
+       "nome": "TARJETA"
+      },
+      {
+       "codigo": 565,
+       "nome": "ESPELHO FECHADURA"
+      },
+      {
+       "codigo": 566,
+       "nome": "FECHADURA"
+      },
+      {
+       "codigo": 2271,
+       "nome": "ALDRABA"
+      },
+      {
+       "codigo": 2431,
+       "nome": "Amortecedor De Vibracao (Para Equipamentos Diversos)"
+      },
+      {
+       "codigo": 4564,
+       "nome": "CARRANCA METAL JANELA"
+      },
+      {
+       "codigo": 4578,
+       "nome": "CARRETILHA"
+      },
+      {
+       "codigo": 4944,
+       "nome": "CHAVEIRO"
+      },
+      {
+       "codigo": 4993,
+       "nome": "CILINDRO FECHADURA"
+      },
+      {
+       "codigo": 7131,
+       "nome": "ESTICADOR"
+      },
+      {
+       "codigo": 7325,
+       "nome": "PEÇAS E ACESSÓRIOS FECHADURA"
+      },
+      {
+       "codigo": 7369,
+       "nome": "FERRAGEM - PORTA / JANELA / TRANCA"
+      },
+      {
+       "codigo": 7370,
+       "nome": "CONJUNTO FERRAGENS FIXAÇÃO"
+      },
+      {
+       "codigo": 7374,
+       "nome": "FERRAGEM ARMÁRIO / GAVETA"
+      },
+      {
+       "codigo": 7377,
+       "nome": "FERRAGEM DE MARCENARIA"
+      },
+      {
+       "codigo": 7406,
+       "nome": "FERROLHO"
+      },
+      {
+       "codigo": 8863,
+       "nome": "LINGUETA DE FECHADURA"
+      },
+      {
+       "codigo": 8995,
+       "nome": "MAÇANETA"
+      },
+      {
+       "codigo": 9110,
+       "nome": "MANILHA"
+      },
+      {
+       "codigo": 9854,
+       "nome": "MOLA PORTA"
+      },
+      {
+       "codigo": 9859,
+       "nome": "MOLA EM LAMINA ( FERRAGEM)"
+      },
+      {
+       "codigo": 9861,
+       "nome": "MOLA DE ARAME"
+      },
+      {
+       "codigo": 9862,
+       "nome": "MOLA ESPIRAL DE ARAME, MULTIAPLICACAO"
+      },
+      {
+       "codigo": 11170,
+       "nome": "PRENDEDOR PORTA"
+      },
+      {
+       "codigo": 11205,
+       "nome": "PRESILHA PARA JUNTA"
+      },
+      {
+       "codigo": 11345,
+       "nome": "PUXADOR"
+      },
+      {
+       "codigo": 11805,
+       "nome": "ROLDANA"
+      },
+      {
+       "codigo": 11807,
+       "nome": "ROLDANA METÁLICA"
+      },
+      {
+       "codigo": 11988,
+       "nome": "SELO - CHUMBO"
+      },
+      {
+       "codigo": 12368,
+       "nome": "SUPORTE ( REPARO ) NAO HIDRAULICO ( FERRAGEM )"
+      },
+      {
+       "codigo": 12385,
+       "nome": "SUPORTE DE EXTINTOR DE INCENDIO"
+      },
+      {
+       "codigo": 12862,
+       "nome": "TRANCA PARA PORTA / JANELA"
+      },
+      {
+       "codigo": 12991,
+       "nome": "TRINCO"
+      },
+      {
+       "codigo": 13300,
+       "nome": "VARA DE FECHADURA TIPO CREMONA"
+      },
+      {
+       "codigo": 13827,
+       "nome": "VENTILADOR ARMÁRIO"
+      },
+      {
+       "codigo": 13880,
+       "nome": "DOBRADIÇA"
+      },
+      {
+       "codigo": 13916,
+       "nome": "PRESILHA"
+      },
+      {
+       "codigo": 14500,
+       "nome": "SUPORTE PRATELEIRA"
+      },
+      {
+       "codigo": 14604,
+       "nome": "ROLDANA MÁQUINA VINCO"
+      },
+      {
+       "codigo": 15721,
+       "nome": "CHAVE MATRIZ"
+      },
+      {
+       "codigo": 15828,
+       "nome": "SUPORTE FIXAÇÃO PROJETOR"
+      },
+      {
+       "codigo": 16474,
+       "nome": "SUPORTE FIXAÇÃO SERRA COPO"
+      },
+      {
+       "codigo": 17000,
+       "nome": "FERRAGENS DIVERSAS"
+      },
+      {
+       "codigo": 17799,
+       "nome": "CATRACA ARAME"
+      },
+      {
+       "codigo": 17853,
+       "nome": "VEDA PORTA"
+      },
+      {
+       "codigo": 17982,
+       "nome": "ENGATE PORTEIRA"
+      },
+      {
+       "codigo": 18987,
+       "nome": "SISTEMA MESTRAGEM CHAVES"
+      }
+     ]
+    },
+    {
+     "codigo": 5341,
+     "nome": "CANTONEIRAS",
+     "pdms": [
+      {
+       "codigo": 15312,
+       "nome": "MÃO-FRANCESA"
+      }
+     ]
+    },
+    {
+     "codigo": 5345,
+     "nome": "DISCOS E PEDRAS ABRASIVOS",
+     "pdms": [
+      {
+       "codigo": 567,
+       "nome": "DISCO CORTE"
+      },
+      {
+       "codigo": 568,
+       "nome": "DISCO DIAMANTADO"
+      },
+      {
+       "codigo": 569,
+       "nome": "DISCO DESBASTE"
+      },
+      {
+       "codigo": 570,
+       "nome": "ESCOVA ABRASIVA"
+      },
+      {
+       "codigo": 581,
+       "nome": "DISCO ABRASIVO"
+      },
+      {
+       "codigo": 582,
+       "nome": "PEDRA AFIAR"
+      },
+      {
+       "codigo": 584,
+       "nome": "REBOLO ABRASIVO"
+      },
+      {
+       "codigo": 613,
+       "nome": "PONTA MONTADA"
+      },
+      {
+       "codigo": 6260,
+       "nome": "DISCO DE VISCOSE"
+      },
+      {
+       "codigo": 7546,
+       "nome": "FITA ABRASIVA"
+      },
+      {
+       "codigo": 8834,
+       "nome": "LIMA ACABADA"
+      },
+      {
+       "codigo": 10588,
+       "nome": "PEDRA PARA POLIR"
+      },
+      {
+       "codigo": 11772,
+       "nome": "RODA POLIMENTO"
+      },
+      {
+       "codigo": 14948,
+       "nome": "RODA ESCOVA AÇO"
+      },
+      {
+       "codigo": 17002,
+       "nome": "DISCOS E PEDRAS ABRASIVOS"
+      }
+     ]
+    },
+    {
+     "codigo": 5350,
+     "nome": "MATERIAIS ABRASIVOS",
+     "pdms": [
+      {
+       "codigo": 585,
+       "nome": "LIXA"
+      },
+      {
+       "codigo": 1221,
+       "nome": "ABRASIVO"
+      },
+      {
+       "codigo": 6161,
+       "nome": "DIAMANTE INDUSTRIAL"
+      },
+      {
+       "codigo": 10355,
+       "nome": "PAPEL ABRASIVO"
+      },
+      {
+       "codigo": 10486,
+       "nome": "PASTA DE ESMERILHAR"
+      },
+      {
+       "codigo": 10925,
+       "nome": "PO ABRASIVO PARA POLIMENTO DE MATERIAL METALICO"
+      },
+      {
+       "codigo": 12564,
+       "nome": "TECIDO ABRASIVO"
+      },
+      {
+       "codigo": 16550,
+       "nome": "FILME ABRASIVO"
+      },
+      {
+       "codigo": 18480,
+       "nome": "LIXADOR"
+      }
+     ]
+    },
+    {
+     "codigo": 5355,
+     "nome": "BOTÕES E PONTEIROS",
+     "pdms": [
+      {
+       "codigo": 3824,
+       "nome": "BOTÃO"
+      },
+      {
+       "codigo": 6899,
+       "nome": "ESCALA DE MOSTRADOR"
+      },
+      {
+       "codigo": 9912,
+       "nome": "MOSTRADOR DE BALANCA"
+      },
+      {
+       "codigo": 9913,
+       "nome": "MOSTRADOR PARA APLICACAO MULTIPLA"
+      },
+      {
+       "codigo": 11022,
+       "nome": "PONTEIRO DE MOSTRADOR"
+      }
+     ]
+    },
+    {
+     "codigo": 5360,
+     "nome": "MOLAS DE ARAME, PLANAS E HELICOIDAIS",
+     "pdms": [
+      {
+       "codigo": 604,
+       "nome": "MOLA HELICOIDAL"
+      }
+     ]
+    },
+    {
+     "codigo": 5365,
+     "nome": "ANÉIS, BUCHAS E ESPAÇADORES",
+     "pdms": [
+      {
+       "codigo": 634,
+       "nome": "BUCHA PARAFUSO"
+      },
+      {
+       "codigo": 2494,
+       "nome": "ANEL DE FRENAMENTO"
+      },
+      {
+       "codigo": 2501,
+       "nome": "ANEL DE TRAVA SERRILHADO E COM CHAVETA"
+      },
+      {
+       "codigo": 2506,
+       "nome": "ANEL ADAPTADOR"
+      },
+      {
+       "codigo": 2991,
+       "nome": "ARGOLA"
+      },
+      {
+       "codigo": 3059,
+       "nome": "ARRUELA ROSQUEADA EXTERNAMENTE"
+      },
+      {
+       "codigo": 3945,
+       "nome": "BUCHA REDUÇÃO"
+      },
+      {
+       "codigo": 3952,
+       "nome": "BUJÃO DE ROSCA USINADO"
+      },
+      {
+       "codigo": 15093,
+       "nome": "BUCHA"
+      },
+      {
+       "codigo": 18552,
+       "nome": "CONECTOR"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
