@@ -3,11 +3,11 @@
 ## Próximo agente
 
 Você retoma F4.
-O spec e o [esboço](esboco.md) estão prontos, e nada foi implementado.
-A [fatia 1](slices/01-arquivo-generico.md) roda só sobre dado público. Ela anda em paralelo com F3, mas vem depois da fatia 1 de F2, que exporta o escape `celulaCsv`, e não roda junto com a fatia 3 de F2, porque as duas mexem em `web/diagnostico.ts`.
-A fatia 2 espera o modelo de carga do ERP de uma usina (ticket [`obter-modelo-de-carga-do-erp`](../../docs/wayfinder/partsgraph/tickets/obter-modelo-de-carga-do-erp.md)) e a palavra do Myke para o contato.
+A fatia 1 entrou. `src/motor/chaves.ts` tem `arquivoDeChaves` e `chavesParaCsv`, e o `/diagnostico` baixa o arquivo de chaves ao lado do CSV de resultado. A prova está em [`docs/medicao/arquivo-de-chaves/`](../../docs/medicao/arquivo-de-chaves/README.md), e o [esboço](esboco.md) descreve o que o módulo decidiu além do desenho.
+A [fatia 2](slices/02-carga-fora-da-producao.md) espera o modelo de carga do ERP de uma usina (ticket [`obter-modelo-de-carga-do-erp`](../../docs/wayfinder/partsgraph/tickets/obter-modelo-de-carga-do-erp.md)), um ambiente fora da produção e a palavra do Myke para o contato. Sem esses três, não comece por ela, e não crie formato com nome de ERP.
+A revisão humana da fatia 1 foi decidida pela evidência (ver o fim do spec da fatia). Se o Myke pedir mudança de rótulo ou de posição do botão, a passada é pequena e fica em `web/diagnostico.ts`.
 
-- [ ] [Fatia 1](slices/01-arquivo-generico.md): o arquivo de chaves genérico, baixado do `/diagnostico`.
+- [x] [Fatia 1](slices/01-arquivo-generico.md): o arquivo de chaves genérico, baixado do `/diagnostico`.
 - [ ] [Fatia 2](slices/02-carga-fora-da-producao.md): a equipe do ERP da usina carrega o arquivo fora da produção.
 
 Antes de terminar a sua passada, atualize esta seção com o que mudou e com o próximo ponto de partida.

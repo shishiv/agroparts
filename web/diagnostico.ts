@@ -16,6 +16,7 @@ import {
   type GrupoEmMistura,
   type GrupoPorTipo,
 } from "../src/motor/agrupamento";
+import { arquivoDeChaves, chavesParaCsv } from "../src/motor/chaves";
 import { descreverDivergencia, type Divergencia } from "../src/motor/especificacao";
 import { loteParaCsv, type LinhaLote, type ResultadoLote } from "../src/motor/lote";
 import { adivinharColunas, decodificar, lerCsv, type Tabela } from "./csv";
@@ -37,6 +38,7 @@ let tabela: Tabela | null = null;
 let nomeDoArquivo = "";
 let urlDoCsv: string | null = null;
 let urlDaAmostra: string | null = null;
+let urlDasChaves: string | null = null;
 
 const naFamilia = (l: LinhaLote) => l.estrato.startsWith("série ");
 
@@ -185,7 +187,14 @@ function desenhar(t: Tabela, mostrar: Mostrar = INICIO) {
 
   if (urlDoCsv) URL.revokeObjectURL(urlDoCsv);
   urlDoCsv = URL.createObjectURL(new Blob([loteParaCsv(lote)], { type: "text/csv;charset=utf-8" }));
-  const nomeCsv = `diagnostico-agroparts-${nomeDoArquivo.replace(/\.csv$/i, "") || "cadastro"}.csv`;
+  const base = nomeDoArquivo.replace(/\.csv$/i, "") || "cadastro";
+  const nomeCsv = `diagnostico-agroparts-${base}.csv`;
+
+  if (urlDasChaves) URL.revokeObjectURL(urlDasChaves);
+  const chaves = arquivoDeChaves(lote);
+  urlDasChaves = chaves.linhas.length
+    ? URL.createObjectURL(new Blob([chavesParaCsv(chaves)], { type: "text/csv;charset=utf-8" }))
+    : null;
 
   $("#resultado").innerHTML = `
   <div class="resumo-lote">
@@ -196,7 +205,11 @@ function desenhar(t: Tabela, mostrar: Mostrar = INICIO) {
     <div><strong>${pessoa.length}</strong><span>${SELO.revisa.toLowerCase()}</span></div>
   </div>
   ${semDescricao ? `<p class="pequeno">${semDescricao} ${semDescricao === 1 ? "linha sem descrição foi ignorada" : "linhas sem descrição foram ignoradas"}.</p>` : ""}
-  <div class="acoes dx-baixar"><a class="botao primario" id="baixar" href="${urlDoCsv}" download="${esc(nomeCsv)}">Baixar CSV de resultado</a></div>
+  <div class="acoes dx-baixar">
+    <a class="botao primario" id="baixar" href="${urlDoCsv}" download="${esc(nomeCsv)}">Baixar CSV de resultado</a>
+    ${urlDasChaves ? `<a class="botao" id="baixar-chaves" href="${urlDasChaves}" download="chaves-agroparts-${esc(base)}.csv">Baixar arquivo de chaves (CSV)</a>` : ""}
+  </div>
+  ${chaves.sem_codigo ? `<p class="pequeno">${cadastros(chaves.sem_codigo)} de grupo sem código ${chaves.sem_codigo === 1 ? "fica fora" : "ficam fora"} do arquivo de chaves.</p>` : ""}
   ${desenharAgrupamento(resultado, mostrar)}
 
   <section class="bloco" aria-labelledby="t-grupos">
