@@ -3,14 +3,14 @@
 ## Próximo agente
 
 Você retoma F2.
-As fatias 1 e 2 entraram. `src/motor/agrupamento.ts` tem `compararAgrupamento`, `visaoPorTipo`, `amostrar` e `amostraParaCsv`, e `bun run medir` mostra os 59, 133 e 150 SKUs. O [esboço](esboco.md) descreve o que o módulo faz e o que ele decidiu além do desenho.
-Comece pela [fatia 3](slices/03-agrupamento-no-diagnostico.md): `/diagnostico` chama `compararAgrupamento` e `visaoPorTipo` em `web/`, com a prova de rede e as capturas.
-A fatia 3 roda só sobre dado público.
-A fatia 4 espera o agrupamento real de uma usina (ticket [`obter-agrupamento-da-usina`](../../docs/wayfinder/partsgraph/tickets/obter-agrupamento-da-usina.md)) e a palavra do Myke para o contato (escolhas D1 e D8 do [mapa](../../docs/wayfinder/partsgraph/map.md)). O pré-registro dela cita `fnv1a32` como o hash da amostra e `COLUNAS_AMOSTRA` como as colunas do CSV.
+As fatias 1, 2 e 3 entraram. `/diagnostico` aceita a coluna do agrupamento da usina e chama `compararAgrupamento`, `visaoPorTipo`, `amostrar` e `amostraParaCsv`. A prova da fatia 3 está em [`docs/medicao/diagnostico-agrupamento/`](../../docs/medicao/diagnostico-agrupamento/README.md), e o [esboço](esboco.md) descreve o que o módulo e a tela decidiram além do desenho.
+A [fatia 4](slices/04-comparar-com-a-usina.md) espera o agrupamento real de uma usina (ticket [`obter-agrupamento-da-usina`](../../docs/wayfinder/partsgraph/tickets/obter-agrupamento-da-usina.md)) e a palavra do Myke para o contato (escolhas D1 e D8 do [mapa](../../docs/wayfinder/partsgraph/map.md)). Sem as duas, não comece por ela.
+O pré-registro da fatia 4 cita `fnv1a32` como o hash da amostra, `COLUNAS_AMOSTRA` como as colunas do CSV e `SEMENTE_DA_AMOSTRA`, hoje provisória, como a semente que a página usa. Congele a semente no pré-registro e acrescente o teste que confere as duas.
+A revisão humana da fatia 3 foi decidida pela evidência (ver o fim do spec da fatia). Se o Myke pedir mudança de texto ou de ordem, ela é pequena e fica em `web/diagnostico.ts`.
 
 - [x] [Fatia 1](slices/01-identidade-em-lista.md): os atributos de identidade viram uma lista só.
 - [x] [Fatia 2](slices/02-agrupamento-no-motor.md): o motor compara um agrupamento e mostra a visão por tipo.
-- [ ] [Fatia 3](slices/03-agrupamento-no-diagnostico.md): o `/diagnostico` aceita a coluna do agrupamento da usina.
+- [x] [Fatia 3](slices/03-agrupamento-no-diagnostico.md): o `/diagnostico` aceita a coluna do agrupamento da usina.
 - [ ] [Fatia 4](slices/04-comparar-com-a-usina.md): uma usina roda no próprio cadastro e julga a amostra.
 
 Antes de terminar a sua passada, atualize esta seção com o que mudou e com o próximo ponto de partida.

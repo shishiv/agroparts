@@ -42,6 +42,15 @@ Abra as capturas para o Myke com a skill `preview-shots` e espere uns 5 minutos.
 Se ele não responder, decida pela evidência, registre a decisão e o motivo neste spec, feche as capturas e siga.
 A revisão não bloqueia a fatia.
 
+**Decisão (03/11/2026).** A fatia foi aceita pela evidência, sem a revisão do Myke. O computador era Linux, o `preview-shots` abre o Preview do macOS e o Myke não olhava a tela. A evidência está em [`docs/medicao/diagnostico-agrupamento/`](../../../docs/medicao/diagnostico-agrupamento/README.md): os números da tela batem com `compararAgrupamento` e `visaoPorTipo` no mesmo arquivo, a tela sem coluna é idêntica à do F1, nenhum pedido de rede leva corpo, o celular de 390 px não rola na horizontal e duas rodadas de `screenshot-critique` com um leitor sem contexto levaram a quatro ajustes. A revisão do Myke continua aberta: se ele discordar do texto ou da ordem das seções, a correção é uma passada pequena sobre `web/diagnostico.ts`.
+
+## Como ficou
+
+- O seletor "Coluna do agrupamento da usina" fica ao lado das colunas de código e de descrição, só aparece depois de escolher o arquivo e começa em "Nenhuma". Sem a coluna, a tela é a do F1.
+- Com a coluna, a seção "Agrupamento da sua usina" mostra quatro contagens (misturam peças, sem mistura, com cadastro em dúvida, de um cadastro só), o botão da amostra e um cartão por grupo em mistura, na ordem de `compararAgrupamento`. Cada cartão traz o id do grupo, os atributos que diferem e os códigos de cada chave. Os cartões vêm de 10 em 10.
+- A seção "SKUs por tipo e por identidade" mostra os dois totais de `visaoPorTipo` e o que cada grupo por tipo junta.
+- A semente da amostra é `SEMENTE_DA_AMOSTRA`, em `src/motor/agrupamento.ts`. Ela é provisória: a fatia 4 a congela no pré-registro e confere com um teste.
+
 ## O que mudaria esta fatia
 
 Se a pessoa da usina não souber qual coluna é o agrupamento, a tela precisa nomear o que procura, e isso volta ao ticket [`obter-agrupamento-da-usina`](../../../docs/wayfinder/partsgraph/tickets/obter-agrupamento-da-usina.md).
