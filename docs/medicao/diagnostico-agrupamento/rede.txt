@@ -1,0 +1,25 @@
+# Desktop (1280 px): abrir /diagnostico, escolher o CSV, escolher a coluna, baixar a amostra e o CSV de resultado.
+GET http://127.0.0.1:8793/diagnostico corpo:não 200
+GET http://127.0.0.1:8793/assets/diagnostico-DTbwIQDd.js corpo:não 200
+GET http://127.0.0.1:8793/assets/latin-700-RAXjCpor.js corpo:não 200
+GET http://127.0.0.1:8793/assets/html-Dnsx1fgO.js corpo:não 200
+GET http://127.0.0.1:8793/assets/latin-700-DM2sz0Zi.css corpo:não 200
+GET http://127.0.0.1:8793/assets/html-C3UGRyIw.css corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-latin-400-normal-qiz4-Cze.woff2 corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-semi-condensed-latin-700-normal-BpqDG8I9.woff2 corpo:não 200
+GET data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-latin-600-normal-DILqtrty.woff2 corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-semi-condensed-latin-600-normal-BkLiAYu4.woff2 corpo:não 200
+# Celular (390 px, 2x): a mesma jornada, até a visão por tipo.
+GET http://127.0.0.1:8793/diagnostico corpo:não 200
+GET http://127.0.0.1:8793/assets/diagnostico-DTbwIQDd.js corpo:não 200
+GET http://127.0.0.1:8793/assets/latin-700-RAXjCpor.js corpo:não 200
+GET http://127.0.0.1:8793/assets/html-Dnsx1fgO.js corpo:não 200
+GET http://127.0.0.1:8793/assets/latin-700-DM2sz0Zi.css corpo:não 200
+GET http://127.0.0.1:8793/assets/html-C3UGRyIw.css corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-latin-400-normal-qiz4-Cze.woff2 corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-semi-condensed-latin-700-normal-BpqDG8I9.woff2 corpo:não 200
+GET data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-latin-600-normal-DILqtrty.woff2 corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-latin-700-normal-A9pxMQ4z.woff2 corpo:não 200
+GET http://127.0.0.1:8793/assets/barlow-semi-condensed-latin-600-normal-BkLiAYu4.woff2 corpo:não 200

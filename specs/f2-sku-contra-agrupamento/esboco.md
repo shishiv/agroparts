@@ -2,7 +2,7 @@
 
 Sessão de `architect` com arena, porque o modelo de SKU é porta sem volta.
 As fatias 1 e 2 já entraram no código. A [fatia 1](slices/01-identidade-em-lista.md) trouxe a lista de identidade, `divergencias`, `descreverDivergencia`, o campo `identidade` de `LinhaLote` e o `celulaCsv` exportado. A [fatia 2](slices/02-agrupamento-no-motor.md) trouxe `src/motor/agrupamento.ts`. Os diffs e o módulo saíram deste esboço, e o código é a fonte dos tipos.
-O bloco `ts` do uso, abaixo, é a ilustração que a [fatia 3](slices/03-agrupamento-no-diagnostico.md) segue na página.
+A [fatia 3](slices/03-agrupamento-no-diagnostico.md) ligou `web/diagnostico.ts` ao módulo: o bloco `ts` do uso, abaixo, é a ilustração que ela seguiu, e a página só chama `compararAgrupamento`, `visaoPorTipo`, `amostrar` e `amostraParaCsv`.
 
 ## Problema
 
@@ -81,6 +81,13 @@ O que o código decidiu além do esboço:
 - Um grupo com uma mistura e linhas pendentes continua `mistura`, e as pendentes ficam em `sem_chave`. O CSV da amostra leva essas linhas com `chave` e `designacao` em branco.
 - `GrupoPorTipo.rotulo` junta os atributos mantidos, com `junta` igual a folga e material, `6205 · vedação de contato nos dois lados`.
 
+O que a tela decidiu além do esboço (fatia 3):
+
+- `SEMENTE_DA_AMOSTRA` mora em `src/motor/agrupamento.ts`, e não na página, para a fatia 4 congelá-la no pré-registro e conferir por teste. Hoje é um valor provisório.
+- A visão por tipo só aparece quando há coluna de agrupamento escolhida. Sem ela, a tela é a do F1.
+- Os cartões de mistura e de tipo vêm de 10 em 10, porque o arquivo de teste dá 44 de cada.
+- O número de grupos de um cadastro só aparece na tela. Com a coluna errada (por exemplo, o código), todo grupo tem um cadastro só e é isso que denuncia o engano.
+
 ### O que os tipos garantem
 
 - `GrupoDaUsina` é uma união discriminada. Uma `mistura` tem duas chaves ou mais e pelo menos uma divergência, um grupo `coerente` tem uma chave e nenhuma linha pendente, e um `inconclusivo` tem pelo menos uma linha sem chave. A tela não confere tamanho de lista.
@@ -158,4 +165,4 @@ Do candidato 1 ficou de fora o `lerAgrupamento` com junção por código e marca
 
 ## Próximo passo
 
-Ligar `/diagnostico` a `compararAgrupamento` e `visaoPorTipo`, com a coluna opcional do agrupamento da usina, a prova de rede e as capturas ([fatia 3](slices/03-agrupamento-no-diagnostico.md)).
+A [fatia 4](slices/04-comparar-com-a-usina.md): uma usina roda no próprio cadastro e julga a amostra. Ela espera o agrupamento real e a palavra do Myke.

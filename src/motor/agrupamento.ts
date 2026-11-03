@@ -135,6 +135,12 @@ export function fnv1a32(texto: string): number {
 }
 
 /**
+ * Semente da amostra que a página de diagnóstico baixa. A fatia 4 a congela no pré-registro de F2,
+ * em commit anterior à leitura do arquivo da usina, e um teste confere que as duas são iguais.
+ */
+export const SEMENTE_DA_AMOSTRA = "f2-agrupamento-v1";
+
+/**
  * Amostra pré-registrada dos grupos em mistura que a pessoa da usina vai julgar.
  * Determinística: depende só da semente e dos ids, não da ordem do arquivo.
  * A semente fica no pré-registro, em commit anterior à leitura do arquivo da usina. Com menos misturas que `n`, devolve todas.

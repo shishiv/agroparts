@@ -647,6 +647,14 @@ tfoot th, tfoot td { font-weight: 600; border-top: var(--borda) solid var(--tint
 .dx-item { display: grid; gap: 0.2rem; align-content: start; padding: 0.6rem 0.75rem; background: var(--chapa); border: 1px solid var(--linha); border-radius: var(--raio); }
 .dx-codigo { font-family: var(--placa); font-weight: 700; font-size: var(--t-h3); line-height: 1.1; overflow-wrap: anywhere; }
 .dx-texto { font-size: var(--t-small); color: var(--tinta-2); overflow-wrap: anywhere; }
+.bloco > .resumo-lote { margin-top: 0; }
+.dx-mistura { border-left: var(--borda) solid var(--tinta); }
+.dx-chave { display: grid; gap: 0.5rem; }
+.dx-chave + .dx-chave { border-top: 1px solid var(--linha); padding-top: 0.75rem; }
+.bloco > .resumo-lote + .acoes { margin-top: 0.5rem; }
+.dx-chave h4 { margin: 0; font-family: var(--placa); font-size: var(--t-ui); line-height: 1.1; }
+.dx-codigos { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.3rem; font-size: var(--t-small); color: var(--tinta-2); overflow-wrap: anywhere; }
+.dx-codigos strong { color: var(--tinta); font-family: var(--placa); }
 .dx-lista .txt { font-size: var(--t-small); max-width: 34rem; overflow-wrap: anywhere; color: var(--tinta-2); }
 @media (max-width: 760px) {
   .dx-lista thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
