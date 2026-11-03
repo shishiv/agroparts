@@ -3,12 +3,15 @@
 ## Próximo agente
 
 Você retoma F3.
-O spec e o [esboço](esboco.md) estão prontos, e nada foi implementado.
-Comece pela [fatia 1](slices/01-benchmark-e-regua.md), que não precisa de chave.
-A fatia 2 espera uma chave da TypeSafe que funcione e a leitura dos termos (ticket [`conferir-termos-e-chave-da-typesafe`](../../docs/wayfinder/partsgraph/tickets/conferir-termos-e-chave-da-typesafe.md)).
+A [fatia 1](slices/01-benchmark-e-regua.md) entrou: o pré-registro em [`dados/preregistro/f3-familia.json`](../../dados/preregistro/f3-familia.json), o benchmark público em `dados/publico/` e a régua em `scripts/familia.ts`.
+O número que o Jev precisa vencer, grupo por grupo, está em [`docs/medicao/familia-v1.md`](../../docs/medicao/familia-v1.md), que `bun scripts/medir-familia.ts` refaz.
+A próxima é a [fatia 2](slices/02-jev-em-arvore.md), bloqueada pelo ticket [`conferir-termos-e-chave-da-typesafe`](../../docs/wayfinder/partsgraph/tickets/conferir-termos-e-chave-da-typesafe.md): ela espera uma chave da TypeSafe que funcione e a leitura dos termos.
 Não chame a API da TypeSafe antes disso.
+O classificador do Jev precisa se chamar `jev`, com a versão `jev-1.14.0`, para casar com o limiar do pré-registro.
+Os grupos 28, 30 e 31 ficaram abaixo do mínimo de 100 casos, e pela regra dos critérios a v1 dá INCONCLUSIVE mesmo com o Jev medido.
+Para chegar a um veredito, abra um pré-registro f3-familia-v2 antes de medir o Jev, sem apagar a v1, como diz a fatia 1 em "O que mudaria esta fatia".
 
-- [ ] [Fatia 1](slices/01-benchmark-e-regua.md): pré-registro, benchmark público e a régua em código.
+- [x] [Fatia 1](slices/01-benchmark-e-regua.md): pré-registro, benchmark público e a régua em código.
 - [ ] [Fatia 2](slices/02-jev-em-arvore.md): o Jev escolhe grupo, classe e PDM, nas duas ordens.
 
 Antes de terminar a sua passada, atualize esta seção com o que mudou e com o próximo ponto de partida.
