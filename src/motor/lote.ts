@@ -2,7 +2,7 @@
 import gabCatmat from "../../dados/gabarito/v1/catmat.json";
 import gabLivre from "../../dados/gabarito/v1/textos-livres.json";
 import { ITENS_ATIVOS, itemCatmat } from "./corpus";
-import { chaveIdentidade, designacaoDaEspecificacao, especificar, VERSAO_REGRAS, type ResultadoEspecificacao } from "./especificacao";
+import { chaveIdentidade, designacaoDaEspecificacao, especificar, VERSAO_REGRAS, type Identidade, type ResultadoEspecificacao } from "./especificacao";
 import { decidirPar } from "./identidade";
 import { resolver } from "./resolucao";
 import type { Decisao, MaterialOriginal, Protecao } from "./tipos";
@@ -13,6 +13,8 @@ export interface LinhaLote {
   decisao: Decisao;
   designacao: string | null;
   descricao_por_regra: string | null;
+  /** Atributos de identidade, só quando a decisão é resolve. `chave` é derivada deles. */
+  identidade: Identidade | null;
   chave: string | null;
   motivos: string[];
   grupo_duplicidade: number | null;
@@ -44,13 +46,16 @@ export function traduzirLote(entradas: MaterialOriginal[]): ResultadoLote {
   const linhas: LinhaLote[] = entradas.map((original) => {
     const r = especificar(original.texto);
     const e = r.especificacao;
+    const identidade: Identidade | null =
+      e && r.decisao === "resolve" ? { designacao_basica: e.designacao_basica, protecao: e.protecao, folga: e.folga, inox: e.inox } : null;
     return {
       original,
       estrato: estrato(r),
       decisao: r.decisao,
       designacao: e ? designacaoDaEspecificacao(e) : null,
       descricao_por_regra: e?.descricao_por_regra ?? null,
-      chave: e && r.decisao === "resolve" ? chaveIdentidade(e) : null,
+      identidade,
+      chave: identidade ? chaveIdentidade(identidade) : null,
       motivos: r.motivos,
       grupo_duplicidade: null,
     };
@@ -79,13 +84,15 @@ export function loteCatmat(): ResultadoLote {
   );
 }
 
+/** Uma célula de CSV entre aspas. Único escape de CSV do motor: a amostra de F2 e o arquivo de chaves de F4 usam este. */
+export const celulaCsv = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+
 /** Mapa de códigos em CSV: o texto original vai intacto ao lado da tradução. */
 export function loteParaCsv(r: ResultadoLote): string {
-  const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const cab = ["origem", "codigo", "texto_original", "estrato", "decisao", "designacao_canonica", "descricao_por_regra", "grupo_duplicidade", "motivos", "versao_regras"];
   const linhas = r.linhas.map((l) =>
     [l.original.origem, l.original.codigo, l.original.texto, l.estrato, l.decisao, l.designacao, l.descricao_por_regra, l.grupo_duplicidade, l.motivos.join(" | "), r.versao_regras]
-      .map(esc)
+      .map(celulaCsv)
       .join(","),
   );
   return [cab.join(","), ...linhas].join("\n") + "\n";

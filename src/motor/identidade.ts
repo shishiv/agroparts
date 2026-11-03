@@ -1,7 +1,7 @@
 // Decisão de SAME_AS entre dois materiais do cadastro.
 // Contradição de atributo reprova o par; concordância só soma evidência.
 // Semelhança de texto aparece como SIMILAR_TO e nunca decide identidade.
-import { rotuloProtecao, type ResultadoEspecificacao } from "./especificacao";
+import { descreverDivergencia, divergencias, rotuloProtecao, type ResultadoEspecificacao } from "./especificacao";
 import type { Decisao, Evidencia, Relacao } from "./tipos";
 
 export function tokens(texto: string): Set<string> {
@@ -42,11 +42,7 @@ export function decidirPar(a: ResultadoEspecificacao, b: ResultadoEspecificacao)
     const motivo = !ea ? a.motivos[0] : b.motivos[0];
     return { decisao: "recusa", exata: false, motivos: [`um dos itens não tem especificação: ${motivo}`], semelhanca_texto: semelhanca };
   }
-  const diferencas: string[] = [];
-  if (ea.designacao_basica !== eb.designacao_basica) diferencas.push(`designação básica ${ea.designacao_basica} x ${eb.designacao_basica}`);
-  if (ea.protecao !== eb.protecao) diferencas.push(`proteção: ${rotuloProtecao(ea.protecao)} x ${rotuloProtecao(eb.protecao)}`);
-  if (ea.folga !== eb.folga) diferencas.push(`folga radial ${ea.folga} x ${eb.folga}`);
-  if (ea.inox !== eb.inox) diferencas.push(`material: ${ea.inox ? "inoxidável" : "não declarado inox"} x ${eb.inox ? "inoxidável" : "não declarado inox"}`);
+  const diferencas = divergencias([ea, eb]).map(descreverDivergencia);
   if (diferencas.length) {
     return { decisao: "recusa", exata: false, motivos: diferencas.map((d) => `atributo diverge: ${d}`), semelhanca_texto: semelhanca };
   }
