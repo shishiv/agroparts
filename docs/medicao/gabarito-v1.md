@@ -60,6 +60,16 @@ Itens ativos do PDM 11797: 396. Grupos de duplicidade resolvidos: 28. Tempo do l
 
 Estas contagens não medem precisão: só o gabarito tem rótulo.
 
+### SKUs por visão
+
+Itens resolvidos do lote: 183. A visão por tipo é uma contagem, não SAME_AS nem INTERCHANGEABLE_FOR.
+
+| Visão | SKUs |
+|---|---:|
+| Só a designação básica (SKU por tipo) | 59 |
+| Designação básica e proteção | 133 |
+| Chave de identidade | 150 |
+
 ## Limites
 
 - A elegibilidade usa as mesmas fontes de regra que o motor. Os 100% medem se o motor aplica as regras sem errar nos textos reais; não medem se as regras acertam a peça física.
