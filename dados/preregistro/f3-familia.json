@@ -1,0 +1,61 @@
+{
+ "versao": "f3-familia-v1",
+ "registrado_em": "2026-11-03",
+ "registrado_por": "worker agent Kiro (trilha B do firstmate), a mesma origem que escreve a régua; revisão humana da equipe pendente",
+ "aviso": "Congelado em commit próprio, antes do benchmark e de qualquer número de família. Mudar regra, rótulo ou limiar abre a versão f3-familia-v2, e esta continua publicada (ADR 0014).",
+ "visto_antes_do_registro": "Para escolher a janela e a forma do arquivo, uma sondagem leu as classes e a contagem de PDMs ativos de cada grupo da seleção e 10 linhas de compra de cada um de 5 PDMs (550, 656, 3937, 4139 e 11797). Nenhum classificador rodou, e nenhum caso do benchmark foi montado.",
+ "pergunta": "O Jev escolhe a classe e o PDM do CATMAT para um texto de fornecedor em português errando menos que uma régua em código, numa faixa de confiança pré-registrada, em cada grupo do CATMAT?",
+ "fonte": {
+  "arvore": "https://dadosabertos.compras.gov.br/modulo-material/3_consultarPdmMaterial?codigoGrupo=<grupo>&statusPdm=true, para cada grupo da seleção",
+  "compras": "https://dadosabertos.compras.gov.br/modulo-pesquisa-preco/1_consultarMaterial?tipo=codigoPdm&codigo=<pdm>&dataCompraInicio=2025-01-01&dataCompraFim=2025-12-31, para cada PDM da árvore",
+  "licenca": "Decreto 8.777/2016, art. 4, na redação do Decreto 9.903/2019: dados do Poder Executivo federal são de livre utilização pelos Poderes Públicos e pela sociedade. A licença é conferida e gravada no snapshot na hora do download."
+ },
+ "selecao": {
+  "grupos": [25, 28, 29, 30, 31, 43, 47, 53],
+  "arvore": "Todos os PDMs ativos desses grupos, com a classe e o grupo que a API dá a cada PDM.",
+  "janela_de_compras": { "inicio": "2025-01-01", "fim": "2025-12-31" },
+  "texto": "O campo marca da linha de compra, como o fornecedor digitou.",
+  "rotulo": "O PDM consultado, que é o PDM do item em que o fornecedor cotou, com a classe e o grupo desse PDM na árvore. O rótulo não vem do motor.",
+  "normalizacao": "tokens(texto) de src/motor/identidade.ts, em ordem alfabética e unidos por espaço.",
+  "caso": "Um caso por par (texto normalizado, PDM). O texto do caso é o campo marca da linha de menor idCompraItem do par, e o id do caso é <pdm>:<idCompraItem>.",
+  "limite_por_pdm": 10,
+  "regra_do_limite": "Depois das exclusões, cada PDM fica com os 10 casos de menor sha256 do texto normalizado."
+ },
+ "exclusao": [
+  "Linha cujo codigoPdm não é o PDM consultado.",
+  "Texto sem nenhum token.",
+  "Texto que é só nome de marca: não tem dígito, e nenhum token dele com 4 caracteres ou mais, fora PARA e TIPO, aparece entre os tokens do nome de algum PDM da árvore.",
+  "Rótulo ambíguo: o mesmo texto normalizado, depois das três regras acima, aparece em mais de um PDM. O texto sai de todos eles."
+ ],
+ "estratos": "O grupo do CATMAT do rótulo, um estrato por grupo da seleção.",
+ "classificadores": {
+  "regua": {
+   "versao": "1",
+   "regra": "Para cada PDM da árvore, confiança = tokens do nome do PDM presentes nos tokens do texto / tokens do nome do PDM, com tokens de src/motor/identidade.ts. Escolhe a maior confiança; no empate, o PDM com mais tokens em comum, e depois o menor código de PDM. Sem token em comum com nenhum PDM, responde nenhum no nível pdm. Não depende da ordem das opções."
+  },
+  "jev": {
+   "versao": "jev-1.14.0",
+   "regra": "Fatia 2: escolha em árvore, grupo, classe e PDM, com nenhum em cada nível; confiança final = a menor entre os níveis descidos. O classificador se chama jev, para casar com o limiar abaixo."
+  }
+ },
+ "limiar_por_classificador": { "regua": 1, "jev": 0.9 },
+ "erro_maximo": 0.05,
+ "margem_sobre_a_regua": 0.05,
+ "minimo_por_estrato": 100,
+ "limite_mudou_com_a_ordem": 0.01,
+ "metricas": {
+  "por_estrato": "casos, na_faixa, corretos_na_faixa, nenhum e mudou_com_a_ordem, em números absolutos.",
+  "na_faixa": "A resposta é um PDM e a confiança é maior ou igual ao limiar do classificador.",
+  "correto": "Na faixa, o PDM da resposta é o PDM do rótulo.",
+  "mudou_com_a_ordem": "A resposta na ordem inversa das opções difere da resposta na ordem direta, no tipo ou no PDM.",
+  "cobertura": "na_faixa / casos.",
+  "erro_na_faixa": "(na_faixa - corretos_na_faixa) / na_faixa, com o limite superior unilateral de 95% de Clopper-Pearson.",
+  "proibido": "acurácia geral única"
+ },
+ "veredito": {
+  "VERIFIED": "Todos os estratos têm pelo menos minimo_por_estrato casos, e em cada estrato o Jev cumpre quatro condições: o limite superior de 95% do erro na faixa fica menor ou igual a erro_maximo; a cobertura do Jev é maior ou igual à da régua; o erro na faixa do Jev é menor ou igual ao da régua menos margem_sobre_a_regua, ou, quando o erro da régua é menor que a margem, menor ou igual ao da régua com cobertura maior ou igual à da régua mais a margem; mudou_com_a_ordem / casos fica menor ou igual a limite_mudou_com_a_ordem.",
+  "NOT VERIFIED": "Todos os estratos têm o mínimo de casos, o Jev foi medido, e algum estrato falha alguma das quatro condições.",
+  "INCONCLUSIVE": "O Jev não foi medido (a chave não funciona ou a fatia 2 não rodou), algum estrato tem menos que minimo_por_estrato casos, ou o benchmark não se reproduz por hash."
+ },
+ "reproducao": "bun run dados grava a árvore e as compras com sha256 do conteúdo. Uma nova execução que dê o mesmo sha256 registra a conferência no arquivo e não muda o conteúdo. Uma que dê outro sha256 não sobrescreve o benchmark congelado: registra a conferência que falhou, e o veredito vira INCONCLUSIVE. Sem nenhuma conferência que bata, o veredito também é INCONCLUSIVE. O benchmark não se ajusta à mão."
+}
