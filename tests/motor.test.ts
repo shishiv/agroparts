@@ -1,7 +1,8 @@
 import { describe, expect, test } from "vitest";
 import { lerDesignacao } from "../src/motor/designacao";
-import { especificar } from "../src/motor/especificacao";
-import { loteCatmat, loteParaCsv, medir, traduzirLote } from "../src/motor/lote";
+import { descreverDivergencia, divergencias, especificar } from "../src/motor/especificacao";
+import { decidirPar } from "../src/motor/identidade";
+import { celulaCsv, loteCatmat, loteParaCsv, medir, traduzirLote } from "../src/motor/lote";
 import { resolver } from "../src/motor/resolucao";
 import { criarDecisaoHumana } from "../src/motor/revisao";
 
@@ -99,7 +100,62 @@ describe("as cinco provas do roteiro", () => {
   });
 });
 
+describe("identidade em lista", () => {
+  const entrada = (texto: string) => ({ origem: "entrada manual" as const, texto });
+
+  test("a chave de cada uma das 183 linhas resolvidas do CATMAT sai igual à fórmula anterior", () => {
+    const lote = loteCatmat();
+    const resolvidas = lote.linhas.filter((l) => l.decisao === "resolve");
+    expect(resolvidas.length).toBe(183);
+    for (const l of resolvidas) {
+      const i = l.identidade!;
+      expect(l.chave).toBe(`${i.designacao_basica}|${i.protecao}|${i.folga}|${i.inox ? "inox" : "aco"}`);
+    }
+    expect(lote.linhas.filter((l) => l.decisao !== "resolve").every((l) => l.identidade === null && l.chave === null)).toBe(true);
+    expect(new Set(resolvidas.map((l) => l.chave)).size).toBe(150);
+    expect(lote.grupos_duplicidade.length).toBe(28);
+  });
+
+  test("a linha traz os atributos de identidade e a chave deriva deles", () => {
+    const [l] = traduzirLote([entrada("ROLAMENTO RIGIDO DE ESFERAS 6205 2RS C3")]).linhas;
+    expect(l.identidade).toEqual({ designacao_basica: "6205", protecao: "vedacao_dupla", folga: "C3", inox: false });
+    expect(l.chave).toBe("6205|vedacao_dupla|C3|aco");
+  });
+
+  test("divergencias lista só os atributos que discordam, na ordem da lista, sem repetir valores", () => {
+    const base = { designacao_basica: "6205", protecao: "aberto", folga: "CN", inox: false } as const;
+    expect(divergencias([base, base])).toEqual([]);
+    expect(divergencias([base, { ...base, folga: "C3" }, { ...base, folga: "C3" }, { ...base, inox: true }])).toEqual([
+      { atributo: "folga", valores: ["CN", "C3"] },
+      { atributo: "inox", valores: [false, true] },
+    ]);
+    expect(descreverDivergencia({ atributo: "inox", valores: [true, false] })).toBe("material: inoxidável x não declarado inox");
+  });
+
+  test("decidirPar mantém os motivos de cada atributo que diverge", () => {
+    const motivos = (a: string, b: string) => decidirPar(especificar(a), especificar(b)).motivos;
+    expect(motivos("6204", "6205")).toEqual(["atributo diverge: designação básica 6204 x 6205"]);
+    expect(motivos("6205 2RS", "6205 ZZ")).toEqual([
+      "atributo diverge: proteção: vedação de contato nos dois lados x blindagem metálica nos dois lados",
+    ]);
+    expect(motivos("6205 C3", "6205")).toEqual(["atributo diverge: folga radial C3 x CN"]);
+    expect(motivos("6205 INOX", "6205")).toEqual(["atributo diverge: material: inoxidável x não declarado inox"]);
+    expect(motivos("6204 2RS C3 INOX", "6205 ZZ")).toEqual([
+      "atributo diverge: designação básica 6204 x 6205",
+      "atributo diverge: proteção: vedação de contato nos dois lados x blindagem metálica nos dois lados",
+      "atributo diverge: folga radial C3 x CN",
+      "atributo diverge: material: inoxidável x não declarado inox",
+    ]);
+  });
+});
+
 describe("lote e medição", () => {
+  test("celulaCsv fecha em aspas e dobra as aspas internas", () => {
+    expect(celulaCsv('ROLAMENTO "6205"')).toBe('"ROLAMENTO ""6205"""');
+    expect(celulaCsv(undefined)).toBe('""');
+    expect(celulaCsv(null)).toBe('""');
+    expect(celulaCsv(7)).toBe('"7"');
+  });
   test("CSV preserva o texto original com aspas escapadas", () => {
     const csv = loteParaCsv(traduzirLote([{ origem: "entrada manual", texto: 'ROLAMENTO "6205" 2RS' }]));
     expect(csv.split("\n")[1]).toContain('"ROLAMENTO ""6205"" 2RS"');

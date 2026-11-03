@@ -205,9 +205,53 @@ export function especificar(texto: string): ResultadoEspecificacao {
   };
 }
 
+/**
+ * Os atributos que definem SAME_AS, nesta ordem. Única lista: o tipo `Identidade`, a chave,
+ * as divergências e os atributos que uma visão por tipo pode juntar derivam dela.
+ */
+export const ATRIBUTOS_IDENTIDADE = ["designacao_basica", "protecao", "folga", "inox"] as const;
+export type AtributoIdentidade = (typeof ATRIBUTOS_IDENTIDADE)[number];
+
+/** A parte da especificação que decide identidade. */
+export type Identidade = Pick<EspecificacaoTecnica, AtributoIdentidade>;
+
+/** Um atributo de identidade com mais de um valor entre itens. `valores` vem sem repetição, na ordem de aparição. */
+export type Divergencia = { [A in AtributoIdentidade]: { atributo: A; valores: Identidade[A][] } }[AtributoIdentidade];
+
 /** Chave de identidade da especificação: os atributos que definem SAME_AS. */
-export function chaveIdentidade(e: Pick<EspecificacaoTecnica, "designacao_basica" | "protecao" | "folga" | "inox">): string {
-  return `${e.designacao_basica}|${e.protecao}|${e.folga}|${e.inox ? "inox" : "aco"}`;
+export function chaveIdentidade(e: Identidade): string {
+  // Mesma string de antes ("6205|blindagem_dupla|CN|aco"): a medição v1 e o CSV não mudam.
+  return ATRIBUTOS_IDENTIDADE.map((a) => (a === "inox" ? (e.inox ? "inox" : "aco") : String(e[a]))).join("|");
+}
+
+/**
+ * Atributos de identidade em que os itens discordam, na ordem de ATRIBUTOS_IDENTIDADE.
+ * Vazio quando todos têm a mesma chave.
+ */
+export function divergencias(itens: readonly Identidade[]): Divergencia[] {
+  const achadas: Divergencia[] = [];
+  for (const atributo of ATRIBUTOS_IDENTIDADE) {
+    const valores = [...new Set(itens.map((i) => i[atributo]))];
+    // O cast é o único do módulo: o TS não relaciona `atributo` a `valores` dentro do laço.
+    if (valores.length > 1) achadas.push({ atributo, valores } as Divergencia);
+  }
+  return achadas;
+}
+
+const MATERIAL = (inox: boolean) => (inox ? "inoxidável" : "não declarado inox");
+
+/** Frase da divergência, no formato que `web/linguagem.ts` lê dos motivos de `decidirPar`. */
+export function descreverDivergencia(d: Divergencia): string {
+  switch (d.atributo) {
+    case "designacao_basica":
+      return `designação básica ${d.valores.join(" x ")}`;
+    case "protecao":
+      return `proteção: ${d.valores.map((p) => ROTULO_PROTECAO[p]).join(" x ")}`;
+    case "folga":
+      return `folga radial ${d.valores.join(" x ")}`;
+    case "inox":
+      return `material: ${d.valores.map(MATERIAL).join(" x ")}`;
+  }
 }
 
 export const rotuloProtecao = (p: Protecao) => ROTULO_PROTECAO[p];

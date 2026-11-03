@@ -1,9 +1,7 @@
 # Esboço de F4: o arquivo de chaves que volta ao ERP
 
-<!-- depende: f2-sku-contra-agrupamento -->
-
 Esboço direto de `architect`, sem arena: o arquivo é uma projeção do lote que já existe, e trocar as colunas não tem custo antes de uma usina carregar.
-O bloco `ts` é um arquivo novo inteiro. Ele compila contra o motor de hoje somado ao [esboço de F2](../f2-sku-contra-agrupamento/esboco.md), de onde vem o escape `celulaCsv`.
+O bloco `ts` é um arquivo novo inteiro. Ele compila contra o motor de hoje, onde `src/motor/lote.ts` já exporta o escape `celulaCsv` (fatia 1 de [F2](../f2-sku-contra-agrupamento/README.md)).
 
 ## Problema
 

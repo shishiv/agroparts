@@ -1,8 +1,8 @@
 # Esboço de F2: o agrupamento da usina contra a chave de identidade
 
 Sessão de `architect` com arena, porque o modelo de SKU é porta sem volta.
-Os blocos `diff` aplicam com `git apply` sobre o `main` de hoje, e cada bloco `ts` que começa com `// <caminho>` é o arquivo inteiro nesse caminho.
-O conjunto compila contra o motor de hoje (`tsc` da raiz e de `web/`).
+A [fatia 1](slices/01-identidade-em-lista.md) já entrou no código: a lista de identidade, `divergencias`, `descreverDivergencia`, o campo `identidade` de `LinhaLote` e o `celulaCsv` exportado. Os diffs dela saíram deste esboço.
+O bloco `ts` que começa com `// <caminho>` é o arquivo inteiro nesse caminho e compila contra o motor de hoje (`tsc` da raiz e de `web/`).
 Os corpos são `throw new Error("not implemented")` com pseudocódigo onde a lógica é sutil.
 
 ## Problema
@@ -11,7 +11,7 @@ A usina já liga cada código de material do ERP a um grupo próprio, o "SKU uni
 F2 precisa mostrar, com evidência, quais desses grupos juntam chaves de identidade diferentes e em quais atributos, e mostrar a visão por tipo com o que ela junta.
 Quatro fatos do código e das decisões dão a forma:
 
-- Hoje a identidade só existe como texto: `chaveIdentidade` monta `designacao_basica|protecao|folga|inox`, e `decidirPar` repete a mesma lista de atributos à mão. Dizer "qual atributo difere" obrigaria a abrir o texto da chave num terceiro lugar.
+- Antes da fatia 1, a identidade só existia como texto: `chaveIdentidade` montava `designacao_basica|protecao|folga|inox`, e `decidirPar` repetia a mesma lista de atributos à mão. Dizer "qual atributo difere" obrigaria a abrir o texto da chave num terceiro lugar.
 - `traduzirLote` já devolve `grupos_duplicidade`, que é a visão de identidade. Uma segunda via para a identidade seria duas maneiras de fazer a mesma coisa.
 - O arquivo da usina não sai do navegador ([ADR 0022](../../docs/decisoes/adr-0022-diagnostico-no-navegador.md) e escolha D3), então tudo é função pura que a página chama, e nada passa por script nosso.
 - O grupo da usina é registro dela e não se reescreve ([ADR 0001](../../docs/decisoes/adr-0001-camada-de-traducao-nao-destrutiva.md)). A decisão continua por regra sobre atributos ([ADR 0006](../../docs/decisoes/adr-0006-guardrails-programaticos-e-revisao-humana.md)), e SIMILAR_TO fica fora dela ([ADR 0013](../../docs/decisoes/adr-0013-modelo-de-entidades-e-relacoes-tipadas.md)).
@@ -58,157 +58,14 @@ O arquivo de chaves de F4 lê `lote.grupos_duplicidade` e não recebe nada deste
 
 ## Forma
 
-### A identidade vira uma lista tipada, e a chave deriva dela
+### A identidade virou uma lista tipada, e a chave deriva dela (fatia 1, no código)
 
-`ATRIBUTOS_IDENTIDADE` passa a ser a única lista dos atributos que fazem SAME_AS.
-O tipo `Identidade`, o texto da chave, as divergências e os atributos que uma visão por tipo junta saem dela.
-O texto de `chaveIdentidade` fica igual: no CATMAT de hoje, as 183 chaves e os 28 grupos de duplicidade não mudam.
-
-```diff
---- a/src/motor/especificacao.ts
-+++ b/src/motor/especificacao.ts
-@@ -205,9 +205,44 @@
-   };
- }
- 
-+/**
-+ * Os atributos que definem SAME_AS, nesta ordem. Única lista: o tipo `Identidade`, a chave,
-+ * as divergências e os atributos que uma visão por tipo pode juntar derivam dela.
-+ */
-+export const ATRIBUTOS_IDENTIDADE = ["designacao_basica", "protecao", "folga", "inox"] as const;
-+export type AtributoIdentidade = (typeof ATRIBUTOS_IDENTIDADE)[number];
-+
-+/** A parte da especificação que decide identidade. */
-+export type Identidade = Pick<EspecificacaoTecnica, AtributoIdentidade>;
-+
-+/** Um atributo de identidade com mais de um valor entre itens. `valores` vem sem repetição, na ordem de aparição. */
-+export type Divergencia = { [A in AtributoIdentidade]: { atributo: A; valores: Identidade[A][] } }[AtributoIdentidade];
-+
- /** Chave de identidade da especificação: os atributos que definem SAME_AS. */
--export function chaveIdentidade(e: Pick<EspecificacaoTecnica, "designacao_basica" | "protecao" | "folga" | "inox">): string {
--  return `${e.designacao_basica}|${e.protecao}|${e.folga}|${e.inox ? "inox" : "aco"}`;
-+export function chaveIdentidade(e: Identidade): string {
-+  // Mesma string de antes ("6205|blindagem_dupla|CN|aco"): a medição v1 e o CSV não mudam.
-+  return ATRIBUTOS_IDENTIDADE.map((a) => (a === "inox" ? (e.inox ? "inox" : "aco") : String(e[a]))).join("|");
-+}
-+
-+/**
-+ * Atributos de identidade em que os itens discordam, na ordem de ATRIBUTOS_IDENTIDADE.
-+ * Vazio quando todos têm a mesma chave. Serve ao par (decidirPar) e ao grupo (agrupamento.ts).
-+ */
-+export function divergencias(itens: readonly Identidade[]): Divergencia[] {
-+  // TODO para cada atributo a de ATRIBUTOS_IDENTIDADE:
-+  //   valores = itens.map(i => i[a]) sem repetição, na ordem de aparição
-+  //   se valores.length > 1, empurra { atributo: a, valores }
-+  // O mapeamento para a união exige um cast local; é o único do módulo.
-+  throw new Error("not implemented");
-+}
-+
-+/**
-+ * Frase da divergência, no formato que decidirPar já emite:
-+ * "designação básica 6204 x 6205", "proteção: blindagem dupla x vedação dupla",
-+ * "folga radial C3 x CN", "material: inoxidável x não declarado inox".
-+ */
-+export function descreverDivergencia(d: Divergencia): string {
-+  throw new Error("not implemented");
- }
- 
- export const rotuloProtecao = (p: Protecao) => ROTULO_PROTECAO[p];
-```
-
-`decidirPar` passa a usar as mesmas funções, e as quatro comparações escritas à mão saem na mesma mudança.
-Os motivos têm de sair iguais, porque `web/linguagem.ts` os traduz para linguagem simples.
-
-```diff
---- a/src/motor/identidade.ts
-+++ b/src/motor/identidade.ts
-@@ -1,7 +1,7 @@
- // Decisão de SAME_AS entre dois materiais do cadastro.
- // Contradição de atributo reprova o par; concordância só soma evidência.
- // Semelhança de texto aparece como SIMILAR_TO e nunca decide identidade.
--import { rotuloProtecao, type ResultadoEspecificacao } from "./especificacao";
-+import { descreverDivergencia, divergencias, rotuloProtecao, type ResultadoEspecificacao } from "./especificacao";
- import type { Decisao, Evidencia, Relacao } from "./tipos";
- 
- export function tokens(texto: string): Set<string> {
-@@ -42,11 +42,8 @@
-     const motivo = !ea ? a.motivos[0] : b.motivos[0];
-     return { decisao: "recusa", exata: false, motivos: [`um dos itens não tem especificação: ${motivo}`], semelhanca_texto: semelhanca };
-   }
--  const diferencas: string[] = [];
--  if (ea.designacao_basica !== eb.designacao_basica) diferencas.push(`designação básica ${ea.designacao_basica} x ${eb.designacao_basica}`);
--  if (ea.protecao !== eb.protecao) diferencas.push(`proteção: ${rotuloProtecao(ea.protecao)} x ${rotuloProtecao(eb.protecao)}`);
--  if (ea.folga !== eb.folga) diferencas.push(`folga radial ${ea.folga} x ${eb.folga}`);
--  if (ea.inox !== eb.inox) diferencas.push(`material: ${ea.inox ? "inoxidável" : "não declarado inox"} x ${eb.inox ? "inoxidável" : "não declarado inox"}`);
-+  // A lista de atributos e as frases saem de especificacao.ts; os motivos ficam iguais aos de hoje.
-+  const diferencas = divergencias([ea, eb]).map(descreverDivergencia);
-   if (diferencas.length) {
-     return { decisao: "recusa", exata: false, motivos: diferencas.map((d) => `atributo diverge: ${d}`), semelhanca_texto: semelhanca };
-   }
-```
-
-`LinhaLote` passa a levar a identidade com os tipos reais (`Protecao`, `Folga`, `boolean`), e `chave` é derivada dela no mesmo ponto.
-O campo `identidade` aparece também no JSON de `/api/lote`.
-O mesmo trecho exporta `celulaCsv`, o escape de célula que `loteParaCsv` já usava, para que a amostra de F2 e o arquivo de chaves de F4 não escrevam outro.
-
-```diff
---- a/src/motor/lote.ts
-+++ b/src/motor/lote.ts
-@@ -2,7 +2,7 @@
- import gabCatmat from "../../dados/gabarito/v1/catmat.json";
- import gabLivre from "../../dados/gabarito/v1/textos-livres.json";
- import { ITENS_ATIVOS, itemCatmat } from "./corpus";
--import { chaveIdentidade, designacaoDaEspecificacao, especificar, VERSAO_REGRAS, type ResultadoEspecificacao } from "./especificacao";
-+import { chaveIdentidade, designacaoDaEspecificacao, especificar, VERSAO_REGRAS, type Identidade, type ResultadoEspecificacao } from "./especificacao";
- import { decidirPar } from "./identidade";
- import { resolver } from "./resolucao";
- import type { Decisao, MaterialOriginal, Protecao } from "./tipos";
-@@ -13,6 +13,8 @@
-   decisao: Decisao;
-   designacao: string | null;
-   descricao_por_regra: string | null;
-+  /** Atributos de identidade, só quando a decisão é resolve. `chave` é derivada deles. */
-+  identidade: Identidade | null;
-   chave: string | null;
-   motivos: string[];
-   grupo_duplicidade: number | null;
-@@ -44,13 +46,16 @@
-   const linhas: LinhaLote[] = entradas.map((original) => {
-     const r = especificar(original.texto);
-     const e = r.especificacao;
-+    const identidade: Identidade | null =
-+      e && r.decisao === "resolve" ? { designacao_basica: e.designacao_basica, protecao: e.protecao, folga: e.folga, inox: e.inox } : null;
-     return {
-       original,
-       estrato: estrato(r),
-       decisao: r.decisao,
-       designacao: e ? designacaoDaEspecificacao(e) : null,
-       descricao_por_regra: e?.descricao_por_regra ?? null,
--      chave: e && r.decisao === "resolve" ? chaveIdentidade(e) : null,
-+      identidade,
-+      chave: identidade ? chaveIdentidade(identidade) : null,
-       motivos: r.motivos,
-       grupo_duplicidade: null,
-     };
-@@ -79,13 +84,15 @@
-   );
- }
- 
-+/** Uma célula de CSV entre aspas. Único escape de CSV do motor: a amostra de F2 e o arquivo de chaves de F4 usam este. */
-+export const celulaCsv = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-+
- /** Mapa de códigos em CSV: o texto original vai intacto ao lado da tradução. */
- export function loteParaCsv(r: ResultadoLote): string {
--  const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-   const cab = ["origem", "codigo", "texto_original", "estrato", "decisao", "designacao_canonica", "descricao_por_regra", "grupo_duplicidade", "motivos", "versao_regras"];
-   const linhas = r.linhas.map((l) =>
-     [l.original.origem, l.original.codigo, l.original.texto, l.estrato, l.decisao, l.designacao, l.descricao_por_regra, l.grupo_duplicidade, l.motivos.join(" | "), r.versao_regras]
--      .map(esc)
-+      .map(celulaCsv)
-       .join(","),
-   );
-   return [cab.join(","), ...linhas].join("\n") + "\n";
-```
+`ATRIBUTOS_IDENTIDADE`, em `src/motor/especificacao.ts`, é a única lista dos atributos que fazem SAME_AS.
+O tipo `Identidade`, o texto da chave, `divergencias` e os atributos que uma visão por tipo junta saem dela.
+O texto de `chaveIdentidade` é o de antes: as 183 chaves do CATMAT e os 28 grupos de duplicidade não mudaram.
+`decidirPar`, em `src/motor/identidade.ts`, usa `divergencias` e `descreverDivergencia`, e os motivos que `web/linguagem.ts` traduz saem iguais.
+`LinhaLote` leva `identidade` com os tipos reais, `chave` deriva dela, e o campo aparece no JSON de `/api/lote`.
+`celulaCsv`, em `src/motor/lote.ts`, é o escape de célula que `loteParaCsv` já usava, exportado para a amostra de F2 e para o arquivo de chaves de F4.
 
 ### O módulo novo
 
@@ -431,4 +288,4 @@ Do candidato 1 ficou de fora o `lerAgrupamento` com junção por código e marca
 
 ## Próximo passo
 
-Implementar `ATRIBUTOS_IDENTIDADE`, `divergencias` e `descreverDivergencia`, migrar `decidirPar` e acrescentar `identidade` a `LinhaLote`, com `bun run test` verde e `bun run medir` sem diferença em `docs/medicao/gabarito-v1.md` ([fatia 1](slices/01-identidade-em-lista.md)).
+Implementar `src/motor/agrupamento.ts`: `compararAgrupamento`, `amostrar`, `amostraParaCsv` e `visaoPorTipo`, com os números da linha de base (59, 133 e 150 SKUs) em teste ([fatia 2](slices/02-agrupamento-no-motor.md)).

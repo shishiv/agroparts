@@ -479,7 +479,34 @@
      "linhas": {
       "type": "array",
       "items": {
-       "type": "object"
+       "type": "object",
+       "properties": {
+        "identidade": {
+         "description": "Atributos de identidade (SAME_AS); null quando a decisão não é resolve. `chave` deriva deles.",
+         "oneOf": [
+          {
+           "type": "object",
+           "properties": {
+            "designacao_basica": {
+             "type": "string"
+            },
+            "protecao": {
+             "type": "string"
+            },
+            "folga": {
+             "type": "string"
+            },
+            "inox": {
+             "type": "boolean"
+            }
+           }
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       }
       }
      },
      "por_estrato": {

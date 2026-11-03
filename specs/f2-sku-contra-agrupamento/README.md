@@ -3,12 +3,12 @@
 ## Próximo agente
 
 Você retoma F2.
-O spec e o [esboço](esboco.md) estão prontos, e nada foi implementado.
-Comece pela [fatia 1](slices/01-identidade-em-lista.md), que é uma refatoração sem mudança de comportamento.
-As fatias 1 a 3 rodam só sobre dado público.
+A fatia 1 entrou: `ATRIBUTOS_IDENTIDADE` é a única lista de identidade, `LinhaLote` leva `identidade`, e `celulaCsv` está exportado em `src/motor/lote.ts`. O esboço agora só traz o módulo `agrupamento.ts`.
+Comece pela [fatia 2](slices/02-agrupamento-no-motor.md): `compararAgrupamento`, `amostrar`, `amostraParaCsv` e `visaoPorTipo` em `src/motor/agrupamento.ts`, sobre os mesmos 59, 133 e 150 SKUs da linha de base.
+As fatias 2 e 3 rodam só sobre dado público.
 A fatia 4 espera o agrupamento real de uma usina (ticket [`obter-agrupamento-da-usina`](../../docs/wayfinder/partsgraph/tickets/obter-agrupamento-da-usina.md)) e a palavra do Myke para o contato (escolhas D1 e D8 do [mapa](../../docs/wayfinder/partsgraph/map.md)).
 
-- [ ] [Fatia 1](slices/01-identidade-em-lista.md): os atributos de identidade viram uma lista só.
+- [x] [Fatia 1](slices/01-identidade-em-lista.md): os atributos de identidade viram uma lista só.
 - [ ] [Fatia 2](slices/02-agrupamento-no-motor.md): o motor compara um agrupamento e mostra a visão por tipo.
 - [ ] [Fatia 3](slices/03-agrupamento-no-diagnostico.md): o `/diagnostico` aceita a coluna do agrupamento da usina.
 - [ ] [Fatia 4](slices/04-comparar-com-a-usina.md): uma usina roda no próprio cadastro e julga a amostra.
