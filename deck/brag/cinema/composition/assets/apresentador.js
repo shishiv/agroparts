@@ -43,6 +43,38 @@
       mostrar();
     }
     history.replaceState(null, "", "#" + (atual + 1));
+    atualizarNotas();
+  }
+
+  // Notas do apresentador (tecla N): uma janela à parte com a fala do slide atual e o começo do próximo.
+  var notas = null;
+  var comeco = null;
+  function falaDe(i) {
+    return (window.FALAS && window.FALAS[i]) || "";
+  }
+  function atualizarNotas() {
+    if (!notas || notas.closed) return;
+    var d = notas.document;
+    var min = comeco ? Math.floor((performance.now() - comeco) / 60000) : 0;
+    d.getElementById("n-onde").textContent = "Slide " + (atual + 1) + " de " + slides.length + " · " + min + " min";
+    d.getElementById("n-fala").textContent = falaDe(atual);
+    d.getElementById("n-proxima").textContent = atual + 1 < slides.length ? "Depois: " + falaDe(atual + 1).split("\n")[0] : "Último slide.";
+  }
+  function abrirNotas() {
+    notas = window.open("", "agroparts-notas", "width=960,height=720");
+    if (!notas) return;
+    comeco = comeco || performance.now();
+    notas.document.open();
+    notas.document.write(
+      '<!doctype html><meta charset="utf-8"><title>Notas · AgroParts</title>' +
+        "<style>body{margin:0;padding:40px 48px;background:#15191a;color:#f3f4f2;font:400 30px/1.45 Barlow,Arial,sans-serif}" +
+        "#n-onde{color:#8f989b;font-weight:600;margin-bottom:24px}#n-fala{white-space:pre-line;font-size:34px}" +
+        "#n-proxima{color:#8f989b;margin-top:36px;font-size:24px}</style>" +
+        '<div id="n-onde"></div><div id="n-fala"></div><div id="n-proxima"></div>',
+    );
+    notas.document.close();
+    notas.addEventListener("keydown", teclar);
+    atualizarNotas();
   }
 
   function telaCheia() {
@@ -51,7 +83,7 @@
     }
   }
 
-  addEventListener("keydown", function (e) {
+  function teclar(e) {
     if (["ArrowRight", " ", "PageDown", "Enter"].indexOf(e.key) >= 0) {
       e.preventDefault();
       if (atual < slides.length - 1) ir(atual + 1, true);
@@ -62,8 +94,11 @@
       ir(0, true);
     } else if (e.key === "f" || e.key === "F") {
       telaCheia();
+    } else if (e.key === "n" || e.key === "N") {
+      abrirNotas();
     }
-  });
+  }
+  addEventListener("keydown", teclar);
   addEventListener("click", function () {
     telaCheia();
     if (atual < slides.length - 1) ir(atual + 1, true);
