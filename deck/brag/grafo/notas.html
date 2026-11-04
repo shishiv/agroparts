@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notas · AgroParts</title>
+    <style>
+      @font-face {
+        font-family: "Barlow";
+        src: url("assets/fonts/barlow-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        src: url("assets/fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+      }
+      body {
+        margin: 0;
+        padding: 2rem 2.5rem;
+        background: #15191a;
+        color: #f3f4f2;
+        font: 400 2rem/1.4 "Barlow", sans-serif;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        font: 700 2.4rem/1 "Barlow Semi Condensed", sans-serif;
+      }
+      #notas {
+        margin-top: 1.5rem;
+        white-space: pre-line;
+      }
+      #relogio {
+        font-variant-numeric: tabular-nums;
+        color: #c7cccd;
+      }
+    </style>
+  </head>
+  <body>
+    <header><span id="pos">–</span><span id="relogio">0:00</span></header>
+    <p id="notas">Abra o deck e avance um slide.</p>
+    <script>
+      const canal = new BroadcastChannel("agroparts-grafo");
+      const pos = document.getElementById("pos");
+      const notas = document.getElementById("notas");
+      const relogio = document.getElementById("relogio");
+      let inicio = 0;
+      canal.onmessage = (e) => {
+        if (typeof e.data !== "object") return;
+        if (!inicio && e.data.atual >= 0) inicio = performance.now();
+        pos.textContent = `${e.data.atual + 1} de ${e.data.total}`;
+        notas.textContent = e.data.notas || "";
+      };
+      canal.postMessage("estado");
+      setInterval(() => {
+        if (!inicio) return;
+        const s = Math.floor((performance.now() - inicio) / 1000);
+        relogio.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+      }, 500);
+      addEventListener("keydown", (e) => {
+        if (["ArrowRight", " ", "PageDown"].includes(e.key)) canal.postMessage("avancar");
+        if (["ArrowLeft", "PageUp"].includes(e.key)) canal.postMessage("voltar");
+      });
+    </script>
+  </body>
+</html>

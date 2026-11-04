@@ -1,0 +1,10 @@
+{
+  "name": "agroparts-deck-grafo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "apresentar": "python3 -m http.server 8090 --bind 127.0.0.1",
+    "check": "npx --yes hyperframes@0.9.12 check",
+    "render": "npx --yes hyperframes@0.9.12 render --output deck.mp4"
+  }
+}
