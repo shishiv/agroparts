@@ -13,7 +13,7 @@ COMP="$DECK/composition"
 
 mapfile -t SLIDES < <(node -e '
   const html = require("fs").readFileSync(process.argv[1], "utf8");
-  for (const [tag] of html.matchAll(/<section[^>]*class="slide[^"]*"[^>]*>/g)) {
+  for (const [tag] of html.matchAll(/<section id="[^"]*" class="slide[^"]*"[^>]*>/g)) {
     const a = (n) => (tag.match(new RegExp(`data-${n}="([^"]*)"`)) || [])[1];
     console.log([tag.match(/id="([^"]*)"/)[1], a("start"), a("pausa"), a("segurar") ?? 3].join(" "));
   }' "$COMP/index.html")
@@ -38,7 +38,9 @@ for s in "${SLIDES[@]}"; do
   ROTULOS+="[v$i]"
   i=$((i + 1))
 done
-ffmpeg -y -loglevel error -i "$SAIDA/filme.mp4" -filter_complex "${FILTRO}${ROTULOS}concat=n=${i}:v=1:a=0,format=yuv420p[v]" \
+# O quadro final do slide 1 vira o quadro 0, a miniatura do vídeo no celular.
+ffmpeg -y -loglevel error -i "$SAIDA/filme.mp4" -i "$(ls "$SAIDA"/quadros/01-*.png)" \
+  -filter_complex "${FILTRO}${ROTULOS}concat=n=${i}:v=1:a=0[c];[c][1:v]overlay=enable='eq(n,0)',format=yuv420p[v]" \
   -map "[v]" -c:v libx264 -crf 18 -preset medium -movflags +faststart "$SAIDA/deck.mp4"
 rm "$SAIDA/filme.mp4"
 
