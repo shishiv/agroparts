@@ -1,0 +1,8 @@
+Fotos (as mesmas de public/exemplos/, com os créditos de public/exemplos/CREDITOS.txt):
+- foto-rolamento-6203-c3-rkw.jpg: "Second half of 20th century ball bearing 6203 C3 M7 by RKW", R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0.
+- colheita-piracicaba.jpg: "Sugarcane harvest Piracicaba 05 2009 5783", Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0.
+- etiqueta-impressa-catmat-311960.png: imagem gerada pela equipe a partir do item CATMAT 311960.
+Mapa: contorno do Brasil do Natural Earth 1:50m (domínio público), simplificado.
+Slide 10: a tela é a marcação real de https://agroparts.pages.dev/diagnostico com o resultado do arquivo de teste
+(bun scripts/arquivo-diagnostico.ts): 629 itens lidos, 307 na família, 322 fora, 55 grupos, 84 para uma pessoa, e o grupo 6001-2Z.
+QR: qrencode, para https://agroparts.pages.dev/diagnostico.

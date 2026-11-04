@@ -30,91 +30,577 @@
         background: var(--chapa);
         font-family: "Barlow", sans-serif;
         color: var(--tinta);
-      }
-      .corpo {
-        position: absolute;
-        inset: 0;
-        background: var(--chapa);
+        font-variant-numeric: tabular-nums;
       }
       .slide {
         position: absolute;
         inset: 0;
         overflow: hidden;
       }
-
-      /* Abertura: os quatro nomes chegam como linhas de uma lista de app. */
-      #ab-palco {
+      .corpo {
         position: absolute;
-        left: 180px;
-        top: 165px;
-        width: 1560px;
-        height: 780px;
-        transform-origin: 0 50%;
+        inset: 0;
+        background: var(--chapa);
+        visibility: hidden;
+        opacity: 0;
       }
-      .ab-linha {
+      .corpo > * {
+        position: absolute;
+      }
+      .corpo p,
+      .corpo h2 {
+        margin: 0;
+        max-width: none;
+      }
+
+      /* Tipos do deck: os tokens do DESIGN.md em tamanho de projeção. */
+      .titulo {
+        left: 140px;
+        top: 96px;
+        width: 1640px;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 76px;
+        line-height: 1.04;
+        letter-spacing: -0.015em;
+      }
+      .d-linha {
+        font-family: "Barlow", sans-serif;
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 1.25;
+        color: var(--tinta-2);
+      }
+      .numero {
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+      .cartao {
+        background: var(--papel);
+        border: 2px solid var(--tinta);
+        border-radius: 4px;
+      }
+      .d-rotulo {
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 52px;
+        line-height: 1;
+      }
+      .picto {
+        display: block;
+      }
+
+      /* 1 · Abertura */
+      #s1-foto {
+        left: 1040px;
+        top: 0;
+        width: 880px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      #s1-foto img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #s1-marca {
+        left: 120px;
+        top: 300px;
+        width: 880px;
+        height: 200px;
+        font-size: 168px;
+      }
+      #s1-marca span {
+        position: absolute;
+        top: 0;
+      }
+      #s1-chave-a { left: 0; }
+      #s1-nome { left: 80px; }
+      #s1-chave-f { left: 780px; }
+      #s1-frase {
+        left: 128px;
+        top: 560px;
+        width: 820px;
+        font-size: 60px;
+        color: var(--tinta);
+      }
+
+      /* 2 · A cena */
+      #s2-foto {
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      #s2-foto img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #s2-sistema {
+        left: 140px;
+        top: 380px;
+        padding: 40px 52px;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 72px;
+        line-height: 1.05;
+        white-space: nowrap;
+        transform-origin: 0 0;
+      }
+      #s2-prateleira {
+        left: 140px;
+        top: 420px;
+        width: 1640px;
+        height: 330px;
+      }
+      #s2-prateleira .tabua {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 14px;
+        background: var(--tinta);
+      }
+      .s2-caixa {
+        position: absolute;
+        bottom: 14px;
+        width: 300px;
+        height: 260px;
+        display: grid;
+        place-items: center;
+      }
+      .s2-caixa .picto {
+        width: 150px;
+        height: 150px;
+      }
+      #s2-cx1 { left: 330px; }
+      #s2-cx2 { left: 670px; }
+      #s2-cx3 { left: 1010px; }
+      #s2-tres {
+        left: 140px;
+        top: 820px;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 96px;
+        line-height: 1;
+      }
+
+      /* 3 · Quanto custa */
+      #s3-valor {
+        left: 128px;
+        top: 360px;
+        font-size: 250px;
+      }
+      #s3-fonte {
+        left: 140px;
+        top: 700px;
+        width: 1500px;
+      }
+
+      /* 4 e 7 · os três setores */
+      .setor {
+        left: 140px;
+        width: 1640px;
+        height: 150px;
         display: flex;
         align-items: center;
         gap: 40px;
-        height: 150px;
-        border-top: 2px solid var(--linha);
-        font-family: "Barlow Semi Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 104px;
+      }
+      .setor .d-rotulo {
+        flex: none;
+        width: 400px;
+      }
+      .setor .cartao {
+        flex: none;
+        width: 900px;
+        padding: 26px 32px;
+        font-family: "Barlow", sans-serif;
+        font-weight: 500;
+        font-size: 44px;
         line-height: 1;
-        letter-spacing: -0.015em;
-        color: var(--tinta);
-        font-variant-numeric: tabular-nums;
-      }
-      .ab-linha span {
-        display: block;
-      }
-      #ab-l4 {
-        height: 300px;
-        border-top: 6px solid var(--tinta);
-        font-size: 124px;
         white-space: nowrap;
+        overflow: hidden;
       }
-      #ab-logo {
+      #s4-a { top: 280px; }
+      #s4-b { top: 450px; }
+      #s4-c { top: 620px; }
+      #s4-ligas {
+        left: 1440px;
+        top: 280px;
+        width: 220px;
+        height: 490px;
+      }
+      #s4-peca {
+        left: 1620px;
+        top: 445px;
         width: 160px;
         height: 160px;
-        flex: none;
+      }
+      #s4-fim {
+        left: 140px;
+        top: 840px;
+        width: 1640px;
+        font-size: 56px;
         color: var(--tinta);
       }
+      #s7-a { top: 330px; }
+      #s7-b { top: 520px; }
+      #s7-c { top: 710px; }
+      .ganho {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 600;
+        font-size: 72px;
+        line-height: 1;
+      }
+      .ganho .picto {
+        width: 76px;
+        height: 76px;
+        flex: none;
+      }
 
-      /* Produto: a tela real do /diagnostico, com uma câmera por cima. */
-      .camera {
+      /* 5 · 1 em 12 */
+      #s5-numero {
+        left: 128px;
+        top: 250px;
+        font-size: 260px;
+      }
+      #s5-frase {
+        left: 140px;
+        top: 590px;
+        width: 760px;
+        font-size: 52px;
+        color: var(--tinta);
+      }
+      #s5-grade {
+        left: 1060px;
+        top: 250px;
+        width: 720px;
+        height: 560px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+      .s5-cad {
+        position: relative;
+        display: grid;
+        place-items: center;
+        color: var(--linha);
+      }
+      .s5-cad .picto {
+        width: 84px;
+        height: 84px;
+      }
+      #s5-repetido {
+        left: 1060px;
+        top: 250px;
+        width: 162px;
+        height: 171px;
+        display: grid;
+        place-items: center;
+        background: var(--tinta);
+        border: 2px solid var(--tinta);
+        border-radius: 4px;
+        color: var(--papel);
+      }
+      #s5-repetido .picto {
+        width: 84px;
+        height: 84px;
+      }
+
+      /* 6 · A resposta */
+      .resposta {
+        left: 140px;
+        width: 1640px;
+        height: 230px;
+        display: flex;
+        align-items: center;
+        gap: 36px;
+      }
+      #s6-mesma { top: 300px; }
+      #s6-pessoa { top: 640px; }
+      .d-selo {
+        flex: none;
+        width: 132px;
+        height: 132px;
+        border-radius: 4px;
+        display: grid;
+        place-items: center;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 110px;
+        line-height: 1;
+      }
+      #s6-mesma .d-selo {
+        background: var(--verde);
+        color: var(--papel);
+      }
+      #s6-pessoa .d-selo {
+        background: var(--amarelo);
+        color: var(--tinta);
+      }
+      .resposta .frase {
+        flex: none;
+        width: 640px;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 72px;
+        line-height: 1.02;
+      }
+      .cad {
+        flex: none;
+        width: 300px;
+        height: 180px;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        justify-items: center;
+        align-items: center;
+        padding: 18px 0 22px;
+        box-sizing: border-box;
+      }
+      .cad .lados {
+        display: flex;
+        gap: 10px;
+      }
+      .cad .lados .picto {
+        width: 72px;
+        height: 72px;
+      }
+      .cad .codigo {
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 56px;
+        line-height: 1;
+      }
+      .cad.duvida .codigo {
+        font-size: 120px;
+      }
+      #s6-par {
+        position: relative;
+        flex: none;
+        width: 640px;
+        height: 180px;
+      }
+      #s6-par .cad {
+        position: absolute;
+        top: 0;
+      }
+      #s6-a { left: 0; }
+      #s6-b { left: 316px; }
+      #s6-seta {
+        flex: none;
+        width: 110px;
+        height: 60px;
+      }
+      #s6-gente {
+        flex: none;
+        width: 150px;
+        height: 150px;
+        color: var(--amarelo-escuro);
+      }
+
+      /* 8 · Cinco passos */
+      .passo {
+        left: 140px;
+        width: 1080px;
+        height: 118px;
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 600;
+        font-size: 56px;
+        line-height: 1;
+      }
+      .passo .d-num {
+        flex: none;
+        width: 92px;
+        height: 92px;
+        border-radius: 2px;
+        display: grid;
+        place-items: center;
+        background: var(--tinta);
+        color: var(--papel);
+        font-weight: 700;
+        font-size: 60px;
+      }
+      #s8-p1 { top: 270px; }
+      #s8-p2 { top: 400px; }
+      #s8-p3 { top: 530px; }
+      #s8-p4 { top: 660px; }
+      #s8-p5 { top: 790px; }
+      #s8-etiqueta {
+        left: 1280px;
+        top: 250px;
+        width: 500px;
+        padding: 0;
+        overflow: hidden;
+      }
+      #s8-etiqueta img {
+        display: block;
+        width: 100%;
+      }
+      #s8-junta {
+        left: 1280px;
+        top: 760px;
+        width: 500px;
+        height: 180px;
+      }
+      #s8-junta .cad {
+        position: absolute;
+        top: 0;
+        width: 240px;
+      }
+      #s8-ja { left: 0; }
+      #s8-jb { left: 260px; }
+
+      /* 9 · O teste */
+      .rodada {
+        left: 140px;
+        width: 1640px;
+        height: 200px;
+        display: flex;
+        align-items: baseline;
+        gap: 48px;
+      }
+      .rodada .d-rotulo {
+        flex: none;
+        width: 720px;
+        font-size: 72px;
+      }
+      .rodada .numero {
+        font-size: 190px;
+      }
+      #s9-r1 { top: 330px; }
+      #s9-r2 { top: 560px; }
+      #s9-fim {
+        left: 140px;
+        top: 860px;
+        width: 1640px;
+      }
+
+      /* 10 · Teste na sua usina: a tela real do /diagnostico */
+      #s10-janela {
+        left: 140px;
+        top: 220px;
+        width: 1640px;
+        height: 700px;
+        overflow: hidden;
+        background: var(--chapa);
+      }
+      #s10-camera {
         position: absolute;
         left: 0;
         top: 0;
         width: 1920px;
-        height: 2200px;
+        height: 2000px;
         transform-origin: 0 0;
       }
-      .camera .topo,
-      .camera main {
+      #s10-camera main,
+      #s10-camera .topo {
         background: var(--chapa);
       }
-      #dx-arquivo {
-        position: absolute;
+      #s10-camera .dx-grupos {
+        margin-top: 1.2rem;
+      }
+      #s10-arquivo {
         left: 0;
         top: 0;
-        display: flex;
-        align-items: center;
-        gap: 22px;
-        padding: 26px 34px;
-        background: var(--papel);
-        border: 2px solid var(--tinta);
-        border-radius: 4px;
-        font-family: "Barlow", sans-serif;
-        font-weight: 600;
-        font-size: 30px;
-        color: var(--tinta);
-        white-space: nowrap;
+        width: 150px;
+        height: 180px;
+        display: grid;
+        place-items: center;
       }
-      #dx-arquivo svg {
-        width: 46px;
-        height: 56px;
+      #s10-arquivo .picto {
+        width: 92px;
+        height: 110px;
+      }
+      #s10-fim {
+        left: 140px;
+        top: 958px;
+        font-size: 52px;
+        color: var(--tinta);
+      }
+
+      /* 11 · Lá fora */
+      #s11-valor {
+        left: 128px;
+        top: 320px;
+        font-size: 200px;
+      }
+      #s11-fonte {
+        left: 140px;
+        top: 560px;
+        width: 860px;
+      }
+      #s11-mapa {
+        left: 1260px;
+        top: 220px;
+        width: 500px;
+        height: 497px;
+      }
+      #s11-ninguem {
+        left: 1080px;
+        top: 780px;
+        width: 700px;
+        font-size: 52px;
+        color: var(--tinta);
+      }
+
+      /* 12 · O pedido */
+      .pedido {
+        left: 140px;
+        width: 900px;
+        display: flex;
+        align-items: flex-start;
+        gap: 32px;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 600;
+        font-size: 64px;
+        line-height: 1.05;
+      }
+      .pedido::before {
+        content: "";
         flex: none;
+        width: 26px;
+        height: 26px;
+        margin-top: 20px;
+        background: var(--tinta);
+      }
+      #s12-a { top: 330px; }
+      #s12-b { top: 470px; }
+      #s12-c { top: 610px; }
+      #s12-qr {
+        left: 1200px;
+        top: 300px;
+        width: 460px;
+        height: 460px;
+        padding: 30px;
+      }
+      #s12-qr img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        image-rendering: pixelated;
+      }
+      #s12-link {
+        left: 1200px;
+        top: 840px;
+        width: 640px;
+        font-family: "Barlow", sans-serif;
+        font-weight: 700;
+        font-size: 42px;
+        line-height: 1.25;
+        color: var(--azul);
       }
     </style>
   </head>
@@ -122,139 +608,384 @@
     <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
       <defs>
         <symbol id="p-peca" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="4" /><circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="4" /><g fill="currentColor"><circle cx="24" cy="11.5" r="3" /><circle cx="24" cy="36.5" r="3" /><circle cx="11.5" cy="24" r="3" /><circle cx="36.5" cy="24" r="3" /><circle cx="15.2" cy="15.2" r="3" /><circle cx="32.8" cy="32.8" r="3" /><circle cx="32.8" cy="15.2" r="3" /><circle cx="15.2" cy="32.8" r="3" /></g></symbol>
+        <symbol id="p-blindado" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#fff" stroke="#15191a" stroke-width="3" /><circle cx="24" cy="24" r="16.5" fill="#c7cccd" stroke="#15191a" stroke-width="1.5" /><circle cx="24" cy="24" r="9" fill="#fff" stroke="#15191a" stroke-width="3" /></symbol>
         <symbol id="p-seta" viewBox="0 0 24 24"><path d="M5 12h12M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" /></symbol>
-        <symbol id="p-csv" viewBox="0 0 40 48"><path d="M2 2h26l10 10v34H2z" fill="none" stroke="currentColor" stroke-width="3" /><path d="M28 2v10h10" fill="none" stroke="currentColor" stroke-width="3" /><path d="M8 22h24M8 30h24M8 38h24M17 18v24" stroke="currentColor" stroke-width="2.5" /></symbol>
+        <symbol id="p-visto" viewBox="0 0 48 48"><path d="M10 25.5 19.5 35 38 14" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" /></symbol>
+        <symbol id="p-revisa" viewBox="0 0 48 48"><circle cx="24" cy="11.5" r="5.5" fill="currentColor" /><path d="M15 21h18l-2.5 13H28l-1 10h-6l-1-10h-2.5z" fill="currentColor" /></symbol>
+        <symbol id="p-csv" viewBox="0 0 40 48"><path d="M2 2h26l10 10v34H2z" fill="#fff" stroke="currentColor" stroke-width="3" /><path d="M28 2v10h10" fill="none" stroke="currentColor" stroke-width="3" /><path d="M8 22h24M8 30h24M8 38h24M17 18v24" stroke="currentColor" stroke-width="2.5" /></symbol>
       </defs>
     </svg>
 
-    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
-      <!--
-        Cada <section class="slide"> é um slide do apresentador (index.html da pasta acima):
-        a entrada toca de data-start até data-pausa e o slide para ali, no quadro final.
-        data-notas é a fala, só na tela de quem apresenta.
-      -->
-      <section
-        id="s-abertura"
-        class="slide clip"
-        data-start="0"
-        data-duration="5"
-        data-track-index="1"
-        data-track-kind="graphics"
-        data-pausa="4.9"
-        data-notas="Gabi, Myke e Alberto, um de cada vez. Abertura fixa."
-      >
+    <!--
+      Um <section class="slide"> por slide do texto aprovado
+      (data/agroparts-brag-texto/report.md, 04/11/2026). O texto visível de cada slide é o
+      "Na tela" daquele slide, palavra por palavra; data-notas é a "Fala".
+      A casca (../apresentador.js) toca de data-start até data-pausa e para ali.
+      data-segurar é quanto o quadro final fica parado no MP4 (scripts/entregar.sh).
+    -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="66.5" data-width="1920" data-height="1080">
+      <section id="s-abertura" class="slide clip" data-start="0" data-duration="4" data-pausa="3.9" data-segurar="4" data-track-index="1" data-track-kind="graphics"
+        data-notas="GABI: Boa tarde. Eu sou a Gabi.
+MYKE: Eu sou o Myke.
+ALBERTO: Eu sou o Alberto.
+GABI: E nós somos a AgroParts. Queremos que a usina não compre a peça que ela já tem.">
         <div class="corpo">
-        <div id="ab-palco">
-          <div class="ab-linha" id="ab-l1"><span>Eu sou a Gabi.</span></div>
-          <div class="ab-linha" id="ab-l2"><span>Eu sou o Myke.</span></div>
-          <div class="ab-linha" id="ab-l3"><span>Eu sou o Alberto.</span></div>
-          <div class="ab-linha" id="ab-l4">
-            <svg id="ab-logo" aria-hidden="true"><use href="#p-peca" /></svg>
-            <span>E nós somos a AgroParts.</span>
+          <div id="s1-foto"><img src="assets/img/foto-rolamento-6203-c3-rkw.jpg" alt="" /></div>
+          <div id="s1-marca" class="numero">
+            <span id="s1-chave-a">{</span><span id="s1-nome">AgroParts</span><span id="s1-chave-f">}</span>
           </div>
-        </div>
+          <p id="s1-frase" class="d-linha">Para a usina não comprar a peça que ela já tem.</p>
         </div>
       </section>
 
-      <section
-        id="s-diagnostico"
-        class="slide clip"
-        data-start="5"
-        data-duration="7"
-        data-track-index="1"
-        data-track-kind="graphics"
-        data-pausa="11.9"
-        data-notas="Prova de movimento da direção Produto: o CSV entra, o relatório sai. O texto aprovado substitui este slide."
-        data-layout-allow-overflow
-      >
+      <section id="s-cena" class="slide clip" data-start="4" data-duration="6" data-pausa="9.9" data-segurar="4" data-track-index="1" data-track-kind="graphics"
+        data-notas="GABI: Dia de safra. A colhedora para e precisa de uma peça. O sistema diz que a peça não existe, e compras faz um pedido urgente. Mas, na prateleira, havia três.">
         <div class="corpo">
-        <div class="camera" id="dx-camera">
-          <header class="topo">
-            <span class="marca">
-              <svg class="logo" aria-hidden="true"><use href="#p-peca" /></svg>
-              <span class="nome">AgroParts</span>
-            </span>
-          </header>
-          <main>
-            <section class="aba">
-              <h1>Quais cadastros são a mesma peça?</h1>
-              <p class="lead">Escolha o arquivo CSV com o seu cadastro de material. A página mostra os códigos que são a mesma peça e o que precisa de uma pessoa.</p>
-              <ul class="dx-garantias">
-                <li><strong>Rolamento rígido de esferas das séries 60, 62 e 63.</strong> Os outros materiais ficam de fora.</li>
-                <li><strong>O arquivo não sai do seu navegador.</strong> Nada é enviado a um servidor.</li>
-              </ul>
-              <div class="acoes dx-escolha">
-                <span class="botao primario botao-arquivo" id="dx-botao">Escolher arquivo CSV <svg aria-hidden="true"><use href="#p-seta" /></svg></span>
-              </div>
-              <div id="dx-resultado">
-                <div class="resumo-lote" id="dx-resumo">
-                  <div><strong data-ate="397">397</strong><span>itens lidos</span></div>
-                  <div><strong data-ate="215">215</strong><span>na família coberta</span></div>
-                  <div><strong data-ate="182">182</strong><span>fora da família</span></div>
-                  <div><strong data-ate="28">28</strong><span>grupos de cadastros duplicados</span></div>
-                  <div><strong data-ate="74">74</strong><span>precisa de uma pessoa</span></div>
-                </div>
-              </div>
-            </section>
-          </main>
+          <div id="s2-foto"><img src="assets/img/colheita-piracicaba.jpg" alt="" /></div>
+          <div id="s2-prateleira">
+            <div class="s2-caixa cartao" id="s2-cx1"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s2-caixa cartao" id="s2-cx2"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s2-caixa cartao" id="s2-cx3"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="tabua"></div>
+          </div>
+          <p id="s2-sistema" class="cartao">O sistema diz que a peça não existe.</p>
+          <p id="s2-tres">Na prateleira, havia três.</p>
         </div>
-        <div id="dx-arquivo">
-          <svg aria-hidden="true"><use href="#p-csv" /></svg>
-          <span>catmat-rolamento-de-esfera.csv</span>
+      </section>
+
+      <section id="s-custo" class="slide clip" data-start="10" data-duration="4.5" data-pausa="14.4" data-segurar="4" data-track-index="1" data-track-kind="graphics"
+        data-notas="GABI: E quanto custa manter uma usina rodando? Milhões. A São Martinho publicou: 183 milhões e meio de reais com manutenção de entressafra, em nove meses. Cada peça comprada sem precisar sai desse dinheiro.">
+        <div class="corpo">
+          <h2 id="s3-pergunta" class="titulo">Quanto custa manter uma usina rodando?</h2>
+          <p id="s3-valor" class="numero">R$ <span id="s3-conta">183,5</span> milhões</p>
+          <p id="s3-fonte" class="d-linha">São Martinho, manutenção de entressafra, em 9 meses</p>
         </div>
+      </section>
+
+      <section id="s-manual" class="slide clip" data-start="14.5" data-duration="6.5" data-pausa="20.9" data-segurar="6" data-track-index="1" data-track-kind="graphics"
+        data-notas="GABI: Isso acontece porque hoje é manual. Cada setor cadastra do seu jeito: o almoxarifado de um jeito, a manutenção de outro, compras de outro. O sistema vê três peças, que na verdade são uma só. E cada fornecedor ainda escreve a peça de outro jeito na nota fiscal.">
+        <div class="corpo">
+          <h2 id="s4-titulo" class="titulo">Hoje é manual. Cada setor cadastra do seu jeito.</h2>
+          <div id="s4-a" class="setor"><span class="d-rotulo">Almoxarifado:</span><span class="cartao"><span class="digita">ROLAM 6318ZZC3 P/ BOMBA</span></span></div>
+          <div id="s4-b" class="setor"><span class="d-rotulo">Manutenção:</span><span class="cartao"><span class="digita">ROL 6318 ZZ C3</span></span></div>
+          <div id="s4-c" class="setor"><span class="d-rotulo">Compras:</span><span class="cartao"><span class="digita">ROLAMENTO RIG. ESFERAS 6318-2Z/C3</span></span></div>
+          <svg id="s4-ligas" viewBox="0 0 220 490" fill="none" stroke="#15191a" stroke-width="5">
+            <path class="liga" d="M0 75 C120 75 110 245 220 245" />
+            <path class="liga" d="M0 245 L220 245" />
+            <path class="liga" d="M0 415 C120 415 110 245 220 245" />
+          </svg>
+          <svg id="s4-peca" class="picto"><use href="#p-peca" /></svg>
+          <p id="s4-fim" class="d-linha">O sistema vê três peças, que na verdade são uma só.</p>
+        </div>
+      </section>
+
+      <section id="s-raro" class="slide clip" data-start="21" data-duration="4.5" data-pausa="25.4" data-segurar="4" data-track-index="1" data-track-kind="graphics"
+        data-notas="GABI: E isso não é caso raro. Nós lemos os 396 cadastros de rolamento do catálogo do governo: um em cada doze, ou 8%, está repetido.">
+        <div class="corpo">
+          <p id="s5-numero" class="numero">1 em 12</p>
+          <p id="s5-frase" class="d-linha">dos cadastros de rolamento do catálogo do governo está repetido</p>
+          <div id="s5-grade">
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+            <div class="s5-cad cartao"><svg class="picto"><use href="#p-peca" /></svg></div>
+          </div>
+          <div id="s5-repetido"><svg class="picto"><use href="#p-peca" /></svg></div>
+        </div>
+      </section>
+
+      <section id="s-resposta" class="slide clip" data-start="25.5" data-duration="5.5" data-pausa="30.9" data-segurar="5" data-track-index="1" data-track-kind="graphics"
+        data-notas="MYKE: A AgroParts confere a peça e responde: é a mesma peça, ou precisa de uma pessoa. Quando não tem certeza, ela não junta nada e chama uma pessoa.">
+        <div class="corpo">
+          <h2 id="s6-titulo" class="titulo">A AgroParts confere a peça e responde</h2>
+          <div id="s6-mesma" class="resposta">
+            <span class="d-selo">=</span>
+            <span class="frase">É a mesma peça</span>
+            <div id="s6-par">
+              <div id="s6-a" class="cad cartao"><span class="lados"><svg class="picto"><use href="#p-blindado" /></svg><svg class="picto"><use href="#p-blindado" /></svg></span><span class="codigo">317388</span></div>
+              <div id="s6-b" class="cad cartao"><span class="lados"><svg class="picto"><use href="#p-blindado" /></svg><svg class="picto"><use href="#p-blindado" /></svg></span><span class="codigo">472510</span></div>
+            </div>
+          </div>
+          <div id="s6-pessoa" class="resposta">
+            <span class="d-selo">?</span>
+            <span class="frase">Precisa de uma pessoa</span>
+            <div id="s6-c" class="cad cartao duvida"><span class="codigo">?</span></div>
+            <svg id="s6-seta" viewBox="0 0 24 12" fill="none" stroke="#15191a" stroke-width="1.6"><path d="M1 6h20M16 1.5 21 6l-5 4.5" /></svg>
+            <svg id="s6-gente" class="picto"><use href="#p-revisa" /></svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="s-ganho" class="slide clip" data-start="31" data-duration="4.5" data-pausa="35.4" data-segurar="4" data-track-index="1" data-track-kind="graphics"
+        data-notas="MYKE: Com isso, cada setor ganha: o almoxarifado acha a peça, a manutenção sabe se já tem, e compras não compra de novo.">
+        <div class="corpo">
+          <h2 id="s7-titulo" class="titulo">Um ganho para cada setor</h2>
+          <div id="s7-a" class="setor"><span class="d-rotulo">Almoxarifado:</span><span class="ganho"><svg class="picto"><use href="#p-visto" /></svg>Acha a peça</span></div>
+          <div id="s7-b" class="setor"><span class="d-rotulo">Manutenção:</span><span class="ganho"><svg class="picto"><use href="#p-visto" /></svg>Sabe se já tem</span></div>
+          <div id="s7-c" class="setor"><span class="d-rotulo">Compras:</span><span class="ganho"><svg class="picto"><use href="#p-visto" /></svg>Não compra de novo</span></div>
+        </div>
+      </section>
+
+      <section id="s-passos" class="slide clip" data-start="35.5" data-duration="6" data-pausa="41.4" data-segurar="6" data-track-index="1" data-track-kind="graphics"
+        data-notas="MYKE: São cinco passos, e tudo leva segundos. Um: a pessoa digita o código do sistema ou da caixa da peça, escreve o nome, ou tira uma foto da etiqueta, e a AgroParts lê o texto da foto. Dois: lê as medidas e o tipo da peça. Três: procura no catálogo as peças parecidas. Quatro: compara uma a uma. Cinco: junta os cadastros da mesma peça, sem apagar o original. Assim, quem vai comprar sabe o que a usina já tem.">
+        <div class="corpo">
+          <h2 id="s8-titulo" class="titulo">Cinco passos, em segundos</h2>
+          <div id="s8-p1" class="passo"><span class="d-num">1</span><span>Recebe código, nome ou foto</span></div>
+          <div id="s8-p2" class="passo"><span class="d-num">2</span><span>Lê as medidas e o tipo da peça</span></div>
+          <div id="s8-p3" class="passo"><span class="d-num">3</span><span>Procura as parecidas no catálogo</span></div>
+          <div id="s8-p4" class="passo"><span class="d-num">4</span><span>Compara uma a uma</span></div>
+          <div id="s8-p5" class="passo"><span class="d-num">5</span><span>Junta os cadastros, sem apagar o original</span></div>
+          <div id="s8-etiqueta" class="cartao"><img src="assets/img/etiqueta-impressa-catmat-311960.png" alt="" /></div>
+          <div id="s8-junta">
+            <div id="s8-ja" class="cad cartao"><span class="lados"><svg class="picto"><use href="#p-blindado" /></svg><svg class="picto"><use href="#p-blindado" /></svg></span></div>
+            <div id="s8-jb" class="cad cartao"><span class="lados"><svg class="picto"><use href="#p-blindado" /></svg><svg class="picto"><use href="#p-blindado" /></svg></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s-teste" class="slide clip" data-start="41.5" data-duration="5" data-pausa="46.4" data-segurar="5" data-track-index="1" data-track-kind="graphics"
+        data-notas="MYKE: E nós testamos com cadastros reais e públicos: 42 cadastros de rolamento do catálogo de compras do governo federal. A AgroParts comparou esses cadastros dois a dois, em 104 comparações, e disse se era a mesma peça. Na primeira rodada, errou 6. Depois de um ajuste, errou 0. E qualquer pessoa pode refazer esse teste, porque o código e os dados são públicos.">
+        <div class="corpo">
+          <h2 id="s9-titulo" class="titulo">Testamos com cadastros reais e públicos do governo</h2>
+          <div id="s9-r1" class="rodada"><span class="d-rotulo">1ª rodada:</span><span class="numero">6 erros</span></div>
+          <div id="s9-r2" class="rodada"><span class="d-rotulo">Depois de um ajuste:</span><span class="numero"><span id="s9-conta">0</span> erros</span></div>
+          <p id="s9-fim" class="d-linha">Em 104 comparações. Qualquer pessoa pode refazer o teste.</p>
+        </div>
+      </section>
+
+      <section id="s-usina" class="slide clip" data-start="46.5" data-duration="9" data-pausa="55.4" data-segurar="5" data-track-index="1" data-track-kind="graphics" data-layout-allow-overflow
+        data-notas="ALBERTO: E a sua usina pode testar hoje, com o próprio cadastro. Abre a página, escolhe a planilha, e a AgroParts mostra os cadastros que são a mesma peça. O arquivo não sai do seu computador. Num arquivo público de 629 linhas, do catálogo e das compras do governo, ela achou 55 grupos da mesma peça. Por enquanto, ela confere rolamento.">
+        <div class="corpo">
+          <h2 id="s10-titulo" class="titulo">Teste hoje com o cadastro da sua usina</h2>
+          <div id="s10-janela" class="cartao" data-layout-allow-overflow>
+            <div id="s10-camera">
+              <header class="topo">
+                <span class="marca">
+                  <svg class="logo" aria-hidden="true"><use href="#p-peca" /></svg>
+                  <span class="nome">AgroParts</span>
+                </span>
+              </header>
+              <main>
+                <section class="aba">
+                  <h1>Quais cadastros são a mesma peça?</h1>
+                  <p class="lead">Escolha o arquivo CSV com o seu cadastro de material. A página mostra os códigos que são a mesma peça e o que precisa de uma pessoa.</p>
+                  <ul class="dx-garantias">
+                    <li><strong>Rolamento rígido de esferas das séries 60, 62 e 63.</strong> Os outros materiais ficam de fora.</li>
+                    <li><strong>O arquivo não sai do seu navegador.</strong> Nada é enviado a um servidor.</li>
+                  </ul>
+                  <div class="acoes dx-escolha">
+                    <span class="botao primario botao-arquivo" id="s10-botao">Escolher arquivo CSV <svg aria-hidden="true"><use href="#p-seta" /></svg></span>
+                  </div>
+                  <div id="s10-resultado">
+                    <div class="resumo-lote" id="s10-resumo">
+                      <div id="s10-lidos"><strong data-ate="629">629</strong><span>itens lidos</span></div>
+                      <div class="s10-apaga"><strong data-ate="307">307</strong><span>na família coberta</span></div>
+                      <div class="s10-apaga"><strong data-ate="322">322</strong><span>fora da família</span></div>
+                      <div id="s10-grupos"><strong data-ate="55">55</strong><span>grupos de cadastros duplicados</span></div>
+                      <div id="s10-pessoa"><strong data-ate="84">84</strong><span>precisa de uma pessoa</span></div>
+                    </div>
+                    <ul class="dx-grupos">
+                      <li class="dx-grupo" id="s10-grupo">
+                        <h3>6001-2Z <span class="dx-quantos">2 cadastros</span></h3>
+                        <div class="dx-itens">
+                          <div class="dx-item"><span class="dx-codigo">472477</span><span class="dx-texto">ROLAMENTO DE ESFERA, TIPO USO: MÁQUINAS EM GERAL , CARACTERÍSTICAS ADICIONAIS: RÍGIDO DE UMA CARREIRA DE ESFERAS, BLINDAGEM DUPLA , DIÂMETRO INTERNO: 12 MM, DIÂMETRO EXTERNO: 28 MM, LARGURA: 8 MM, REFERÊNCIA FABRICANTE 1: 6001 ZZ</span></div>
+                          <div class="dx-item"><span class="dx-codigo">FORN-152</span><span class="dx-texto">6001 ZZ</span></div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+              </main>
+            </div>
+          </div>
+          <div id="s10-arquivo"><svg class="picto"><use href="#p-csv" /></svg></div>
+          <p id="s10-fim" class="d-linha">O arquivo não sai do seu computador.</p>
+        </div>
+      </section>
+
+      <section id="s-fora" class="slide clip" data-start="55.5" data-duration="6" data-pausa="61.4" data-segurar="5" data-track-index="1" data-track-kind="graphics"
+        data-notas="ALBERTO: E isso já é negócio lá fora. A Verusen, uma empresa americana, publicou o caso de uma fabricante que economizou 10 milhões e meio de dólares em estoque de peças. No Brasil, para usina, não achamos ninguém. E só no Centro-Sul, a UNICA conta 250 usinas operando. Quem paga é a usina, com uma assinatura.">
+        <div class="corpo">
+          <h2 id="s11-titulo" class="titulo">Lá fora, isso já é negócio</h2>
+          <p id="s11-valor" class="numero">US$ <span id="s11-conta">10,5</span> mi</p>
+          <p id="s11-fonte" class="d-linha">de economia numa fabricante, segundo a Verusen</p>
+          <svg id="s11-mapa" viewBox="0 0 600 597" fill="none" stroke="#15191a" stroke-width="4" stroke-linejoin="round"><path id="s11-brasil" d="" /></svg>
+          <p id="s11-ninguem" class="d-linha">No Brasil, para usina, não achamos ninguém.</p>
+        </div>
+      </section>
+
+      <section id="s-pedido" class="slide clip" data-start="61.5" data-duration="5" data-pausa="66.4" data-segurar="6" data-track-index="1" data-track-kind="graphics"
+        data-notas="ALBERTO: Para construir a AgroParts a fundo, queremos investimento em dinheiro e em conhecimento, e acesso a uma usina e às pessoas que conhecem o sistema dela. O QR abre o teste da sua usina, em agroparts ponto pages ponto dev, barra diagnóstico. Obrigado.">
+        <div class="corpo">
+          <h2 id="s12-titulo" class="titulo">Queremos investimento para construir a AgroParts</h2>
+          <p id="s12-a" class="pedido">Dinheiro</p>
+          <p id="s12-b" class="pedido">Conhecimento</p>
+          <p id="s12-c" class="pedido">Acesso a uma usina e a quem conhece o sistema dela</p>
+          <div id="s12-qr" class="cartao"><img src="assets/img/qr-diagnostico.svg" alt="QR para agroparts.pages.dev/diagnostico" /></div>
+          <p id="s12-link">Teste hoje: agroparts.pages.dev/diagnostico</p>
         </div>
       </section>
     </div>
 
+    <script src="assets/brasil.js"></script>
     <script>
       const tl = gsap.timeline({ paused: true });
-      const chega = "expo.out";
+      const CHEGA = "expo.out";
+      const sobe = (alvo, t, d = 1.0, y = 60) => tl.fromTo(alvo, { y, opacity: 0 }, { y: 0, opacity: 1, duration: d, ease: CHEGA }, t);
+      const carimbo = (alvo, t) => tl.fromTo(alvo, { scale: 1.18, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: CHEGA }, t);
+      const conta = (el, de, ate, t, d, casas = 0) => {
+        const v = { n: de };
+        const escreve = () => (el.textContent = v.n.toFixed(casas).replace(".", ","));
+        tl.fromTo(v, { n: de }, { n: ate, duration: d, ease: "power2.out", onUpdate: escreve, onComplete: escreve }, t);
+      };
+      const inicio = (id) => Number(document.getElementById(id).dataset.start);
 
-      // Abertura (0 a 5 s): a câmera recua devagar e cada nome sobe na sua linha.
-      tl.fromTo("#ab-palco", { scale: 1.06 }, { scale: 1, duration: 3.6, ease: "power2.out" }, 0);
-      ["#ab-l1", "#ab-l2", "#ab-l3"].forEach((linha, i) => {
-        tl.fromTo(`${linha} span`, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: chega }, 0.15 + i * 0.55);
+      // 1 · Abertura: as chaves se abrem em volta do nome; a foto do rolamento chega devagar.
+      let S = inicio("s-abertura");
+      tl.fromTo("#s1-foto img", { scale: 1.12 }, { scale: 1, duration: 3.6, ease: "power2.out" }, S);
+      tl.fromTo("#s1-foto", { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: 1.2, ease: "power3.inOut" }, S);
+      tl.fromTo("#s1-chave-a", { x: 330, opacity: 0 }, { x: 0, opacity: 1, duration: 1.1, ease: "power3.inOut" }, S + 0.3);
+      tl.fromTo("#s1-chave-f", { x: -370, opacity: 0 }, { x: 0, opacity: 1, duration: 1.1, ease: "power3.inOut" }, S + 0.3);
+      tl.fromTo("#s1-nome", { clipPath: "inset(0 50% 0 50%)" }, { clipPath: "inset(0 0% 0 0%)", duration: 1.1, ease: "power3.inOut" }, S + 0.3);
+      sobe("#s1-frase", S + 1.3, 1.1, 50);
+
+      // 2 · A cena: a colheita, o sistema diz "não existe", e a câmera corre até a prateleira.
+      S = inicio("s-cena");
+      tl.fromTo("#s2-foto img", { scale: 1.15 }, { scale: 1.04, duration: 2.8, ease: "power1.out" }, S);
+      tl.fromTo("#s2-sistema", { y: 50, opacity: 0, scale: 1 }, { y: 0, opacity: 1, duration: 0.9, ease: CHEGA }, S + 0.4);
+      tl.to("#s2-foto", { xPercent: -100, duration: 1.2, ease: "power3.inOut" }, S + 2.6);
+      tl.to("#s2-sistema", { x: 0, y: -200, scale: 0.72, duration: 1.2, ease: "power3.inOut" }, S + 2.6);
+      tl.fromTo("#s2-prateleira", { x: 1920 }, { x: 0, duration: 1.2, ease: "power3.inOut" }, S + 2.6);
+      ["#s2-cx1", "#s2-cx2", "#s2-cx3"].forEach((cx, i) => tl.fromTo(cx, { y: -90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "bounce.out" }, S + 3.5 + i * 0.25));
+      sobe("#s2-tres", S + 4.3, 0.9);
+
+      // 3 · Quanto custa: a pergunta, e o número conta até R$ 183,5 milhões.
+      S = inicio("s-custo");
+      sobe("#s3-pergunta", S + 0.2);
+      tl.fromTo("#s3-valor", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: CHEGA }, S + 0.9);
+      conta(document.getElementById("s3-conta"), 0, 183.5, S + 0.9, 2.0, 1);
+      sobe("#s3-fonte", S + 2.6, 0.9, 40);
+
+      // 4 · Por que acontece: cada setor digita do seu jeito, e as três linhas viram uma peça só.
+      S = inicio("s-manual");
+      sobe("#s4-titulo", S + 0.2);
+      ["#s4-a", "#s4-b", "#s4-c"].forEach((linha, i) => {
+        const t = S + 1.0 + i * 0.8;
+        tl.fromTo(`${linha} .d-rotulo`, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: CHEGA }, t);
+        tl.fromTo(`${linha} .cartao`, { opacity: 0 }, { opacity: 1, duration: 0.3 }, t + 0.1);
+        tl.fromTo(`${linha} .digita`, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.8, ease: "steps(14)" }, t + 0.25);
       });
-      tl.fromTo("#ab-l4 span", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: chega }, 1.9);
-      tl.fromTo("#ab-logo", { scale: 1.18, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: chega }, 2.25);
+      document.querySelectorAll("#s4-ligas .liga").forEach((p) => {
+        const L = p.getTotalLength();
+        tl.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.8, ease: "power2.inOut" }, S + 3.6);
+      });
+      carimbo("#s4-peca", S + 4.3);
+      sobe("#s4-fim", S + 4.7, 0.9, 40);
 
-      // Diagnóstico (5 a 12 s): a câmera vai ao botão, o arquivo cai nele e o relatório sai.
-      const S = 5;
-      const botao = { x: 371, y: 773, w: 362, h: 71 };
-      const camera = (escala, cx, cy) => ({ scale: escala, x: 960 - cx * escala, y: 540 - cy * escala });
-      tl.fromTo("#dx-camera", camera(1, 960, 540), { ...camera(1.55, botao.x + 320, botao.y), duration: 1.4, ease: "power3.inOut" }, S + 0.2);
-      tl.fromTo(
-        "#dx-arquivo",
-        { x: 2000, y: 660, rotation: 6, opacity: 1 },
-        { x: 1040, y: 470, rotation: 0, duration: 1.1, ease: chega },
-        S + 0.9,
-      );
-      tl.to("#dx-arquivo", { x: 700, y: 520, scale: 0.6, opacity: 0, duration: 0.45, ease: "power2.in" }, S + 2.2);
-      tl.fromTo("#dx-botao", { scale: 1 }, { scale: 0.96, duration: 0.12, yoyo: true, repeat: 1, ease: "power1.inOut" }, S + 2.55);
-      tl.fromTo("#dx-resultado", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: chega }, S + 2.8);
-      tl.to("#dx-camera", { ...camera(1.5, 960, 1064), duration: 1.5, ease: "power3.inOut" }, S + 2.7);
-      document.querySelectorAll("#dx-resumo strong").forEach((n, i) => {
-        const ate = Number(n.dataset.ate);
-        const conta = { v: 0 };
-        tl.fromTo(
-          conta,
-          { v: 0 },
-          {
-            v: ate,
-            duration: 1.3,
-            ease: "power2.out",
-            onUpdate: () => (n.textContent = String(Math.round(conta.v))),
-          },
-          S + 3.0 + i * 0.12,
-        );
+      // 5 · Não é caso raro: doze cadastros, e um acende como repetido.
+      S = inicio("s-raro");
+      carimbo("#s5-numero", S + 0.2);
+      sobe("#s5-frase", S + 0.8, 0.9, 40);
+      tl.fromTo("#s5-grade .s5-cad", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)", stagger: 0.07 }, S + 0.8);
+      carimbo("#s5-repetido", S + 2.7);
+
+      // 6 · A resposta: dois cadastros se encaixam; o terceiro vai até uma pessoa.
+      S = inicio("s-resposta");
+      sobe("#s6-titulo", S + 0.2);
+      carimbo("#s6-mesma .d-selo", S + 0.9);
+      sobe("#s6-mesma .frase", S + 1.0, 0.8, 30);
+      tl.fromTo("#s6-a", { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: CHEGA }, S + 1.2);
+      tl.fromTo("#s6-b", { x: 260, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: CHEGA }, S + 1.4);
+      tl.fromTo("#s6-par", { scale: 1 }, { scale: 1.04, duration: 0.15, yoyo: true, repeat: 1, ease: "power1.inOut" }, S + 2.2);
+      carimbo("#s6-pessoa .d-selo", S + 2.6);
+      sobe("#s6-pessoa .frase", S + 2.7, 0.8, 30);
+      tl.fromTo("#s6-c", { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: CHEGA }, S + 2.9);
+      tl.fromTo("#s6-seta", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "power2.out" }, S + 3.6);
+      carimbo("#s6-gente", S + 4.0);
+
+      // 7 · O ganho: cada setor recebe o seu visto.
+      S = inicio("s-ganho");
+      sobe("#s7-titulo", S + 0.2);
+      ["#s7-a", "#s7-b", "#s7-c"].forEach((linha, i) => {
+        const t = S + 0.9 + i * 0.7;
+        tl.fromTo(`${linha} .d-rotulo`, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: CHEGA }, t);
+        tl.fromTo(`${linha} .ganho`, { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: CHEGA }, t + 0.15);
+        carimbo(`${linha} .ganho .picto`, t + 0.45);
       });
 
-      // Cada slide aparece só na sua janela, com ou sem o runtime do HyperFrames.
+      // 8 · Como funciona: os cinco passos acendem em ordem; a etiqueta entra no 1 e dois cadastros se juntam no 5.
+      S = inicio("s-passos");
+      sobe("#s8-titulo", S + 0.2);
+      tl.fromTo(".passo", { opacity: 0 }, { opacity: 0.22, duration: 0.4, stagger: 0.05 }, S + 0.6);
+      ["#s8-p1", "#s8-p2", "#s8-p3", "#s8-p4", "#s8-p5"].forEach((p, i) => {
+        tl.to(p, { opacity: 1, duration: 0.35 }, S + 1.1 + i * 0.6);
+        carimbo(`${p} .d-num`, S + 1.1 + i * 0.6);
+      });
+      tl.fromTo("#s8-etiqueta", { x: 160, opacity: 0, rotation: 4 }, { x: 0, opacity: 1, rotation: 0, duration: 0.9, ease: CHEGA }, S + 1.1);
+      tl.fromTo("#s8-ja", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.6, ease: CHEGA }, S + 3.5);
+      tl.fromTo("#s8-jb", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.6, ease: CHEGA }, S + 3.6);
+      tl.to("#s8-ja", { x: 130, duration: 0.7, ease: "power3.inOut" }, S + 4.0);
+      tl.to("#s8-jb", { x: -130, opacity: 0, duration: 0.7, ease: "power3.inOut" }, S + 4.0);
+
+      // 9 · O teste: 6 erros na primeira rodada, e o segundo número cai até 0.
+      S = inicio("s-teste");
+      sobe("#s9-titulo", S + 0.2);
+      sobe("#s9-r1", S + 0.9, 0.9, 40);
+      sobe("#s9-r2", S + 1.7, 0.9, 40);
+      conta(document.getElementById("s9-conta"), 6, 0, S + 2.0, 1.2);
+      sobe("#s9-fim", S + 3.0, 0.9, 40);
+
+      // 10 · Teste na sua usina: na tela real, o CSV cai no botão e o relatório sai.
+      S = inicio("s-usina");
+      const VW = 1636, VH = 696;
+      const camera = (k, cx, cy) => ({ scale: k, x: VW / 2 - cx * k, y: VH / 2 - cy * k });
+      const PONTOS = { topo: [960, 410], botao: [900, 752], resumo: [960, 1112] };
+      sobe("#s10-titulo", S + 0.2);
+      tl.fromTo("#s10-janela", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: CHEGA }, S + 0.4);
+      tl.fromTo("#s10-camera", camera(0.85, ...PONTOS.topo), { ...camera(1.25, ...PONTOS.botao), duration: 1.3, ease: "power3.inOut" }, S + 1.2);
+      tl.fromTo("#s10-arquivo", { x: 1900, y: 560, rotation: 8, opacity: 1, scale: 1 }, { x: 900, y: 470, rotation: 0, duration: 1.0, ease: CHEGA }, S + 1.9);
+      tl.to("#s10-arquivo", { x: 560, y: 490, scale: 0.5, opacity: 0, duration: 0.45, ease: "power2.in" }, S + 3.0);
+      tl.fromTo("#s10-botao", { scale: 1 }, { scale: 0.95, duration: 0.12, yoyo: true, repeat: 1, ease: "power1.inOut" }, S + 3.35);
+      tl.fromTo("#s10-resultado", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: CHEGA }, S + 3.6);
+      tl.to("#s10-camera", { ...camera(1.16, ...PONTOS.resumo), duration: 1.4, ease: "power3.inOut" }, S + 3.5);
+      document.querySelectorAll("#s10-resumo strong").forEach((n, i) => conta(n, 0, Number(n.dataset.ate), S + 3.8 + i * 0.1, 1.3));
+      tl.to("#s10-resumo .s10-apaga", { opacity: 0.2, duration: 0.6 }, S + 5.4);
+      tl.fromTo("#s10-grupo", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: CHEGA }, S + 5.8);
+      sobe("#s10-fim", S + 6.6, 0.9, 30);
+
+      // 11 · Lá fora: o número conta; o mapa do Brasil se desenha vazio.
+      S = inicio("s-fora");
+      sobe("#s11-titulo", S + 0.2);
+      tl.fromTo("#s11-valor", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: CHEGA }, S + 0.8);
+      conta(document.getElementById("s11-conta"), 0, 10.5, S + 0.8, 1.6, 1);
+      sobe("#s11-fonte", S + 1.9, 0.9, 30);
+      const brasil = document.getElementById("s11-brasil");
+      brasil.setAttribute("d", window.BRASIL);
+      const LB = brasil.getTotalLength();
+      tl.fromTo(brasil, { strokeDasharray: LB, strokeDashoffset: LB }, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut" }, S + 2.6);
+      sobe("#s11-ninguem", S + 4.1, 0.9, 30);
+
+      // 12 · O pedido: os três pedidos entram um a um; por último, o QR.
+      S = inicio("s-pedido");
+      sobe("#s12-titulo", S + 0.2);
+      ["#s12-a", "#s12-b", "#s12-c"].forEach((p, i) => sobe(p, S + 0.9 + i * 0.5, 0.8, 40));
+      carimbo("#s12-qr", S + 2.6);
+      sobe("#s12-link", S + 3.0, 0.8, 30);
+
+      // Cada slide aparece só na sua janela, com ou sem o runtime do HyperFrames (o CSS começa escondido).
       document.querySelectorAll("section.slide").forEach((s) => {
         const corpo = s.querySelector(":scope > .corpo");
-        const inicio = Number(s.dataset.start);
-        const fim = inicio + Number(s.dataset.duration);
-        if (inicio > 0) tl.set(corpo, { autoAlpha: 0 }, 0).set(corpo, { autoAlpha: 1 }, inicio);
+        const comeca = Number(s.dataset.start);
+        const fim = comeca + Number(s.dataset.duration);
+        tl.set(corpo, { autoAlpha: 1 }, comeca);
         tl.set(corpo, { autoAlpha: 0 }, fim);
       });
       tl.set({}, {}, Number(document.getElementById("root").dataset.duration));
