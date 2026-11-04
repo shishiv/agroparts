@@ -48,22 +48,19 @@
 
   // Notas do apresentador (tecla N): uma janela à parte com a fala do slide atual e o começo do próximo.
   var notas = null;
-  var comeco = null;
   function falaDe(i) {
-    return (window.FALAS && window.FALAS[i]) || "";
+    return (window.FALAS && window.FALAS[i]) || { fala: "", tempo: "" };
   }
   function atualizarNotas() {
     if (!notas || notas.closed) return;
     var d = notas.document;
-    var min = comeco ? Math.floor((performance.now() - comeco) / 60000) : 0;
-    d.getElementById("n-onde").textContent = "Slide " + (atual + 1) + " de " + slides.length + " · " + min + " min";
-    d.getElementById("n-fala").textContent = falaDe(atual);
-    d.getElementById("n-proxima").textContent = atual + 1 < slides.length ? "Depois: " + falaDe(atual + 1).split("\n")[0] : "Último slide.";
+    d.getElementById("n-onde").textContent = "Slide " + (atual + 1) + " de " + slides.length + " · " + falaDe(atual).tempo;
+    d.getElementById("n-fala").textContent = falaDe(atual).fala;
+    d.getElementById("n-proxima").textContent = atual + 1 < slides.length ? "Depois: " + falaDe(atual + 1).fala.split("\n")[0] : "Último slide.";
   }
   function abrirNotas() {
     notas = window.open("", "agroparts-notas", "width=960,height=720");
     if (!notas) return;
-    comeco = comeco || performance.now();
     notas.document.open();
     notas.document.write(
       '<!doctype html><meta charset="utf-8"><title>Notas · AgroParts</title>' +
