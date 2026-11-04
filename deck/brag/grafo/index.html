@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=1920, height=1080" />
     <title>AgroParts · Grafo</title>
     <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/grafo.js"></script>
+    <script src="assets/brasil.js"></script>
     <style>
       @font-face {
         font-family: "Barlow";
@@ -33,6 +35,7 @@
         --tinta-2: #3b4447;
         --suave: #4f585b;
         --linha: #c7cccd;
+        --desligado: #8f989b;
         --verde: #237f52;
         --amarelo: #f9a800;
         --vermelho: #a52019;
@@ -62,56 +65,363 @@
         font-family: var(--texto);
         font-variant-numeric: tabular-nums;
       }
-      #palco {
-        position: absolute;
-        inset: 0;
-      }
       .slide {
         position: absolute;
         inset: 0;
+        background: var(--chapa);
       }
-      .slide svg.grafo {
+      .grafo {
         position: absolute;
-        inset: 0;
+        left: 0;
+        top: 0;
         width: 1920px;
         height: 1080px;
         overflow: visible;
       }
-      .frase {
+      .t {
         position: absolute;
         font-family: var(--display);
         font-weight: 700;
-        line-height: 1.02;
+        line-height: 1.04;
         letter-spacing: -0.015em;
-        white-space: nowrap;
       }
-      .frase .p {
+      .t .p {
         display: inline-block;
       }
+      .titulo {
+        left: 120px;
+        top: 96px;
+        width: 1680px;
+        font-size: 76px;
+      }
+      .apoio {
+        font-family: var(--display);
+        font-weight: 600;
+        color: var(--tinta-2);
+      }
+      .fonte {
+        font-family: var(--texto);
+        font-weight: 600;
+        color: var(--suave);
+        letter-spacing: 0;
+      }
+      .credito {
+        position: absolute;
+        font: 600 18px/1.3 var(--texto);
+        color: var(--suave);
+      }
+      .foto {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 4px;
+        background: var(--papel);
+      }
+      .foto img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .tela {
+        position: absolute;
+        border: 3px solid var(--tinta);
+        border-radius: 4px;
+        overflow: hidden;
+        background: var(--chapa);
+      }
+      .tela img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .placa {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 22px 40px 22px 22px;
+        border-radius: 4px;
+        font: 700 60px/1 var(--display);
+        box-shadow: inset 0 0 0 4px currentColor;
+      }
+      .placa .sinal {
+        display: grid;
+        place-items: center;
+        width: 92px;
+        height: 92px;
+        border-radius: 2px;
+        font-size: 88px;
+        line-height: 1;
+      }
+      .placa.verde {
+        background: var(--verde);
+        color: var(--papel);
+      }
+      .placa.verde .sinal {
+        background: var(--papel);
+        color: var(--verde);
+      }
+      .placa.amarelo {
+        background: var(--amarelo);
+        color: var(--tinta);
+      }
+      .placa.amarelo .sinal {
+        box-shadow: inset 0 0 0 6px var(--tinta);
+      }
+      .num {
+        display: inline-grid;
+        place-items: center;
+        width: 76px;
+        height: 76px;
+        border-radius: 2px;
+        background: var(--tinta);
+        color: var(--chapa);
+        font: 700 52px/1 var(--display);
+      }
 
-      /* abertura */
-      #ab-gabi,
-      #ab-myke,
-      #ab-alberto {
+      /* 1 */
+      #s1-marca {
+        left: 120px;
+        top: 300px;
+        font-size: 176px;
+        white-space: nowrap;
+      }
+      #s1-marca .chave {
+        display: inline-block;
+        color: var(--tinta);
+        font-weight: 600;
+      }
+      #s1-frase {
+        left: 120px;
+        top: 560px;
+        width: 860px;
+        font-size: 68px;
+        color: var(--tinta-2);
+      }
+      #s1-foto {
+        left: 1100px;
         top: 150px;
+        width: 700px;
+        height: 700px;
+      }
+      #s1-credito {
+        left: 1100px;
+        top: 866px;
+        width: 700px;
+      }
+
+      /* 2 */
+      #s2-foto {
+        left: 0;
+        top: 0;
+        width: 900px;
+        height: 1080px;
+        border-radius: 0;
+      }
+      #s2-credito {
+        left: 24px;
+        top: 1036px;
+        width: 860px;
+        color: var(--papel);
+        text-shadow: 0 0 6px #15191a;
+      }
+      #s2-l1 {
+        left: 1000px;
+        top: 150px;
+        width: 820px;
+        font-size: 72px;
+      }
+      #s2-l2 {
+        left: 1000px;
+        top: 590px;
+        width: 820px;
+        font-size: 72px;
+      }
+
+      /* 3 */
+      #s3-q {
+        left: 120px;
+        top: 150px;
+        width: 1680px;
+        font-size: 84px;
+        color: var(--tinta-2);
+      }
+      #s3-valor {
+        left: 112px;
+        top: 360px;
+        font-size: 260px;
+        white-space: nowrap;
+      }
+      #s3-fonte {
+        left: 120px;
+        top: 700px;
+        width: 1680px;
+        font-size: 48px;
+      }
+
+      /* 4 e 7 */
+      .setor {
+        position: absolute;
+        left: 120px;
+        width: 1200px;
+        white-space: nowrap;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 56px;
+        line-height: 1;
+      }
+      .setor .nome {
+        color: var(--suave);
+        font-weight: 600;
+      }
+      #s4-fim {
+        left: 120px;
+        top: 860px;
+        width: 1700px;
+        font-size: 60px;
+      }
+
+      /* 5 */
+      #s5-num {
+        left: 112px;
+        top: 230px;
+        font-size: 300px;
+        white-space: nowrap;
+      }
+      #s5-frase {
+        left: 120px;
+        top: 600px;
+        width: 900px;
+        font-size: 60px;
+        color: var(--tinta-2);
+      }
+
+      /* 6 */
+      .codigo {
+        position: absolute;
+        width: 260px;
+        text-align: center;
+        font: 700 52px/1 var(--display);
+      }
+      #s6-sim {
+        left: 330px;
+        top: 700px;
+      }
+      #s6-pessoa {
+        left: 1080px;
+        top: 700px;
+      }
+
+      /* 8 */
+      .passo {
+        position: absolute;
+        top: 420px;
+        width: 320px;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 46px;
+        line-height: 1.08;
+      }
+      .passo .num {
+        margin-bottom: 26px;
+      }
+      #s8-etiqueta {
+        left: 120px;
+        top: 790px;
+        width: 300px;
+        height: 142px;
+      }
+
+      /* 9 */
+      #s9-l1,
+      #s9-l2 {
+        left: 120px;
+        width: 560px;
+        font-size: 64px;
+      }
+      #s9-l1 {
+        top: 330px;
+      }
+      #s9-l2 {
+        top: 560px;
+      }
+      #s9-fim {
+        left: 120px;
+        top: 900px;
+        width: 1680px;
+        font-size: 50px;
+        color: var(--tinta-2);
+      }
+
+      /* 10 */
+      #s10-numeros {
+        left: 120px;
+        top: 300px;
+        width: 1068px;
+        height: 270px;
+      }
+      #s10-grupo {
+        left: 1040px;
+        top: 620px;
+        width: 774px;
+        height: 306px;
+      }
+      #s10-frase {
+        left: 120px;
+        top: 680px;
+        width: 840px;
         font-size: 64px;
         color: var(--tinta-2);
-        transform: translateX(-50%);
       }
-      #ab-gabi {
-        left: 420px;
+
+      /* 11 */
+      #s11-valor {
+        left: 112px;
+        top: 260px;
+        font-size: 200px;
+        white-space: nowrap;
       }
-      #ab-myke {
-        left: 960px;
+      #s11-de {
+        left: 120px;
+        top: 520px;
+        width: 900px;
+        font-size: 52px;
       }
-      #ab-alberto {
-        left: 1500px;
+      #s11-brasil {
+        left: 120px;
+        top: 760px;
+        width: 900px;
+        font-size: 60px;
       }
-      #ab-nos {
-        top: 812px;
-        left: 960px;
-        font-size: 112px;
-        transform: translateX(-50%);
+
+      /* 12 */
+      #s12-titulo {
+        width: 1100px;
+        font-size: 72px;
+      }
+      .pedido {
+        position: absolute;
+        left: 200px;
+        width: 940px;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 58px;
+        line-height: 1.04;
+      }
+      #s12-qr {
+        position: absolute;
+        left: 1340px;
+        top: 150px;
+        width: 460px;
+        height: 460px;
+      }
+      #s12-teste {
+        left: 1290px;
+        top: 650px;
+        width: 560px;
+        font-size: 48px;
+        color: var(--azul);
       }
     </style>
   </head>
@@ -120,156 +430,634 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="8"
+      data-duration="248"
       data-width="1920"
       data-height="1080"
     >
-      <svg id="palco" viewBox="0 0 1920 1080" aria-hidden="true">
+      <svg width="0" height="0" style="position: absolute" aria-hidden="true">
         <defs>
           <symbol id="p-peca" viewBox="0 0 48 48">
             <circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="4" />
             <circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="4" />
             <g fill="currentColor">
-              <circle cx="24" cy="11.5" r="3" />
-              <circle cx="24" cy="36.5" r="3" />
-              <circle cx="11.5" cy="24" r="3" />
-              <circle cx="36.5" cy="24" r="3" />
-              <circle cx="15.2" cy="15.2" r="3" />
-              <circle cx="32.8" cy="32.8" r="3" />
-              <circle cx="32.8" cy="15.2" r="3" />
-              <circle cx="15.2" cy="32.8" r="3" />
+              <circle cx="24" cy="11.5" r="3" /><circle cx="24" cy="36.5" r="3" /><circle cx="11.5" cy="24" r="3" /><circle cx="36.5" cy="24" r="3" />
+              <circle cx="15.2" cy="15.2" r="3" /><circle cx="32.8" cy="32.8" r="3" /><circle cx="32.8" cy="15.2" r="3" /><circle cx="15.2" cy="32.8" r="3" />
             </g>
           </symbol>
+          <symbol id="r-metal" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="21.75" fill="#fff" stroke="#15191a" stroke-width="2.5" />
+            <circle cx="24" cy="24" r="19" fill="#dde0e0" stroke="#15191a" stroke-width="1.5" />
+            <circle cx="24" cy="24" r="16" fill="none" stroke="#6a7477" stroke-width="1.5" />
+            <circle cx="24" cy="24" r="13" fill="#fff" stroke="#15191a" stroke-width="1.5" />
+            <circle cx="24" cy="24" r="9.5" fill="#f3f4f2" stroke="#15191a" stroke-width="2" />
+          </symbol>
+          <symbol id="p-revisa" viewBox="0 0 48 48">
+            <circle cx="24" cy="11.5" r="5.5" fill="currentColor" />
+            <path d="M15 21h18l-2.5 13H28l-1 10h-6l-1-10h-2.5z" fill="currentColor" />
+          </symbol>
         </defs>
-        <g id="campo"></g>
       </svg>
 
+      <!-- 1 · Abertura -->
       <section
-        id="abertura"
+        id="s1"
         class="slide clip"
+        data-hold
         data-slide
         data-start="0"
-        data-duration="8"
-        data-rest="5"
+        data-duration="15"
+        data-rest="4.4"
         data-track-index="1"
+        data-notes="Gabi: Boa tarde. Eu sou a Gabi.&#10;Myke: Eu sou o Myke.&#10;Alberto: Eu sou o Alberto.&#10;Gabi: E nós somos a AgroParts. Queremos que a usina não compre a peça que ela já tem."
       >
+        <div id="s1-foto" class="foto"><img src="assets/fotos/rolamento-com-tampa-6007.jpg" alt="" /></div>
+        <p id="s1-credito" class="credito">Foto: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0</p>
         <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
-          <g fill="none" stroke="#15191a" stroke-width="3" stroke-linecap="round">
-            <path id="ab-e1" d="M420 268 C 420 430, 720 560, 892 590" />
-            <path id="ab-e2" d="M960 268 L 960 520" />
-            <path id="ab-e3" d="M1500 268 C 1500 430, 1200 560, 1028 590" />
-          </g>
           <g fill="#15191a">
-            <circle id="ab-n1" cx="420" cy="268" r="18" />
-            <circle id="ab-n2" cx="960" cy="268" r="18" />
-            <circle id="ab-n3" cx="1500" cy="268" r="18" />
-            <circle id="ab-v1" cx="420" cy="268" r="10" />
-            <circle id="ab-v2" cx="960" cy="268" r="10" />
-            <circle id="ab-v3" cx="1500" cy="268" r="10" />
-          </g>
-          <g id="ab-marca" color="#15191a">
-            <circle cx="960" cy="610" r="104" fill="#f3f4f2" />
-            <use href="#p-peca" x="870" y="520" width="180" height="180" />
+            <circle id="s1-n1" cx="300" cy="200" r="16" />
+            <circle id="s1-n2" cx="520" cy="160" r="16" />
+            <circle id="s1-n3" cx="740" cy="200" r="16" />
           </g>
         </svg>
-        <p id="ab-gabi" class="frase"><span class="p">Eu</span> <span class="p">sou</span> <span class="p">a</span> <span class="p">Gabi.</span></p>
-        <p id="ab-myke" class="frase"><span class="p">Eu</span> <span class="p">sou</span> <span class="p">o</span> <span class="p">Myke.</span></p>
-        <p id="ab-alberto" class="frase"><span class="p">Eu</span> <span class="p">sou</span> <span class="p">o</span> <span class="p">Alberto.</span></p>
-        <p id="ab-nos" class="frase"><span class="p">E</span> <span class="p">nós</span> <span class="p">somos</span> <span class="p">a</span> <span class="p">AgroParts.</span></p>
+        <p id="s1-marca" class="t"><span id="s1-ca" class="chave">{</span> <span id="s1-nome" class="p">AgroParts</span> <span id="s1-cf" class="chave">}</span></p>
+        <p id="s1-frase" class="t palavras">Para a usina não comprar a peça que ela já tem.</p>
+      </section>
+
+      <!-- 2 · A cena -->
+      <section
+        id="s2"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="15"
+        data-duration="14"
+        data-rest="4.4"
+        data-track-index="1"
+        data-notes="Gabi: Dia de safra. A colhedora para e precisa de uma peça. O sistema diz que a peça não existe, e compras faz um pedido urgente. Mas, na prateleira, havia três."
+      >
+        <div id="s2-foto" class="foto"><img id="s2-img" src="assets/fotos/colheita-piracicaba.jpg" alt="" /></div>
+        <p id="s2-credito" class="credito">Foto: Mariordo (Mario Roberto Duran Ortiz), Wikimedia Commons, CC BY 3.0</p>
+        <div id="s2-camera" class="slide" style="background: none; left: 900px; width: 1020px">
+          <p id="s2-l1" class="t palavras" style="left: 100px">O sistema diz que a peça não existe.</p>
+          <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true" style="left: -900px">
+            <circle id="s2-vazio" cx="1100" cy="420" r="62" fill="none" stroke="#8f989b" stroke-width="5" stroke-dasharray="14 10" />
+            <line id="s2-prateleira" x1="1000" y1="930" x2="1800" y2="930" stroke="#15191a" stroke-width="8" />
+            <use id="s2-c1" href="#r-metal" x="1010" y="770" width="150" height="150" />
+            <use id="s2-c2" href="#r-metal" x="1190" y="770" width="150" height="150" />
+            <use id="s2-c3" href="#r-metal" x="1370" y="770" width="150" height="150" />
+          </svg>
+          <p id="s2-l2" class="t palavras" style="left: 100px">Na prateleira, havia três.</p>
+        </div>
+      </section>
+
+      <!-- 3 · Quanto custa -->
+      <section
+        id="s3"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="29"
+        data-duration="16"
+        data-rest="3.6"
+        data-track-index="1"
+        data-notes="Gabi: E quanto custa manter uma usina rodando? Milhões. A São Martinho publicou: 183 milhões e meio de reais com manutenção de entressafra, em nove meses. Cada peça comprada sem precisar sai desse dinheiro."
+      >
+        <p id="s3-q" class="t palavras">Quanto custa manter uma usina rodando?</p>
+        <p id="s3-valor" class="t"><span class="p">R$&nbsp;<span id="s3-num">183,5</span>&nbsp;milhões</span></p>
+        <p id="s3-fonte" class="t fonte palavras">São Martinho, manutenção de entressafra, em 9 meses</p>
+      </section>
+
+      <!-- 4 · Por que acontece -->
+      <section
+        id="s4"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="45"
+        data-duration="23"
+        data-rest="5.2"
+        data-track-index="1"
+        data-notes="Gabi: Isso acontece porque hoje é manual. Cada setor cadastra do seu jeito: o almoxarifado de um jeito, a manutenção de outro, compras de outro. O sistema vê três peças, que na verdade são uma só. E cada fornecedor ainda escreve a peça de outro jeito na nota fiscal."
+      >
+        <p class="t titulo palavras">Hoje é manual. Cada setor cadastra do seu jeito.</p>
+        <p id="s4-r1" class="setor" style="top: 330px"><span class="nome">Almoxarifado:</span> ROLAM 6318ZZC3 P/ BOMBA</p>
+        <p id="s4-r2" class="setor" style="top: 470px"><span class="nome">Manutenção:</span> ROL 6318 ZZ C3</p>
+        <p id="s4-r3" class="setor" style="top: 610px"><span class="nome">Compras:</span> ROLAMENTO RIG. ESFERAS 6318-2Z/C3</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <g fill="none" stroke="#15191a" stroke-width="4" stroke-linecap="round">
+            <path id="s4-e1" d="M1250 358 C 1400 358, 1440 498, 1560 498" />
+            <path id="s4-e2" d="M1250 498 L 1560 498" />
+            <path id="s4-e3" d="M1250 638 C 1400 638, 1440 498, 1560 498" />
+          </g>
+          <g fill="#15191a">
+            <circle id="s4-n1" cx="1250" cy="358" r="16" />
+            <circle id="s4-n2" cx="1250" cy="498" r="16" />
+            <circle id="s4-n3" cx="1250" cy="638" r="16" />
+            <circle id="s4-v1" cx="1250" cy="358" r="10" />
+            <circle id="s4-v2" cx="1250" cy="498" r="10" />
+            <circle id="s4-v3" cx="1250" cy="638" r="10" />
+          </g>
+          <use id="s4-peca" href="#r-metal" x="1560" y="398" width="200" height="200" />
+        </svg>
+        <p id="s4-fim" class="t palavras">O sistema vê três peças, que na verdade são uma só.</p>
+      </section>
+
+      <!-- 5 · Não é caso raro -->
+      <section
+        id="s5"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="68"
+        data-duration="12"
+        data-rest="3.4"
+        data-track-index="1"
+        data-notes="Gabi: E isso não é caso raro. Nós lemos os 396 cadastros de rolamento do catálogo do governo: um em cada doze, ou 8%, está repetido."
+      >
+        <p id="s5-num" class="t"><span class="p">1 em 12</span></p>
+        <p id="s5-frase" class="t palavras">dos cadastros de rolamento do catálogo do governo está repetido</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true"><g id="s5-grade"></g></svg>
+      </section>
+
+      <!-- 6 · A resposta -->
+      <section
+        id="s6"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="80"
+        data-duration="13"
+        data-rest="4.8"
+        data-track-index="1"
+        data-notes="Myke: A AgroParts confere a peça e responde: é a mesma peça, ou precisa de uma pessoa. Quando não tem certeza, ela não junta nada e chama uma pessoa."
+      >
+        <p class="t titulo palavras">A AgroParts confere a peça e responde</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <line id="s6-liga" x1="420" y1="440" x2="820" y2="440" stroke="#237f52" stroke-width="10" />
+          <g id="s6-a"><use href="#r-metal" x="340" y="360" width="160" height="160" /></g>
+          <g id="s6-b"><use href="#r-metal" x="740" y="360" width="160" height="160" /></g>
+          <line id="s6-liga2" x1="1340" y1="440" x2="1340" y2="440" stroke="#7a5200" stroke-width="6" stroke-dasharray="12 10" />
+          <g id="s6-c"><use href="#r-metal" x="1180" y="360" width="160" height="160" /></g>
+          <g id="s6-p" color="#15191a"><use href="#p-revisa" x="1500" y="360" width="160" height="160" /></g>
+        </svg>
+        <p id="s6-ca" class="codigo" style="left: 290px; top: 560px">317388</p>
+        <p id="s6-cb" class="codigo" style="left: 690px; top: 560px">472510</p>
+        <div id="s6-sim" class="placa verde"><span class="sinal">=</span><span>É a mesma peça</span></div>
+        <div id="s6-pessoa" class="placa amarelo"><span class="sinal">?</span><span>Precisa de uma pessoa</span></div>
+      </section>
+
+      <!-- 7 · O ganho -->
+      <section
+        id="s7"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="93"
+        data-duration="11"
+        data-rest="3.6"
+        data-track-index="1"
+        data-notes="Myke: Com isso, cada setor ganha: o almoxarifado acha a peça, a manutenção sabe se já tem, e compras não compra de novo."
+      >
+        <p class="t titulo palavras">Um ganho para cada setor</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <g fill="none" stroke="#15191a" stroke-width="4">
+            <line id="s7-e1" x1="760" y1="358" x2="900" y2="358" />
+            <line id="s7-e2" x1="760" y1="498" x2="900" y2="498" />
+            <line id="s7-e3" x1="760" y1="638" x2="900" y2="638" />
+          </g>
+          <g fill="#15191a">
+            <circle id="s7-n1" cx="760" cy="358" r="16" />
+            <circle id="s7-n2" cx="760" cy="498" r="16" />
+            <circle id="s7-n3" cx="760" cy="638" r="16" />
+            <circle id="s7-m1" cx="900" cy="358" r="16" />
+            <circle id="s7-m2" cx="900" cy="498" r="16" />
+            <circle id="s7-m3" cx="900" cy="638" r="16" />
+          </g>
+        </svg>
+        <p id="s7-s1" class="setor" style="top: 330px; width: 600px"><span class="nome">Almoxarifado:</span></p>
+        <p id="s7-s2" class="setor" style="top: 470px; width: 600px"><span class="nome">Manutenção:</span></p>
+        <p id="s7-s3" class="setor" style="top: 610px; width: 600px"><span class="nome">Compras:</span></p>
+        <p id="s7-g1" class="setor palavras" style="left: 950px; top: 330px; width: 860px">Acha a peça</p>
+        <p id="s7-g2" class="setor palavras" style="left: 950px; top: 470px; width: 860px">Sabe se já tem</p>
+        <p id="s7-g3" class="setor palavras" style="left: 950px; top: 610px; width: 860px">Não compra de novo</p>
+      </section>
+
+      <!-- 8 · Como funciona -->
+      <section
+        id="s8"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="104"
+        data-duration="38"
+        data-rest="5.6"
+        data-track-index="1"
+        data-notes="Myke: São cinco passos, e tudo leva segundos. Um: a pessoa digita o código do sistema ou da caixa da peça, escreve o nome, ou tira uma foto da etiqueta, e a AgroParts lê o texto da foto. Dois: lê as medidas e o tipo da peça. Três: procura no catálogo as peças parecidas. Quatro: compara uma a uma. Cinco: junta os cadastros da mesma peça, sem apagar o original. Assim, quem vai comprar sabe o que a usina já tem."
+      >
+        <p class="t titulo palavras">Cinco passos, em segundos</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <line id="s8-trilho" x1="158" y1="458" x2="1700" y2="458" stroke="#c7cccd" stroke-width="6" />
+          <line id="s8-aceso" x1="158" y1="458" x2="1700" y2="458" stroke="#15191a" stroke-width="6" />
+          <g id="s8-junta">
+            <circle id="s8-ja" cx="1560" cy="860" r="22" fill="#15191a" />
+            <circle id="s8-jb" cx="1700" cy="860" r="22" fill="#15191a" />
+          </g>
+        </svg>
+        <div id="s8-p1" class="passo" style="left: 120px"><span class="num">1</span><br />Recebe código, nome ou foto</div>
+        <div id="s8-p2" class="passo" style="left: 470px"><span class="num">2</span><br />Lê as medidas e o tipo da peça</div>
+        <div id="s8-p3" class="passo" style="left: 820px"><span class="num">3</span><br />Procura as parecidas no catálogo</div>
+        <div id="s8-p4" class="passo" style="left: 1170px"><span class="num">4</span><br />Compara uma a uma</div>
+        <div id="s8-p5" class="passo" style="left: 1520px; width: 330px"><span class="num">5</span><br />Junta os cadastros, sem apagar o original</div>
+        <div id="s8-etiqueta" class="foto"><img src="assets/fotos/etiqueta-impressa-catmat-311960.png" alt="" style="object-fit: contain" /></div>
+      </section>
+
+      <!-- 9 · O teste -->
+      <section
+        id="s9"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="142"
+        data-duration="30"
+        data-rest="7.4"
+        data-track-index="1"
+        data-notes="Myke: E nós testamos com cadastros reais e públicos: 42 cadastros de rolamento do catálogo de compras do governo federal. A AgroParts comparou esses cadastros dois a dois, em 104 comparações, e disse se era a mesma peça. Na primeira rodada, errou 6. Depois de um ajuste, errou 0. E qualquer pessoa pode refazer esse teste, porque o código e os dados são públicos."
+      >
+        <p class="t titulo palavras">Testamos com cadastros reais e públicos do governo</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <g id="s9-mapa" transform="translate(660 220) scale(0.8)">
+            <g id="s9-ligacoes" fill="none" stroke-linecap="round"></g>
+            <g id="s9-pontos"></g>
+          </g>
+        </svg>
+        <p id="s9-l1" class="t palavras">1ª rodada: <span id="s9-e1">6 erros</span></p>
+        <p id="s9-l2" class="t palavras">Depois de um ajuste: 0 erros</p>
+        <p id="s9-fim" class="t palavras">Em 104 comparações. Qualquer pessoa pode refazer o teste.</p>
+      </section>
+
+      <!-- 10 · Teste na sua usina -->
+      <section
+        id="s10"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="172"
+        data-duration="29"
+        data-rest="4.6"
+        data-track-index="1"
+        data-notes="Alberto: E a sua usina pode testar hoje, com o próprio cadastro. Abre a página, escolhe a planilha, e a AgroParts mostra os cadastros que são a mesma peça. O arquivo não sai do seu computador. Num arquivo público de 629 linhas, do catálogo e das compras do governo, ela achou 55 grupos da mesma peça. Por enquanto, ela confere rolamento."
+      >
+        <p class="t titulo palavras">Teste hoje com o cadastro da sua usina</p>
+        <div id="s10-numeros" class="tela"><img src="assets/telas/diagnostico-numeros.png" alt="" /></div>
+        <div id="s10-grupo" class="tela"><img src="assets/telas/diagnostico-grupo.png" alt="" /></div>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <line id="s10-liga" x1="1172" y1="714" x2="1440" y2="714" stroke="#237f52" stroke-width="8" />
+        </svg>
+        <p id="s10-frase" class="t palavras">O arquivo não sai do seu computador.</p>
+      </section>
+
+      <!-- 11 · Lá fora -->
+      <section
+        id="s11"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="201"
+        data-duration="26"
+        data-rest="5"
+        data-track-index="1"
+        data-notes="Alberto: E isso já é negócio lá fora. A Verusen, uma empresa americana, publicou o caso de uma fabricante que economizou 10 milhões e meio de dólares em estoque de peças. No Brasil, para usina, não achamos ninguém. E só no Centro-Sul, a UNICA conta 250 usinas operando. Quem paga é a usina, com uma assinatura."
+      >
+        <p class="t titulo palavras">Lá fora, isso já é negócio</p>
+        <p id="s11-valor" class="t"><span class="p">US$ 10,5 mi</span></p>
+        <p id="s11-de" class="t fonte palavras">de economia numa fabricante, segundo a Verusen</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <g id="s11-mapa" transform="translate(1230 250) scale(0.82)">
+            <path id="s11-contorno" fill="none" stroke="#15191a" stroke-width="3" stroke-linejoin="round" />
+            <g id="s11-pontos" fill="#c7cccd"></g>
+          </g>
+        </svg>
+        <p id="s11-brasil" class="t palavras">No Brasil, para usina, não achamos ninguém.</p>
+      </section>
+
+      <!-- 12 · O pedido -->
+      <section
+        id="s12"
+        class="slide clip"
+        data-hold
+        data-slide
+        data-start="227"
+        data-duration="21"
+        data-rest="5.4"
+        data-track-index="1"
+        data-notes="Alberto: Para construir a AgroParts a fundo, queremos investimento em dinheiro e em conhecimento, e acesso a uma usina e às pessoas que conhecem o sistema dela. O QR abre o teste da sua usina, em agroparts ponto pages ponto dev, barra diagnóstico. Obrigado."
+      >
+        <p id="s12-titulo" class="t titulo palavras">Queremos investimento para construir a AgroParts</p>
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <line id="s12-espinha" x1="140" y1="420" x2="140" y2="760" stroke="#15191a" stroke-width="4" />
+          <g fill="#15191a">
+            <circle id="s12-n1" cx="140" cy="420" r="16" />
+            <circle id="s12-n2" cx="140" cy="560" r="16" />
+            <circle id="s12-n3" cx="140" cy="700" r="16" />
+          </g>
+        </svg>
+        <p id="s12-a1" class="pedido" style="top: 390px">Dinheiro</p>
+        <p id="s12-a2" class="pedido" style="top: 530px">Conhecimento</p>
+        <p id="s12-a3" class="pedido" style="top: 670px">Acesso a uma usina e a quem conhece o sistema dela</p>
+        <img id="s12-qr" src="assets/qr-diagnostico.svg" alt="QR para agroparts.pages.dev/diagnostico" />
+        <p id="s12-teste" class="t palavras">Teste hoje: agroparts.pages.dev/diagnostico</p>
       </section>
     </div>
 
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
+      const SVG = "http://www.w3.org/2000/svg";
+      const inicio = (id) => Number(document.getElementById(id).dataset.start);
+      const el = (q) => document.querySelector(q);
+      const novo = (pai, tag, attrs) => {
+        const n = document.createElementNS(SVG, tag);
+        for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+        pai.appendChild(n);
+        return n;
+      };
 
-      // O campo: 42 pontos, um por cadastro público do gabarito, ao fundo desde o primeiro quadro.
-      const campo = document.getElementById("campo");
-      let semente = 42;
-      const acaso = () => ((semente = (semente * 16807) % 2147483647) / 2147483647);
-      const pontos = [];
-      const livre = [
-        [200, 110, 1740, 310],
-        [360, 300, 1560, 720],
-        [360, 770, 1560, 960],
-      ];
-      while (pontos.length < 42) {
-        const x = 60 + acaso() * 1800;
-        const y = 40 + acaso() * 1000;
-        const longe = livre.every(([a, b, c, d]) => x < a || x > c || y < b || y > d);
-        if (longe && pontos.every(([a, b]) => Math.hypot(a - x, b - y) > 90)) pontos.push([x, y]);
-      }
-      for (const [x, y] of pontos) {
-        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        c.setAttribute("cx", x.toFixed(1));
-        c.setAttribute("cy", y.toFixed(1));
-        c.setAttribute("r", "5");
-        c.setAttribute("fill", "#c7cccd");
-        c.setAttribute("class", "ponto");
-        campo.appendChild(c);
+      // Cada palavra de um .palavras vira um span, para entrar uma a uma.
+      for (const p of document.querySelectorAll(".palavras")) {
+        const partes = [];
+        const andar = (no) => {
+          for (const filho of [...no.childNodes]) {
+            if (filho.nodeType === 3) {
+              const frag = document.createDocumentFragment();
+              filho.textContent.split(/(\s+)/).forEach((w) => {
+                if (!w) return;
+                if (/^\s+$/.test(w)) frag.appendChild(document.createTextNode(w));
+                else {
+                  const s = document.createElement("span");
+                  s.className = "p";
+                  s.textContent = w;
+                  frag.appendChild(s);
+                }
+              });
+              filho.replaceWith(frag);
+            } else andar(filho);
+          }
+        };
+        andar(p);
       }
 
-      const entraFrase = (sel, t) =>
+      const frase = (sel, t, gap = 0.067) =>
         tl.fromTo(
           `${sel} .p`,
           { opacity: 0, filter: "blur(6px)" },
-          { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out", stagger: 0.067 },
+          { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out", stagger: gap },
           t,
         );
-      const entraNo = (sel, t) =>
-        tl.fromTo(sel, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "expo.out" }, t);
+      const surge = (sel, t, d = 0.5) =>
+        tl.fromTo(sel, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: d, ease: "expo.out" }, t);
+      const aparece = (sel, t, d = 0.4) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: d, ease: "power2.out" }, t);
       const desenha = (sel, t, d = 0.6) => {
-        const el = document.querySelector(sel);
-        const L = el.getTotalLength();
-        tl.fromTo(el, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: "power2.inOut" }, t);
+        for (const e of document.querySelectorAll(sel)) {
+          const L = e.getTotalLength();
+          tl.fromTo(e, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: "power2.inOut" }, t);
+        }
       };
       const viaja = (sel, caminho, t, d = 0.55) => {
-        const el = document.querySelector(caminho);
-        const L = el.getTotalLength();
-        const prog = { p: 0 };
-        const ponto = document.querySelector(sel);
+        const p = el(caminho);
+        const L = p.getTotalLength();
+        const ponto = el(sel);
+        const prog = { v: 0 };
         tl.fromTo(
           prog,
-          { p: 0 },
+          { v: 0 },
           {
-            p: 1,
+            v: 1,
             duration: d,
             ease: "power3.in",
             immediateRender: false,
             onUpdate: () => {
-              const q = el.getPointAtLength(prog.p * L);
+              const q = p.getPointAtLength(prog.v * L);
               ponto.setAttribute("cx", q.x);
               ponto.setAttribute("cy", q.y);
             },
           },
           t,
         );
-        tl.fromTo(ponto, { opacity: 1 }, { opacity: 0, duration: 0.08 }, t + d - 0.04);
+        tl.fromTo(ponto, { opacity: 1 }, { opacity: 0, duration: 0.08, immediateRender: false }, t + d - 0.04);
       };
+      const carimbo = (sel, t, origem) =>
+        tl.fromTo(sel, { opacity: 0, scale: 1.18, svgOrigin: origem }, { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out" }, t);
+      const chega = (sel, t, de = { y: 40 }) =>
+        tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", ...de }, { opacity: 1, filter: "blur(0px)", x: 0, y: 0, duration: 0.7, ease: "expo.out" }, t);
 
-      // abertura
-      tl.fromTo(".ponto", { opacity: 0 }, { opacity: 1, duration: 0.5, stagger: { each: 0.02, from: "random" } }, 0);
-      tl.set(["#ab-v1", "#ab-v2", "#ab-v3"], { opacity: 0 }, 0);
-      entraNo("#ab-n1", 0.2);
-      entraFrase("#ab-gabi", 0.3);
-      entraNo("#ab-n2", 1.0);
-      entraFrase("#ab-myke", 1.1);
-      entraNo("#ab-n3", 1.8);
-      entraFrase("#ab-alberto", 1.9);
-      desenha("#ab-e1", 2.7);
-      desenha("#ab-e2", 2.75);
-      desenha("#ab-e3", 2.8);
-      tl.set(["#ab-v1", "#ab-v2", "#ab-v3"], { opacity: 1 }, 2.9);
-      viaja("#ab-v1", "#ab-e1", 2.9);
-      viaja("#ab-v2", "#ab-e2", 2.95);
-      viaja("#ab-v3", "#ab-e3", 3.0);
-      tl.fromTo(
-        "#ab-marca",
-        { opacity: 0, scale: 1.18, svgOrigin: "960 610" },
-        { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out" },
-        3.5,
-      );
-      entraFrase("#ab-nos", 3.95);
+      // 1 · Abertura: três pontos, um por pessoa, entram nas chaves da marca.
+      {
+        const t = inicio("s1");
+        surge("#s1-n1", t + 0.2);
+        surge("#s1-n2", t + 1.0);
+        surge("#s1-n3", t + 1.8);
+        tl.fromTo(["#s1-n1", "#s1-n2", "#s1-n3"], { x: 0, y: 0 }, { x: (i) => [260, 40, -180][i], y: 200, opacity: 0, duration: 0.5, ease: "power3.in" }, t + 2.4);
+        tl.fromTo("#s1-ca", { x: 420 }, { x: 0, duration: 0.8, ease: "expo.out" }, t + 2.8);
+        tl.fromTo("#s1-cf", { x: -420 }, { x: 0, duration: 0.8, ease: "expo.out" }, t + 2.8);
+        tl.fromTo(["#s1-ca", "#s1-cf"], { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 2.8);
+        tl.fromTo("#s1-nome", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, t + 3.0);
+        frase("#s1-frase", t + 3.4);
+        tl.fromTo("#s1-foto", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 1.4, ease: "power2.out" }, t);
+        aparece("#s1-credito", t + 0.6);
+      }
+
+      // 2 · A cena: a busca não acha nada; a câmera desce até a prateleira com três caixas.
+      {
+        const t = inicio("s2");
+        tl.fromTo("#s2-img", { scale: 1.12 }, { scale: 1, duration: 4.4, ease: "power2.out" }, t);
+        aparece("#s2-foto", t, 0.5);
+        aparece("#s2-credito", t + 0.4);
+        tl.fromTo("#s2-camera", { y: 240 }, { y: 240, duration: 0.01 }, t);
+        frase("#s2-l1", t + 0.3);
+        tl.fromTo("#s2-vazio", { opacity: 0, scale: 0.6, svgOrigin: "1100 420" }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, t + 0.9);
+        tl.fromTo("#s2-camera", { y: 240 }, { y: 0, duration: 0.9, ease: "power2.inOut", immediateRender: false }, t + 2.0);
+        desenha("#s2-prateleira", t + 2.4, 0.5);
+        tl.fromTo(["#s2-c1", "#s2-c2", "#s2-c3"], { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "expo.out", stagger: 0.14 }, t + 2.8);
+        frase("#s2-l2", t + 3.5);
+      }
+
+      // 3 · Quanto custa: o número conta até o valor publicado.
+      {
+        const t = inicio("s3");
+        frase("#s3-q", t + 0.2);
+        const n = el("#s3-num");
+        const conta = { v: 0 };
+        aparece("#s3-valor", t + 0.9, 0.3);
+        tl.fromTo(
+          conta,
+          { v: 0 },
+          {
+            v: 183.5,
+            duration: 1.4,
+            ease: "power3.out",
+            onUpdate: () => (n.textContent = conta.v.toFixed(1).replace(".", ",")),
+          },
+          t + 0.9,
+        );
+        frase("#s3-fonte", t + 2.6, 0.05);
+      }
+
+      // 4 · Por que acontece: três escritas, três pontos, uma peça.
+      {
+        const t = inicio("s4");
+        frase("#s4 .titulo", t + 0.2);
+        chega("#s4-r1", t + 1.0, { x: -40 });
+        surge("#s4-n1", t + 1.2);
+        chega("#s4-r2", t + 1.5, { x: -40 });
+        surge("#s4-n2", t + 1.7);
+        chega("#s4-r3", t + 2.0, { x: -40 });
+        surge("#s4-n3", t + 2.2);
+        desenha("#s4-e1, #s4-e2, #s4-e3", t + 2.7);
+        tl.fromTo(["#s4-v1", "#s4-v2", "#s4-v3"], { opacity: 0 }, { opacity: 1, duration: 0.01 }, t + 3.2);
+        viaja("#s4-v1", "#s4-e1", t + 3.2);
+        viaja("#s4-v2", "#s4-e2", t + 3.25);
+        viaja("#s4-v3", "#s4-e3", t + 3.3);
+        carimbo("#s4-peca", t + 3.8, "1660 498");
+        frase("#s4-fim", t + 4.2);
+      }
+
+      // 5 · 1 em 12: doze cadastros, um repetido.
+      {
+        const t = inicio("s5");
+        const g = el("#s5-grade");
+        const pts = [];
+        for (let i = 0; i < 12; i++) {
+          const x = 1160 + (i % 4) * 170;
+          const y = 300 + Math.floor(i / 4) * 170;
+          const c = novo(g, "circle", { cx: x, cy: y, r: 46, fill: "#ffffff", stroke: "#8f989b", "stroke-width": 5, class: "s5-c" });
+          pts.push(c);
+        }
+        const dup = novo(g, "circle", { cx: 1160 + 2 * 170, cy: 300 + 170, r: 46, fill: "#15191a", id: "s5-dup" });
+        const dup2 = novo(g, "circle", { cx: 1160 + 2 * 170 + 26, cy: 300 + 170 - 26, r: 46, fill: "none", stroke: "#15191a", "stroke-width": 5, id: "s5-dup2" });
+        tl.fromTo(".s5-c", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "expo.out", stagger: 0.05 }, t + 0.2);
+        tl.fromTo("#s5-num .p", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, t + 0.5);
+        carimbo("#s5-dup", t + 1.4, `${1160 + 340} 470`);
+        tl.fromTo("#s5-dup2", { opacity: 0, x: -26, y: 26 }, { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "expo.out" }, t + 1.7);
+        frase("#s5-frase", t + 2.1);
+      }
+
+      // 6 · A resposta: dois cadastros viram um; o terceiro vai até uma pessoa.
+      {
+        const t = inicio("s6");
+        frase("#s6 .titulo", t + 0.2);
+        chega("#s6-a", t + 0.8, { x: -60 });
+        chega("#s6-b", t + 1.0, { x: 60 });
+        aparece("#s6-ca, #s6-cb", t + 1.1);
+        desenha("#s6-liga", t + 1.6, 0.4);
+        tl.fromTo("#s6-a", { x: 0 }, { x: 120, duration: 0.6, ease: "power3.inOut", immediateRender: false }, t + 2.0);
+        tl.fromTo("#s6-b", { x: 0 }, { x: -120, duration: 0.6, ease: "power3.inOut", immediateRender: false }, t + 2.0);
+        tl.fromTo("#s6-ca", { x: 0 }, { x: 120, duration: 0.6, ease: "power3.inOut", immediateRender: false }, t + 2.0);
+        tl.fromTo("#s6-cb", { x: 0 }, { x: -120, duration: 0.6, ease: "power3.inOut", immediateRender: false }, t + 2.0);
+        chega("#s6-sim", t + 2.5, { y: 10 });
+        chega("#s6-c", t + 2.9, { x: 60 });
+        tl.fromTo("#s6-liga2", { attr: { x2: 1340 } }, { attr: { x2: 1500 }, duration: 0.5, ease: "power2.inOut" }, t + 3.3);
+        carimbo("#s6-p", t + 3.6, "1580 440");
+        chega("#s6-pessoa", t + 3.8, { y: 10 });
+      }
+
+      // 7 · O ganho: cada setor ganha uma ligação.
+      {
+        const t = inicio("s7");
+        frase("#s7 .titulo", t + 0.2);
+        for (const i of [1, 2, 3]) {
+          const o = t + 0.6 + (i - 1) * 0.5;
+          chega(`#s7-s${i}`, o, { x: -40 });
+          surge(`#s7-n${i}`, o + 0.2);
+          desenha(`#s7-e${i}`, o + 0.4, 0.35);
+          surge(`#s7-m${i}`, o + 0.7);
+          frase(`#s7-g${i}`, o + 0.8);
+        }
+      }
+
+      // 8 · Cinco passos que acendem em ordem.
+      {
+        const t = inicio("s8");
+        frase("#s8 .titulo", t + 0.2);
+        aparece("#s8-trilho", t + 0.6);
+        desenha("#s8-aceso", t + 0.9, 3.4);
+        for (const i of [1, 2, 3, 4, 5]) chega(`#s8-p${i}`, t + 0.9 + (i - 1) * 0.75, { y: 30 });
+        tl.fromTo("#s8-etiqueta", { opacity: 0, y: 80, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: 0.8, ease: "expo.out" }, t + 1.3);
+        aparece("#s8-ja, #s8-jb", t + 4.0, 0.3);
+        tl.fromTo("#s8-ja", { attr: { cx: 1560 } }, { attr: { cx: 1630 }, duration: 0.6, ease: "power3.inOut" }, t + 4.5);
+        tl.fromTo("#s8-jb", { attr: { cx: 1700 } }, { attr: { cx: 1630 }, duration: 0.6, ease: "power3.inOut" }, t + 4.5);
+        tl.fromTo("#s8-jb", { attr: { r: 22 } }, { attr: { r: 32 }, duration: 0.3, ease: "expo.out" }, t + 5.1);
+      }
+
+      // 9 · O teste: os 42 cadastros e as 104 comparações do gabarito v1, como o motor decidiu.
+      {
+        const t = inicio("s9");
+        const G = window.GRAFO;
+        const pos = new Map(G.pontos.map((p) => [p.codigo, p]));
+        const ligs = el("#s9-ligacoes");
+        const pts = el("#s9-pontos");
+        const ordem = [...G.comparacoes].sort((a, b) => pos.get(a.a).y - pos.get(b.a).y || pos.get(a.a).x - pos.get(b.a).x);
+        ordem.forEach((c, i) => {
+          const a = pos.get(c.a);
+          const b = pos.get(c.b);
+          const cor = c.mesma ? "#237f52" : "#8f989b";
+          novo(ligs, "line", {
+            x1: a.x, y1: a.y, x2: b.x, y2: b.y,
+            stroke: c.errouNaPrimeira ? "#a52019" : cor,
+            "stroke-width": c.mesma ? 8 : 2.5,
+            class: `s9-l${c.errouNaPrimeira ? " s9-erro" : ""}`,
+            "data-i": i,
+          });
+        });
+        for (const p of G.pontos) {
+          novo(pts, "circle", { cx: p.x, cy: p.y, r: 15, fill: p.elegivel ? "#15191a" : "#ffffff", stroke: "#15191a", "stroke-width": p.elegivel ? 0 : 4, class: "s9-p" });
+        }
+        frase("#s9 .titulo", t + 0.2);
+        tl.fromTo(".s9-p", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.45, ease: "expo.out", stagger: 0.018 }, t + 0.7);
+        tl.fromTo(".s9-l", { opacity: 0 }, { opacity: 1, duration: 0.12, stagger: 0.022 }, t + 1.5);
+        frase("#s9-l1", t + 4.0);
+        tl.fromTo(".s9-erro", { attr: { "stroke-width": 8 } }, { attr: { "stroke-width": 14 }, duration: 0.25, ease: "power2.out" }, t + 4.3);
+        tl.fromTo(".s9-erro", { attr: { stroke: "#a52019", "stroke-width": 14 } }, { attr: { stroke: "#237f52", "stroke-width": 8 }, duration: 0.5, ease: "power2.inOut", immediateRender: false }, t + 5.4);
+        frase("#s9-l2", t + 5.6);
+        frase("#s9-fim", t + 6.6, 0.05);
+      }
+
+      // 10 · Teste na sua usina: a tela real do diagnóstico.
+      {
+        const t = inicio("s10");
+        frase("#s10 .titulo", t + 0.2);
+        chega("#s10-numeros", t + 0.9, { y: 60 });
+        chega("#s10-grupo", t + 1.8, { y: 60 });
+        desenha("#s10-liga", t + 2.7, 0.5);
+        frase("#s10-frase", t + 3.4);
+      }
+
+      // 11 · Lá fora: o número; depois o Brasil, sem nenhum ponto aceso.
+      {
+        const t = inicio("s11");
+        const B = window.BRASIL;
+        el("#s11-contorno").setAttribute("d", B.contorno);
+        const g = el("#s11-pontos");
+        for (const [x, y] of B.pontos) novo(g, "circle", { cx: x, cy: y, r: 6, class: "s11-p" });
+        frase("#s11 .titulo", t + 0.2);
+        tl.fromTo("#s11-valor .p", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, t + 0.8);
+        frase("#s11-de", t + 1.4, 0.05);
+        desenha("#s11-contorno", t + 2.2, 1.2);
+        tl.fromTo(".s11-p", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: { each: 0.003, from: "random" } }, t + 2.8);
+        frase("#s11-brasil", t + 4.0);
+      }
+
+      // 12 · O pedido: três pedidos ligados; o QR por último.
+      {
+        const t = inicio("s12");
+        frase("#s12-titulo", t + 0.2);
+        desenha("#s12-espinha", t + 0.9, 1.4);
+        for (const i of [1, 2, 3]) {
+          surge(`#s12-n${i}`, t + 0.9 + (i - 1) * 0.6);
+          chega(`#s12-a${i}`, t + 1.0 + (i - 1) * 0.6, { x: -40 });
+        }
+        tl.fromTo("#s12-qr", { opacity: 0, scale: 1.18 }, { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out" }, t + 3.4);
+        frase("#s12-teste", t + 3.9, 0.05);
+      }
 
       tl.set({}, {}, Number(document.getElementById("root").dataset.duration));
       window.__timelines["main"] = tl;
