@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AgroParts · notas de quem apresenta</title>
+    <style>
+      @font-face { font-family: "Barlow"; font-weight: 400; src: url("composition/assets/fonts/barlow-latin-400.woff2") format("woff2"); }
+      @font-face { font-family: "Barlow Semi Condensed"; font-weight: 700; src: url("composition/assets/fonts/barlow-semi-condensed-latin-700.woff2") format("woff2"); }
+      body {
+        margin: 0;
+        padding: 32px 40px;
+        background: #15191a;
+        color: #f3f4f2;
+        font-family: "Barlow", sans-serif;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 40px;
+      }
+      #notas {
+        margin: 28px 0;
+        font-size: 34px;
+        line-height: 1.4;
+        white-space: pre-line;
+      }
+      #proximo {
+        color: #8f989b;
+        font-size: 22px;
+        line-height: 1.4;
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <header><span id="posicao">Antes do primeiro slide</span><span id="relogio">0:00</span></header>
+    <p id="notas"></p>
+    <p id="proximo"></p>
+    <script>
+      const canal = new BroadcastChannel("agroparts-deck-produto");
+      const $ = (id) => document.getElementById(id);
+      let comeco = null;
+      canal.onmessage = ({ data }) => {
+        if (typeof data !== "object") return;
+        if (data.atual >= 0 && comeco === null) comeco = performance.now();
+        $("posicao").textContent = data.atual >= 0 ? `Slide ${data.atual + 1} de ${data.total}` : "Antes do primeiro slide";
+        $("notas").textContent = data.notas;
+        $("proximo").textContent = data.proximo ? `Depois: ${data.proximo}` : "";
+      };
+      canal.postMessage("estado");
+      setInterval(() => {
+        if (comeco === null) return;
+        const s = Math.floor((performance.now() - comeco) / 1000);
+        $("relogio").textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+      }, 500);
+      addEventListener("keydown", (e) => {
+        const c = { ArrowRight: "avancar", " ": "avancar", PageDown: "avancar", Enter: "avancar", ArrowLeft: "voltar", PageUp: "voltar", Backspace: "voltar" }[e.key];
+        if (!c) return;
+        e.preventDefault();
+        canal.postMessage(c);
+      });
+    </script>
+  </body>
+</html>
