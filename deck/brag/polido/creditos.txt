@@ -1,0 +1,8 @@
+Fotos (Wikimedia Commons), com o crédito na tela ao lado de cada uma:
+- assets/fotos/rolamento-com-tampa-6007.jpg: R. Henrik Nilsson, CC BY 4.0 (a mesma de public/exemplos/)
+- assets/fotos/colheita-piracicaba.jpg: Mariordo, Colheita em Piracicaba (SP), CC BY 3.0 (a mesma de public/exemplos/)
+Etiqueta: assets/fotos/etiqueta-impressa-catmat-311960.png, do próprio projeto (public/exemplos/).
+Telas: capturas de https://agroparts.pages.dev/diagnostico em 04/11/2026, com o arquivo de bun scripts/arquivo-diagnostico.ts (dados públicos do governo).
+Mapa: contorno do Brasil do Natural Earth (domínio público), via world-atlas 2 (ISC).
+Letras: Barlow e Barlow Semi Condensed, SIL Open Font License 1.1 (assets/fonts/OFL.txt).
+GSAP 3.15.0: licença padrão da GreenSock, sem custo (https://gsap.com/standard-license).

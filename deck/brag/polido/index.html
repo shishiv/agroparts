@@ -70,7 +70,7 @@
       #s2-prateleira { background: var(--chapa); }
       #s2-prateleira .tabua { position: absolute; left: 40px; right: 40px; top: 330px; height: 6px; background: var(--tinta); }
       #s2-prateleira .caixa { position: absolute; top: 160px; width: 160px; height: 170px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 4px; display: grid; place-items: center; }
-      #s2-prateleira .caixa svg { width: 88px; height: 88px; color: var(--tinta); }
+      #s2-prateleira .caixa svg { width: 120px; height: 120px; color: var(--tinta); }
       #s2-credito { left: 1080px; top: 690px; }
 
       /* 3 · Quanto custa */
@@ -92,8 +92,8 @@
       /* 5 · Não é caso raro */
       #s5-num { left: 200px; top: 250px; font-size: 280px; }
       #s5-txt { left: 200px; top: 580px; }
-      #s5-grade { left: 1190px; top: 300px; width: 520px; display: grid; grid-template-columns: repeat(4, 106px); gap: 32px 32px; }
-      #s5-grade .cel { position: relative; height: 136px; background: var(--papel); border: 2px solid var(--linha); border-radius: 4px; padding: 16px 14px; }
+      #s5-grade { left: 1190px; top: 300px; width: 520px; display: grid; grid-template-columns: repeat(4, 116px); gap: 28px 28px; }
+      #s5-grade .cel { position: relative; height: 150px; background: var(--papel); border: 2px solid var(--linha); border-radius: 4px; padding: 16px 14px; }
       #s5-grade .cel .barra { margin-top: 12px; height: 8px; }
       #s5-grade .cel .barra:first-child { margin-top: 0; width: 70%; }
       #s5-acesa { position: absolute; inset: -2px; background: var(--tinta); border-radius: 4px; }
@@ -539,7 +539,6 @@
         acende(3, b + 23.0);
         acende(4, b + 25.6);
         acende(5, b + 28.0);
-        tl.to("#s8-etiqueta", { opacity: 0.35, duration: 0.6, ease: "power2.inOut" }, b + 28.0);
         tl.fromTo("#s8-x", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, b + 28.0);
         tl.fromTo("#s8-y", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, b + 28.0);
         tl.to("#s8-y", { x: -110, duration: 0.8, ease: "power3.inOut" }, b + 28.6);

@@ -10,7 +10,7 @@ O movimento de decisão vem do próprio site: a placa sobe 10px e o pictograma b
 ## LOOK
 
 Fundo chapa `#f3f4f2`, texto tinta `#15191a`, apoio suave `#4f585b`.
-Barlow Semi Condensed 700 na frase principal (148px, 14% da altura), 600 nas linhas de apoio (84px), Barlow 400 no corpo, nada abaixo de 40px.
+Barlow Semi Condensed 700 na frase principal (148px, 14% da altura), 600 nas linhas de apoio (84px), Barlow 400 no corpo, nada abaixo de 40px, fora o crédito das fotos (18px), que a licença pede.
 Tudo alinhado à esquerda numa margem de 200px, com pelo menos metade da tela vazia.
 Régua de tinta de 3px como único ornamento.
 Azul `#154889` só no que pede ação (o QR do último slide).
@@ -31,6 +31,6 @@ Proibido: gradiente, sombra (fora do carimbo de 0,45s da placa), cartão, bloco 
 ## Como funciona
 
 - `index.html` é a composição do Hyperframes: uma linha do tempo só, com um `section.slide` por slide.
-- Cada slide diz em `data-paradas` os trechos que a seta toca ("entra-para", em segundos desde o início do slide) e em `data-saida` quando a saída começa. A abertura tem uma parada por pessoa que fala.
+- Cada slide diz em `data-paradas` os trechos que a seta toca ("entra-para", em segundos desde o início do slide) e em `data-saida` quando a saída começa. Um slide tem mais de uma parada quando a fala revela a tela em partes; as notas marcam com ▶ onde apertar.
 - `apresentar.html` é a casca: toca o trecho até a próxima parada e para no quadro final. ← volta na hora, sem animação. P abre a janela do apresentador, com a fala de cada slide (`#falas` em `index.html`).
 - O vídeo passa a mesma linha do tempo inteira, com cada quadro final parado o tempo da fala.
