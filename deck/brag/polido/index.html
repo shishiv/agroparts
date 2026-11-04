@@ -20,74 +20,579 @@
         --tinta-2: #3b4447;
         --suave: #4f585b;
         --linha: #c7cccd;
+        --desligado: #8f989b;
         --verde: #237f52;
         --amarelo: #f9a800;
         --azul: #154889;
         --placa: "Barlow Semi Condensed", "Barlow", sans-serif;
         --corpo: "Barlow", sans-serif;
-        --margem: 200px;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--chapa); }
       body { font-family: var(--corpo); color: var(--tinta); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
       #deck { position: relative; width: 1920px; height: 1080px; background: var(--chapa); }
       .slide { position: absolute; inset: 0; }
-      .palco { position: absolute; inset: 0; padding: 0 var(--margem); display: flex; flex-direction: column; justify-content: center; }
+      .palco { position: absolute; inset: 0; }
+      .palco > * { position: absolute; }
 
       /* Máscara: a linha sobe de dentro do próprio recorte. */
       .linha { display: block; overflow: hidden; padding-bottom: 0.2em; margin-bottom: -0.2em; }
-      .linha > span { display: inline-block; will-change: transform; }
+      .linha > span { display: inline-block; white-space: nowrap; }
 
-      #abertura .nomes { font-family: var(--placa); font-weight: 600; font-size: 84px; line-height: 1.12; letter-spacing: -0.01em; }
-      #abertura .nomes .linha > span { color: var(--tinta); }
-      #abertura .heroi { margin-top: 64px; font-family: var(--placa); font-weight: 700; font-size: 148px; line-height: 1.0; white-space: nowrap; letter-spacing: -0.015em; }
-      #abertura .regua { margin-top: 56px; width: 760px; height: 3px; background: var(--tinta); transform-origin: 0 50%; }
+      .titulo { font-family: var(--placa); font-weight: 700; font-size: 72px; line-height: 1.08; letter-spacing: -0.01em; }
+      .apoio { font-family: var(--corpo); font-weight: 400; font-size: 48px; line-height: 1.3; color: var(--tinta-2); }
+      .numero { font-family: var(--placa); font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+      .credito { font-size: 16px; line-height: 1.3; color: var(--suave); }
+      .janela { overflow: hidden; }
+      .janela img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .tela { overflow: hidden; border: 1px solid var(--linha); background: var(--papel); }
+      .tela img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .cartao { background: var(--papel); border: 2px solid var(--tinta); border-radius: 4px; }
+      .cartao .codigo { font-family: var(--placa); font-weight: 700; font-size: 56px; line-height: 1; }
+      .barra { display: block; height: 10px; background: var(--linha); border-radius: 2px; margin-top: 14px; }
+      .picto { fill: currentColor; }
+
+      /* 1 · Abertura */
+      #s1-marca { left: 200px; top: 300px; display: flex; align-items: baseline; font-family: var(--placa); font-size: 160px; line-height: 1; }
+      #s1-marca .chave { font-weight: 500; color: var(--suave); }
+      #s1-marca .linha { margin: 0 28px; }
+      #s1-marca #s1-nome { font-weight: 700; letter-spacing: -0.015em; }
+      #s1-frase { left: 200px; top: 560px; font-family: var(--placa); font-weight: 600; font-size: 64px; line-height: 1.12; color: var(--tinta-2); }
+      #s1-foto { left: 1200px; top: 250px; width: 520px; height: 510px; }
+      #s1-credito { left: 1200px; top: 772px; }
+
+      /* 2 · A cena */
+      #s2-l1 { left: 200px; top: 250px; }
+      #s2-l2 { left: 200px; top: 560px; }
+      #s2-janela { left: 1080px; top: 250px; width: 640px; height: 427px; }
+      #s2-faixa { position: absolute; left: 0; top: 0; width: 1280px; height: 427px; display: flex; }
+      #s2-faixa > * { flex: 0 0 640px; height: 427px; position: relative; }
+      #s2-prateleira { background: var(--chapa); }
+      #s2-prateleira .tabua { position: absolute; left: 40px; right: 40px; top: 330px; height: 6px; background: var(--tinta); }
+      #s2-prateleira .caixa { position: absolute; top: 160px; width: 160px; height: 170px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 4px; display: grid; place-items: center; }
+      #s2-prateleira .caixa svg { width: 88px; height: 88px; color: var(--tinta); }
+      #s2-credito { left: 1080px; top: 690px; }
+
+      /* 3 · Quanto custa */
+      #s3-q { left: 200px; top: 200px; }
+      #s3-num { left: 200px; top: 440px; font-size: 200px; }
+      #s3-fonte { left: 200px; top: 700px; }
+
+      /* 4 · Por que acontece */
+      #s4-t { left: 200px; top: 120px; font-size: 64px; }
+      .setor { left: 200px; width: 1180px; height: 96px; display: flex; align-items: center; }
+      .setor .rotulo { width: 360px; font-family: var(--corpo); font-weight: 600; font-size: 44px; color: var(--suave); }
+      .setor .campo { width: 820px; height: 96px; display: flex; align-items: center; padding: 0 28px; background: var(--papel); border: 2px solid var(--tinta); border-radius: 4px; font-family: var(--placa); font-weight: 600; font-size: 48px; white-space: nowrap; }
+      #s4-a { top: 330px; } #s4-b { top: 460px; } #s4-c { top: 590px; }
+      #s4-fios { left: 0; top: 0; width: 1920px; height: 1080px; }
+      #s4-fios path { fill: none; stroke: var(--tinta); stroke-width: 3; }
+      #s4-peca { left: 1570px; top: 438px; width: 160px; height: 160px; color: var(--tinta); }
+      #s4-fim { left: 200px; top: 790px; font-size: 60px; }
+
+      /* 5 · Não é caso raro */
+      #s5-num { left: 200px; top: 250px; font-size: 280px; }
+      #s5-txt { left: 200px; top: 580px; }
+      #s5-grade { left: 1190px; top: 300px; width: 520px; display: grid; grid-template-columns: repeat(4, 106px); gap: 32px 32px; }
+      #s5-grade .cel { position: relative; height: 136px; background: var(--papel); border: 2px solid var(--linha); border-radius: 4px; padding: 16px 14px; }
+      #s5-grade .cel .barra { margin-top: 12px; height: 8px; }
+      #s5-grade .cel .barra:first-child { margin-top: 0; width: 70%; }
+      #s5-acesa { position: absolute; inset: -2px; background: var(--tinta); border-radius: 4px; }
+
+      /* 6 · A resposta */
+      #s6-t { left: 200px; top: 150px; }
+      .placa { left: 200px; width: 780px; height: 150px; border-radius: 4px; display: flex; align-items: center; gap: 36px; padding: 0 36px; font-family: var(--placa); font-weight: 700; font-size: 64px; }
+      .placa::after { content: ""; position: absolute; inset: 6px; border: 2px solid currentColor; border-radius: 2px; opacity: 0.9; pointer-events: none; }
+      .placa .sinal { flex: 0 0 96px; height: 96px; display: grid; place-items: center; border-radius: 2px; font-size: 84px; line-height: 1; }
+      #s6-p1 { top: 380px; background: var(--verde); color: var(--papel); }
+      #s6-p1 .sinal { background: var(--papel); color: var(--verde); }
+      #s6-p2 { top: 600px; background: var(--amarelo); color: var(--tinta); }
+      #s6-p2 .sinal { border: 4px solid var(--tinta); }
+      #s6-a, #s6-b, #s6-c { width: 250px; height: 150px; padding: 26px 28px; }
+      #s6-a { left: 1090px; top: 380px; } #s6-b { left: 1470px; top: 380px; } #s6-c { left: 1090px; top: 600px; }
+      #s6-c .barra:first-child { margin-top: 6px; width: 80%; }
+      #s6-igual { left: 1340px; top: 380px; width: 130px; height: 150px; display: grid; place-items: center; font-family: var(--placa); font-weight: 700; font-size: 96px; }
+      #s6-duvida { left: 1340px; top: 600px; width: 130px; height: 150px; display: grid; place-items: center; font-family: var(--placa); font-weight: 700; font-size: 96px; }
+      #s6-pessoa { left: 1500px; top: 610px; width: 130px; height: 130px; color: var(--tinta); }
+
+      /* 7 · O ganho */
+      #s7-t { left: 200px; top: 170px; }
+      .ganho { left: 200px; width: 1520px; height: 130px; display: flex; align-items: center; border-top: 1px solid var(--linha); }
+      .ganho .rotulo { width: 440px; font-weight: 600; font-size: 48px; color: var(--suave); }
+      .ganho .valor { font-family: var(--placa); font-weight: 700; font-size: 72px; }
+      #s7-a { top: 370px; } #s7-b { top: 520px; } #s7-c { top: 670px; }
+
+      /* 8 · Como funciona */
+      #s8-t { left: 200px; top: 110px; }
+      .passo { left: 200px; height: 84px; display: flex; align-items: center; gap: 36px; }
+      .passo .n { flex: 0 0 72px; height: 72px; display: grid; place-items: center; border-radius: 2px; border: 3px solid var(--desligado); color: var(--desligado); font-family: var(--placa); font-weight: 700; font-size: 44px; }
+      .passo .txt { font-weight: 600; font-size: 48px; color: var(--desligado); white-space: nowrap; }
+      #s8-1 { top: 290px; } #s8-2 { top: 420px; } #s8-3 { top: 550px; } #s8-4 { top: 680px; } #s8-5 { top: 810px; }
+      #s8-etiqueta { left: 1300px; top: 285px; width: 420px; height: 199px; }
+      #s8-x, #s8-y { width: 200px; height: 120px; padding: 22px 22px; top: 790px; }
+      #s8-x { left: 1300px; } #s8-y { left: 1520px; }
+
+      /* 9 · O teste */
+      #s9-t { left: 200px; top: 130px; }
+      .rodada { width: 700px; }
+      .rodada .rot { font-weight: 500; font-size: 52px; color: var(--tinta-2); }
+      .rodada .val { margin-top: 12px; display: flex; align-items: baseline; gap: 24px; font-family: var(--placa); font-weight: 700; }
+      .rodada .val .num { font-size: 260px; line-height: 0.9; }
+      .rodada .val .un { font-size: 80px; }
+      #s9-r1 { left: 200px; top: 380px; } #s9-r2 { left: 960px; top: 380px; }
+      #s9-fim { left: 200px; top: 840px; }
+
+      /* 10 · Teste na sua usina */
+      #s10-t { left: 200px; top: 100px; }
+      #s10-sub { left: 200px; top: 200px; }
+      #s10-inicio { left: 200px; top: 320px; width: 1094px; height: 684px; }
+      #s10-resumo { left: 200px; top: 330px; width: 1520px; height: 170px; border: 0; background: transparent; }
+      #s10-grupo { left: 200px; top: 530px; width: 1150px; height: 480px; border: 0; background: transparent; }
+
+      /* 11 · Lá fora */
+      #s11-t { left: 200px; top: 140px; }
+      #s11-num { left: 200px; top: 290px; font-size: 220px; }
+      #s11-txt { left: 200px; top: 540px; }
+      #s11-mapa { left: 1250px; top: 160px; width: 470px; height: 482px; }
+      #s11-mapa path { fill: none; stroke: var(--tinta); stroke-width: 3; stroke-linejoin: round; }
+      #s11-fim { left: 200px; top: 800px; font-size: 60px; }
+
+      /* 12 · O pedido */
+      #s12-t { left: 200px; top: 120px; }
+      .pedido { left: 200px; display: flex; align-items: center; gap: 32px; font-weight: 600; font-size: 52px; }
+      .pedido::before { content: ""; flex: 0 0 18px; height: 18px; background: var(--tinta); }
+      #s12-a { top: 380px; } #s12-b { top: 470px; } #s12-c { top: 560px; }
+      #s12-qr { left: 200px; top: 700px; width: 300px; height: 300px; }
+      #s12-qr img { width: 100%; height: 100%; image-rendering: pixelated; }
+      #s12-teste { left: 560px; top: 770px; font-family: var(--placa); font-weight: 600; font-size: 52px; line-height: 1.3; }
+      #s12-teste .url { color: var(--azul); font-weight: 700; font-size: 64px; }
     </style>
   </head>
   <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="p-peca" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="4" /><circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="4" /><g fill="currentColor"><circle cx="24" cy="11.5" r="3" /><circle cx="24" cy="36.5" r="3" /><circle cx="11.5" cy="24" r="3" /><circle cx="36.5" cy="24" r="3" /><circle cx="15.2" cy="15.2" r="3" /><circle cx="32.8" cy="32.8" r="3" /><circle cx="32.8" cy="15.2" r="3" /><circle cx="15.2" cy="32.8" r="3" /></g></symbol>
+      <symbol id="p-revisa" viewBox="0 0 48 48"><circle cx="24" cy="11.5" r="5.5" fill="currentColor" /><path d="M15 21h18l-2.5 13H28l-1 10h-6l-1-10h-2.5z" fill="currentColor" /></symbol>
+    </svg>
+
     <!--
-      Cada slide é um .clip com três tempos próprios, em segundos desde o início do slide:
-      data-paradas: um ou mais trechos "entra-para"; o apresentador toca cada trecho e para no fim dele.
-      data-saida: quando começa a saída do slide. O vídeo segura o quadro entre a última parada e a saída.
+      Cada slide é um section.slide com dois tempos próprios, em segundos desde o início do slide:
+      data-paradas: um ou mais trechos "entra-para"; a seta do apresentador toca um trecho e para no fim dele.
+      data-saida: quando a saída do slide começa. O vídeo segura o quadro entre a última parada e a saída.
+      O texto de cada slide é o "Na tela" de data/agroparts-brag-texto/report.md; scripts/conferir-texto.py confere.
     -->
-    <div id="deck" data-composition-id="deck" data-start="0" data-duration="12" data-width="1920" data-height="1080">
-      <section id="abertura" class="slide clip" data-start="0" data-duration="12" data-track-index="0"
-        data-label="Abertura" data-paradas="0.6-1.5,2.6-3.5,4.6-5.5,6.6-7.8" data-saida="11.4">
+    <div id="deck" data-composition-id="deck" data-start="0" data-duration="248" data-width="1920" data-height="1080">
+
+      <section id="s1" class="slide clip" data-hold data-start="0" data-duration="15" data-track-index="0" data-label="1 · Abertura"
+        data-paradas="0.4-1.6,6.0-7.4,9.5-10.7" data-saida="14.5">
         <div class="palco">
-          <p class="nomes">
-            <span class="linha" data-layout-allow-overflow><span id="ab-gabi">Eu sou a Gabi.</span></span>
-            <span class="linha" data-layout-allow-overflow><span id="ab-myke">Eu sou o Myke.</span></span>
-            <span class="linha" data-layout-allow-overflow><span id="ab-alberto">Eu sou o Alberto.</span></span>
+          <div id="s1-foto" class="janela" data-layout-allow-overflow><img src="assets/fotos/rolamento-com-tampa-6007.jpg" alt="" /></div>
+          <p id="s1-credito" class="credito nao-texto">Foto: R. Henrik Nilsson, Wikimedia Commons, CC BY 4.0</p>
+          <p id="s1-marca"><span class="chave" id="s1-ca">{</span><span class="linha" data-layout-allow-overflow><span id="s1-nome">AgroParts</span></span><span class="chave" id="s1-cf">}</span></p>
+          <p id="s1-frase">
+            <span class="linha" data-layout-allow-overflow><span>Para a usina não comprar</span></span>
+            <span class="linha" data-layout-allow-overflow><span>a peça que ela já tem.</span></span>
           </p>
-          <p class="heroi"><span class="linha" data-layout-allow-overflow><span id="ab-nos">E nós somos a AgroParts.</span></span></p>
-          <div class="regua" id="ab-regua"></div>
+        </div>
+      </section>
+
+      <section id="s2" class="slide clip" data-hold data-start="15" data-duration="14" data-track-index="0" data-label="2 · A cena"
+        data-paradas="0.4-1.6,10.0-11.6" data-saida="13.5">
+        <div class="palco">
+          <p id="s2-l1" class="titulo">
+            <span class="linha" data-layout-allow-overflow><span>O sistema diz que</span></span>
+            <span class="linha" data-layout-allow-overflow><span>a peça não existe.</span></span>
+          </p>
+          <p id="s2-l2" class="titulo">
+            <span class="linha" data-layout-allow-overflow><span>Na prateleira,</span></span>
+            <span class="linha" data-layout-allow-overflow><span>havia três.</span></span>
+          </p>
+          <div id="s2-janela" class="janela" data-layout-allow-overflow>
+            <div id="s2-faixa">
+              <div><img src="assets/fotos/colheita-piracicaba.jpg" alt="" style="width: 640px; height: 427px; object-fit: cover" /></div>
+              <div id="s2-prateleira">
+                <div class="caixa" style="left: 60px"><svg><use href="#p-peca" /></svg></div>
+                <div class="caixa" style="left: 240px"><svg><use href="#p-peca" /></svg></div>
+                <div class="caixa" style="left: 420px"><svg><use href="#p-peca" /></svg></div>
+                <div class="tabua"></div>
+              </div>
+            </div>
+          </div>
+          <p id="s2-credito" class="credito nao-texto">Colheita em Piracicaba (SP). Foto: Mariordo, Wikimedia Commons, CC BY 3.0</p>
+        </div>
+      </section>
+
+      <section id="s3" class="slide clip" data-hold data-start="29" data-duration="16" data-track-index="0" data-label="3 · Quanto custa"
+        data-paradas="0.4-1.4,3.0-5.0" data-saida="15.5">
+        <div class="palco">
+          <p id="s3-q" class="titulo">
+            <span class="linha" data-layout-allow-overflow><span>Quanto custa manter</span></span>
+            <span class="linha" data-layout-allow-overflow><span>uma usina rodando?</span></span>
+          </p>
+          <p id="s3-num" class="numero"><span class="linha" data-layout-allow-overflow><span>R$ <span id="s3-valor">183,5</span> milhões</span></span></p>
+          <p id="s3-fonte" class="apoio"><span class="linha" data-layout-allow-overflow><span>São Martinho, manutenção de entressafra, em 9 meses</span></span></p>
+        </div>
+      </section>
+
+      <section id="s4" class="slide clip" data-hold data-start="45" data-duration="23" data-track-index="0" data-label="4 · Por que acontece"
+        data-paradas="0.4-1.4,4.0-5.4,13.0-14.6" data-saida="22.5">
+        <div class="palco">
+          <p id="s4-t" class="titulo">
+            <span class="linha" data-layout-allow-overflow><span>Hoje é manual.</span></span>
+            <span class="linha" data-layout-allow-overflow><span>Cada setor cadastra do seu jeito.</span></span>
+          </p>
+          <div id="s4-a" class="setor"><span class="rotulo">Almoxarifado:</span><span class="campo">ROLAM 6318ZZC3 P/ BOMBA</span></div>
+          <div id="s4-b" class="setor"><span class="rotulo">Manutenção:</span><span class="campo">ROL 6318 ZZ C3</span></div>
+          <div id="s4-c" class="setor"><span class="rotulo">Compras:</span><span class="campo">ROLAMENTO RIG. ESFERAS 6318-2Z/C3</span></div>
+          <svg id="s4-fios" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path id="s4-f1" d="M1380 378 C1470 378 1480 518 1560 518" />
+            <path id="s4-f2" d="M1380 508 L1560 518" />
+            <path id="s4-f3" d="M1380 638 C1470 638 1480 518 1560 518" />
+          </svg>
+          <svg id="s4-peca"><use href="#p-peca" /></svg>
+          <p id="s4-fim" class="titulo">
+            <span class="linha" data-layout-allow-overflow><span>O sistema vê três peças,</span></span>
+            <span class="linha" data-layout-allow-overflow><span>que na verdade são uma só.</span></span>
+          </p>
+        </div>
+      </section>
+
+      <section id="s5" class="slide clip" data-hold data-start="68" data-duration="12" data-track-index="0" data-label="5 · Não é caso raro"
+        data-paradas="0.4-2.2" data-saida="11.5">
+        <div class="palco">
+          <p id="s5-num" class="numero"><span class="linha" data-layout-allow-overflow><span>1 em 12</span></span></p>
+          <p id="s5-txt" class="apoio">
+            <span class="linha" data-layout-allow-overflow><span>dos cadastros de rolamento</span></span>
+            <span class="linha" data-layout-allow-overflow><span>do catálogo do governo</span></span>
+            <span class="linha" data-layout-allow-overflow><span>está repetido</span></span>
+          </p>
+          <div id="s5-grade" aria-hidden="true">
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i><span id="s5-acesa"></span></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+            <div class="cel"><i class="barra"></i><i class="barra"></i><i class="barra"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s6" class="slide clip" data-hold data-start="80" data-duration="13" data-track-index="0" data-label="6 · A resposta"
+        data-paradas="0.4-1.4,3.0-4.4,5.6-7.0" data-saida="12.5">
+        <div class="palco">
+          <p id="s6-t" class="titulo"><span class="linha" data-layout-allow-overflow><span>A AgroParts confere a peça e responde</span></span></p>
+          <div id="s6-p1" class="placa"><span class="sinal" id="s6-p1s">=</span><span>É a mesma peça</span></div>
+          <div id="s6-p2" class="placa"><span class="sinal" id="s6-p2s">?</span><span>Precisa de uma pessoa</span></div>
+          <div id="s6-a" class="cartao nao-texto"><span class="codigo">317388</span><i class="barra" style="width: 70%"></i></div>
+          <div id="s6-igual" class="nao-texto" aria-hidden="true">=</div>
+          <div id="s6-b" class="cartao nao-texto"><span class="codigo">472510</span><i class="barra" style="width: 70%"></i></div>
+          <div id="s6-c" class="cartao" aria-hidden="true"><i class="barra"></i><i class="barra"></i><i class="barra" style="width: 60%"></i></div>
+          <div id="s6-duvida" class="nao-texto" aria-hidden="true">?</div>
+          <svg id="s6-pessoa"><use href="#p-revisa" /></svg>
+        </div>
+      </section>
+
+      <section id="s7" class="slide clip" data-hold data-start="93" data-duration="11" data-track-index="0" data-label="7 · O ganho"
+        data-paradas="0.4-2.2" data-saida="10.5">
+        <div class="palco">
+          <p id="s7-t" class="titulo"><span class="linha" data-layout-allow-overflow><span>Um ganho para cada setor</span></span></p>
+          <div id="s7-a" class="ganho"><span class="rotulo">Almoxarifado:</span><span class="valor">Acha a peça</span></div>
+          <div id="s7-b" class="ganho"><span class="rotulo">Manutenção:</span><span class="valor">Sabe se já tem</span></div>
+          <div id="s7-c" class="ganho"><span class="rotulo">Compras:</span><span class="valor">Não compra de novo</span></div>
+        </div>
+      </section>
+
+      <section id="s8" class="slide clip" data-hold data-start="104" data-duration="38" data-track-index="0" data-label="8 · Como funciona"
+        data-paradas="0.4-1.8,4.0-5.0,20.0-21.0,23.0-24.0,25.6-26.6,28.0-29.4" data-saida="37.5">
+        <div class="palco">
+          <p id="s8-t" class="titulo"><span class="linha" data-layout-allow-overflow><span>Cinco passos, em segundos</span></span></p>
+          <div id="s8-1" class="passo"><span class="n">1</span><span class="txt">Recebe código, nome ou foto</span></div>
+          <div id="s8-2" class="passo"><span class="n">2</span><span class="txt">Lê as medidas e o tipo da peça</span></div>
+          <div id="s8-3" class="passo"><span class="n">3</span><span class="txt">Procura as parecidas no catálogo</span></div>
+          <div id="s8-4" class="passo"><span class="n">4</span><span class="txt">Compara uma a uma</span></div>
+          <div id="s8-5" class="passo"><span class="n">5</span><span class="txt">Junta os cadastros, sem apagar o original</span></div>
+          <div id="s8-etiqueta" class="janela nao-texto" data-layout-allow-overflow><img src="assets/fotos/etiqueta-impressa-catmat-311960.png" alt="" style="object-fit: contain" /></div>
+          <div id="s8-x" class="cartao" aria-hidden="true"><i class="barra" style="margin-top: 0"></i><i class="barra"></i><i class="barra" style="width: 60%"></i></div>
+          <div id="s8-y" class="cartao" aria-hidden="true"><i class="barra" style="margin-top: 0"></i><i class="barra"></i><i class="barra" style="width: 60%"></i></div>
+        </div>
+      </section>
+
+      <section id="s9" class="slide clip" data-hold data-start="142" data-duration="30" data-track-index="0" data-label="9 · O teste"
+        data-paradas="0.4-2.0,20.5-21.7,24.0-26.0" data-saida="29.5">
+        <div class="palco">
+          <p id="s9-t" class="titulo">
+            <span class="linha" data-layout-allow-overflow><span>Testamos com cadastros reais</span></span>
+            <span class="linha" data-layout-allow-overflow><span>e públicos do governo</span></span>
+          </p>
+          <div id="s9-r1" class="rodada">
+            <p class="rot"><span class="linha" data-layout-allow-overflow><span>1ª rodada:</span></span></p>
+            <p class="val"><span class="linha" data-layout-allow-overflow><span id="s9-seis"><span class="num">6</span> <span class="un">erros</span></span></span></p>
+          </div>
+          <div id="s9-r2" class="rodada">
+            <p class="rot"><span class="linha" data-layout-allow-overflow><span>Depois de um ajuste:</span></span></p>
+            <p class="val"><span class="linha" data-layout-allow-overflow><span id="s9-zero"><span class="num" id="s9-conta">0</span> <span class="un">erros</span></span></span></p>
+          </div>
+          <p id="s9-fim" class="apoio"><span class="linha" data-layout-allow-overflow><span>Em 104 comparações. Qualquer pessoa pode refazer o teste.</span></span></p>
+        </div>
+      </section>
+
+      <section id="s10" class="slide clip" data-hold data-start="172" data-duration="29" data-track-index="0" data-label="10 · Teste na sua usina"
+        data-paradas="0.4-1.8,14.0-15.0,18.5-19.9,22.0-23.2" data-saida="28.5">
+        <div class="palco">
+          <p id="s10-t" class="titulo"><span class="linha" data-layout-allow-overflow><span>Teste hoje com o cadastro da sua usina</span></span></p>
+          <p id="s10-sub" class="apoio"><span class="linha" data-layout-allow-overflow><span>O arquivo não sai do seu computador.</span></span></p>
+          <div id="s10-inicio" class="tela nao-texto" data-layout-allow-overflow><img src="assets/telas/diagnostico-inicio.jpg" alt="" /></div>
+          <div id="s10-resumo" class="tela nao-texto" data-layout-allow-overflow><img src="assets/telas/diagnostico-resumo.png" alt="" style="object-position: left center" /></div>
+          <div id="s10-grupo" class="tela nao-texto" data-layout-allow-overflow><img src="assets/telas/diagnostico-grupo-6001.png" alt="" style="object-position: left top" /></div>
+        </div>
+      </section>
+
+      <section id="s11" class="slide clip" data-hold data-start="201" data-duration="26" data-track-index="0" data-label="11 · Lá fora"
+        data-paradas="0.4-1.4,6.0-8.0,14.5-16.5" data-saida="25.5">
+        <div class="palco">
+          <p id="s11-t" class="titulo"><span class="linha" data-layout-allow-overflow><span>Lá fora, isso já é negócio</span></span></p>
+          <p id="s11-num" class="numero"><span class="linha" data-layout-allow-overflow><span>US$ <span id="s11-valor">10,5</span> mi</span></span></p>
+          <p id="s11-txt" class="apoio">
+            <span class="linha" data-layout-allow-overflow><span>de economia numa fabricante,</span></span>
+            <span class="linha" data-layout-allow-overflow><span>segundo a Verusen</span></span>
+          </p>
+          <svg id="s11-mapa" viewBox="0 0 640 656" aria-hidden="true"><path id="s11-contorno" d="M116.3 67.9 L120.5 71.8 L123.6 74.6 L125.7 75.8 L129.7 75.3 L131.9 73.9 L133.7 72.7 L135.9 71.9 L137.7 72.9 L137.8 75.9 L140.3 75.2 L142.7 72.8 L144.2 71.3 L146.6 69.0 L148.4 68.0 L151.4 67.4 L153.8 65.4 L155.4 64.0 L158.3 64.0 L160.0 62.7 L161.4 61.2 L162.2 58.7 L162.7 56.4 L165.8 55.2 L168.5 54.0 L170.3 52.8 L172.6 52.2 L173.5 49.1 L170.1 47.5 L168.0 47.5 L164.5 47.2 L162.5 46.4 L163.1 43.5 L162.7 41.3 L161.0 37.9 L159.7 34.5 L159.5 32.2 L159.6 29.7 L158.8 26.8 L154.0 22.8 L152.4 20.9 L150.0 17.2 L152.4 17.2 L153.9 18.8 L159.1 18.8 L161.3 20.0 L163.0 22.3 L167.4 22.3 L169.9 22.6 L173.4 22.1 L177.4 25.3 L180.1 28.0 L183.5 26.7 L183.9 22.2 L185.1 20.5 L187.1 19.7 L189.2 18.5 L193.5 19.5 L198.9 17.9 L203.2 16.3 L204.5 14.4 L207.7 12.4 L210.6 12.7 L212.9 11.5 L213.8 9.6 L216.5 8.1 L218.4 6.1 L218.3 3.0 L217.0 1.1 L219.2 1.1 L221.9 0.8 L224.7 0.0 L226.9 1.1 L228.8 2.9 L228.4 5.9 L228.1 8.7 L226.6 11.1 L227.9 12.7 L230.1 13.1 L232.8 14.1 L233.1 16.3 L233.7 18.5 L234.8 20.8 L235.6 23.1 L234.0 25.3 L231.0 28.1 L231.3 30.2 L230.7 33.2 L229.5 36.5 L228.7 41.9 L229.3 44.9 L230.4 48.7 L232.6 50.2 L232.8 52.8 L232.7 55.5 L234.0 57.5 L235.2 59.6 L237.1 61.0 L238.8 62.8 L241.2 65.3 L243.3 65.9 L245.5 66.5 L247.2 68.2 L249.4 67.5 L251.4 67.0 L253.3 65.8 L253.5 63.8 L255.4 62.3 L257.5 62.2 L259.8 63.0 L261.5 60.7 L264.6 59.9 L267.9 59.8 L270.9 56.4 L273.1 55.5 L275.6 54.6 L277.5 56.2 L280.3 56.8 L282.6 56.3 L284.8 56.4 L287.6 56.1 L290.2 56.7 L293.6 57.5 L295.2 55.2 L294.6 53.2 L292.8 50.8 L293.2 48.7 L294.0 46.5 L298.3 48.0 L304.0 47.4 L307.2 45.6 L310.2 44.8 L311.4 46.5 L314.1 47.2 L315.8 49.3 L318.2 50.7 L321.8 52.2 L323.9 52.5 L327.5 50.9 L329.4 49.5 L331.8 49.9 L333.7 50.4 L335.8 50.1 L338.3 49.8 L340.0 51.3 L342.8 51.8 L345.0 50.3 L347.8 48.7 L349.7 45.9 L350.2 43.9 L351.8 40.3 L352.8 38.4 L353.4 36.0 L354.8 34.0 L356.6 31.8 L359.2 27.1 L360.4 24.9 L362.1 23.3 L363.1 21.3 L364.9 20.1 L366.5 17.2 L368.1 15.9 L370.2 17.4 L372.0 19.6 L374.3 26.7 L374.7 33.2 L375.7 36.7 L378.4 43.9 L379.0 46.8 L380.8 51.3 L382.0 53.1 L383.2 56.0 L384.4 57.7 L386.9 58.2 L391.0 59.3 L393.9 64.6 L393.5 67.1 L392.9 69.6 L391.2 70.8 L387.1 74.4 L384.3 77.7 L382.4 81.4 L379.6 84.7 L377.1 85.8 L373.9 89.0 L370.9 89.9 L369.0 95.1 L367.5 97.1 L364.1 101.3 L363.8 105.6 L362.2 107.3 L360.3 110.7 L355.5 111.4 L350.2 114.0 L354.2 114.7 L356.1 116.1 L360.1 115.2 L365.0 112.0 L366.9 111.3 L370.7 109.1 L372.3 107.6 L375.1 105.8 L377.3 104.2 L376.9 107.2 L378.1 109.1 L378.5 111.6 L380.8 116.1 L381.5 119.1 L385.3 122.4 L387.6 120.8 L390.0 119.7 L393.5 120.0 L396.5 120.9 L398.7 119.9 L403.1 117.6 L401.7 121.7 L400.7 125.4 L399.2 130.9 L397.9 133.2 L399.7 132.2 L401.6 127.9 L404.8 120.7 L408.4 119.3 L413.0 113.5 L415.9 114.8 L418.8 113.4 L416.9 111.9 L417.9 109.1 L419.6 106.0 L420.2 103.5 L422.5 101.8 L424.0 100.4 L426.5 100.2 L429.0 100.4 L431.8 99.7 L434.1 101.4 L433.7 99.4 L436.5 99.3 L438.8 101.0 L441.8 101.0 L444.0 101.6 L446.7 103.9 L448.8 105.3 L452.0 106.0 L454.9 107.3 L457.7 108.4 L460.8 109.5 L463.1 111.2 L466.1 111.3 L467.8 114.8 L468.2 117.4 L469.6 115.9 L470.6 113.8 L473.1 113.9 L474.9 115.2 L476.3 116.6 L478.1 117.7 L480.2 119.5 L481.1 123.0 L479.8 124.7 L478.3 126.2 L479.0 128.4 L480.5 126.0 L482.7 125.0 L483.6 128.3 L481.4 129.0 L480.7 130.9 L479.9 133.5 L478.1 141.3 L482.7 138.0 L483.7 134.6 L484.9 131.1 L487.0 130.1 L488.0 132.2 L486.7 133.9 L489.7 132.9 L492.1 132.1 L494.3 130.9 L498.8 130.6 L500.0 128.5 L502.4 128.6 L507.3 129.9 L509.0 131.0 L511.5 132.1 L518.5 135.5 L522.5 135.7 L524.5 134.7 L527.1 135.7 L531.0 137.5 L533.7 137.9 L535.7 137.0 L540.9 136.8 L547.5 135.5 L551.4 135.8 L555.8 136.6 L558.9 138.7 L561.6 139.9 L565.8 142.3 L571.3 145.5 L573.2 147.4 L576.6 150.0 L580.1 151.0 L582.0 153.7 L587.0 159.4 L591.2 162.6 L594.0 165.8 L599.3 167.8 L601.3 171.1 L604.9 171.6 L608.3 173.5 L610.9 174.3 L614.2 174.0 L617.9 174.2 L620.8 173.5 L627.9 174.8 L630.4 176.8 L633.0 182.2 L634.5 188.1 L635.3 192.6 L637.1 196.1 L638.0 202.7 L638.8 204.7 L639.6 206.7 L640.0 211.1 L639.2 215.3 L638.9 217.9 L639.5 221.0 L638.6 224.7 L637.4 230.0 L634.3 238.8 L631.3 243.8 L627.1 249.0 L624.4 251.7 L622.3 251.5 L622.4 254.2 L619.6 258.0 L616.9 260.5 L614.0 264.9 L610.1 266.7 L608.0 268.1 L605.2 270.6 L602.7 274.5 L601.2 276.8 L599.0 279.9 L598.9 277.2 L597.0 280.2 L596.5 284.6 L593.0 292.1 L588.6 298.4 L587.6 300.4 L583.9 304.6 L581.3 306.7 L579.3 303.3 L577.2 301.3 L575.7 303.0 L575.4 305.7 L574.3 307.8 L572.2 311.8 L570.5 315.4 L571.7 317.6 L570.9 320.0 L571.0 323.9 L570.6 335.1 L571.3 339.8 L571.6 345.2 L572.5 350.4 L573.4 355.1 L572.2 360.9 L570.5 366.2 L569.5 370.6 L568.9 375.3 L568.2 377.6 L568.0 379.9 L568.8 385.4 L567.0 388.9 L564.8 390.1 L560.9 395.6 L559.5 402.2 L559.4 405.6 L560.1 412.9 L559.6 415.9 L558.8 417.8 L555.2 420.7 L552.9 424.5 L551.9 428.5 L550.3 430.0 L550.0 432.2 L548.8 434.6 L545.5 438.3 L543.4 439.3 L541.7 442.4 L539.6 445.9 L538.1 450.4 L539.1 457.4 L536.9 460.1 L529.4 462.8 L527.4 463.9 L522.8 468.5 L522.8 471.1 L521.8 474.7 L513.1 474.5 L509.0 475.1 L506.9 475.0 L504.9 473.9 L505.1 471.7 L502.5 471.3 L502.8 473.5 L500.2 475.5 L497.5 476.3 L494.2 476.7 L491.6 477.3 L495.2 475.7 L492.1 474.0 L489.1 474.6 L487.5 475.7 L483.9 475.6 L479.5 476.5 L478.9 479.0 L480.6 480.2 L474.3 482.0 L470.1 485.2 L466.6 487.1 L466.0 489.0 L462.7 488.4 L459.8 488.4 L457.7 488.9 L446.9 494.2 L443.1 496.3 L438.7 500.7 L431.3 505.5 L427.3 508.4 L424.7 509.8 L425.7 512.0 L421.3 516.2 L420.1 514.4 L418.0 513.8 L417.6 516.0 L415.4 516.7 L412.6 515.4 L413.3 517.5 L416.3 518.0 L418.0 519.2 L415.7 522.9 L413.7 523.4 L415.1 524.9 L414.4 529.1 L412.3 530.6 L413.9 532.9 L413.5 536.3 L414.5 540.8 L414.9 543.8 L415.5 546.2 L415.2 549.1 L414.1 552.3 L414.7 556.8 L414.4 561.0 L414.0 563.2 L411.6 567.1 L411.5 569.4 L407.9 571.5 L403.8 574.3 L400.1 577.8 L396.0 582.6 L391.3 590.0 L387.0 600.5 L381.8 608.5 L379.7 611.3 L376.9 614.5 L373.1 618.3 L368.1 622.0 L362.5 625.3 L360.5 626.8 L358.6 628.9 L358.5 626.6 L358.2 624.2 L361.0 624.8 L364.5 623.2 L368.3 619.6 L371.1 618.2 L372.8 615.9 L372.9 612.2 L375.9 611.8 L376.5 608.6 L379.3 607.0 L380.6 605.2 L380.2 600.5 L382.4 600.7 L383.0 598.7 L381.3 597.3 L376.7 599.6 L374.9 597.7 L372.6 596.9 L371.5 594.4 L371.0 597.5 L373.0 599.5 L371.5 601.2 L370.9 603.3 L370.9 606.0 L369.4 607.6 L367.6 609.8 L367.3 611.9 L363.9 614.3 L360.5 615.9 L359.4 618.4 L357.3 621.9 L356.1 625.1 L356.5 628.5 L356.1 630.7 L354.8 632.5 L353.7 634.4 L351.0 641.7 L348.6 646.2 L346.8 648.3 L344.2 650.6 L336.8 656.3 L334.4 655.2 L334.3 652.3 L334.3 646.7 L336.5 644.0 L339.4 640.8 L340.9 639.4 L339.1 637.5 L337.0 636.8 L334.9 635.5 L333.1 633.8 L331.5 630.1 L330.5 628.0 L328.6 626.9 L326.8 625.8 L323.0 624.6 L320.6 622.7 L318.8 620.7 L317.0 618.3 L312.0 616.8 L309.7 614.9 L307.4 614.9 L305.7 613.3 L304.3 611.0 L301.2 608.1 L298.7 609.3 L297.0 610.8 L294.7 611.5 L293.9 607.4 L292.2 605.4 L287.3 600.9 L282.2 596.5 L280.3 595.1 L277.1 595.2 L274.5 597.8 L271.4 598.1 L268.6 597.7 L268.4 595.7 L271.0 593.9 L272.4 592.3 L273.9 589.7 L276.2 588.6 L278.6 586.5 L281.3 583.5 L283.0 581.4 L284.6 578.8 L287.5 576.5 L288.7 574.0 L290.2 572.1 L292.3 570.7 L293.6 568.5 L295.5 567.2 L297.1 565.8 L299.3 565.5 L298.4 563.1 L300.7 561.7 L303.6 560.3 L306.3 558.0 L308.6 557.5 L311.0 555.4 L312.3 552.9 L314.9 552.0 L316.6 550.9 L318.7 550.6 L321.3 550.0 L323.3 547.7 L326.0 547.0 L327.7 545.6 L330.6 542.5 L331.0 539.6 L330.8 537.2 L331.2 533.5 L332.0 530.9 L330.7 527.4 L329.5 525.4 L328.8 521.8 L327.3 520.1 L325.2 518.8 L323.2 518.1 L321.1 518.8 L319.3 519.7 L316.6 518.9 L316.6 516.5 L318.9 512.9 L319.2 510.3 L319.9 507.0 L321.5 501.2 L322.0 497.5 L321.4 494.5 L320.6 491.9 L318.0 489.9 L315.6 489.5 L313.3 490.5 L311.4 491.5 L308.9 492.3 L305.6 492.5 L303.5 491.5 L303.0 488.9 L301.8 486.1 L301.5 483.3 L301.2 480.9 L301.1 478.1 L300.1 476.0 L299.6 473.6 L300.0 471.2 L299.7 469.2 L298.0 467.3 L297.2 464.7 L294.0 463.4 L290.8 463.4 L288.2 461.7 L286.6 460.0 L284.5 461.8 L282.5 462.6 L280.1 463.2 L277.1 462.8 L273.7 462.0 L271.2 462.0 L268.3 461.8 L265.8 460.4 L263.2 461.0 L261.5 459.5 L262.4 457.2 L262.4 454.5 L262.4 451.9 L262.8 448.9 L263.1 446.4 L264.1 444.1 L264.1 441.9 L262.9 439.7 L263.1 437.6 L261.6 436.1 L261.1 433.8 L260.3 431.6 L259.0 429.1 L260.2 426.9 L261.9 425.8 L260.8 422.2 L259.1 420.8 L260.1 418.7 L261.7 415.4 L263.3 412.1 L264.5 409.6 L265.7 407.7 L265.8 403.7 L267.2 399.4 L268.2 396.1 L268.0 393.4 L266.8 390.5 L264.9 385.9 L264.0 383.2 L261.4 383.2 L257.9 380.7 L255.6 379.3 L254.5 375.9 L253.8 373.1 L253.5 369.5 L255.5 366.0 L255.7 363.5 L253.2 363.2 L245.7 363.0 L237.8 362.7 L231.4 362.5 L225.7 362.3 L225.6 360.0 L225.3 356.1 L225.0 353.3 L224.7 349.0 L222.4 346.3 L220.0 343.3 L222.0 342.5 L224.1 342.4 L223.7 334.5 L222.5 331.1 L221.1 328.5 L221.0 326.3 L222.0 324.4 L221.1 321.8 L218.9 319.8 L216.8 318.4 L213.7 316.7 L211.0 315.5 L205.5 316.1 L202.9 316.1 L199.4 316.1 L196.9 314.1 L194.4 311.3 L193.1 309.5 L190.2 309.5 L187.4 308.3 L184.8 307.2 L182.3 306.5 L180.3 304.7 L178.9 303.1 L177.7 301.4 L175.5 302.3 L172.0 300.6 L170.1 299.2 L166.8 298.3 L164.3 299.3 L162.3 298.9 L159.1 298.6 L156.4 297.8 L155.4 295.9 L153.3 293.8 L150.5 291.4 L148.4 290.5 L147.0 289.1 L145.5 286.1 L144.1 284.5 L142.4 282.2 L141.7 279.7 L140.6 277.8 L140.9 275.4 L141.5 271.8 L140.4 268.8 L139.8 266.6 L139.9 264.3 L141.8 261.0 L141.7 257.2 L141.9 254.6 L140.5 251.9 L137.9 253.4 L135.4 252.9 L131.9 253.2 L126.3 253.9 L124.1 254.6 L121.3 255.1 L118.7 256.4 L112.5 261.3 L109.8 262.1 L107.5 263.3 L104.8 265.3 L103.4 266.9 L101.5 268.3 L98.1 268.1 L95.4 270.0 L93.6 272.5 L91.5 273.9 L87.8 275.4 L85.4 275.2 L81.7 273.5 L77.9 272.8 L74.1 272.7 L70.7 272.8 L68.0 272.5 L64.3 273.3 L61.7 274.4 L59.7 274.7 L56.6 272.7 L54.8 273.8 L54.8 270.9 L54.8 266.6 L54.9 262.9 L54.9 259.8 L54.9 256.3 L54.9 253.8 L56.1 251.8 L55.7 249.1 L53.0 249.6 L50.9 251.2 L49.5 252.8 L47.1 254.3 L45.1 256.2 L39.1 256.9 L34.5 256.9 L30.3 256.9 L29.9 254.1 L28.3 251.5 L27.5 249.3 L25.1 248.2 L22.8 247.5 L19.4 246.8 L16.1 246.8 L12.9 246.9 L14.9 244.4 L16.8 242.0 L16.8 239.8 L15.2 238.0 L13.1 235.2 L10.5 232.6 L9.2 230.3 L7.3 228.9 L6.3 226.3 L5.8 224.3 L3.6 222.0 L4.6 220.2 L2.9 218.7 L0.9 216.6 L0.8 214.0 L2.4 212.2 L4.6 211.5 L3.9 209.2 L3.6 205.8 L5.0 203.5 L8.2 200.9 L11.1 199.1 L13.5 198.3 L14.3 196.2 L13.6 193.8 L12.5 191.1 L13.7 188.3 L15.2 185.9 L16.7 183.3 L17.0 181.0 L17.7 177.7 L17.9 175.3 L21.3 173.7 L25.0 171.0 L26.9 169.0 L31.3 166.6 L33.0 165.4 L35.2 164.3 L38.1 164.0 L40.5 163.7 L43.8 162.9 L46.6 162.3 L49.4 161.7 L51.2 159.7 L53.6 158.5 L56.7 158.6 L58.7 158.3 L60.1 160.0 L62.3 160.8 L64.4 161.4 L65.9 159.7 L66.8 155.7 L67.8 150.1 L68.7 144.9 L69.7 139.2 L70.7 133.4 L71.8 127.4 L72.7 122.5 L73.4 118.4 L73.8 115.8 L74.5 112.4 L74.8 109.4 L74.3 106.8 L73.7 104.7 L72.2 102.6 L71.5 100.6 L71.8 98.6 L70.8 96.6 L68.1 94.9 L64.6 91.8 L64.2 88.2 L64.3 85.3 L64.4 81.0 L64.4 78.7 L66.5 78.6 L69.3 77.9 L71.2 77.4 L73.1 76.4 L75.2 77.2 L77.5 77.9 L78.9 75.8 L78.5 73.4 L77.4 71.4 L75.1 70.9 L72.4 70.5 L70.0 70.6 L67.7 70.6 L67.8 66.4 L67.8 62.5 L67.8 59.7 L71.0 59.2 L74.0 58.9 L76.4 59.5 L79.7 59.5 L83.1 59.5 L86.9 59.5 L90.8 59.5 L94.1 59.5 L93.8 57.4 L94.8 55.0 L96.7 57.2 L98.2 59.0 L101.0 58.3 L102.7 56.1 L104.3 54.2 L106.2 53.0 L108.6 53.4 L110.9 57.4 L112.3 59.8 L112.9 64.9 L112.8 68.1 L116.3 67.9 Z" /></svg>
+          <p id="s11-fim" class="titulo"><span class="linha" data-layout-allow-overflow><span>No Brasil, para usina, não achamos ninguém.</span></span></p>
+        </div>
+      </section>
+
+      <section id="s12" class="slide clip" data-hold data-start="227" data-duration="21" data-track-index="0" data-label="12 · O pedido"
+        data-paradas="0.4-2.0,3.5-4.5,5.0-6.0,7.0-8.0,11.0-12.6" data-saida="21">
+        <div class="palco">
+          <p id="s12-t" class="titulo">
+            <span class="linha" data-layout-allow-overflow><span>Queremos investimento</span></span>
+            <span class="linha" data-layout-allow-overflow><span>para construir a AgroParts</span></span>
+          </p>
+          <p id="s12-a" class="pedido">Dinheiro</p>
+          <p id="s12-b" class="pedido">Conhecimento</p>
+          <p id="s12-c" class="pedido">Acesso a uma usina e a quem conhece o sistema dela</p>
+          <div id="s12-qr" class="janela" data-layout-allow-overflow><img src="assets/qr-diagnostico.svg" alt="QR que abre agroparts.pages.dev/diagnostico" /></div>
+          <p id="s12-teste">
+            <span class="linha" data-layout-allow-overflow><span>Teste hoje:</span></span>
+            <span class="linha" data-layout-allow-overflow><span class="url">agroparts.pages.dev/diagnostico</span></span>
+          </p>
         </div>
       </section>
     </div>
 
     <script type="application/json" id="falas">
-      { "abertura": "Gabi: Eu sou a Gabi. Myke: Eu sou o Myke. Alberto: Eu sou o Alberto. Os três: E nós somos a AgroParts." }
+{
+  "s1": "▶ Gabi: Boa tarde. Eu sou a Gabi.\nMyke: Eu sou o Myke.\nAlberto: Eu sou o Alberto.\nGabi: ▶ E nós somos a AgroParts. ▶ Queremos que a usina não compre a peça que ela já tem.",
+  "s2": "▶ Gabi: Dia de safra. A colhedora para e precisa de uma peça. O sistema diz que a peça não existe, e compras faz um pedido urgente. ▶ Mas, na prateleira, havia três.",
+  "s3": "▶ Gabi: E quanto custa manter uma usina rodando? ▶ Milhões. A São Martinho publicou: 183 milhões e meio de reais com manutenção de entressafra, em nove meses. Cada peça comprada sem precisar sai desse dinheiro.",
+  "s4": "▶ Gabi: Isso acontece porque hoje é manual. Cada setor cadastra do seu jeito: ▶ o almoxarifado de um jeito, a manutenção de outro, compras de outro. ▶ O sistema vê três peças, que na verdade são uma só. E cada fornecedor ainda escreve a peça de outro jeito na nota fiscal.",
+  "s5": "▶ Gabi: E isso não é caso raro. Nós lemos os 396 cadastros de rolamento do catálogo do governo: um em cada doze, ou 8%, está repetido.",
+  "s6": "▶ Myke: A AgroParts confere a peça e responde: ▶ é a mesma peça, ▶ ou precisa de uma pessoa. Quando não tem certeza, ela não junta nada e chama uma pessoa.",
+  "s7": "▶ Myke: Com isso, cada setor ganha: o almoxarifado acha a peça, a manutenção sabe se já tem, e compras não compra de novo.",
+  "s8": "▶ Myke: São cinco passos, e tudo leva segundos. ▶ Um: a pessoa digita o código do sistema ou da caixa da peça, escreve o nome, ou tira uma foto da etiqueta, e a AgroParts lê o texto da foto. ▶ Dois: lê as medidas e o tipo da peça. ▶ Três: procura no catálogo as peças parecidas. ▶ Quatro: compara uma a uma. ▶ Cinco: junta os cadastros da mesma peça, sem apagar o original. Assim, quem vai comprar sabe o que a usina já tem.",
+  "s9": "▶ Myke: E nós testamos com cadastros reais e públicos: 42 cadastros de rolamento do catálogo de compras do governo federal. A AgroParts comparou esses cadastros dois a dois, em 104 comparações, e disse se era a mesma peça. ▶ Na primeira rodada, errou 6. ▶ Depois de um ajuste, errou 0. E qualquer pessoa pode refazer esse teste, porque o código e os dados são públicos.",
+  "s10": "▶ Alberto: E a sua usina pode testar hoje, com o próprio cadastro. Abre a página, escolhe a planilha, e a AgroParts mostra os cadastros que são a mesma peça. ▶ O arquivo não sai do seu computador. ▶ Num arquivo público de 629 linhas, do catálogo e das compras do governo, ▶ ela achou 55 grupos da mesma peça. Por enquanto, ela confere rolamento.",
+  "s11": "▶ Alberto: E isso já é negócio lá fora. ▶ A Verusen, uma empresa americana, publicou o caso de uma fabricante que economizou 10 milhões e meio de dólares em estoque de peças. ▶ No Brasil, para usina, não achamos ninguém. E só no Centro-Sul, a UNICA conta 250 usinas operando. Quem paga é a usina, com uma assinatura.",
+  "s12": "▶ Alberto: Para construir a AgroParts a fundo, queremos investimento ▶ em dinheiro ▶ e em conhecimento, ▶ e acesso a uma usina e às pessoas que conhecem o sistema dela. ▶ O QR abre o teste da sua usina, em agroparts ponto pages ponto dev, barra diagnóstico. Obrigado."
+}
     </script>
 
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
+      const inicio = (id) => +document.getElementById(id).dataset.start;
+      const ate = (sel) => document.querySelectorAll(sel);
 
-      // Entrada por máscara: sobe de 105% para 0 numa saída longa; parado depois de pousar.
-      const sobe = (alvo, em, dur = 0.9) =>
-        tl.fromTo(alvo, { yPercent: 105 }, { yPercent: 0, duration: dur, ease: "expo.out" }, em);
-      // Saída: um movimento só, mais curto que a entrada.
-      const sai = (alvo, em) =>
-        tl.to(alvo, { y: -24, opacity: 0, duration: 0.4, ease: "power2.in" }, em);
+      // Linha: sobe de dentro do próprio recorte, numa saída longa. Parada depois de pousar.
+      const sobe = (alvos, t, dur = 0.9, passo = 0.12) =>
+        tl.fromTo(alvos, { yPercent: 105 }, { yPercent: 0, duration: dur, ease: "expo.out", stagger: passo }, t);
+      // Elemento quieto: aparece com um deslize curto.
+      const chega = (alvos, t, passo = 0.08) =>
+        tl.fromTo(alvos, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: passo }, t);
+      // Imagem: abre por máscara de baixo para cima e assenta de 1,04 para 1.
+      const abre = (janela, t) => {
+        tl.fromTo(janela, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "expo.inOut" }, t);
+        tl.fromTo(janela.querySelector ? janela.querySelector("img") || janela : janela, { scale: 1.04 }, { scale: 1, duration: 1.4, ease: "expo.out" }, t);
+      };
+      // Placa: o carimbo do site. Sobe 10px e o sinal bate de 1,18 para 1.
+      const carimbo = (placa, sinal, t) => {
+        tl.fromTo(placa, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" }, t);
+        tl.fromTo(sinal, { scale: 1.18 }, { scale: 1, duration: 0.45, ease: "expo.out" }, t);
+      };
+      // Tinta para suave: o que já foi dito recua quando a frase seguinte chega.
+      const recua = (alvos, t) => tl.to(alvos, { color: "#4f585b", duration: 0.6, ease: "power2.inOut" }, t);
+      // Número contando até o valor, com vírgula decimal.
+      const conta = (el, de, para, casas, t, dur = 1.8) => {
+        const v = { n: de };
+        const pinta = () => (el.textContent = v.n.toFixed(casas).replace(".", ","));
+        tl.fromTo(v, { n: de }, { n: para, duration: dur, ease: "expo.out", onUpdate: pinta, immediateRender: true, onStart: pinta }, t);
+      };
+      // Saída do slide: um movimento só, mais curto que a entrada.
+      const sai = (id) => {
+        const s = document.getElementById(id);
+        tl.to(s.querySelector(".palco"), { y: -24, opacity: 0, duration: 0.4, ease: "power2.in" }, +s.dataset.start + +s.dataset.saida);
+      };
+      const linhas = (sel) => ate(sel + " .linha > span");
 
-      // Abertura (0 a 12 s)
-      sobe("#ab-gabi", 0.6);
-      sobe("#ab-myke", 2.6);
-      sobe("#ab-alberto", 4.6);
-      tl.to(["#ab-gabi", "#ab-myke", "#ab-alberto"], { color: "#4f585b", duration: 0.6, ease: "power2.inOut" }, 6.6);
-      sobe("#ab-nos", 6.6, 1.0);
-      tl.fromTo("#ab-regua", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power3.inOut" }, 6.8);
-      sai("#abertura .palco", 11.4);
+      // 1 · Abertura
+      {
+        const b = inicio("s1");
+        abre(document.getElementById("s1-foto"), b + 0.4);
+        chega("#s1-credito", b + 1.0);
+        tl.fromTo("#s1-ca", { x: 354, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: "expo.inOut" }, b + 6.0);
+        tl.fromTo("#s1-cf", { x: -354, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: "expo.inOut" }, b + 6.0);
+        sobe("#s1-nome", b + 6.4, 1.0);
+        sobe(linhas("#s1-frase"), b + 9.5);
+        sai("s1");
+      }
+
+      // 2 · A cena
+      {
+        const b = inicio("s2");
+        sobe(linhas("#s2-l1"), b + 0.4);
+        abre(document.getElementById("s2-janela"), b + 0.5);
+        chega("#s2-credito", b + 1.0);
+        tl.to("#s2-faixa", { x: -640, duration: 1.2, ease: "power2.inOut" }, b + 10.0);
+        tl.to("#s2-credito", { opacity: 0, duration: 0.3, ease: "power2.in" }, b + 10.0);
+        tl.fromTo("#s2-prateleira .caixa", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.1 }, b + 10.6);
+        recua(linhas("#s2-l1"), b + 10.4);
+        sobe(linhas("#s2-l2"), b + 10.4);
+        sai("s2");
+      }
+
+      // 3 · Quanto custa
+      {
+        const b = inicio("s3");
+        sobe(linhas("#s3-q"), b + 0.4);
+        recua(linhas("#s3-q"), b + 3.0);
+        sobe(linhas("#s3-num"), b + 3.0);
+        conta(document.getElementById("s3-valor"), 0, 183.5, 1, b + 3.0, 1.9);
+        sobe(linhas("#s3-fonte"), b + 3.8);
+        sai("s3");
+      }
+
+      // 4 · Por que acontece
+      {
+        const b = inicio("s4");
+        sobe(linhas("#s4-t"), b + 0.4);
+        chega(["#s4-a", "#s4-b", "#s4-c"], b + 4.0, 0.25);
+        ["#s4-f1", "#s4-f2", "#s4-f3"].forEach((f, i) => {
+          const L = document.querySelector(f).getTotalLength();
+          tl.fromTo(f, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.9, ease: "power3.inOut" }, b + 13.0 + i * 0.08);
+        });
+        tl.fromTo("#s4-peca", { scale: 1.18, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" }, b + 13.8);
+        sobe(linhas("#s4-fim"), b + 13.4);
+        sai("s4");
+      }
+
+      // 5 · Não é caso raro
+      {
+        const b = inicio("s5");
+        sobe(linhas("#s5-num"), b + 0.4, 1.0);
+        sobe(linhas("#s5-txt"), b + 0.7);
+        chega(ate("#s5-grade .cel"), b + 0.5, 0.04);
+        tl.fromTo("#s5-acesa", { scale: 1.18, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" }, b + 1.7);
+        sai("s5");
+      }
+
+      // 6 · A resposta
+      {
+        const b = inicio("s6");
+        sobe(linhas("#s6-t"), b + 0.4);
+        tl.fromTo("#s6-a", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, b + 3.0);
+        tl.fromTo("#s6-b", { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, b + 3.0);
+        tl.fromTo("#s6-igual", { scale: 1.18, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" }, b + 3.5);
+        carimbo("#s6-p1", "#s6-p1s", b + 3.7);
+        tl.fromTo("#s6-c", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, b + 5.6);
+        tl.fromTo("#s6-duvida", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, b + 6.0);
+        tl.fromTo("#s6-pessoa", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, b + 6.1);
+        carimbo("#s6-p2", "#s6-p2s", b + 6.3);
+        sai("s6");
+      }
+
+      // 7 · O ganho
+      {
+        const b = inicio("s7");
+        sobe(linhas("#s7-t"), b + 0.4);
+        chega(["#s7-a", "#s7-b", "#s7-c"], b + 0.9, 0.3);
+        sai("s7");
+      }
+
+      // 8 · Como funciona
+      {
+        const b = inicio("s8");
+        const acende = (n, t) => {
+          tl.to(`#s8-${n} .n`, { backgroundColor: "#15191a", borderColor: "#15191a", color: "#ffffff", duration: 0.35, ease: "power2.out" }, t);
+          tl.fromTo(`#s8-${n} .n`, { scale: 1.18 }, { scale: 1, duration: 0.45, ease: "expo.out", immediateRender: false }, t);
+          tl.to(`#s8-${n} .txt`, { color: "#15191a", duration: 0.5, ease: "power2.out" }, t);
+        };
+        sobe(linhas("#s8-t"), b + 0.4);
+        chega(ate("#s8 .passo"), b + 0.8, 0.08);
+        acende(1, b + 4.0);
+        abre(document.getElementById("s8-etiqueta"), b + 4.0);
+        acende(2, b + 20.0);
+        acende(3, b + 23.0);
+        acende(4, b + 25.6);
+        acende(5, b + 28.0);
+        tl.to("#s8-etiqueta", { opacity: 0.35, duration: 0.6, ease: "power2.inOut" }, b + 28.0);
+        tl.fromTo("#s8-x", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, b + 28.0);
+        tl.fromTo("#s8-y", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, b + 28.0);
+        tl.to("#s8-y", { x: -110, duration: 0.8, ease: "power3.inOut" }, b + 28.6);
+        tl.to("#s8-x", { x: 110, duration: 0.8, ease: "power3.inOut" }, b + 28.6);
+        sai("s8");
+      }
+
+      // 9 · O teste
+      {
+        const b = inicio("s9");
+        sobe(linhas("#s9-t"), b + 0.4);
+        sobe(linhas("#s9-fim"), b + 1.0);
+        sobe(linhas("#s9-r1"), b + 20.5);
+        sobe(linhas("#s9-r2"), b + 24.0);
+        conta(document.getElementById("s9-conta"), 6, 0, 0, b + 24.4, 1.6);
+        recua("#s9-r1 .val", b + 25.4);
+        sai("s9");
+      }
+
+      // 10 · Teste na sua usina
+      {
+        const b = inicio("s10");
+        sobe(linhas("#s10-t"), b + 0.4);
+        abre(document.getElementById("s10-inicio"), b + 0.8);
+        sobe(linhas("#s10-sub"), b + 14.0);
+        tl.to("#s10-inicio", { clipPath: "inset(0% 0% 100% 0%)", duration: 0.6, ease: "power3.in" }, b + 18.5);
+        abre(document.getElementById("s10-resumo"), b + 18.9);
+        abre(document.getElementById("s10-grupo"), b + 22.0);
+        sai("s10");
+      }
+
+      // 11 · Lá fora
+      {
+        const b = inicio("s11");
+        sobe(linhas("#s11-t"), b + 0.4);
+        sobe(linhas("#s11-num"), b + 6.0);
+        conta(document.getElementById("s11-valor"), 0, 10.5, 1, b + 6.0, 1.8);
+        sobe(linhas("#s11-txt"), b + 6.8);
+        const L = document.getElementById("s11-contorno").getTotalLength();
+        tl.fromTo("#s11-contorno", { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut" }, b + 14.5);
+        sobe(linhas("#s11-fim"), b + 15.2);
+        sai("s11");
+      }
+
+      // 12 · O pedido
+      {
+        const b = inicio("s12");
+        sobe(linhas("#s12-t"), b + 0.4);
+        chega("#s12-a", b + 3.5);
+        chega("#s12-b", b + 5.0);
+        chega("#s12-c", b + 7.0);
+        abre(document.getElementById("s12-qr"), b + 11.0);
+        sobe(linhas("#s12-teste"), b + 11.4);
+      }
 
       window.__timelines["deck"] = tl;
       tl.seek(0);
