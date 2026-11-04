@@ -64,7 +64,7 @@
 
       function tocar(de, ate) {
         return new Promise((pronto) => {
-          tl.pause().seek(de);
+          tl.pause().seek(de, false);
           animando = tl.tweenFromTo(de, ate, { ease: "none", onComplete: pronto });
           animando.vars.alvo = ate;
         });
@@ -75,7 +75,7 @@
         const alvo = animando.vars.alvo;
         animando.kill();
         animando = null;
-        tl.seek(paradas[pos].para);
+        tl.seek(paradas[pos].para, false);
         return alvo !== undefined;
       }
 
@@ -94,7 +94,7 @@
       function irPara(n) {
         if (animando) { animando.kill(); animando = null; }
         pos = Math.max(-1, Math.min(n, paradas.length - 1));
-        tl.pause().seek(pos < 0 ? 0 : paradas[pos].para);
+        tl.pause().seek(pos < 0 ? 0 : paradas[pos].para, false);
         avisar();
       }
 
