@@ -25,7 +25,7 @@ O método vem de duas fontes com licença que deixa usar. A primeira é o preset
 - **Palavra que se troca**: uma palavra roda como um contador mecânico, 0,1 s por volta, até parar na certa.
 - **Número que conta**: de 0 até o valor em 1,2 a 1,6 s, com números tabulares, e para.
 - **Fio que corre**: o fio cresce da esquerda em 0,55 s, `power2.inOut`, e separa o que muda de assunto.
-- Pousou, parou. Nada se mexe depois que a entrada termina. Cada slide termina a entrada em até uns 6 s e espera o próximo clique.
+- Pousou, parou. Nada se mexe depois que a entrada termina. Cada entrada acontece quando a pessoa diz aquelas palavras, no tempo do texto aprovado, e o slide espera o próximo clique.
 - Entre slides, o fundo nunca corta: o texto sai com 8px de desfoque em 0,25 s, e o próximo entra na mesma chapa.
 
 ## Mais fundo, sem crescer (be-ambitious)
@@ -39,7 +39,9 @@ Campo: design de movimento para palestra ao vivo.
 
 ## Arquivos
 
-- `index.html`: a composição HyperFrames. Cada slide é um `<section class="clip slide">` com `data-start` e `data-duration`.
-- `apresentar.html`: a casca do apresentador. Lê os tempos dos próprios slides, então o MP4 e o deck ao vivo nunca discordam.
-- `falas.js`: a fala de cada slide, para a janela de notas.
-- `assets/`: as fontes (OFL), o GSAP e as telas reais do site.
+- `index.html`: a composição HyperFrames. Cada slide é um `<section class="clip slide">` com `data-start` e `data-duration` (o tempo da fala). O texto da tela fica em texto puro no HTML; para trocar um slide, edite a sua `<section>` e o bloco do mesmo número no script, onde cada tempo é contado do começo do slide.
+- `apresentar.html`: a casca do apresentador. Lê os tempos dos próprios slides, então o MP4 e o deck ao vivo nunca discordam. → espaço, Enter ou clique avança; ← volta; F tela cheia; N abre as notas da fala numa segunda janela.
+- `falas.js`: a fala de cada slide, gerada por `python3 scripts/falas.py <report.md>`.
+- `scripts/exportar.sh <pasta>`: refaz o PDF de reserva (um quadro final por slide) e o MP4.
+- `scripts/provar.sh <pasta>`: passa pelo deck ao vivo a 1920x1080 e a 1280x720 e salva o quadro final de cada slide.
+- `assets/`: as fontes (OFL), o GSAP, as fotos, as telas reais do site e o QR. Créditos em `CREDITOS.txt`.
