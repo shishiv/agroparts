@@ -231,11 +231,10 @@
         const pintar = (i) => {
           const f = falas[i] || {};
           const g = falas[i + 1];
-          document.getElementById("posicao").textContent = `${i + 1} / ${falas.length}`;
+          document.getElementById("posicao").textContent = f.titulo || `${i + 1}`;
           document.getElementById("fala").textContent = f.fala || "";
-          document.getElementById("seguinte").innerHTML = g
-            ? `<strong>Depois: ${g.titulo}</strong>`
-            : "<strong>Último slide</strong>";
+          document.getElementById("seguinte").innerHTML =
+            `<strong>${g ? `Depois: ${g.titulo}` : "Último slide"}</strong>${f.tempo || ""}`;
         };
         canal.onmessage = (m) => {
           if (typeof m.data.slide === "number") pintar(m.data.slide);
