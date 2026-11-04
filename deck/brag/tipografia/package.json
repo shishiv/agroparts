@@ -1,0 +1,16 @@
+{
+  "name": "agroparts-deck-tipografia",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "apresentar": "python3 -m http.server 8090 --bind 127.0.0.1",
+    "check": "hyperframes check",
+    "render": "hyperframes render --output exportado/deck.mp4"
+  },
+  "devDependencies": {
+    "@fontsource/barlow": "5.2.8",
+    "@fontsource/barlow-semi-condensed": "5.2.7",
+    "gsap": "3.13.0",
+    "hyperframes": "0.9.12"
+  }
+}

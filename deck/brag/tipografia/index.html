@@ -1,0 +1,192 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  data-composition-variables='[
+  {"id":"color-ground","type":"color","label":"Chapa","default":"#f3f4f2"},
+  {"id":"color-ink","type":"color","label":"Tinta","default":"#15191a"},
+  {"id":"color-soft","type":"color","label":"Suave","default":"#4f585b"},
+  {"id":"color-accent","type":"color","label":"Azul de ação","default":"#154889"}
+]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>AgroParts · Tipografia cinética</title>
+    <style>
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        font-weight: 600;
+        font-display: block;
+        src: url("assets/fonts/barlow-semi-condensed-latin-600-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        font-weight: 700;
+        font-display: block;
+        src: url("assets/fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Barlow";
+        font-weight: 400;
+        font-display: block;
+        src: url("assets/fonts/barlow-latin-400-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Barlow";
+        font-weight: 600;
+        font-display: block;
+        src: url("assets/fonts/barlow-latin-600-normal.woff2") format("woff2");
+      }
+      :root {
+        --color-ground: #f3f4f2;
+        --color-ink: #15191a;
+        --color-soft: #4f585b;
+        --color-line: #c7cccd;
+        --color-accent: #154889;
+        --margin-x: 120px;
+        --margin-y: 96px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--color-ground);
+      }
+      #deck {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        background: var(--color-ground);
+        color: var(--color-ink);
+        font-family: "Barlow Semi Condensed", "Barlow", sans-serif;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        -webkit-font-smoothing: antialiased;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .palco {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+        height: 100%;
+        padding: var(--margin-y) var(--margin-x);
+      }
+      .w {
+        display: inline-block;
+      }
+      .mascara {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: bottom;
+        padding: 0.04em 0.02em 0.26em;
+        margin: -0.04em -0.02em -0.26em;
+      }
+      .mascara > span {
+        display: inline-block;
+      }
+      .fio {
+        height: 4px;
+        background: var(--color-ink);
+        transform-origin: 0 50%;
+      }
+
+      /* 01 · abertura */
+      #s01 .apresentacao {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 108px;
+        line-height: 1;
+        letter-spacing: -0.01em;
+      }
+      #s01 .apresentacao .eu {
+        color: var(--color-soft);
+        font-weight: 600;
+      }
+      #s01 .fio {
+        margin: 56px 0 40px;
+      }
+      #s01 .nos {
+        font-size: 108px;
+        line-height: 1;
+        font-weight: 600;
+        color: var(--color-soft);
+        letter-spacing: -0.01em;
+      }
+      #s01 .marca {
+        font-size: 300px;
+        line-height: 0.86;
+        letter-spacing: -0.035em;
+        margin-left: -0.05em;
+      }
+    </style>
+    <script src="assets/gsap.min.js"></script>
+  </head>
+  <body>
+    <div id="deck" data-composition-id="deck" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+      <section id="s01" class="clip slide" data-start="0" data-duration="8" data-track-index="1" data-track-kind="graphics">
+        <div class="palco">
+          <div class="apresentacao">
+            <div id="s01-l1"><span class="w eu">Eu</span> <span class="w eu">sou</span> <span class="w eu">a</span> <span class="mascara"><span>Gabi.</span></span></div>
+            <div id="s01-l2"><span class="w eu">Eu</span> <span class="w eu">sou</span> <span class="w eu">o</span> <span class="mascara"><span>Myke.</span></span></div>
+            <div id="s01-l3"><span class="w eu">Eu</span> <span class="w eu">sou</span> <span class="w eu">o</span> <span class="mascara"><span>Alberto.</span></span></div>
+          </div>
+          <div id="s01-fio" class="fio"></div>
+          <div id="s01-nos" class="nos"><span class="w">E</span> <span class="w">nós</span> <span class="w">somos</span> <span class="w">a</span></div>
+          <div id="s01-marca" class="marca"><span class="mascara"><span>A</span></span><span class="mascara"><span>g</span></span><span class="mascara"><span>r</span></span><span class="mascara"><span>o</span></span><span class="mascara"><span>P</span></span><span class="mascara"><span>a</span></span><span class="mascara"><span>r</span></span><span class="mascara"><span>t</span></span><span class="mascara"><span>s</span></span><span class="mascara"><span>.</span></span></div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Words land in place: blur 6px to 0 with no translate, one word every 67 ms.
+      function palavras(sel, at) {
+        tl.fromTo(
+          sel,
+          { opacity: 0, filter: "blur(6px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 0.16, stagger: 0.067, ease: "power2.out" },
+          at,
+        );
+      }
+      // A word rises out of its own baseline slot, as if set into the grid.
+      function encaixa(sel, at, stagger = 0) {
+        tl.fromTo(
+          sel,
+          { yPercent: 112, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.7, stagger, ease: "expo.out" },
+          at,
+        );
+      }
+      function fio(sel, at) {
+        tl.fromTo(sel, { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power2.inOut" }, at);
+      }
+
+      // 01 · abertura (0 → 8 s). Each line lands while its speaker says it.
+      palavras("#s01-l1 .w", 0.2);
+      encaixa("#s01-l1 .mascara > span", 0.4);
+      palavras("#s01-l2 .w", 1.6);
+      encaixa("#s01-l2 .mascara > span", 1.8);
+      palavras("#s01-l3 .w", 3.0);
+      encaixa("#s01-l3 .mascara > span", 3.2);
+      fio("#s01-fio", 4.3);
+      palavras("#s01-nos .w", 4.5);
+      encaixa("#s01-marca .mascara > span", 4.95, 0.035);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["deck"] = tl;
+    </script>
+  </body>
+</html>
