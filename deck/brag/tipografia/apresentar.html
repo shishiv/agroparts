@@ -143,7 +143,8 @@
         canal.postMessage({ slide: i });
         if (!animar) {
           mostrar(i);
-          tl.pause(repouso(i));
+          tl.pause();
+          tl.seek(repouso(i), false); // false: let the counters' onUpdate write their final value
           return;
         }
         const entrar = () => {

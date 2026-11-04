@@ -21,7 +21,8 @@ for TAM in 1920x1080 1280x720; do
   for ((i = 1; i <= TOTAL; i++)); do
     agent-browser open "about:blank" >/dev/null
     agent-browser open "$URL#$i" >/dev/null
-    agent-browser wait 900 >/dev/null
+    # Slide 1 plays its entrance on load, as the deck opens; every other slide opens at rest.
+    agent-browser wait "$([ "$i" = 1 ] && echo 15500 || echo 900)" >/dev/null
     agent-browser screenshot "$OUT/$(printf 's%02d' "$i")-$TAM.png" >/dev/null
   done
 done
