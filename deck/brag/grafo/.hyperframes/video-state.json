@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "historyId": "7a6f1850-5371-4cb7-a8e9-9a21887eda10",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "assets/apresentar.js": {
+      "hash": "295a29aaeb48071f7452959fd3e0b657381f05cc2659c1d2cc9bc6445e4c1326",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/29/295a29aaeb48071f7452959fd3e0b657381f05cc2659c1d2cc9bc6445e4c1326"
+    },
+    "assets/fonts/OFL.txt": {
+      "hash": "4877e0c1b66f0b16cc3ebc4801c4def24c06252f618b9229428b20c7387aa0c0",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/48/4877e0c1b66f0b16cc3ebc4801c4def24c06252f618b9229428b20c7387aa0c0"
+    },
+    "assets/fonts/barlow-latin-400-normal.woff2": {
+      "hash": "b0a8ad37ac45f5fb22ced461576db72e44e295107aad7a9c8a7a4bad728fd03b",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/b0/b0a8ad37ac45f5fb22ced461576db72e44e295107aad7a9c8a7a4bad728fd03b"
+    },
+    "assets/fonts/barlow-latin-600-normal.woff2": {
+      "hash": "4b52ddd4836b592df0e4832b8286956883cdc651b015126bdd18f184b7f90cc3",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/4b/4b52ddd4836b592df0e4832b8286956883cdc651b015126bdd18f184b7f90cc3"
+    },
+    "assets/fonts/barlow-semi-condensed-latin-600-normal.woff2": {
+      "hash": "f158417e9207b5362f9b71a2fe779ce5bb836ad972f38445c3163af39d2c998d",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/f1/f158417e9207b5362f9b71a2fe779ce5bb836ad972f38445c3163af39d2c998d"
+    },
+    "assets/fonts/barlow-semi-condensed-latin-700-normal.woff2": {
+      "hash": "fb958c8c20a05552ac8a85d925d96028d52565792650e941a5fe96b6997aa5cb",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/fb/fb958c8c20a05552ac8a85d925d96028d52565792650e941a5fe96b6997aa5cb"
+    },
+    "assets/vendor/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/92/92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/53/53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "b61eaf6d291427cf5e01866098b7c08a902f34b3da4452c48ae4b2e7e4235002",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/b6/b61eaf6d291427cf5e01866098b7c08a902f34b3da4452c48ae4b2e7e4235002"
+    },
+    "notas.html": {
+      "hash": "04b5a03b7acfd44d8ce8e21b30b41c8b61f9c2d38b58d1df6996f7ee84ebe239",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/04/04b5a03b7acfd44d8ce8e21b30b41c8b61f9c2d38b58d1df6996f7ee84ebe239"
+    },
+    "package.json": {
+      "hash": "89895ab9b79bee4e8e0921a6543f65993b03edb39bfa15dc3993318931706a2c",
+      "content": "/home/shiv/.cache/hyperframes/history/7a6f1850-5371-4cb7-a8e9-9a21887eda10/blobs/89/89895ab9b79bee4e8e0921a6543f65993b03edb39bfa15dc3993318931706a2c"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": {
+      "revision": null,
+      "id": "33525059-0862-4da1-bc21-1dd696a398c4"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "id": "33525059-0862-4da1-bc21-1dd696a398c4",
+        "scope": "project",
+        "report": "/home/shiv/.treehouse/agroparts-a19ea6/9/agroparts/deck/brag/grafo/.hyperframes/artifacts/checks/33525059-0862-4da1-bc21-1dd696a398c4.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 45000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793810561909,
+        "contentHash": "e7f63324842b7216c2176a89b936d96aedb1f3b414d62711912459acb927d53d",
+        "revision": null,
+        "inputFingerprint": "5531c19fbdc03600f7c92fde33f10b215390bd8918ac1ce06c24d764f4f792d1",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  }
+}

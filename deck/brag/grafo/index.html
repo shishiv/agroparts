@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>AgroParts · Grafo</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Barlow";
+        src: url("assets/fonts/barlow-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Barlow";
+        src: url("assets/fonts/barlow-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        src: url("assets/fonts/barlow-semi-condensed-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        src: url("assets/fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+      }
+      :root {
+        --chapa: #f3f4f2;
+        --papel: #ffffff;
+        --tinta: #15191a;
+        --tinta-2: #3b4447;
+        --suave: #4f585b;
+        --linha: #c7cccd;
+        --verde: #237f52;
+        --amarelo: #f9a800;
+        --vermelho: #a52019;
+        --azul: #154889;
+        --display: "Barlow Semi Condensed", "Barlow", sans-serif;
+        --texto: "Barlow", sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--chapa);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--chapa);
+        color: var(--tinta);
+        font-family: var(--texto);
+        font-variant-numeric: tabular-nums;
+      }
+      #palco {
+        position: absolute;
+        inset: 0;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+      }
+      .slide svg.grafo {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: visible;
+      }
+      .frase {
+        position: absolute;
+        font-family: var(--display);
+        font-weight: 700;
+        line-height: 1.02;
+        letter-spacing: -0.015em;
+        white-space: nowrap;
+      }
+      .frase .p {
+        display: inline-block;
+      }
+
+      /* abertura */
+      #ab-gabi,
+      #ab-myke,
+      #ab-alberto {
+        top: 150px;
+        font-size: 64px;
+        color: var(--tinta-2);
+        transform: translateX(-50%);
+      }
+      #ab-gabi {
+        left: 420px;
+      }
+      #ab-myke {
+        left: 960px;
+      }
+      #ab-alberto {
+        left: 1500px;
+      }
+      #ab-nos {
+        top: 812px;
+        left: 960px;
+        font-size: 112px;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="8"
+      data-width="1920"
+      data-height="1080"
+    >
+      <svg id="palco" viewBox="0 0 1920 1080" aria-hidden="true">
+        <defs>
+          <symbol id="p-peca" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="4" />
+            <circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="4" />
+            <g fill="currentColor">
+              <circle cx="24" cy="11.5" r="3" />
+              <circle cx="24" cy="36.5" r="3" />
+              <circle cx="11.5" cy="24" r="3" />
+              <circle cx="36.5" cy="24" r="3" />
+              <circle cx="15.2" cy="15.2" r="3" />
+              <circle cx="32.8" cy="32.8" r="3" />
+              <circle cx="32.8" cy="15.2" r="3" />
+              <circle cx="15.2" cy="32.8" r="3" />
+            </g>
+          </symbol>
+        </defs>
+        <g id="campo"></g>
+      </svg>
+
+      <section
+        id="abertura"
+        class="slide clip"
+        data-slide
+        data-start="0"
+        data-duration="8"
+        data-rest="5"
+        data-track-index="1"
+      >
+        <svg class="grafo" viewBox="0 0 1920 1080" aria-hidden="true">
+          <g fill="none" stroke="#15191a" stroke-width="3" stroke-linecap="round">
+            <path id="ab-e1" d="M420 268 C 420 430, 720 560, 892 590" />
+            <path id="ab-e2" d="M960 268 L 960 520" />
+            <path id="ab-e3" d="M1500 268 C 1500 430, 1200 560, 1028 590" />
+          </g>
+          <g fill="#15191a">
+            <circle id="ab-n1" cx="420" cy="268" r="18" />
+            <circle id="ab-n2" cx="960" cy="268" r="18" />
+            <circle id="ab-n3" cx="1500" cy="268" r="18" />
+            <circle id="ab-v1" cx="420" cy="268" r="10" />
+            <circle id="ab-v2" cx="960" cy="268" r="10" />
+            <circle id="ab-v3" cx="1500" cy="268" r="10" />
+          </g>
+          <g id="ab-marca" color="#15191a">
+            <circle cx="960" cy="610" r="104" fill="#f3f4f2" />
+            <use href="#p-peca" x="870" y="520" width="180" height="180" />
+          </g>
+        </svg>
+        <p id="ab-gabi" class="frase"><span class="p">Eu</span> <span class="p">sou</span> <span class="p">a</span> <span class="p">Gabi.</span></p>
+        <p id="ab-myke" class="frase"><span class="p">Eu</span> <span class="p">sou</span> <span class="p">o</span> <span class="p">Myke.</span></p>
+        <p id="ab-alberto" class="frase"><span class="p">Eu</span> <span class="p">sou</span> <span class="p">o</span> <span class="p">Alberto.</span></p>
+        <p id="ab-nos" class="frase"><span class="p">E</span> <span class="p">nós</span> <span class="p">somos</span> <span class="p">a</span> <span class="p">AgroParts.</span></p>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // O campo: 42 pontos, um por cadastro público do gabarito, ao fundo desde o primeiro quadro.
+      const campo = document.getElementById("campo");
+      let semente = 42;
+      const acaso = () => ((semente = (semente * 16807) % 2147483647) / 2147483647);
+      const pontos = [];
+      const livre = [
+        [200, 110, 1740, 310],
+        [360, 300, 1560, 720],
+        [360, 770, 1560, 960],
+      ];
+      while (pontos.length < 42) {
+        const x = 60 + acaso() * 1800;
+        const y = 40 + acaso() * 1000;
+        const longe = livre.every(([a, b, c, d]) => x < a || x > c || y < b || y > d);
+        if (longe && pontos.every(([a, b]) => Math.hypot(a - x, b - y) > 90)) pontos.push([x, y]);
+      }
+      for (const [x, y] of pontos) {
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("cx", x.toFixed(1));
+        c.setAttribute("cy", y.toFixed(1));
+        c.setAttribute("r", "5");
+        c.setAttribute("fill", "#c7cccd");
+        c.setAttribute("class", "ponto");
+        campo.appendChild(c);
+      }
+
+      const entraFrase = (sel, t) =>
+        tl.fromTo(
+          `${sel} .p`,
+          { opacity: 0, filter: "blur(6px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out", stagger: 0.067 },
+          t,
+        );
+      const entraNo = (sel, t) =>
+        tl.fromTo(sel, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "expo.out" }, t);
+      const desenha = (sel, t, d = 0.6) => {
+        const el = document.querySelector(sel);
+        const L = el.getTotalLength();
+        tl.fromTo(el, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: "power2.inOut" }, t);
+      };
+      const viaja = (sel, caminho, t, d = 0.55) => {
+        const el = document.querySelector(caminho);
+        const L = el.getTotalLength();
+        const prog = { p: 0 };
+        const ponto = document.querySelector(sel);
+        tl.fromTo(
+          prog,
+          { p: 0 },
+          {
+            p: 1,
+            duration: d,
+            ease: "power3.in",
+            immediateRender: false,
+            onUpdate: () => {
+              const q = el.getPointAtLength(prog.p * L);
+              ponto.setAttribute("cx", q.x);
+              ponto.setAttribute("cy", q.y);
+            },
+          },
+          t,
+        );
+        tl.fromTo(ponto, { opacity: 1 }, { opacity: 0, duration: 0.08 }, t + d - 0.04);
+      };
+
+      // abertura
+      tl.fromTo(".ponto", { opacity: 0 }, { opacity: 1, duration: 0.5, stagger: { each: 0.02, from: "random" } }, 0);
+      tl.set(["#ab-v1", "#ab-v2", "#ab-v3"], { opacity: 0 }, 0);
+      entraNo("#ab-n1", 0.2);
+      entraFrase("#ab-gabi", 0.3);
+      entraNo("#ab-n2", 1.0);
+      entraFrase("#ab-myke", 1.1);
+      entraNo("#ab-n3", 1.8);
+      entraFrase("#ab-alberto", 1.9);
+      desenha("#ab-e1", 2.7);
+      desenha("#ab-e2", 2.75);
+      desenha("#ab-e3", 2.8);
+      tl.set(["#ab-v1", "#ab-v2", "#ab-v3"], { opacity: 1 }, 2.9);
+      viaja("#ab-v1", "#ab-e1", 2.9);
+      viaja("#ab-v2", "#ab-e2", 2.95);
+      viaja("#ab-v3", "#ab-e3", 3.0);
+      tl.fromTo(
+        "#ab-marca",
+        { opacity: 0, scale: 1.18, svgOrigin: "960 610" },
+        { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out" },
+        3.5,
+      );
+      entraFrase("#ab-nos", 3.95);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+    <script src="assets/apresentar.js"></script>
+  </body>
+</html>
