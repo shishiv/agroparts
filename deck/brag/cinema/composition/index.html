@@ -1,0 +1,219 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  data-composition-variables='[
+    {"id":"color-ground","type":"color","label":"Fundo","default":"#15191a"},
+    {"id":"color-ink","type":"color","label":"Texto","default":"#f3f4f2"},
+    {"id":"color-accent","type":"color","label":"Ação","default":"#154889"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>AgroParts · Cinema</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        src: url("assets/fonts/barlow-semi-condensed-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        src: url("assets/fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Barlow";
+        src: url("assets/fonts/barlow-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Barlow";
+        src: url("assets/fonts/barlow-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      :root {
+        --color-ground: #15191a;
+        --color-ink: #f3f4f2;
+        --color-paper: #ffffff;
+        --color-quiet: #8f989b;
+        --color-accent: #154889;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--color-ground);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--color-ground);
+        font-family: "Barlow Semi Condensed", sans-serif;
+        color: var(--color-ink);
+        font-variant-numeric: tabular-nums;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        perspective: 1400px;
+        perspective-origin: 50% 46%;
+        background: var(--color-ground);
+      }
+      .camera {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+      }
+      .plano {
+        position: absolute;
+        inset: 0;
+      }
+      .luz {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        background: radial-gradient(closest-side, rgba(243, 244, 242, 0.22), rgba(243, 244, 242, 0.07) 55%, rgba(243, 244, 242, 0) 100%);
+      }
+      .vinheta {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse 85% 80% at 42% 50%, rgba(21, 25, 26, 0) 62%, rgba(8, 10, 10, 0.6) 100%);
+      }
+      .grao {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.07;
+        mix-blend-mode: screen;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      }
+
+      /* Abertura */
+      #ab-peca {
+        position: absolute;
+        left: 980px;
+        top: -60px;
+        width: 1200px;
+        height: 1200px;
+        color: var(--color-ink);
+        opacity: 0.16;
+      }
+      #ab-luz {
+        left: 560px;
+        top: 80px;
+        width: 1500px;
+        height: 1100px;
+      }
+      #ab-nomes {
+        position: absolute;
+        left: 168px;
+        top: 196px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        font-weight: 600;
+        font-size: 72px;
+        line-height: 1;
+        letter-spacing: -0.005em;
+      }
+      #ab-nos {
+        position: absolute;
+        left: 172px;
+        top: 612px;
+        font-weight: 600;
+        font-size: 72px;
+        line-height: 1;
+      }
+      #ab-marca {
+        position: absolute;
+        left: 152px;
+        top: 676px;
+        font-weight: 700;
+        font-size: 290px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: var(--color-paper);
+        transform-origin: 0% 60%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="deck"
+      data-start="0"
+      data-duration="6.5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <section
+        id="s-abertura"
+        class="slide clip"
+        data-start="0"
+        data-duration="6.5"
+        data-rest="1.7"
+        data-track-index="0"
+        data-label="Abertura"
+      >
+        <div id="ab-camera" class="camera">
+          <div id="ab-fundo" class="plano">
+            <div id="ab-luz" class="luz"></div>
+            <svg id="ab-peca" viewBox="0 0 48 48" aria-hidden="true">
+              <circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="1.1" />
+              <circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="1.1" />
+              <g fill="none" stroke="currentColor" stroke-width="0.9">
+                <circle cx="24" cy="11.5" r="3" /><circle cx="24" cy="36.5" r="3" /><circle cx="11.5" cy="24" r="3" /><circle cx="36.5" cy="24" r="3" />
+                <circle cx="15.2" cy="15.2" r="3" /><circle cx="32.8" cy="32.8" r="3" /><circle cx="32.8" cy="15.2" r="3" /><circle cx="15.2" cy="32.8" r="3" />
+              </g>
+            </svg>
+          </div>
+          <div id="ab-frente" class="plano">
+            <div id="ab-nomes">
+              <span id="ab-gabi">Eu sou a Gabi.</span>
+              <span id="ab-myke">Eu sou o Myke.</span>
+              <span id="ab-alberto">Eu sou o Alberto.</span>
+            </div>
+            <div id="ab-nos">E nós somos a</div>
+            <div id="ab-marca">AgroParts.</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div>
+        <div class="grao" data-layout-ignore></div>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Abertura: a câmera entra no espaço, os três nomes acendem um a um, a marca pousa com peso.
+      tl.fromTo("#ab-camera", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 0);
+      tl.fromTo("#ab-camera", { z: 520, rotationY: -7, rotationX: 2 }, { z: 0, rotationY: 0, rotationX: 0, duration: 1.6, ease: "power3.out" }, 0);
+      tl.fromTo("#ab-fundo", { z: -900 }, { z: -600, duration: 1.6, ease: "power2.out" }, 0);
+      tl.fromTo("#ab-peca", { rotation: -40 }, { rotation: 0, duration: 1.7, ease: "expo.out" }, 0);
+      tl.fromTo("#ab-luz", { opacity: 0, x: -360 }, { opacity: 1, x: 0, duration: 1.5, ease: "power2.inOut" }, 0.05);
+      ["#ab-gabi", "#ab-myke", "#ab-alberto", "#ab-nos"].forEach(function (sel, i) {
+        tl.fromTo(sel, { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.24, ease: "power2.out" }, 0.12 + i * 0.2);
+      });
+      tl.fromTo("#ab-marca", { opacity: 0, scale: 1.32, filter: "blur(18px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.42, ease: "expo.out" }, 0.98);
+      tl.fromTo("#ab-camera", { x: 0, y: 0 }, { keyframes: [{ x: -9, y: 5, duration: 0.04 }, { x: 7, y: -4, duration: 0.05 }, { x: -3, y: 2, duration: 0.06 }, { x: 0, y: 0, duration: 0.08 }], ease: "none" }, 1.06);
+      tl.to({}, { duration: 0.01 }, 6.49);
+
+      window.__timelines["deck"] = tl;
+      tl.seek(0);
+    </script>
+    <script src="assets/apresentador.js"></script>
+  </body>
+</html>
