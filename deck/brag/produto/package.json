@@ -1,0 +1,10 @@
+{
+  "name": "agroparts-deck-produto",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "apresentar": "python3 servir.py",
+    "check": "cd composition && npx --yes hyperframes@0.9.12 check",
+    "render": "cd composition && npx --yes hyperframes@0.9.12 render"
+  }
+}

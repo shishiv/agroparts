@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgroParts · apresentação</title>
+    <script src="vendor/hyperframes-player.global.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #f3f4f2;
+        overflow: hidden;
+      }
+      hyperframes-player {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        display: block;
+      }
+      #toque {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+      }
+      body.parado {
+        cursor: none;
+      }
+    </style>
+  </head>
+  <body>
+    <hyperframes-player
+      id="player"
+      src="composition/index.html"
+      runtime-src="vendor/hyperframe.runtime.iife.js"
+      disable-click-to-play
+      muted
+    ></hyperframes-player>
+    <div id="toque"></div>
+    <script type="module" src="apresentador.js"></script>
+  </body>
+</html>
