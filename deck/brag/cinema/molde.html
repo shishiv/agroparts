@@ -1,0 +1,738 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  data-composition-variables='[
+    {"id":"color-ground","type":"color","label":"Fundo","default":"#15191a"},
+    {"id":"color-ink","type":"color","label":"Texto","default":"#f3f4f2"},
+    {"id":"color-accent","type":"color","label":"Ação","default":"#154889"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>AgroParts · Cinema</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/falas.js"></script>
+    <style>
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        src: url("assets/fonts/barlow-semi-condensed-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        src: url("assets/fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Barlow";
+        src: url("assets/fonts/barlow-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Barlow";
+        src: url("assets/fonts/barlow-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      :root {
+        --color-ground: #15191a;
+        --color-ink: #f3f4f2;
+        --color-paper: #ffffff;
+        --color-quiet: #8f989b;
+        --color-line: #c7cccd;
+        --color-accent: #154889;
+        --verde: #237f52;
+        --amarelo: #f9a800;
+        --tinta: #15191a;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--color-ground);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--color-ground);
+        font-family: "Barlow Semi Condensed", sans-serif;
+        color: var(--color-ink);
+        font-variant-numeric: tabular-nums;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        perspective: 1400px;
+        perspective-origin: 50% 46%;
+        background: var(--color-ground);
+      }
+      .camera {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+      }
+      .plano {
+        position: absolute;
+        inset: 0;
+      }
+      .luz {
+        position: absolute;
+        left: 460px;
+        top: 40px;
+        width: 1500px;
+        height: 1100px;
+        border-radius: 50%;
+        pointer-events: none;
+        background: radial-gradient(closest-side, rgba(243, 244, 242, 0.2), rgba(243, 244, 242, 0.06) 55%, rgba(243, 244, 242, 0) 100%);
+      }
+      .foto {
+        position: absolute;
+        left: -480px;
+        top: -270px;
+        width: 2880px;
+        height: 1620px;
+        object-fit: cover;
+      }
+      .vinheta {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse 85% 80% at 42% 50%, rgba(21, 25, 26, 0) 62%, rgba(8, 10, 10, 0.6) 100%);
+      }
+      .grao {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.07;
+        mix-blend-mode: screen;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      }
+      .abs {
+        position: absolute;
+      }
+      .frase {
+        font-weight: 600;
+        font-size: 64px;
+        line-height: 1.08;
+      }
+      .grande {
+        font-weight: 700;
+        font-size: 112px;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        color: var(--color-paper);
+      }
+      .rotulo {
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 1.1;
+        color: var(--color-line);
+      }
+      .fonte {
+        font-family: "Barlow", sans-serif;
+        font-weight: 400;
+        font-size: 44px;
+        line-height: 1.25;
+        color: var(--color-line);
+      }
+      .numero {
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: var(--color-paper);
+      }
+      .rolo {
+        display: inline-flex;
+        vertical-align: top;
+      }
+      .dig {
+        display: inline-block;
+        height: 1em;
+        overflow: hidden;
+        line-height: 1;
+      }
+      .fita {
+        display: flex;
+        flex-direction: column;
+      }
+      .fita i {
+        font-style: normal;
+        display: block;
+        height: 1em;
+      }
+      .peca {
+        color: var(--color-ink);
+      }
+      .cartao {
+        position: absolute;
+        background: var(--color-paper);
+        color: var(--tinta);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 60px;
+      }
+      .placa {
+        position: absolute;
+        height: 150px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 0 36px;
+        font-weight: 700;
+        font-size: 58px;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .placa::after {
+        content: "";
+        position: absolute;
+        inset: 6px;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        border-radius: 2px;
+        pointer-events: none;
+      }
+      .placa .picto {
+        width: 92px;
+        height: 92px;
+        flex: none;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 80px;
+      }
+      .placa-verde {
+        background: var(--verde);
+        color: var(--color-paper);
+      }
+      .placa-verde .picto {
+        background: var(--color-paper);
+        color: var(--verde);
+      }
+      .placa-amarela {
+        background: var(--amarelo);
+        color: var(--tinta);
+      }
+      .placa-amarela::after {
+        border-color: rgba(21, 25, 26, 0.7);
+      }
+      .placa-amarela .picto {
+        border: 5px solid var(--tinta);
+        color: var(--tinta);
+      }
+      .quadro {
+        width: 96px;
+        height: 96px;
+        border-radius: 2px;
+        background: var(--color-ink);
+        color: var(--tinta);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 64px;
+      }
+      .tela {
+        position: absolute;
+        border-radius: 4px;
+        box-shadow: 0 0 120px rgba(243, 244, 242, 0.12);
+      }
+
+      /* 1 · Abertura */
+      #f1 .foto { opacity: 0.18; object-position: 50% 50%; }
+      #s1-marca { position: absolute; left: 0; width: 1920px; top: 300px; display: flex; justify-content: center; align-items: center; gap: 36px; }
+      .chave { font-weight: 600; font-size: 300px; line-height: 1; color: var(--color-line); }
+      #s1-nome { font-weight: 700; font-size: 250px; line-height: 1; letter-spacing: -0.02em; color: var(--color-paper); }
+      #s1-frase { left: 0; width: 1920px; top: 712px; text-align: center; }
+
+      /* 2 · A cena */
+      #f2 .foto { opacity: 0.3; }
+      #s2-prateleira { left: 1000px; top: 150px; width: 760px; height: 400px; }
+      #s2-l1 { left: 160px; top: 640px; }
+      #s2-l2 { left: 160px; top: 742px; font-size: 140px; }
+
+      /* 3 · Quanto custa */
+      #s3-pergunta { left: 160px; top: 190px; }
+      #s3-valor { left: 160px; top: 370px; display: flex; align-items: baseline; gap: 36px; }
+      #s3-rs, #s3-mi { font-weight: 700; font-size: 140px; color: var(--color-ink); }
+      #s3-num { font-size: 360px; }
+      #s3-fonte { left: 164px; top: 850px; }
+
+      /* 4 · Por que acontece */
+      #s4-titulo { left: 160px; top: 140px; }
+      .s4-linha { position: absolute; left: 160px; display: flex; align-items: baseline; }
+      .s4-linha .rotulo { width: 380px; flex: none; }
+      .s4-linha .codigo { font-weight: 600; font-size: 60px; color: var(--color-paper); }
+      #s4-a { top: 330px; }
+      #s4-m { top: 470px; }
+      #s4-c { top: 610px; }
+      #s4-fios { left: 0; top: 0; width: 1920px; height: 1080px; }
+      #s4-peca { left: 1590px; top: 380px; width: 230px; height: 230px; }
+      #s4-fim { left: 160px; top: 860px; }
+
+      /* 5 · Não é caso raro */
+      #s5-num { left: 150px; top: 230px; font-size: 330px; }
+      #s5-grade { left: 1260px; top: 262px; width: 500px; height: 275px; }
+      #s5-frase { left: 160px; top: 790px; font-size: 56px; }
+
+      /* 6 · A resposta */
+      #s6-titulo { left: 160px; top: 140px; }
+      #s6-c1 { left: 160px; top: 330px; width: 300px; height: 150px; }
+      #s6-igual { left: 470px; top: 330px; width: 80px; height: 150px; font-weight: 700; font-size: 110px; line-height: 150px; text-align: center; color: var(--color-paper); }
+      #s6-c2 { left: 560px; top: 330px; width: 300px; height: 150px; }
+      #s6-p1 { left: 160px; top: 600px; width: 760px; }
+      #s6-c3 { left: 980px; top: 330px; width: 300px; height: 150px; font-size: 96px; }
+      #s6-seta { left: 1310px; top: 370px; width: 150px; height: 70px; }
+      #s6-pessoa { left: 1500px; top: 320px; width: 170px; height: 170px; color: var(--color-ink); }
+      #s6-p2 { left: 980px; top: 600px; width: 780px; }
+
+      /* 7 · O ganho */
+      #s7-titulo { left: 160px; top: 140px; }
+      .s7-linha { position: absolute; left: 160px; display: flex; align-items: baseline; }
+      .s7-linha .rotulo { width: 460px; flex: none; }
+      .s7-linha .ganho { font-weight: 700; font-size: 96px; color: var(--color-paper); }
+      #s7-a { top: 320px; }
+      #s7-m { top: 500px; }
+      #s7-c { top: 680px; }
+
+      /* 8 · Como funciona */
+      #s8-titulo { left: 160px; top: 120px; }
+      #s8-trilho { left: 208px; top: 606px; width: 1340px; height: 4px; background: var(--color-quiet); transform-origin: 0 50%; }
+      .s8-passo { position: absolute; top: 560px; width: 290px; }
+      .s8-passo .texto { margin-top: 36px; font-family: "Barlow", sans-serif; font-weight: 600; font-size: 44px; line-height: 1.2; color: var(--color-ink); }
+      #s8-p1 { left: 160px; }
+      #s8-p2 { left: 490px; }
+      #s8-p3 { left: 820px; }
+      #s8-p4 { left: 1150px; }
+      #s8-p5 { left: 1480px; }
+      #s8-etiqueta { left: 160px; top: 330px; width: 290px; height: 137px; border-radius: 4px; }
+      #s8-m1 { left: 1480px; top: 360px; width: 130px; height: 90px; }
+      #s8-m2 { left: 1640px; top: 360px; width: 130px; height: 90px; }
+      .s8-fio { position: absolute; width: 4px; background: var(--color-quiet); transform-origin: 50% 0; }
+      #s8-fio1 { left: 206px; top: 476px; height: 76px; }
+      #s8-fio5 { left: 1526px; top: 458px; height: 94px; }
+
+      /* 9 · O teste */
+      #s9-titulo { left: 160px; top: 140px; font-size: 60px; }
+      #s9-r1 { left: 160px; top: 300px; }
+      #s9-r2 { left: 1000px; top: 300px; }
+      .s9-bloco .valor { display: flex; align-items: baseline; gap: 28px; margin-top: 10px; }
+      .s9-bloco .n { font-size: 300px; }
+      .s9-bloco .u { font-weight: 700; font-size: 112px; color: var(--color-ink); }
+      #s9-fim { left: 160px; top: 860px; font-size: 52px; }
+
+      /* 10 · Teste na sua usina */
+      #s10-titulo { left: 160px; top: 120px; font-weight: 700; font-size: 80px; color: var(--color-paper); }
+      #s10-numeros { left: 160px; top: 270px; width: 1060px; height: 298px; }
+      #s10-grupo { left: 1000px; top: 500px; width: 760px; height: 300px; }
+      #s10-fim { left: 160px; top: 880px; font-size: 60px; }
+
+      /* 11 · Lá fora */
+      #s11-titulo { left: 160px; top: 160px; }
+      #s11-valor { left: 160px; top: 300px; display: flex; align-items: baseline; gap: 30px; }
+      #s11-us, #s11-mi { font-weight: 700; font-size: 120px; color: var(--color-ink); }
+      #s11-num { font-size: 300px; }
+      #s11-fonte { left: 164px; top: 640px; width: 1050px; }
+      #s11-mapa { left: 1220px; top: 140px; width: 560px; height: 588px; }
+      #s11-fim { left: 160px; top: 860px; font-size: 60px; }
+
+      /* 12 · O pedido */
+      #s12-titulo { left: 160px; top: 140px; }
+      .s12-pedido { position: absolute; left: 160px; width: 900px; padding-left: 64px; font-weight: 700; font-size: 72px; line-height: 1.08; color: var(--color-paper); }
+      .s12-pedido::before { content: ""; position: absolute; left: 0; top: 24px; width: 28px; height: 28px; background: var(--color-ink); }
+      #s12-a1 { top: 300px; }
+      #s12-a2 { top: 420px; }
+      #s12-a3 { top: 540px; }
+      #s12-placa { left: 1120px; top: 250px; width: 640px; height: 680px; background: var(--color-accent); border-radius: 4px; }
+      #s12-qr { position: absolute; left: 110px; top: 60px; width: 420px; height: 420px; background: var(--color-paper); padding: 22px; border-radius: 4px; }
+      #s12-qr svg { width: 100%; height: 100%; display: block; }
+      #s12-teste { position: absolute; left: 40px; right: 40px; top: 520px; text-align: center; color: var(--color-paper); }
+      #s12-teste b { display: block; font-weight: 700; font-size: 56px; line-height: 1.1; }
+      #s12-teste span { display: block; font-weight: 600; font-size: 40px; line-height: 1.3; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="deck" data-start="0" data-duration="106" data-width="1920" data-height="1080">
+      <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+        <defs>
+          <symbol id="p-peca" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="2.4" /><circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="2.4" /><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="24" cy="11.5" r="3" /><circle cx="24" cy="36.5" r="3" /><circle cx="11.5" cy="24" r="3" /><circle cx="36.5" cy="24" r="3" /><circle cx="15.2" cy="15.2" r="3" /><circle cx="32.8" cy="32.8" r="3" /><circle cx="32.8" cy="15.2" r="3" /><circle cx="15.2" cy="32.8" r="3" /></g></symbol>
+          <symbol id="p-pessoa" viewBox="0 0 48 48"><circle cx="24" cy="11.5" r="5.5" fill="currentColor" /><path d="M15 21h18l-2.5 13H28l-1 10h-6l-1-10h-2.5z" fill="currentColor" /></symbol>
+        </defs>
+      </svg>
+
+      <!-- 1 · Abertura -->
+      <section id="s-1" class="slide clip" data-hold data-start="0" data-duration="6" data-rest="1.8" data-track-index="0" data-label="Abertura">
+        <div id="c1" class="camera">
+          <div id="f1" class="plano"><img class="foto" src="assets/fotos/rolamento-com-tampa-6007.jpg" alt="" /><div id="l1" class="luz"></div></div>
+          <div class="plano">
+            <div id="s1-marca"><span id="s1-ca" class="chave">{</span><span id="s1-nome">AgroParts</span><span id="s1-cf" class="chave">}</span></div>
+            <div id="s1-frase" class="abs frase">Para a usina não comprar a peça que ela já tem.</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 2 · A cena -->
+      <section id="s-2" class="slide clip" data-hold data-start="6" data-duration="6.4" data-rest="2" data-track-index="0" data-label="A cena">
+        <div id="c2" class="camera">
+          <div id="f2" class="plano"><img class="foto" src="assets/fotos/colheita-piracicaba.jpg" alt="" /><div id="l2" class="luz"></div></div>
+          <div class="plano">
+            <svg id="s2-prateleira" class="abs" viewBox="0 0 760 400" aria-hidden="true">
+              <g id="s2-cx1"><rect x="30" y="96" width="210" height="226" rx="4" fill="#15191a" stroke="#f3f4f2" stroke-width="4" /><use href="#p-peca" x="75" y="130" width="120" height="120" color="#f3f4f2" /><rect x="70" y="270" width="130" height="18" fill="#8f989b" /></g>
+              <g id="s2-cx2"><rect x="275" y="96" width="210" height="226" rx="4" fill="#15191a" stroke="#f3f4f2" stroke-width="4" /><use href="#p-peca" x="320" y="130" width="120" height="120" color="#f3f4f2" /><rect x="315" y="270" width="130" height="18" fill="#8f989b" /></g>
+              <g id="s2-cx3"><rect x="520" y="96" width="210" height="226" rx="4" fill="#15191a" stroke="#f3f4f2" stroke-width="4" /><use href="#p-peca" x="565" y="130" width="120" height="120" color="#f3f4f2" /><rect x="560" y="270" width="130" height="18" fill="#8f989b" /></g>
+              <rect x="0" y="322" width="760" height="16" fill="#c7cccd" /><rect x="14" y="338" width="14" height="62" fill="#c7cccd" /><rect x="732" y="338" width="14" height="62" fill="#c7cccd" />
+            </svg>
+            <div id="s2-l1" class="abs frase">O sistema diz que a peça não existe.</div>
+            <div id="s2-l2" class="abs grande">Na prateleira, havia três.</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 3 · Quanto custa -->
+      <section id="s-3" class="slide clip" data-hold data-start="12.4" data-duration="7.8" data-rest="2.2" data-track-index="0" data-label="Quanto custa">
+        <div id="c3" class="camera">
+          <div id="f3" class="plano"><div id="l3" class="luz"></div></div>
+          <div class="plano">
+            <div id="s3-pergunta" class="abs frase">Quanto custa manter uma usina rodando?</div>
+            <div id="s3-valor" class="abs" data-layout-allow-overflow><span id="s3-rs">R$</span><span id="s3-num" class="numero rolo">ROLO(1)ROLO(8)ROLO(3)<span>,</span>ROLO(5)</span><span id="s3-mi">milhões</span></div>
+            <div id="s3-fonte" class="abs fonte">São Martinho, manutenção de entressafra, em 9 meses</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 4 · Por que acontece -->
+      <section id="s-4" class="slide clip" data-hold data-start="20.2" data-duration="11.9" data-rest="2.4" data-track-index="0" data-label="Por que acontece">
+        <div id="c4" class="camera">
+          <div id="f4" class="plano"><div id="l4" class="luz"></div></div>
+          <div class="plano">
+            <div id="s4-titulo" class="abs frase">Hoje é manual. Cada setor cadastra do seu jeito.</div>
+            <div id="s4-a" class="s4-linha"><span class="rotulo">Almoxarifado:</span><span class="codigo">ROLAM 6318ZZC3 P/ BOMBA</span></div>
+            <div id="s4-m" class="s4-linha"><span class="rotulo">Manutenção:</span><span class="codigo">ROL 6318 ZZ C3</span></div>
+            <div id="s4-c" class="s4-linha"><span class="rotulo">Compras:</span><span class="codigo">ROLAMENTO RIG. ESFERAS 6318-2Z/C3</span></div>
+            <svg id="s4-fios" class="abs" viewBox="0 0 1920 1080" aria-hidden="true" data-layout-ignore>
+              <path id="s4-f1" d="M1250 362 C1440 362 1470 495 1585 495" fill="none" stroke="#8f989b" stroke-width="4" pathLength="1" />
+              <path id="s4-f2" d="M1000 502 C1300 502 1400 495 1585 495" fill="none" stroke="#8f989b" stroke-width="4" pathLength="1" />
+              <path id="s4-f3" d="M1500 642 C1540 642 1540 495 1585 495" fill="none" stroke="#8f989b" stroke-width="4" pathLength="1" />
+            </svg>
+            <svg id="s4-peca" class="abs peca" aria-hidden="true"><use href="#p-peca" /></svg>
+            <div id="s4-fim" class="abs frase">O sistema vê três peças, que na verdade são uma só.</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 5 · Não é caso raro -->
+      <section id="s-5" class="slide clip" data-hold data-start="32.1" data-duration="6.4" data-rest="2" data-track-index="0" data-label="Não é caso raro">
+        <div id="c5" class="camera">
+          <div id="f5" class="plano"><div id="l5" class="luz"></div></div>
+          <div class="plano">
+            <div id="s5-num" class="abs numero">1 em 12</div>
+            <svg id="s5-grade" class="abs" viewBox="0 0 600 330" aria-hidden="true">
+              <g fill="none" stroke="#8f989b" stroke-width="3">
+                <rect class="s5-c" x="2" y="2" width="132" height="94" rx="4" /><rect class="s5-c" x="156" y="2" width="132" height="94" rx="4" /><rect class="s5-c" x="310" y="2" width="132" height="94" rx="4" /><rect class="s5-c" x="464" y="2" width="132" height="94" rx="4" />
+                <rect class="s5-c" x="2" y="118" width="132" height="94" rx="4" /><rect class="s5-c" x="156" y="118" width="132" height="94" rx="4" /><rect class="s5-c" x="310" y="118" width="132" height="94" rx="4" /><rect class="s5-c" x="464" y="118" width="132" height="94" rx="4" />
+                <rect class="s5-c" x="2" y="234" width="132" height="94" rx="4" /><rect class="s5-c" x="156" y="234" width="132" height="94" rx="4" /><rect class="s5-c" x="310" y="234" width="132" height="94" rx="4" />
+              </g>
+              <rect id="s5-repetido" x="464" y="234" width="132" height="94" rx="4" fill="#ffffff" stroke="#ffffff" stroke-width="3" />
+            </svg>
+            <div id="s5-frase" class="abs frase">dos cadastros de rolamento do catálogo do governo está repetido</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 6 · A resposta -->
+      <section id="s-6" class="slide clip" data-hold data-start="38.5" data-duration="7" data-rest="2.6" data-track-index="0" data-label="A resposta">
+        <div id="c6" class="camera">
+          <div id="f6" class="plano"><div id="l6" class="luz"></div></div>
+          <div class="plano">
+            <div id="s6-titulo" class="abs frase">A AgroParts confere a peça e responde</div>
+            <div id="s6-c1" class="cartao">317388</div>
+            <div id="s6-igual" class="abs">=</div>
+            <div id="s6-c2" class="cartao">472510</div>
+            <div id="s6-p1" class="placa placa-verde"><span class="picto">=</span><span>É a mesma peça</span></div>
+            <div id="s6-c3" class="cartao">?</div>
+            <svg id="s6-seta" class="abs" viewBox="0 0 150 70" aria-hidden="true"><path id="s6-seta-l" d="M4 35h124M104 12l26 23-26 23" fill="none" stroke="#f3f4f2" stroke-width="7" pathLength="1" /></svg>
+            <svg id="s6-pessoa" class="abs" aria-hidden="true"><use href="#p-pessoa" /></svg>
+            <div id="s6-p2" class="placa placa-amarela"><span class="picto">?</span><span>Precisa de uma pessoa</span></div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 7 · O ganho -->
+      <section id="s-7" class="slide clip" data-hold data-start="45.5" data-duration="7.6" data-rest="2" data-track-index="0" data-label="O ganho">
+        <div id="c7" class="camera">
+          <div id="f7" class="plano"><div id="l7" class="luz"></div></div>
+          <div class="plano">
+            <div id="s7-titulo" class="abs frase">Um ganho para cada setor</div>
+            <div id="s7-a" class="s7-linha"><span class="rotulo">Almoxarifado:</span><span class="ganho">Acha a peça</span></div>
+            <div id="s7-m" class="s7-linha"><span class="rotulo">Manutenção:</span><span class="ganho">Sabe se já tem</span></div>
+            <div id="s7-c" class="s7-linha"><span class="rotulo">Compras:</span><span class="ganho">Não compra de novo</span></div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 8 · Como funciona -->
+      <section id="s-8" class="slide clip" data-hold data-start="53.1" data-duration="14.4" data-rest="2.8" data-track-index="0" data-label="Como funciona">
+        <div id="c8" class="camera">
+          <div id="f8" class="plano"><div id="l8" class="luz"></div></div>
+          <div class="plano">
+            <div id="s8-titulo" class="abs frase">Cinco passos, em segundos</div>
+            <div id="s8-trilho" class="abs"></div>
+            <div id="s8-fio1" class="s8-fio"></div>
+            <div id="s8-fio5" class="s8-fio"></div>
+            <img id="s8-etiqueta" class="abs" src="assets/fotos/etiqueta-impressa-catmat-311960.png" alt="" />
+            <svg id="s8-m1" class="abs" viewBox="0 0 130 90" aria-hidden="true"><rect x="2" y="2" width="126" height="86" rx="4" fill="#ffffff" /><rect x="18" y="22" width="70" height="10" fill="#15191a" /><rect x="18" y="44" width="94" height="8" fill="#8f989b" /><rect x="18" y="60" width="80" height="8" fill="#8f989b" /></svg>
+            <svg id="s8-m2" class="abs" viewBox="0 0 130 90" aria-hidden="true"><rect x="2" y="2" width="126" height="86" rx="4" fill="#ffffff" /><rect x="18" y="22" width="70" height="10" fill="#15191a" /><rect x="18" y="44" width="94" height="8" fill="#8f989b" /><rect x="18" y="60" width="80" height="8" fill="#8f989b" /></svg>
+            <div id="s8-p1" class="s8-passo"><div class="quadro">1</div><div class="texto">Recebe código, nome ou foto</div></div>
+            <div id="s8-p2" class="s8-passo"><div class="quadro">2</div><div class="texto">Lê as medidas e o tipo da peça</div></div>
+            <div id="s8-p3" class="s8-passo"><div class="quadro">3</div><div class="texto">Procura as parecidas no catálogo</div></div>
+            <div id="s8-p4" class="s8-passo"><div class="quadro">4</div><div class="texto">Compara uma a uma</div></div>
+            <div id="s8-p5" class="s8-passo"><div class="quadro">5</div><div class="texto">Junta os cadastros, sem apagar o original</div></div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 9 · O teste -->
+      <section id="s-9" class="slide clip" data-hold data-start="67.5" data-duration="11" data-rest="2.4" data-track-index="0" data-label="O teste">
+        <div id="c9" class="camera">
+          <div id="f9" class="plano"><div id="l9" class="luz"></div></div>
+          <div class="plano">
+            <div id="s9-titulo" class="abs frase">Testamos com cadastros reais e públicos do governo</div>
+            <div id="s9-r1" class="abs s9-bloco"><div class="rotulo">1ª rodada:</div><div class="valor"><span id="s9-n1" class="n numero">6</span><span class="u">erros</span></div></div>
+            <div id="s9-r2" class="abs s9-bloco" data-layout-allow-overflow><div class="rotulo">Depois de um ajuste:</div><div class="valor"><span id="s9-n2" class="n numero rolo">ROLO(0)</span><span class="u">erros</span></div></div>
+            <div id="s9-fim" class="abs frase">Em 104 comparações. Qualquer pessoa pode refazer o teste.</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 10 · Teste na sua usina -->
+      <section id="s-10" class="slide clip" data-hold data-start="78.5" data-duration="7.4" data-rest="2.4" data-track-index="0" data-label="Teste na sua usina">
+        <div id="c10" class="camera">
+          <div id="f10" class="plano"><div id="l10" class="luz"></div></div>
+          <div class="plano" data-layout-allow-overlap>
+            <div id="s10-titulo" class="abs">Teste hoje com o cadastro da sua usina</div>
+            <img id="s10-numeros" class="tela" src="assets/telas/diagnostico-numeros.png" alt="" />
+            <img id="s10-grupo" class="tela" src="assets/telas/diagnostico-grupo-6001.png" alt="" />
+            <div id="s10-fim" class="abs frase">O arquivo não sai do seu computador.</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 11 · Lá fora -->
+      <section id="s-11" class="slide clip" data-hold data-start="85.9" data-duration="9.5" data-rest="2.4" data-track-index="0" data-label="Lá fora">
+        <div id="c11" class="camera">
+          <div id="f11" class="plano"><div id="l11" class="luz"></div></div>
+          <div class="plano">
+            <div id="s11-titulo" class="abs frase">Lá fora, isso já é negócio</div>
+            <div id="s11-valor" class="abs" data-layout-allow-overflow><span id="s11-us">US$</span><span id="s11-num" class="numero rolo">ROLO(1)ROLO(0)<span>,</span>ROLO(5)</span><span id="s11-mi">mi</span></div>
+            <div id="s11-fonte" class="abs fonte">de economia numa fabricante, segundo a Verusen</div>
+            <svg id="s11-mapa" class="abs" viewBox="0 0 1000 1050" aria-hidden="true"><path id="s11-brasil" d="BRASIL" fill="none" stroke="#f3f4f2" stroke-width="5" stroke-linejoin="round" pathLength="1" /></svg>
+            <div id="s11-fim" class="abs frase">No Brasil, para usina, não achamos ninguém.</div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+
+      <!-- 12 · O pedido -->
+      <section id="s-12" class="slide clip" data-hold data-start="95.4" data-duration="10.6" data-rest="2.6" data-track-index="0" data-label="O pedido">
+        <div id="c12" class="camera">
+          <div id="f12" class="plano"><div id="l12" class="luz"></div></div>
+          <div class="plano">
+            <div id="s12-titulo" class="abs frase">Queremos investimento para construir a AgroParts</div>
+            <div id="s12-a1" class="s12-pedido">Dinheiro</div>
+            <div id="s12-a2" class="s12-pedido">Conhecimento</div>
+            <div id="s12-a3" class="s12-pedido">Acesso a uma usina e a quem conhece o sistema dela</div>
+            <div id="s12-placa" class="abs">
+              <div id="s12-qr">QRCODE</div>
+              <div id="s12-teste"><b>Teste hoje:</b><span>agroparts.pages.dev/diagnostico</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="vinheta" data-layout-ignore></div><div class="grao" data-layout-ignore></div>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const inicio = (n) => Number(document.getElementById("s-" + n).dataset.start);
+
+      // A câmera entra no espaço de cada slide; o fundo fica atrás e anda menos; a luz cruza e assenta.
+      function entra(n) {
+        const t = inicio(n);
+        tl.fromTo("#c" + n, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, t);
+        tl.fromTo("#c" + n, { z: 520, rotationY: -7, rotationX: 2 }, { z: 0, rotationY: 0, rotationX: 0, duration: 1.6, ease: "power3.out" }, t);
+        tl.fromTo("#f" + n, { z: -900 }, { z: -600, duration: 1.6, ease: "power2.out" }, t);
+        tl.fromTo("#l" + n, { opacity: 0, x: -360 }, { opacity: 1, x: 0, duration: 1.5, ease: "power2.inOut" }, t + 0.05);
+        return t;
+      }
+      // Uma linha acende do desfoque, sem deslizar.
+      function acende(sel, t, d) {
+        tl.fromTo(sel, { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: d || 0.24, ease: "power2.out" }, t);
+      }
+      // Um número ou objeto pousa com peso e a câmera treme no impacto.
+      function pousa(sel, t, n, escala) {
+        tl.fromTo(sel, { opacity: 0, scale: escala || 1.32, filter: "blur(18px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.42, ease: "expo.out" }, t);
+        treme(n, t + 0.08);
+      }
+      function treme(n, t) {
+        tl.fromTo("#c" + n, { x: 0, y: 0 }, { keyframes: [{ x: -9, y: 5, duration: 0.04 }, { x: 7, y: -4, duration: 0.05 }, { x: -3, y: 2, duration: 0.06 }, { x: 0, y: 0, duration: 0.08 }], ease: "none" }, t);
+      }
+      // Cada dígito roda como um contador mecânico até o valor final, da esquerda para a direita.
+      function rola(sel, t, de) {
+        document.querySelectorAll(sel + " .fita").forEach(function (fita, i) {
+          const final = Number(fita.dataset.final);
+          tl.fromTo(fita, { yPercent: -(de === undefined ? 0 : de) * 5 }, { yPercent: -(10 + final) * 5, duration: 1.1 + i * 0.12, ease: "expo.out" }, t);
+        });
+      }
+      function desenha(sel, t, d) {
+        tl.fromTo(sel, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, t);
+      }
+
+      let t;
+      // 1 · Abertura: as chaves se abrem do centro e a marca pousa entre elas.
+      t = entra(1);
+      tl.fromTo("#s1-ca", { x: 300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, t + 0.2);
+      tl.fromTo("#s1-cf", { x: -300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, t + 0.2);
+      pousa("#s1-nome", t + 0.45, 1, 1.25);
+      acende("#s1-frase", t + 1.0, 0.3);
+
+      // 2 · A cena: a frase do sistema, depois as três caixas caem na prateleira.
+      t = entra(2);
+      acende("#s2-l1", t + 0.15);
+      ["#s2-cx1", "#s2-cx2", "#s2-cx3"].forEach(function (sel, i) {
+        tl.fromTo(sel, { y: -90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.36, ease: "power4.out" }, t + 0.7 + i * 0.16);
+      });
+      treme(2, t + 1.12);
+      pousa("#s2-l2", t + 1.3, 2, 1.12);
+
+      // 3 · Quanto custa: a pergunta, depois o valor roda até 183,5.
+      t = entra(3);
+      acende("#s3-pergunta", t + 0.15);
+      acende("#s3-rs", t + 0.55);
+      acende("#s3-mi", t + 0.55);
+      tl.fromTo("#s3-num", { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.5);
+      rola("#s3-num", t + 0.5);
+      treme(3, t + 1.55);
+      acende("#s3-fonte", t + 1.7);
+
+      // 4 · Por que acontece: três jeitos de escrever, três fios que viram uma peça.
+      t = entra(4);
+      acende("#s4-titulo", t + 0.1);
+      ["#s4-a", "#s4-m", "#s4-c"].forEach(function (sel, i) {
+        acende(sel, t + 0.45 + i * 0.18);
+      });
+      ["#s4-f1", "#s4-f2", "#s4-f3"].forEach(function (sel) {
+        desenha(sel, t + 1.0, 0.6);
+      });
+      pousa("#s4-peca", t + 1.5, 4, 1.5);
+      acende("#s4-fim", t + 1.9, 0.3);
+
+      // 5 · Não é caso raro: o número pousa; na grade de 12, um acende.
+      t = entra(5);
+      pousa("#s5-num", t + 0.2, 5);
+      tl.fromTo(".s5-c", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.04, ease: "power2.out" }, t + 0.6);
+      tl.fromTo("#s5-repetido", { opacity: 0, scale: 1.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "expo.out" }, t + 1.15);
+      acende("#s5-frase", t + 1.45, 0.3);
+
+      // 6 · A resposta: dois cadastros se encaixam; o terceiro vai para uma pessoa.
+      t = entra(6);
+      acende("#s6-titulo", t + 0.1);
+      tl.fromTo("#s6-c1", { x: -160, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, t + 0.45);
+      tl.fromTo("#s6-c2", { x: 160, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, t + 0.45);
+      pousa("#s6-igual", t + 0.85, 6, 1.6);
+      tl.fromTo("#s6-p1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" }, t + 1.1);
+      tl.fromTo("#s6-c3", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, t + 1.35);
+      desenha("#s6-seta-l", t + 1.6, 0.35);
+      acende("#s6-pessoa", t + 1.85);
+      tl.fromTo("#s6-p2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" }, t + 2.0);
+
+      // 7 · O ganho: cada setor ganha a sua linha.
+      t = entra(7);
+      acende("#s7-titulo", t + 0.1);
+      ["#s7-a", "#s7-m", "#s7-c"].forEach(function (sel, i) {
+        tl.fromTo(sel + " .rotulo", { opacity: 0 }, { opacity: 1, duration: 0.25 }, t + 0.45 + i * 0.3);
+        pousa(sel + " .ganho", t + 0.55 + i * 0.3, 7, 1.15);
+      });
+
+      // 8 · Como funciona: a luz corre pelo trilho e acende os cinco passos.
+      t = entra(8);
+      acende("#s8-titulo", t + 0.1);
+      tl.fromTo("#s8-trilho", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "power2.inOut" }, t + 0.5);
+      ["#s8-p1", "#s8-p2", "#s8-p3", "#s8-p4", "#s8-p5"].forEach(function (sel, i) {
+        tl.fromTo(sel + " .quadro", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out" }, t + 0.5 + i * 0.3);
+        acende(sel + " .texto", t + 0.6 + i * 0.3);
+      });
+      tl.fromTo("#s8-etiqueta", { opacity: 0, y: -40, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: 0.5, ease: "power3.out" }, t + 0.6);
+      tl.fromTo("#s8-m1", { opacity: 0, x: -40 }, { opacity: 1, x: -17, duration: 0.6, ease: "power3.inOut" }, t + 1.8);
+      tl.fromTo("#s8-m2", { opacity: 0, x: 40 }, { opacity: 1, x: -177, duration: 0.6, ease: "power3.inOut" }, t + 1.8);
+      tl.fromTo("#s8-fio1", { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: "power2.out" }, t + 1.0);
+      tl.fromTo("#s8-fio5", { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: "power2.out" }, t + 2.3);
+
+      // 9 · O teste: 6 erros pousam; depois do ajuste o contador cai a 0.
+      t = entra(9);
+      acende("#s9-titulo", t + 0.1);
+      acende("#s9-r1 .rotulo", t + 0.4);
+      pousa("#s9-r1 .valor", t + 0.5, 9);
+      acende("#s9-r2 .rotulo", t + 1.0);
+      tl.fromTo("#s9-r2 .valor", { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 1.0);
+      rola("#s9-n2", t + 1.05, 6);
+      treme(9, t + 1.9);
+      acende("#s9-fim", t + 2.0, 0.3);
+
+      // 10 · Teste na sua usina: as telas reais do diagnóstico acendem no espaço.
+      t = entra(10);
+      acende("#s10-titulo", t + 0.1);
+      tl.fromTo("#s10-numeros", { opacity: 0, rotationY: 14, z: -200, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, rotationY: 6, z: 0, clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: "power3.out" }, t + 0.5);
+      tl.fromTo("#s10-grupo", { opacity: 0, rotationY: -12, z: -160 }, { opacity: 1, rotationY: -6, z: 60, duration: 0.8, ease: "power3.out" }, t + 1.1);
+      acende("#s10-fim", t + 1.9, 0.3);
+
+      // 11 · Lá fora: o valor roda; o mapa do Brasil se desenha, vazio.
+      t = entra(11);
+      acende("#s11-titulo", t + 0.1);
+      acende("#s11-us", t + 0.45);
+      acende("#s11-mi", t + 0.45);
+      tl.fromTo("#s11-num", { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.4);
+      rola("#s11-num", t + 0.4);
+      treme(11, t + 1.4);
+      acende("#s11-fonte", t + 1.3);
+      desenha("#s11-brasil", t + 0.9, 1.1);
+      acende("#s11-fim", t + 2.0, 0.3);
+
+      // 12 · O pedido: os três pedidos entram um a um; o QR, a única ação do deck, chega por último.
+      t = entra(12);
+      acende("#s12-titulo", t + 0.1);
+      pousa("#s12-a1", t + 0.45, 12, 1.15);
+      pousa("#s12-a2", t + 0.8, 12, 1.15);
+      pousa("#s12-a3", t + 1.15, 12, 1.08);
+      tl.fromTo("#s12-placa", { opacity: 0, rotationY: -18, z: -300 }, { opacity: 1, rotationY: 0, z: 0, duration: 0.9, ease: "power3.out" }, t + 1.5);
+
+      tl.to({}, { duration: 0.01 }, 105.99);
+      window.__timelines["deck"] = tl;
+      tl.seek(0);
+    </script>
+    <script src="assets/apresentador.js"></script>
+  </body>
+</html>
