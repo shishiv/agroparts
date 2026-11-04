@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgroParts · apresentar</title>
+    <style>
+      @font-face {
+        font-family: "Barlow";
+        font-weight: 400;
+        src: url("assets/fonts/barlow-latin-400-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Barlow Semi Condensed";
+        font-weight: 700;
+        src: url("assets/fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2");
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f3f4f2;
+        color: #15191a;
+        font-family: "Barlow", sans-serif;
+      }
+      body {
+        cursor: none;
+      }
+      #tela {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 1920px;
+        height: 1080px;
+        border: 0;
+        transform-origin: 0 0;
+      }
+      #captura {
+        position: absolute;
+        inset: 0;
+      }
+      body.notas {
+        cursor: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 24px 40px;
+        padding: 32px 40px;
+        overflow: auto;
+      }
+      body.notas #captura,
+      body.notas #tela {
+        display: none;
+      }
+      #painel {
+        display: none;
+      }
+      body.notas #painel {
+        display: contents;
+      }
+      #painel header {
+        grid-column: 1 / -1;
+        display: flex;
+        gap: 32px;
+        align-items: baseline;
+        font: 700 40px/1 "Barlow Semi Condensed", sans-serif;
+        border-bottom: 2px solid #15191a;
+        padding-bottom: 16px;
+      }
+      #painel header span + span {
+        color: #4f585b;
+      }
+      #fala {
+        font-size: 30px;
+        line-height: 1.45;
+        white-space: pre-line;
+      }
+      #seguinte {
+        font-size: 22px;
+        line-height: 1.4;
+        color: #4f585b;
+        white-space: pre-line;
+      }
+      #seguinte strong {
+        display: block;
+        color: #15191a;
+        font: 700 26px/1.2 "Barlow Semi Condensed", sans-serif;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="tela" src="index.html" title="Deck AgroParts" tabindex="-1"></iframe>
+    <div id="captura" aria-hidden="true"></div>
+    <div id="painel">
+      <header><span id="posicao">1 / 1</span><span id="relogio">0:00</span></header>
+      <div id="fala"></div>
+      <div id="seguinte"></div>
+    </div>
+    <script src="falas.js"></script>
+    <script>
+      // One deck, two windows: this page shows the slides, ?notas shows the speaker's notes.
+      // Slide times come from the composition itself (each .slide's data-start and data-duration),
+      // so the MP4 render and the live deck can never disagree.
+      const SAIDA = 0.3; // every slide but the last blurs out in its final 0.3 s
+      const QUADRO = 1 / 30;
+      const notas = new URLSearchParams(location.search).has("notas");
+      const canal = new BroadcastChannel("agroparts-deck-tipografia");
+      const iframe = document.getElementById("tela");
+      let slides = [];
+      let atual = -1;
+      let tl = null;
+      let tween = null;
+
+      function ajustar() {
+        const escala = Math.min(innerWidth / 1920, innerHeight / 1080);
+        iframe.style.transform = `scale(${escala}) translate(-50%, -50%)`;
+      }
+
+      function repouso(i) {
+        const s = slides[i];
+        return i === slides.length - 1 ? s.fim - QUADRO : s.fim - SAIDA;
+      }
+
+      function mostrar(i) {
+        slides.forEach((s, j) => (s.el.style.visibility = j === i ? "visible" : "hidden"));
+      }
+
+      // animar: play the slide's entrance from its first frame and stop on its rest frame.
+      // Without it (going back, reloading) the slide appears already at rest.
+      function ir(i, animar) {
+        if (i < 0 || i >= slides.length) return;
+        if (tween) tween.kill();
+        const anterior = atual;
+        atual = i;
+        history.replaceState(null, "", `#${i + 1}`);
+        canal.postMessage({ slide: i });
+        if (!animar) {
+          mostrar(i);
+          tl.pause();
+          tl.seek(repouso(i), false); // false: let the counters' onUpdate write their final value
+          return;
+        }
+        const entrar = () => {
+          mostrar(i);
+          tween = tl.tweenFromTo(slides[i].inicio, repouso(i), { ease: "none" });
+        };
+        if (anterior >= 0 && anterior < slides.length - 1 && anterior !== i) {
+          tween = tl.tweenFromTo(repouso(anterior), slides[anterior].fim - QUADRO, {
+            ease: "none",
+            onComplete: entrar,
+          });
+        } else {
+          entrar();
+        }
+      }
+
+      function avancar() {
+        ir(atual + 1, true);
+      }
+      function voltar() {
+        ir(atual - 1, false);
+      }
+
+      function telaCheia() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      }
+
+      function teclas(e) {
+        if (["ArrowRight", " ", "PageDown", "Enter"].includes(e.key)) {
+          e.preventDefault();
+          telaCheia();
+          avancar();
+        } else if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) {
+          e.preventDefault();
+          voltar();
+        } else if (e.key === "Home") {
+          ir(0, true);
+        } else if (e.key === "End") {
+          ir(slides.length - 1, false);
+        } else if (e.key === "f" || e.key === "F") {
+          telaCheia();
+        } else if (e.key === "n" || e.key === "N") {
+          open(`${location.pathname}?notas#${atual + 1}`, "agroparts-notas", "width=1280,height=800");
+        }
+      }
+
+      function iniciarDeck() {
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+        tl = win.__timelines.deck;
+        slides = [...doc.querySelectorAll(".slide")].map((el) => {
+          const inicio = Number(el.dataset.start);
+          return { id: el.id, el, inicio, fim: inicio + Number(el.dataset.duration) };
+        });
+        doc.addEventListener("keydown", teclas);
+        addEventListener("keydown", teclas);
+        document.getElementById("captura").addEventListener("click", () => {
+          telaCheia();
+          avancar();
+        });
+        document.getElementById("captura").addEventListener("contextmenu", (e) => {
+          e.preventDefault();
+          voltar();
+        });
+        canal.onmessage = (m) => {
+          if (m.data.ir === "avancar") avancar();
+          if (m.data.ir === "voltar") voltar();
+        };
+        ajustar();
+        addEventListener("resize", ajustar);
+        const inicial = Number(location.hash.slice(1)) || 1;
+        doc.fonts.ready.then(() => ir(inicial - 1, inicial === 1));
+      }
+
+      // Notes window: follows the deck, and its own arrows drive the deck.
+      function iniciarNotas() {
+        document.body.classList.add("notas");
+        const falas = window.FALAS || [];
+        const t0 = Date.now();
+        const relogio = document.getElementById("relogio");
+        setInterval(() => {
+          const s = Math.floor((Date.now() - t0) / 1000);
+          relogio.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+        }, 1000);
+        const pintar = (i) => {
+          const f = falas[i] || {};
+          const g = falas[i + 1];
+          document.getElementById("posicao").textContent = f.titulo || `${i + 1}`;
+          document.getElementById("fala").textContent = f.fala || "";
+          document.getElementById("seguinte").innerHTML =
+            `<strong>${g ? `Depois: ${g.titulo}` : "Último slide"}</strong>${f.tempo || ""}`;
+        };
+        canal.onmessage = (m) => {
+          if (typeof m.data.slide === "number") pintar(m.data.slide);
+        };
+        addEventListener("keydown", (e) => {
+          if (["ArrowRight", " ", "PageDown", "Enter"].includes(e.key)) canal.postMessage({ ir: "avancar" });
+          if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) canal.postMessage({ ir: "voltar" });
+        });
+        pintar((Number(location.hash.slice(1)) || 1) - 1);
+      }
+
+      if (notas) iniciarNotas();
+      else iframe.addEventListener("load", iniciarDeck);
+    </script>
+  </body>
+</html>
