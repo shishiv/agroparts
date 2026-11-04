@@ -10,7 +10,7 @@ O método de tempo vem do `references/motion.md` do HyperFrames 0.9.12, medido q
 
 ## LOOK
 
-Fundo `#15191a` (tinta) em todo slide, com uma luz radial de `#f3f4f2` a 22% no centro e vinheta até 60% de preto nas bordas. Texto em `#f3f4f2` (chapa) e a marca em `#ffffff` (papel). Barlow Semi Condensed 600 a 72 px nas frases e 700 de 290 px a 520 px nos números e na marca; Barlow 600 em nada menor que 40 px. Grão de filme parado a 7%. O azul `#154889` aparece só no que pede ação (o pedido e o QR). Verde, amarelo e vermelho só aparecem dentro das telas reais do produto, como decisão.
+Fundo `#15191a` (tinta) em todo slide, com uma luz radial de `#f3f4f2` a 22% no centro e vinheta até 60% de preto nas bordas. Texto em `#f3f4f2` (chapa), a marca e os números em `#ffffff` (papel) e os rótulos em `#c7cccd` (linha), que ainda passa de 5,5:1 num projetor que sobe o preto a 25%; o `#8f989b` (desligado) cairia a 3,7:1. Barlow Semi Condensed 600 a 72 px nas frases e 700 de 290 px a 520 px nos números e na marca; Nada que se lê fica abaixo de 40 px. Grão de filme parado a 7%. O azul `#154889` aparece só no que pede ação (o pedido e o QR). Verde, amarelo e vermelho só aparecem dentro das telas reais do produto, como decisão.
 
 Fora: gradiente linear de tela cheia, cartão, sombra decorativa, texto que flutua ou respira depois de pousar, uma segunda cor de destaque.
 
@@ -25,8 +25,21 @@ Fora: gradiente linear de tela cheia, cartão, sombra decorativa, texto que flut
 
 ## Telas reais
 
-Capturadas em 04/11/2026 com o `agent-browser`, a 1440x900 e escala 2, em `composition/assets/telas/`:
+Capturadas em 04/11/2026 com o `agent-browser` em https://agroparts.pages.dev/diagnostico, a 1440x900 e escala 2, depois de ler o arquivo público de teste (`bun scripts/arquivo-diagnostico.ts`, 629 linhas do catálogo e das compras do governo):
 
-- `inicio.png`: https://agroparts.pages.dev, "Qual é esta peça?".
-- `resposta-311967.png`: o código 311967 identificado, com a placa verde "Peça identificada" e o grupo "Parece, mas não é".
-- `diagnostico.png` e `diagnostico-relatorio.png`: https://agroparts.pages.dev/diagnostico antes e depois de ler um CSV de exemplo com 8 cadastros (2 grupos duplicados, 1 precisa de uma pessoa). Os códigos e textos do CSV são de exemplo, não de uma usina.
+- `diagnostico-numeros.png`: o resumo, com 629 itens lidos, 55 grupos e 84 para uma pessoa (slide 10).
+- `diagnostico-grupo-6001.png`: o grupo 6001-2Z, com 472477 e FORN-152. A linha "Mesma especificação" foi cortada, como o texto aprovado pede (slide 10).
+
+O slide 6 é um diagrama, como o texto pede. Que 317388 e 472510 são a mesma peça foi conferido hoje em produção: `POST /api/resolver` com 317388 devolve 472510 como a mesma peça.
+
+## Como montar e mudar um slide
+
+O texto de cada slide está em `molde.html`, copiado do "Na tela" do texto aprovado. Para mudar um slide, edite o texto no molde e rode:
+
+```sh
+python3 deck/brag/cinema/montar.py <caminho do report.md aprovado>
+deck/brag/cinema/checar.sh
+deck/brag/cinema/exportar.sh <pasta de saída>
+```
+
+`montar.py` monta `composition/index.html` (os contadores, o mapa e o QR entram nele) e refaz as notas do apresentador a partir das falas do texto. `checar.sh` roda o `hyperframes check`. `exportar.sh` refaz as prints a 1920x1080 e 1280x720, o PDF e o MP4.
