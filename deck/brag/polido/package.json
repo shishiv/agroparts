@@ -1,0 +1,10 @@
+{
+  "name": "agroparts-deck-polido",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "apresentar": "bash scripts/apresentar.sh",
+    "check": "npx --yes hyperframes@0.9.12 check",
+    "render": "npx --yes hyperframes@0.9.12 render"
+  }
+}

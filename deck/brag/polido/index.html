@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>AgroParts · deck polido</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Barlow"; font-weight: 400; src: url("assets/fonts/barlow-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Barlow"; font-weight: 500; src: url("assets/fonts/barlow-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Barlow"; font-weight: 600; src: url("assets/fonts/barlow-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Barlow Semi Condensed"; font-weight: 500; src: url("assets/fonts/barlow-semi-condensed-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Barlow Semi Condensed"; font-weight: 600; src: url("assets/fonts/barlow-semi-condensed-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Barlow Semi Condensed"; font-weight: 700; src: url("assets/fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2"); }
+
+      :root {
+        --chapa: #f3f4f2;
+        --papel: #ffffff;
+        --tinta: #15191a;
+        --tinta-2: #3b4447;
+        --suave: #4f585b;
+        --linha: #c7cccd;
+        --verde: #237f52;
+        --amarelo: #f9a800;
+        --azul: #154889;
+        --placa: "Barlow Semi Condensed", "Barlow", sans-serif;
+        --corpo: "Barlow", sans-serif;
+        --margem: 200px;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--chapa); }
+      body { font-family: var(--corpo); color: var(--tinta); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+      #deck { position: relative; width: 1920px; height: 1080px; background: var(--chapa); }
+      .slide { position: absolute; inset: 0; }
+      .palco { position: absolute; inset: 0; padding: 0 var(--margem); display: flex; flex-direction: column; justify-content: center; }
+
+      /* Máscara: a linha sobe de dentro do próprio recorte. */
+      .linha { display: block; overflow: hidden; padding-bottom: 0.2em; margin-bottom: -0.2em; }
+      .linha > span { display: inline-block; will-change: transform; }
+
+      #abertura .nomes { font-family: var(--placa); font-weight: 600; font-size: 84px; line-height: 1.12; letter-spacing: -0.01em; }
+      #abertura .nomes .linha > span { color: var(--tinta); }
+      #abertura .heroi { margin-top: 64px; font-family: var(--placa); font-weight: 700; font-size: 148px; line-height: 1.0; white-space: nowrap; letter-spacing: -0.015em; }
+      #abertura .regua { margin-top: 56px; width: 760px; height: 3px; background: var(--tinta); transform-origin: 0 50%; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Cada slide é um .clip com três tempos próprios, em segundos desde o início do slide:
+      data-paradas: um ou mais trechos "entra-para"; o apresentador toca cada trecho e para no fim dele.
+      data-saida: quando começa a saída do slide. O vídeo segura o quadro entre a última parada e a saída.
+    -->
+    <div id="deck" data-composition-id="deck" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <section id="abertura" class="slide clip" data-start="0" data-duration="12" data-track-index="0"
+        data-label="Abertura" data-paradas="0.6-1.5,2.6-3.5,4.6-5.5,6.6-7.8" data-saida="11.4">
+        <div class="palco">
+          <p class="nomes">
+            <span class="linha" data-layout-allow-overflow><span id="ab-gabi">Eu sou a Gabi.</span></span>
+            <span class="linha" data-layout-allow-overflow><span id="ab-myke">Eu sou o Myke.</span></span>
+            <span class="linha" data-layout-allow-overflow><span id="ab-alberto">Eu sou o Alberto.</span></span>
+          </p>
+          <p class="heroi"><span class="linha" data-layout-allow-overflow><span id="ab-nos">E nós somos a AgroParts.</span></span></p>
+          <div class="regua" id="ab-regua"></div>
+        </div>
+      </section>
+    </div>
+
+    <script type="application/json" id="falas">
+      { "abertura": "Gabi: Eu sou a Gabi. Myke: Eu sou o Myke. Alberto: Eu sou o Alberto. Os três: E nós somos a AgroParts." }
+    </script>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Entrada por máscara: sobe de 105% para 0 numa saída longa; parado depois de pousar.
+      const sobe = (alvo, em, dur = 0.9) =>
+        tl.fromTo(alvo, { yPercent: 105 }, { yPercent: 0, duration: dur, ease: "expo.out" }, em);
+      // Saída: um movimento só, mais curto que a entrada.
+      const sai = (alvo, em) =>
+        tl.to(alvo, { y: -24, opacity: 0, duration: 0.4, ease: "power2.in" }, em);
+
+      // Abertura (0 a 12 s)
+      sobe("#ab-gabi", 0.6);
+      sobe("#ab-myke", 2.6);
+      sobe("#ab-alberto", 4.6);
+      tl.to(["#ab-gabi", "#ab-myke", "#ab-alberto"], { color: "#4f585b", duration: 0.6, ease: "power2.inOut" }, 6.6);
+      sobe("#ab-nos", 6.6, 1.0);
+      tl.fromTo("#ab-regua", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power3.inOut" }, 6.8);
+      sai("#abertura .palco", 11.4);
+
+      window.__timelines["deck"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
