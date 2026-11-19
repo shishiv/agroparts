@@ -11,6 +11,12 @@ O deck não tem página de fontes nem de créditos: as fontes, os créditos e as
 - O PDF para projetar ou enviar à organização é [`exportado/agroparts-rota-inova-pitch.pdf`](exportado/agroparts-rota-inova-pitch.pdf). O link do protótipo é clicável no PDF.
 - As contas, as fontes e os créditos estão em [`docs/pesquisa/numeros-do-pitch.md`](../../docs/pesquisa/numeros-do-pitch.md). As regras de conteúdo são as de [`docs/rota-inova/README.md`](../../docs/rota-inova/README.md#regras-de-conteúdo).
 
+## Versão final, em três variações
+
+Para o Rota Inova Day de 29/10/2026 há três decks, que só mudam quais páginas entram: [`agroparts-vfinal-a`](slides/agroparts-vfinal-a/index.tsx) (enxuta, 11 páginas), [`agroparts-vfinal-b`](slides/agroparts-vfinal-b/index.tsx) (com mais prova, 13) e [`agroparts-vfinal-c`](slides/agroparts-vfinal-c/index.tsx) (curta, 8).
+As páginas ficam em [`vfinal/pecas.tsx`](vfinal/pecas.tsx). O texto de cada variação, com o que está na tela, a fala de cada pessoa e o tempo, está em [`vfinal/texto/`](vfinal/texto/); o `notas.ts` de cada deck é gerado desse texto por [`vfinal/texto.py`](vfinal/texto.py).
+Para exportar uma variação: `sh exportar.sh http://127.0.0.1:5181 agroparts-vfinal-a`, que grava `exportado/agroparts-vfinal-a.pdf`.
+
 ## Como usar
 
 Precisa de Bun, Python 3 e poppler (pdftocairo e pdfinfo).
