@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # Rebuilds the backups from the composition: one PNG per slide at its rest frame, the PDF of those
 # frames, and the MP4 of the deck playing by itself, with the first slide's rest frame as frame 0.
+# Runs deck/checar.sh first and stops if it finds a problem.
 # Usage: scripts/exportar.sh <output-dir> [--sem-mp4]
 set -euo pipefail
 
 DECK="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$(mkdir -p "$1" && cd "$1" && pwd)"
 HF="$DECK/node_modules/.bin/hyperframes"
+"$DECK/../../checar.sh" "$DECK"
 
 # Rest frame of each slide: 0.3 s before its end (where its blur-out starts), the last one at its final frame.
 REPOUSOS="$(node -e '

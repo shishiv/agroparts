@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Refaz as reservas do deck do zero: checa a composição, grava o MP4 que passa sozinho,
 # tira o quadro final de cada slide e junta os quadros num PDF.
+# Antes, roda deck/checar.sh e para se ele achar um problema.
 # Uso: scripts/exportar.sh [pasta-de-saida]   (padrão: saida/)
 set -euo pipefail
 pasta="$(cd "$(dirname "$0")/.." && pwd)"
@@ -9,6 +10,7 @@ hf=(npx --yes hyperframes@0.9.12)
 export HYPERFRAMES_NO_UPDATE_CHECK=1
 
 cd "$pasta"
+"$pasta/../../checar.sh" "$pasta"
 "${hf[@]}" check
 
 # Quadro final de cada slide: a última parada de cada section.slide.
