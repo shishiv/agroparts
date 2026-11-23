@@ -2,7 +2,7 @@
 // de verdade, no desktop e no celular, contra o site construído (dist/) e as mesmas rotas /api/*
 // do Cloudflare Pages. Defina TOUR_CAPTURAS=/pasta para guardar uma captura de cada passo.
 import { execSync } from "node:child_process";
-import { existsSync, mkdirSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import type { Server } from "node:http";
 import { join, resolve } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
@@ -177,14 +177,17 @@ describe.each(Object.keys(TELAS))("tela inicial no %s", (tela) => {
   }, 60_000);
 });
 
-/** A tela não rola na horizontal e toda imagem visível carregou. */
+const TEXTO_CABE = readFileSync(resolve(__dirname, "../deck/texto-cabe.js"), "utf8");
+
+/** A tela não rola na horizontal, toda imagem visível carregou e todo texto visível cabe na caixa dele. */
 async function telaInteira(page: Page) {
   await page.evaluate(() => document.querySelectorAll<HTMLImageElement>("img[loading=lazy]").forEach((i) => (i.loading = "eager")));
   await page.waitForFunction(() => [...document.images].filter((i) => i.getBoundingClientRect().width > 0).every((i) => i.complete), null, { timeout: 30_000 });
-  return page.evaluate(() => ({
+  const tela = await page.evaluate(() => ({
     rola: document.documentElement.scrollWidth > document.documentElement.clientWidth,
     quebradas: [...document.images].filter((i) => i.getBoundingClientRect().width > 0 && i.naturalWidth === 0).map((i) => i.src),
   }));
+  return { ...tela, texto: await page.evaluate<string>(`(${TEXTO_CABE})("body")`) };
 }
 
 describe.each(Object.keys(TELAS))("exemplos da apresentação no %s", (tela) => {
@@ -202,7 +205,7 @@ describe.each(Object.keys(TELAS))("exemplos da apresentação no %s", (tela) => 
       await page.click(`.casos-lista a[href="#casos/${c.chave}"]`);
       await expect.poll(() => page.locator("#t-casos").textContent()).toBe(c.titulo);
       expect(await page.locator(".etapa").count()).toBe(5);
-      expect(await telaInteira(page), `${tela} caso ${c.chave}`).toEqual({ rola: false, quebradas: [] });
+      expect(await telaInteira(page), `${tela} caso ${c.chave}`).toEqual({ rola: false, quebradas: [], texto: "ok" });
 
       await page.click(`[data-rodar="${c.chave}"]`);
       if ("numeros" in c.resposta) {
@@ -213,7 +216,7 @@ describe.each(Object.keys(TELAS))("exemplos da apresentação no %s", (tela) => 
         expect(await page.locator("#placa-titulo").textContent()).toBe(c.resposta.titulo);
         expect(await page.locator("#resultado .grupo-cabeca h3").evaluateAll((h) => h.map((x) => x.firstChild!.textContent!.trim()))).toEqual(c.resposta.grupos.map((g) => g.titulo));
       }
-      expect(await telaInteira(page), `${tela} caso ${c.chave} ao vivo`).toEqual({ rola: false, quebradas: [] });
+      expect(await telaInteira(page), `${tela} caso ${c.chave} ao vivo`).toEqual({ rola: false, quebradas: [], texto: "ok" });
 
       await page.click("#resultado .voltar-caso, #lote-voltar[href^='#casos']");
       await expect.poll(() => page.evaluate(() => location.hash)).toBe(`#casos/${c.chave}`);
