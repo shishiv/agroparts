@@ -512,7 +512,7 @@ function desenharLote(filtro = "todas", busca = "", mostrar = 50) {
         .slice(0, mostrar)
         .map(
           (l) =>
-            `<tr><td><button type="button" class="link-codigo" data-codigo="${esc(l.original.codigo)}">${esc(l.original.codigo)}</button></td><td class="txt">${esc(l.original.texto)}</td><td>${selo(l.decisao)}</td><td>${esc(l.designacao ?? "")}</td><td class="txt">${esc(explicar(l.motivos[0]) ?? l.motivos[0])}</td></tr>`,
+            `<tr><td><button type="button" class="link-codigo" data-codigo="${esc(l.original.codigo)}">${esc(l.original.codigo)}</button></td><td class="txt" data-layout-allow-overflow>${esc(l.original.texto)}</td><td>${selo(l.decisao)}</td><td>${esc(l.designacao ?? "")}</td><td class="txt">${esc(explicar(l.motivos[0]) ?? l.motivos[0])}</td></tr>`,
         )
         .join("")}</tbody>
     </table></div>

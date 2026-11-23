@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # Refaz as reservas do deck a partir da pasta: a print do quadro final de cada slide a 1920x1080 e 1280x720
 # (pelo modo apresentador, no agent-browser), o PDF com as prints de 1920 e o MP4 do deck passando sozinho.
+# Antes, roda deck/checar.sh e para se ele achar um problema.
 # Uso: deck/brag/cinema/exportar.sh <pasta de saída>
 set -euo pipefail
 aqui="$(cd "$(dirname "$0")" && pwd)"
 saida="$(mkdir -p "${1:?uso: exportar.sh <pasta de saída>}" && cd "$1" && pwd)"
 export AGENT_BROWSER_SESSION="${AGENT_BROWSER_SESSION:-agroparts-brag-cinema}"
 url="file://$aqui/composition/index.html?apresentar"
+"$aqui/../../checar.sh" "$aqui"
 
 for tamanho in 1920x1080 1280x720; do
   mkdir -p "$saida/prints-$tamanho"

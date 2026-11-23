@@ -3,6 +3,7 @@
 #   quadros/NN-<slide>.png  o quadro final de cada slide (data-pausa)
 #   deck.pdf                esses quadros, um por página
 #   deck.mp4                o deck passando sozinho: cada entrada, e o quadro final parado data-segurar segundos
+# Antes, roda deck/checar.sh e para se ele achar um problema.
 # Uso: scripts/entregar.sh <pasta-de-saida>
 set -euo pipefail
 
@@ -10,6 +11,7 @@ DECK="$(cd "$(dirname "$0")/.." && pwd)"
 SAIDA="$(mkdir -p "$1" && cd "$1" && pwd)"
 HF="npx --yes hyperframes@0.9.12"
 COMP="$DECK/composition"
+"$DECK/../../checar.sh" "$DECK"
 
 mapfile -t SLIDES < <(node -e '
   const html = require("fs").readFileSync(process.argv[1], "utf8");

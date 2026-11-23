@@ -5,6 +5,6 @@
   "scripts": {
     "apresentar": "bash scripts/apresentar.sh",
     "check": "npx --yes hyperframes@0.9.12 check",
-    "render": "npx --yes hyperframes@0.9.12 render"
+    "render": "bash ../../checar.sh . && npx --yes hyperframes@0.9.12 render"
   }
 }

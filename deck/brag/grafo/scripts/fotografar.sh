@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Fotografa o quadro final de cada slide e monta o PDF de reserva.
+# Antes, roda deck/checar.sh e para se ele achar um problema.
 # Uso: deck/brag/grafo/scripts/fotografar.sh <pasta-de-saida> [largura altura]
 set -euo pipefail
 saida=${1:?pasta de saída}
@@ -7,6 +8,7 @@ w=${2:-1920}
 h=${3:-1080}
 deck=$(cd "$(dirname "$0")/.." && pwd)
 mkdir -p "$saida"
+"$deck/../../checar.sh" "$deck"
 ab=(agent-browser --session "deck-grafo-$w")
 "${ab[@]}" set viewport "$w" "$h" >/dev/null
 n=$(grep -c 'data-slide$' "$deck/index.html")

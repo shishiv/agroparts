@@ -5,6 +5,6 @@
   "scripts": {
     "apresentar": "python3 servir.py",
     "check": "cd composition && npx --yes hyperframes@0.9.12 check",
-    "render": "cd composition && npx --yes hyperframes@0.9.12 render"
+    "render": "bash ../../checar.sh . && cd composition && npx --yes hyperframes@0.9.12 render"
   }
 }
